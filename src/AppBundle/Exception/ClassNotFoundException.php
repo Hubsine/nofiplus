@@ -13,7 +13,7 @@ class ClassNotFoundException extends \Exception
     {
         if( empty($message) )
         {
-            $this->message = sprintf('Class "%s" not found', $className);
+            $message = sprintf('Class "%s" not found', $className);
         }
         
         parent::__construct($message, $code, $previous);
