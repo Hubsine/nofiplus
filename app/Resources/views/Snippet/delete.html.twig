@@ -1,0 +1,8 @@
+    
+{% if routeName is defined and routeParameters is defined %}
+    <div class="d-inline-block" type="button">
+        <a class="btn button" href="{{ path( routeName, routeParameters |merge({ 'token':   csrf_token('delete-entity')   }) ) }}" title="Supprimer">
+            <i class="fa fa-trash-alt" aria-hidden="true"></i>
+        </a>
+    </div>
+{% endif %}

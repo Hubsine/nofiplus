@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        
+        {### HEAD BLOCK STYLESHEET ###}
+        {% block base_stylesheet %}
+            <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+        {% endblock base_stylesheet %}
+
+        {% block front_stylesheet %}
+
+        {% endblock front_stylesheet %}
+
+        {% block admin_stylesheet %}
+
+        {% endblock admin_stylesheet %}
+            
+        
+        {### HEAD BLOCK SCRIPT ###}
+        {% block head_base_script %}
+            <script src="{{ asset('build/manifest.js') }}"></script>
+            <script src="{{ asset('build/vendor.js') }}"></script>
+            <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        {% endblock head_base_script %}
+
+        {% block head_front_script %}
+
+        {% endblock head_front_script %}
+
+        {% block head_admin_script %}
+
+        {% endblock head_admin_script %}
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="{% block body_tag_class %}{% endblock body_tag_class %}">
+        
+        {### BODY BLOCK###}
+        {% block body %}
+
+            {### HEADER ###}
+            <header class="mainHeader {% block header_tag_class %}{% endblock header_tag_class %}">
+                {% block header_content %}{% endblock header_content %}
+            </header>
+            
+            {### CONTENT ###}
+            <div id="mainContent" class="{% block content_tag_class %}{% endblock content_tag_class %}">
+                    {% block container_content %}{% endblock container_content %}
+            </div>
+            
+            {### FOOTER ###}
+            <footer class="footer {% block footer_tag_class %}{% endblock footer_tag_class %}">
+                <div class="{% block footer_container_tag_class %}container{% endblock footer_container_tag_class %}">
+                {% block footer_content %}{% endblock footer_content %}
+                </div>
+            </footer>
+        {% endblock body %}
+        
+        
+        
+        {% block footer_base_script %}
+
+        {% endblock footer_base_script %}
+
+        {% block footer_front_script %}
+
+        {% endblock footer_front_script %}
+
+        {% block footer_admin_script %}
+
+        {% endblock footer_admin_script %}
+    </body>
+</html>

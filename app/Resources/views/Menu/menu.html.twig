@@ -1,0 +1,12 @@
+{% extends "KnpMenuBundle::menu.html.twig" %}
+
+{% block label %}
+    
+    {% if item.getExtra('icon') %}
+        {# the item has the 'icon' extra set, display the FA icon #}
+        <i class="fa fa-{{ item.getExtra('icon') }}"></i>
+    {% endif %}
+    
+    {{ parent() }}
+    
+{% endblock %}

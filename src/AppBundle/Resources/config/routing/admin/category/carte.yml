@@ -1,0 +1,20 @@
+
+carte_index:
+    path:     /
+    defaults: { _controller: AppBundle:Admin\Carte:index }
+
+carte_new:
+    path:     /new
+    defaults: { _controller: AppBundle:Admin\Carte:new }
+
+carte_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:Admin\Carte:delete }
+    requirements:
+        id: '\d+'
+
+carte_update:
+    path:     /update/{id}
+    defaults: { _controller: AppBundle:Admin\Carte:update }
+    requirements:
+        id: '\d+'

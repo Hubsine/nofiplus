@@ -1,0 +1,16 @@
+home:
+    path: /
+    defaults: { _controller: AppBundle:Default:index }
+
+###
+# ADMIN
+###
+admin:
+    resource: "@AppBundle/Resources/config/routing/admin/admin_all.yml"
+    prefix: /admin 
+
+###
+# FRONT
+###
+front:
+    resource: "@AppBundle/Resources/config/routing/front/front_all.yml"

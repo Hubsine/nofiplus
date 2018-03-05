@@ -1,0 +1,7 @@
+.userLoop{
+    
+    .avatar{
+        @include avatar-size($avatar-width, $avatar-height);
+        margin: auto;
+    }
+}

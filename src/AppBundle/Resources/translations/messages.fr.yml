@@ -1,0 +1,155 @@
+group:
+    edit:
+        submit: 'Mettre à jour le groupe'
+    show:
+        name: 'Nom du groupe'
+    new:
+        submit: 'Créer le groupe'
+    flash:
+        updated: 'Le groupe a été mis à jour.'
+        created: 'Le groupe a été créé.'
+        deleted: 'Le groupe a été supprimé.'
+security:
+    login:
+        email: 'Adresse e-mail'
+        username: 'Nom d''utilisateur'
+        password: 'Mot de passe'
+        forget_password: 'Mot de passe oublié ?'
+        remember_me: 'Se souvenir de moi'
+        submit: Connexion
+        no_login: 'Déjà inscrit(e) ?'
+        login_link: 'Connexion rapide et sécurisée.'
+profile:
+    show:
+        username: 'Nom d''utilisateur'
+        email: 'Adresse e-mail'
+    edit:
+        submit: 'Mettre à jour'
+    flash:
+        updated: 'Le profil a été mis à jour.'
+change_password:
+    submit: 'Modifier le mot de passe'
+    flash:
+        success: 'Le mot de passe a été modifié.'
+registration:
+    check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il contient un lien d''activation sur lequel il vous faudra cliquer afin d''activer votre compte.'
+    confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
+    back: 'Retour à la page d''accueil.'
+    submit: 'Créer un compte'
+    no_register: 'Pas encore inscrit ?'
+    register_link: 'Inscription rapide et gratuite.'
+    flash:
+        user_created: 'L''utilisateur a été créé avec succès.'
+    email:
+        subject: 'Bienvenue %username% !'
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+            
+            Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.
+
+            Cordialement,
+            L'équipe
+
+resetting:
+    check_email: |
+        Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
+        Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+
+        Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
+
+    request:
+        username: 'Nom d''utilisateur ou adresse e-mail'
+        submit: 'Réinitialiser le mot de passe'
+    reset:
+        submit: 'Modifier le mot de passe'
+    flash:
+        success: 'Le mot de passe a été réinitialisé avec succès.'
+    email:
+        subject: 'Réinitialisation de votre mot de passe'
+        message: |
+            Bonjour %username% !
+
+            Pour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%
+
+            Cordialement,
+            L'équipe
+
+layout:
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
+    logged_in_as: 'Connecté en tant que %username%'
+    update: Modifier
+    
+form:
+    group_name: 'Nom du groupe'
+    username: 'Nom d''utilisateur'
+    email: 'Adresse e-mail'
+    email_confirmation: 'Répéter l''e-mail'
+    current_password: 'Mot de passe actuel'
+    password: 'Mot de passe'
+    password_confirmation: 'Répéter le mot de passe'
+    new_password: 'Nouveau mot de passe'
+    new_password_confirmation: 'Répéter le nouveau mot de passe'
+    new: 'Nouveau'
+    update: 'Mettre à jour'
+    delete: 'Supprimer'
+    soccer_post: 'Post'
+    choose_file:
+        avatar: 'Choisir un avatar'
+        site_logo: 'Logo'
+    phone: 'Numéro de mobile'
+    quote: 'Citation'
+    about: 'Description'
+    site_name: 'Nom du site'
+    logo_site: 'Logo du site'
+    gender: 
+        label: 'Je suis'
+        male: 'Homme'
+        female: 'Femme'
+    birthday: 'Date de naissance'
+    soccer_post: 'Post'
+    first_name: 'Prénom'
+    last_name: 'Nom'
+    address: 'Adresse'
+    choose:
+        gender: 'Selectionez votre genre'
+        country: 'Selectionez un pays'
+        year: 'Année'
+        month: 'Mois'
+        day: 'Jour'
+    country: 'Pays'
+    zip_code: 'Code postal'
+    city: 'Ville'
+    social_networks: 'Réseaux sociaux'
+    url: 'Url'
+    social_network:
+        name: 'Nom'
+        icon: 'Icon'
+        url_pattern: 'Url pattern'
+    
+Day: 'Jour'
+Month: 'Mois'
+Year: 'Année'
+None: 'Laisser vide'
+
+flash:
+    add_success: 'L''élèment a été ajouter avec succès.'
+    update_success: 'L''élèment a été mise à jour avec succès.'
+    delete_success: 'L''élèment a été supprimer avec succès.'
+    delete_failure: 'Une erreur inconnue s''est produite. L''élèment n''a pas pu être supprimé.'
+    
+menu:
+    home: Accueil
+    users: 
+        all: Profiles
+        show: Username
+    profile: Profil
+    parameters: 'Paramètres'
+    update: 'Modifier'
+    
+profile:
+    about: 'A propos'
+    username: 'Nom d''utlisateur'

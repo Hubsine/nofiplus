@@ -1,0 +1,6 @@
+{{ form_start(form, {'method': formMethod, 'action': path(formAction, pathParameters)}) }}
+    {{ form_widget(form) }}
+    <div class="form-group">
+        <input name="submit" class="btn btn-primary" type="submit" value="{{ ('form.' ~ adminAction)|trans }}" />
+    </div>
+{{ form_end(form) }}

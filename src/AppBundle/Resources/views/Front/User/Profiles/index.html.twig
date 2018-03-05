@@ -1,0 +1,27 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content_title %}
+    Users 
+{% endblock content_title %}
+
+{% block content %}
+    <div class="userList userLoop">
+        <div class="row">
+            {% for user in pagination %}
+                <div class="col-sm-3">
+                    <div class="card border-0 mb-3 text-center userItem">
+                        <a href="{{ path('user_profiles_show', {'slug': user.slug}) }}" title="{{ user.username }}">
+                            <img class="card-img-top rounded-circle avatar" {{ holderJs('75x75') }} src="{{ asset(getAvatar(user.avatar)) }}" alt="Card image cap /">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title username">{{ user.username }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="navigation" role="navigation">
+        {{ knp_pagination_render(pagination, null, {}, {'align': 'center'}) }}
+    </div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+user_profiles:
+    path: / 
+    defaults: { _controller: AppBundle:Front\Profiles:index }
+    methods: [GET]
+
+user_profiles_show:
+    path: /{slug}
+    defaults: { _controller: AppBundle:Front\Profiles:show }
+    methods: [GET]
+
+user_profiles_edit:
+    path: /{slug}/edit 
+    defaults: { _controller: AppBundle:Front\Profiles:update }
+    methods: [GET,POST]
+    
+user_profiles_edit_parameters:
+    path: /{slug}/parameters
+    defaults: { _controller: AppBundle:Front\Profiles:updateParameters }
+    methods: [GET,POST]    

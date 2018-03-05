@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block body_tag_class %}admin{% endblock body_tag_class %}
+{% block header_tag_class %}{% endblock header_tag_class %}
+
+{% block header_content %}
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a href="{{ path('admin_home') }}" class="navbar-brand col-sm-3 col-md-2 mr-0">NOFI PLUS</a>
+        {{ knp_menu_render('adminMain') }}
+    </nav>
+{% endblock header_content %}
+
+{% block content_tag_class %}container-fluid{% endblock content_tag_class %}
+
+{% block container_content %}
+    
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light p-0 sidebar">
+            <div class="sidebar-sticky">
+                {% set adminSidebarMenu = knp_menu_get('adminSidebar', [], {'_route': app.request.attributes.get('_route')}) %}
+                {{ knp_menu_render(adminSidebarMenu) }}
+            </div>
+        </nav>
+        <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" role="main">
+            
+            {% include 'Snippet/flash.html.twig' %}
+            {% include '@App/Menu/breadcrumb.html.twig' with {'aliasMenu': 'adminSidebar'} %}
+            
+            <h1 class="h2">
+                {% block content_title %}
+                Titre de la page
+                {% endblock content_title %}
+            </h1>
+            
+            {% block content %}
+            Admin content
+            {% endblock content %}
+            
+        </main>
+    </div>
+
+{% endblock container_content %}

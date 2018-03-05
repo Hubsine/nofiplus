@@ -1,0 +1,7 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content %}
+<p>
+{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+</p>
+{% endblock %}

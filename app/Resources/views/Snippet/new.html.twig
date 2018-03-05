@@ -1,0 +1,6 @@
+
+{% if routeName is defined and routeParameters is defined %}
+    <a class="btn" href="{{ path( routeName, routeParameters ) }}" role="button">
+        <i class="fas fa-plus"></i>
+    </a>
+{% endif %}

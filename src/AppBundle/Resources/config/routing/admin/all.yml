@@ -1,0 +1,7 @@
+admin_home:
+    path: /
+    defaults: { _controller: AppBundle:Admin\Index:index }
+    
+admin_category:
+    resource: "@AppBundle/Resources/config/routing/admin/category/all.yml"
+    prefix: /category

@@ -1,0 +1,19 @@
+fos_user_registration_register:
+    path: /
+    defaults: { _controller: AppBundle:Front\Registration:register }
+    methods: [GET, POST]
+    
+fos_user_registration_check_email:
+    path: /check-email 
+    defaults: { _controller: AppBundle:Front\Registration:checkEmail } 
+    methods: [GET]
+
+fos_user_registration_confirm:
+    path: /confirm/{token} 
+    defaults: { _controller: AppBundle:Front\Registration:confirm }
+    methods: [GET]
+
+fos_user_registration_confirmed:
+    path: /confirmed
+    defaults: { _controller: AppBundle:Front\Registration:confirmed }
+    methods: [GET]

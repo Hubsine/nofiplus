@@ -1,0 +1,28 @@
+app:
+    email:
+        mismatch: 'Les deux adresses e-mail ne correspondent pas'
+
+assert:
+    not_blank: 'Ce champ est obligatoire'
+    type: 'Cette valeur doit être de type {{ type }}'        
+    mobile_phone_number: 'Le numéro de mobile est invalide'
+    country: 'Le pays n''est pas valide'
+    choice: 'Le choix est incorrect'
+    expression: 'Cette valeur est invalide'
+    social_network_domain: 'L''url ne correspond à aucun réseau social ou l''url ne correspond pas au bon réseau social'
+    date:
+        birthday: 'La date de naissance est invalide'
+    phone:
+        not_mobile_phone: 'Le numéro de mobile est invalide'
+    unique_entity: 
+        phone: 'Le numéro de téléphon est déjà utilisé'
+        social_network: 'Le réseau social existe déjà'
+    length:
+        max: 'La valeur ne peut pas dépasser {{ limit }} characters'
+        min: 'La valeur doit faire plus de {{ limit }} characters'
+    file:
+        mime_types: 'Le type du fichier n''est pas valide ({{ type }}). Les types de fichier autorisés sont {{ types }}'
+        max_size: 'Le fichier est trop volumineux ({{ size }} {{ suffix }}). La taille maximale autorisée est de {{ limit }} {{ suffix }}'
+    url:
+        invalid: 'L''url est invalide'
+        dns_check: 'L''hôte n''a pas pu être résolu'

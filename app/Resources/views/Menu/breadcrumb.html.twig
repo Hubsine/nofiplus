@@ -1,0 +1,13 @@
+{% if aliasMenu is defined %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-0 mb-0">
+            {% for breadcrumb_item in knp_menu_get_breadcrumbs_array(knp_menu_get_current_item(aliasMenu)) %}
+                {% if not loop.last %}
+                    <li class="breadcrumb-item"><a href="{{ breadcrumb_item.uri }}">{{ breadcrumb_item.label | trans }}</a></li>
+                    {% else %}
+                    <li class="breadcrumb-item active">{{ breadcrumb_item.label | trans }}</li>
+                    {% endif %}
+                {% endfor %}
+        </ol>
+    </nav>
+{% endif %}

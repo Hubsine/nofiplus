@@ -1,0 +1,8 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {% if targetUrl %}
+    <p><a href="{{ path('home') }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock content %}

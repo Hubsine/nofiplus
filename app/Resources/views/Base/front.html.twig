@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block body_tag_class %}front{% endblock body_tag_class %}
+
+{% block header_content %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% set frontMainMenu = knp_menu_get('frontMain', [], {'_route': app.request.attributes.get('_route')}) %}
+                {{ knp_menu_render(frontMainMenu) }}
+            </div>
+        </div>
+    </nav>
+{% endblock header_content %}
+
+{% block container_content %}
+
+    {% include 'Snippet/flash.html.twig' %}
+
+    <main role="main">
+        <div id="breadcrumb">
+            <div class="container">
+                {% include '@App/Menu/breadcrumb.html.twig' with {'aliasMenu': 'frontMain'} %}
+            </div>
+        </div>
+
+        <div id="pageTitle" class="bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {% block content_title_tag_start %}<h1 class="h2">{% endblock content_title_tag_start %}
+                            {% block content_title %}
+                                Titre de la page
+                            {% endblock content_title %}
+                        {% block content_title_tag_end %}</h1>{% endblock content_title_tag_end %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+                {% block content %}Front content{% endblock content %}
+            </div>
+        </div>
+    </main>
+{% endblock container_content %}

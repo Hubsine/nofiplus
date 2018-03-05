@@ -1,0 +1,15 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+    <div class="form-group">
+        <input name="submit" class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
+<div>
+    <p>
+        {{ 'security.login.no_login'|trans }} 
+        <a href="{{ path('fos_user_security_login') }}" title="{{ 'security.login.login_link'|trans }}">{{ 'security.login.login_link'|trans }}</a>
+    </p>
+</div>
+

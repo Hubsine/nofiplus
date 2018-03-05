@@ -1,0 +1,7 @@
+{% extends "@Admin/SoccerPost/index.html.twig" %}
+
+{% block content %}
+
+    {{ simpleForm(form, 'soccer_post_update', 'update', { 'id': app.request.attributes.get('id') })|raw }} 
+
+{% endblock content %}

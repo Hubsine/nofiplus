@@ -1,0 +1,44 @@
+
+{% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <div class="form-group">
+        <label for="username">{{ 'security.login.email'|trans }}</label>
+        <input class="form-control" type="email" id="username" name="_username" value="{{ last_username }}" required="required" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">{{ 'security.login.password'|trans }}</label>
+        <input class="form-control" type="password" id="password" name="_password" required="required" />
+    </div>
+        
+    <div class="form-row">
+        <div class="col">
+            <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label class="custom-control-label" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+            </div>
+        </div>
+        <div class="col">
+            <a href="{{ path('fos_user_resetting_request') }}" title="{{ 'security.login.forget_password'|trans }}">{{ 'security.login.forget_password'|trans }}</a>
+        </div>
+    </div>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    </div>
+</form>
+    
+<div>
+    <p>
+        {{ 'registration.no_register'|trans }} 
+        <a href="{{ path('fos_user_registration_register') }}" title="{{ 'registration.register_link'|trans }}">{{ 'registration.register_link'|trans }}</a>
+    </p>
+</div>

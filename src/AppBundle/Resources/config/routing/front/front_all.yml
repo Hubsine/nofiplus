@@ -1,0 +1,18 @@
+security:
+    resource: "@AppBundle/Resources/config/routing/front/security.yml"
+
+profiles:
+    resource: "@AppBundle/Resources/config/routing/front/profiles.yml"
+    prefix: /profiles
+    
+registration:
+    resource: "@AppBundle/Resources/config/routing/front/registration.yml"
+    prefix: /register
+    
+resetting:
+    resource: "@AppBundle/Resources/config/routing/front/resetting.yml"
+    prefix: /resetting
+    
+change_password.xml:
+    resource: "@AppBundle/Resources/config/routing/front/change_password.yml"
+    prefix: /profile    

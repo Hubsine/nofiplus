@@ -1,0 +1,5 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock content %}
