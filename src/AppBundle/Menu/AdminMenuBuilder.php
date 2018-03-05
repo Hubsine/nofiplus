@@ -53,10 +53,11 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         # Carte
         ###
         $carte = $category->addChild('Carte', array('route' => Carte::ROUTE_PREFIX . '_index'))
-                ->setExtra('_route', Carte::ROUTE_PREFIX . '_index');
+                ->setExtra('_route', Carte::ROUTE_PREFIX . '_index')
+                ->setDisplayChildren(false);
         
-        #$carte->addChild('New', array('route'  => SocialNetworkAvaible::ROUTE_PREFIX . '_new'));
-        #$this->addChildByParam($carte, SocialNetworkAvaible::ROUTE_PREFIX . '_update', 'id', 'Update');
+        $carte->addChild('New', array('route'  => Carte::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($carte, Carte::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         foreach ($menu as $item) 
         {

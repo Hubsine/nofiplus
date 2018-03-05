@@ -129,6 +129,8 @@ form:
         name: 'Nom'
         icon: 'Icon'
         url_pattern: 'Url pattern'
+    category:
+        name: 'Nom du type de carte'
     
 Day: 'Jour'
 Month: 'Mois'

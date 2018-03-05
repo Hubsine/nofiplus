@@ -1,0 +1,7 @@
+{% extends "@Admin/Category/Carte/index.html.twig" %}
+
+{% block content %}
+
+    {{ simpleForm(form, 'category_carte_update', 'update', { 'id': app.request.attributes.get('id') })|raw }} 
+
+{% endblock content %}

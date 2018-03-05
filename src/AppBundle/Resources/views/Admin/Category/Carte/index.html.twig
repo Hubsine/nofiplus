@@ -1,7 +1,7 @@
 {% extends "@App/Base/admin.html.twig" %}
 
 {% block content_title %}
-    Soccer post {{ renderSnippetNew( 'soccer_post_new', {} ) |raw }} 
+    Categorie "Carte" {{ renderSnippetNew( 'category_carte_new', {} ) |raw }} 
 {% endblock content_title %}
 
 {% block content %}
@@ -9,18 +9,18 @@
         <thead>
             <tr>
                 <th scope="col">#ID</th>
-                <th scope="col">Post</th>
+                <th scope="col">Type de carte</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for post in entities %}
+            {% for entity in entities %}
                 <tr>
-                    <th scope="row">{{ post.id }}</th>
-                    <td>{{ post.post }}</td>
+                    <th scope="row">{{ entity.id }}</th>
+                    <td>{{ entity.name }}</td>
                     <th>
-                        {{ renderSnippetUpdate( 'soccer_post_update', {'id': post.id} ) |raw }}
-                        {{ renderSnippetDelete( 'soccer_post_delete', {'id': post.id} ) | raw }}
+                        {{ renderSnippetUpdate( 'category_carte_update', {'id': entity.id} ) |raw }}
+                        {{ renderSnippetDelete( 'category_carte_delete', {'id': entity.id} ) | raw }}
                     </th>
                 </tr>
             {% endfor %}
