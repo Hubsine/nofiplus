@@ -3,6 +3,7 @@
 namespace AppBundle\Menu;
 
 use AppBundle\Menu\AbstractMenuBuilder;
+use AppBundle\Entity\Admin\Category\Carte;
 
 /**
  * Description of AdminMenuBuilder
@@ -45,14 +46,14 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         # Category
         ###
         $category   = $menu->addChild('Category', array());
+        $category->setLinkAttribute('class', 'disabled')
+                ->setUri("#");
         
         ###
         # Carte
         ###
-//        $carte = $category->addChild('', array('route' => Carte::ROUTE_PREFIX . '_index'))
-//                ->setExtra('icon', 'share-square')
-//                ->setExtra('_route', Carte::ROUTE_PREFIX . '_index')
-//                ->setDisplayChildren(false);
+        $carte = $category->addChild('Carte', array('route' => Carte::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', Carte::ROUTE_PREFIX . '_index');
         
         #$carte->addChild('New', array('route'  => SocialNetworkAvaible::ROUTE_PREFIX . '_new'));
         #$this->addChildByParam($carte, SocialNetworkAvaible::ROUTE_PREFIX . '_update', 'id', 'Update');
