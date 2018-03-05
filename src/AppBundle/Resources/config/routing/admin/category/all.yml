@@ -1,3 +1,11 @@
 admin_category_carte:
     resource: "@AppBundle/Resources/config/routing/admin/category/carte.yml"
     prefix: /carte
+    
+admin_category_advantage:
+    resource: "@AppBundle/Resources/config/routing/admin/category/advantage.yml"
+    prefix: /advantage
+    
+admin_category_compagny:
+    resource: "@AppBundle/Resources/config/routing/admin/category/compagny.yml"
+    prefix: /compagny

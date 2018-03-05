@@ -1,0 +1,20 @@
+
+category_advantage_index:
+    path:     /
+    defaults: { _controller: AppBundle:Admin\Category\Advantage:index }
+
+category_advantage_new:
+    path:     /new
+    defaults: { _controller: AppBundle:Admin\Category\Advantage:new }
+
+category_advantage_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Advantage:delete }
+    requirements:
+        id: '\d+'
+
+category_advantage_update:
+    path:     /update/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Advantage:update }
+    requirements:
+        id: '\d+'

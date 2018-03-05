@@ -1,0 +1,20 @@
+
+category_compagny_index:
+    path:     /
+    defaults: { _controller: AppBundle:Admin\Category\Compagny:index }
+
+category_compagny_new:
+    path:     /new
+    defaults: { _controller: AppBundle:Admin\Category\Compagny:new }
+
+category_compagny_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Compagny:delete }
+    requirements:
+        id: '\d+'
+
+category_compagny_update:
+    path:     /update/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Compagny:update }
+    requirements:
+        id: '\d+'

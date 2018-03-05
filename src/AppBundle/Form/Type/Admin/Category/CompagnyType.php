@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class CarteType extends AbstractType
+class CompagnyType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,7 +15,7 @@ class CarteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, array(
-            'label'     => 'form.category.name.carte'
+            'label'     => 'form.category.name.compagny'
         ));
     }
     
@@ -25,7 +25,7 @@ class CarteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Category\Carte'
+            'data_class' => 'AppBundle\Entity\Admin\Category\Compagny'
         ));
     }
 

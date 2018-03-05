@@ -4,6 +4,8 @@ namespace AppBundle\Menu;
 
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\Admin\Category\Carte;
+use AppBundle\Entity\Admin\Category\Advantage;
+use AppBundle\Entity\Admin\Category\Compagny;
 
 /**
  * Description of AdminMenuBuilder
@@ -58,6 +60,26 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         
         $carte->addChild('New', array('route'  => Carte::ROUTE_PREFIX . '_new'));
         $this->addChildByParam($carte, Carte::ROUTE_PREFIX . '_update', 'id', 'Update');
+        
+        ###
+        # Compagny
+        ###
+        $compagny = $category->addChild('Compagny', array('route' => Compagny::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', Compagny::ROUTE_PREFIX . '_index')
+                ->setDisplayChildren(false);
+        
+        $compagny->addChild('New', array('route'  => Compagny::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($carte, Compagny::ROUTE_PREFIX . '_update', 'id', 'Update');
+        
+        ###
+        # Advantage
+        ###
+        $advantage = $category->addChild('Advantage', array('route' => Advantage::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', Advantage::ROUTE_PREFIX . '_index')
+                ->setDisplayChildren(false);
+        
+        $advantage->addChild('New', array('route'  => Advantage::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($carte, Advantage::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         foreach ($menu as $item) 
         {

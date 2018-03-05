@@ -130,7 +130,10 @@ form:
         icon: 'Icon'
         url_pattern: 'Url pattern'
     category:
-        name: 'Nom du type de carte'
+        name: 
+            carte: 'Nom du type de carte'
+            compagny: 'Type d''entreprise'
+            advanatge: 'Type d''avantage'
     
 Day: 'Jour'
 Month: 'Mois'

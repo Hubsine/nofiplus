@@ -1,0 +1,29 @@
+{% extends "@App/Base/admin.html.twig" %}
+
+{% block content_title %}
+    Categorie "Advantage" {{ renderSnippetNew( 'category_advantage_new', {} ) |raw }} 
+{% endblock content_title %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Type d'avantage</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <th scope="row">{{ entity.id }}</th>
+                    <td>{{ entity.name }}</td>
+                    <th>
+                        {{ renderSnippetUpdate( 'category_advantage_update', {'id': entity.id} ) |raw }}
+                        {{ renderSnippetDelete( 'category_advantage_delete', {'id': entity.id} ) | raw }}
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
