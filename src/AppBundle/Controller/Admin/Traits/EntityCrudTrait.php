@@ -3,8 +3,8 @@
 namespace AppBundle\Controller\Admin\Traits;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Debug\Exception\ClassNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use AppBundle\Exception\ClassNotFoundException;
 use AppBundle\AppBundleAdminEvents;
 use AppBundle\Entity\AdminEntityInterface;
 
@@ -195,7 +195,7 @@ trait EntityCrudTrait
         
         if( !class_exists( $class ) )
         {
-            throw new ClassNotFoundException(sprintf('Class "%s" not found.', $class));
+            throw new ClassNotFoundException($class);
         }
         
         return $class;
