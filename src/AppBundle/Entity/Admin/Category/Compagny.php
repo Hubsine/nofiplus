@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Admin\Category\CategoryTrait;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
@@ -19,6 +20,7 @@ class Compagny implements AdminEntityInterface
     CONST ROUTE_PREFIX = 'category_compagny';
             
     use CategoryTrait;
+    use EntityRoutePrefixTrait;
     
     /**
      * @var int
@@ -28,11 +30,6 @@ class Compagny implements AdminEntityInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
-    }
     
     /**
      * Get id

@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineArrayCollectionInterface;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use AppBundle\Entity\User\UserTrait;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
@@ -29,6 +30,7 @@ class Partner extends BaseUser implements AdminEntityInterface
     CONST ROUTE_PREFIX = 'user_partner';
     
     use UserTrait;
+    use EntityRoutePrefixTrait;
 
     /**
      * @var integer

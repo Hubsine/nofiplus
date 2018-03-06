@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineArrayCollectionInterface;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use AppBundle\Entity\User\UserTrait;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
@@ -28,6 +29,9 @@ class Abonne extends BaseUser implements AdminEntityInterface
 {
     CONST ROUTE_PREFIX = 'user_abonne';
     
+    use UserTrait;
+    use EntityRoutePrefixTrait;
+    
     /**
      * @var avatar
      * 
@@ -41,11 +45,6 @@ class Abonne extends BaseUser implements AdminEntityInterface
     public function __construct()
     {
         parent::__construct();
-    }
-    
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
     }
     
     /**

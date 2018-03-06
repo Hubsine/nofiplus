@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Admin\Category\CategoryTrait;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
@@ -19,6 +20,7 @@ class Carte implements AdminEntityInterface
     CONST ROUTE_PREFIX = 'category_carte';
             
     use CategoryTrait;
+    use EntityRoutePrefixTrait;
     
     /**
      * @var int
@@ -38,12 +40,7 @@ class Carte implements AdminEntityInterface
      * @Assert\Type(type="integer", message="assert.type")
      */
     private $price;
-    
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
-    }
-    
+
     /**
      * Get id
      *

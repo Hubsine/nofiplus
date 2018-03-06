@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\AdminEntityInterface;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 
 /**
  * User Admin class entity
@@ -22,14 +23,10 @@ class Admin extends BaseUser implements AdminEntityInterface
 {
     CONST ROUTE_PREFIX = 'user_admin';
     
+    use EntityRoutePrefixTrait;
+    
     public function __construct()
     {
         parent::__construct();
     }
-    
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
-    }
-    
 }
