@@ -14,6 +14,7 @@ assert:
         birthday: 'La date de naissance est invalide'
     phone:
         not_mobile_phone: 'Le numéro de mobile est invalide'
+        not_phone: 'Le numéro de téléphone est invalide'
     unique_entity: 
         phone: 'Le numéro de téléphon est déjà utilisé'
         social_network: 'Le réseau social existe déjà'
