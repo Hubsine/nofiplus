@@ -137,7 +137,7 @@ form:
     price: "Prix"
     how_enjoy: 
         by: 'L''offre est disponible sur'
-        location: 'Dans un lieu visite'
+        location: 'Dans un lieu physique'
         web: 'Sur internet'
         tel: 'Téléphone'
     

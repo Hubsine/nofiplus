@@ -13,10 +13,3 @@ admin_home:
 admin_category:
     resource: "@AppBundle/Resources/config/routing/admin/category/all.yml"
     prefix: /category
-    
-###
-# How Enjoy
-###
-admin_how_enjoy:
-    resource: "@AppBundle/Resources/config/routing/admin/how_enjoy/all.yml"
-    prefix: /how-enjoy
