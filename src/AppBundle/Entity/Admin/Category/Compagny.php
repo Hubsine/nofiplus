@@ -11,7 +11,7 @@ use AppBundle\Entity\AdminEntityInterface;
 /**
  * Compagny
  *
- * @ORM\Table(name="admin_category_compagny")
+ * @ORM\Table(name="np_category_compagny")
  * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\CompagnyRepository")
  */
 class Compagny implements AdminEntityInterface

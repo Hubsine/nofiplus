@@ -11,7 +11,7 @@ use AppBundle\Entity\AdminEntityInterface;
 /**
  * Advantage
  *
- * @ORM\Table(name="admin_category_advantage")
+ * @ORM\Table(name="np_category_advantage")
  * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\AdvantageRepository")
  */
 class Advantage implements AdminEntityInterface

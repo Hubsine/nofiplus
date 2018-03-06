@@ -11,7 +11,7 @@ use AppBundle\Entity\AdminEntityInterface;
 /**
  * Carte
  *
- * @ORM\Table(name="admin_category_carte")
+ * @ORM\Table(name="np_category_carte")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Admin\Category\CarteRepository")
  */
 class Carte implements AdminEntityInterface
