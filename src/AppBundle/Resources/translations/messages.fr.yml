@@ -135,6 +135,11 @@ form:
             compagny: 'Type d''entreprise'
             advantage: 'Type d''avantage'
     price: "Prix"
+    how_enjoy: 
+        by: 'L''offre est disponible sur'
+        location: 'Dans un lieu visite'
+        web: 'Sur internet'
+        tel: 'Téléphone'
     
 Day: 'Jour'
 Month: 'Mois'

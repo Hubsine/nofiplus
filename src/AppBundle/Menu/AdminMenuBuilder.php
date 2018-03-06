@@ -6,6 +6,7 @@ use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Admin\Category\Advantage;
 use AppBundle\Entity\Admin\Category\Compagny;
+use AppBundle\Entity\Admin\HowEnjoy\HowEnjoy;
 
 /**
  * Description of AdminMenuBuilder
@@ -80,6 +81,16 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         
         $advantage->addChild('New', array('route'  => Advantage::ROUTE_PREFIX . '_new'));
         $this->addChildByParam($carte, Advantage::ROUTE_PREFIX . '_update', 'id', 'Update');
+        
+        ###
+        # Location offre
+        ###
+        $howEnjoy = $menu->addChild('HowEnjoy', array('route' => HowEnjoy::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', HowEnjoy::ROUTE_PREFIX . '_index')
+                ->setDisplayChildren(false);
+        
+        $howEnjoy->addChild('New', array('route'  => HowEnjoy::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($menu, HowEnjoy::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         foreach ($menu as $item) 
         {

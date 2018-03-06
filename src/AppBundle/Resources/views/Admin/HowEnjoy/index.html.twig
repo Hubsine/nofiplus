@@ -1,0 +1,29 @@
+{% extends "@App/Base/admin.html.twig" %}
+
+{% block content_title %}
+    Comment profiter d'une offre {{ renderSnippetNew( 'how_enjoy_new', {} ) |raw }} 
+{% endblock content_title %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Comment ?</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <th scope="row">{{ entity.id }}</th>
+                    <td>{{ entity.enjoyBy }}</td>
+                    <th>
+                        {{ renderSnippetUpdate( 'how_enjoy_update', {'id': entity.id} ) |raw }}
+                        {{ renderSnippetDelete( 'how_enjoy_delete', {'id': entity.id} ) | raw }}
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

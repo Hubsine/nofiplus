@@ -1,0 +1,21 @@
+# config/routin/admin/how_enjoy/all.yml
+
+how_enjoy_index:
+    path:     /
+    defaults: { _controller: AppBundle:Admin\HowEnjoy\HowEnjoy:index }
+
+how_enjoy_new:
+    path:     /new
+    defaults: { _controller: AppBundle:Admin\HowEnjoy\HowEnjoy:new }
+
+how_enjoy_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:Admin\HowEnjoy\HowEnjoy:delete }
+    requirements:
+        id: '\d+'
+
+how_enjoy_update:
+    path:     /update/{id}
+    defaults: { _controller: AppBundle:Admin\HowEnjoy\HowEnjoy:update }
+    requirements:
+        id: '\d+'

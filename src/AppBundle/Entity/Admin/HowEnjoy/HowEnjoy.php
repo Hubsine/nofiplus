@@ -3,29 +3,24 @@
 namespace AppBundle\Entity\Admin\HowEnjoy;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\InheritanceType;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
-use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Traits\EntityRoutePrefixTrait;
+use AppBundle\Entity\AdminEntityInterface;
 
 /**
- * AbstractHowEnjoy
+ *HowEnjoy
  *
- * @ORM\Entity
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="discr", type="string")
- * @DiscriminatorMap({
- *  "location" = "Location", 
- *  "web" = "Web",
- *  "tel" = "Tel"
- * })
+ * @ORM\Table(name="np_how_enjoy")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Admin\HowEnjoy\HowEnjoyRepository")
  * 
  * @UniqueEntity(fields="enjoyBy", message="assert.unique_entity.how_enjoy")
  */
-abstract class AbstractHowEnjoy
+class HowEnjoy implements AdminEntityInterface
 {
+    const ROUTE_PREFIX  = 'how_enjoy';
+    
     use EntityRoutePrefixTrait;
     
     /**

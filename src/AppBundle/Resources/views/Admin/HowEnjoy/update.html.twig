@@ -1,0 +1,7 @@
+{% extends "@Admin/HowEnjoy/index.html.twig" %}
+
+{% block content %}
+
+    {{ simpleForm(form, 'how_enjoy_update', 'update', { 'id': app.request.attributes.get('id') })|raw }} 
+
+{% endblock content %}
