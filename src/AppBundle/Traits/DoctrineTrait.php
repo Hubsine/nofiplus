@@ -13,12 +13,4 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 trait DoctrineTrait 
 {
     use TimestampableEntity, SoftDeleteableEntity;
-    
-    /**
-     * {@inhertdoc}
-     */
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
-    }
 }
