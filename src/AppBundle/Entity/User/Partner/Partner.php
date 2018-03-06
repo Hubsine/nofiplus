@@ -35,7 +35,7 @@ class Partner extends BaseUser implements AdminEntityInterface
      * 
      * @ORM\Column(type="phone_number")
      * 
-     * @AssertPhoneNumber(defaultRegion="FR", type="mobile", message="assert.phone.not_mobile_phone")
+     * @AssertPhoneNumber(defaultRegion="FR", message="assert.phone.not_phone")
      */
     protected $phone;
     
