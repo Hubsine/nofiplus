@@ -134,6 +134,7 @@ form:
             carte: 'Nom du type de carte'
             compagny: 'Type d''entreprise'
             advanatge: 'Type d''avantage'
+    price: "Prix"
     
 Day: 'Jour'
 Month: 'Mois'
