@@ -2,20 +2,22 @@
 
 namespace AppBundle\Form\Type\Admin\Category;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use AppBundle\Form\Type\Admin\Category\CategoryType;
 
-class AdvantageType extends AbstractType
+class AdvantageType extends CategoryType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+        
         $builder->add('name', TextType::class, array(
-            'label'     => 'form.category.name.advantage'
+                'label'     => 'form.category.name.advantage'
         ));
     }
     
@@ -25,7 +27,7 @@ class AdvantageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Category\Advanatge'
+            'data_class' => 'AppBundle\Entity\Admin\Category\Advantage'
         ));
     }
 

@@ -7,7 +7,6 @@ use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 abstract class CategoryType extends AbstractType
@@ -22,7 +21,8 @@ abstract class CategoryType extends AbstractType
                 'label'     => 'form.category.name.carte'
             ))
             ->add('about', TextareaType::class, array(
-                'label' => 'form.about'
+                'label' => 'form.about',
+                'required'  => false
             ))
         ;
     }

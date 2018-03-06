@@ -2,29 +2,28 @@
 
 namespace AppBundle\Form\Type\Admin\Category;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use AppBundle\Form\Type\Admin\Category\CategoryType;
 
-class CarteType extends AbstractType
+class CarteType extends CategoryType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+        
         $builder
             ->add('name', TextType::class, array(
                 'label'     => 'form.category.name.carte'
             ))
             ->add('price', IntegerType::class, array(
                 'label' => 'form.price',
-            ))
-            ->add('about', TextareaType::class, array(
-                'label' => 'form.about'
             ))
         ;
     }
