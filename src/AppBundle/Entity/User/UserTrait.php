@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity\User;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,15 +40,6 @@ trait UserTrait
      * @Assert\Date(message="assert.date.birthday")
      */
     protected $birthday;
-    
-    /**
-     * @var string
-     * 
-     * @ORM\Column(unique=true, name="slug")
-     * @Gedmo\Slug(fields={"username", "id"})
-     * 
-     */
-    protected $slug;
     
     /**
      * @var string
@@ -202,29 +192,5 @@ trait UserTrait
     public function getBirthday()
     {
         return $this->birthday;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return User
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

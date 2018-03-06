@@ -40,10 +40,43 @@ abstract class User extends BaseUser
     protected $id;
     
     /**
+     * @var string
+     * 
+     * @ORM\Column(unique=true, name="slug")
+     * @Gedmo\Slug(fields={"username", "id"})
+     * 
+     */
+    protected $slug;
+    
+    /**
      * {@inheritdoc}
      */
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return User
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
