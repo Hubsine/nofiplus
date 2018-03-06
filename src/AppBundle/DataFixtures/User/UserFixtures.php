@@ -94,14 +94,17 @@ class UserFixtures extends DataBaseFixtures
         
         for($i = 0; $i <= 3; $i++)
         {
-            $partner = new Partner();
+            $partner        = new Partner();
+            $phoneNumber    = $this->container->get('libphonenumber.phone_number_util')->parse(
+                    '+3370707070' . $i
+                );
 
             $partner->addRole(User::ROLE_DEFAULT);
             $partner->setUsername('Partner' . $i);
             $partner->setPassword($this->encoder->encodePassword($partner, 'password'));
             $partner->setEmail('partner' . $i . '@nofiplus.com');
             $partner->setEnabled(true);
-            $partner->setPhone(070707070 . $i);
+            $partner->setPhone($phoneNumber);
 
             $manager->persist($partner);
         
