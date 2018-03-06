@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity\User\Partner;
 
-use AppBundle\Entity\User\AbstractUser as BaseUser;
+use AppBundle\Entity\User\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineArrayCollectionInterface;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
-use AppBundle\Traits\DoctrineTrait;
+use AppBundle\Entity\User\UserTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
@@ -20,8 +20,6 @@ use AppBundle\Entity\AdminEntityInterface;
  * @ORM\Table(name="np_user_partner")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\UserRepository")
  * 
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
- * 
  * @UniqueEntity("phone", message="assert.unique_entity.phone")
  * 
  * @author Hubsine <contact@hubsine.com>
@@ -30,7 +28,16 @@ class Partner extends BaseUser implements AdminEntityInterface
 {
     CONST ROUTE_PREFIX = 'user_partner';
     
-    use DoctrineTrait;
+    use UserTrait;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(type="phone_number")
+     * 
+     * @AssertPhoneNumber(defaultRegion="FR", type="mobile", message="assert.phone.not_mobile_phone")
+     */
+    protected $phone;
     
     public function __construct()
     {
@@ -43,9 +50,26 @@ class Partner extends BaseUser implements AdminEntityInterface
     }
     
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * Set phone
+     *
+     * @param phone_number $phone
+     *
+     * @return User
      */
-    protected $id;
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return phone_number
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
 }

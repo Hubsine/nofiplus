@@ -4,7 +4,11 @@ namespace AppBundle\DataFixtures\User;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\Entity\User\User;
+use AppBundle\Entity\User\Admin;
+use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\DataFixtures\DataBaseFixtures;
 
 /**
@@ -30,7 +34,7 @@ class UserFixtures extends DataBaseFixtures
         ###
         # Admin
         ###
-        $user = new User();
+        $user = new Admin();
         
         $user->addRole(User::ROLE_SUPER_ADMIN);
         $user->setUsername('Super admin');
@@ -42,10 +46,80 @@ class UserFixtures extends DataBaseFixtures
         $manager->flush();
             
         $mask = $this->createMaskBuilder();
-        $mask->add('OWNER');
+        $mask->add(MaskBuilder::MASK_OWNER);
         $this->container->get('app.security.acl_manager')->insertObjectAce($user, $mask, $user);
             
         $this->addReference('super_admin', $user);
         
+        ###
+        # Abonnes
+        ###
+        
+        $abonnes = array();
+        
+        for($i = 0; $i <= 3; $i++)
+        {
+            $abonne = new Abonne();
+
+            $abonne->addRole(User::ROLE_DEFAULT);
+            $abonne->setUsername('Abonne' . $i);
+            $abonne->setPassword($this->encoder->encodePassword($abonne, 'password'));
+            $abonne->setEmail('abonne' . $i . '@nofiplus.com');
+            $abonne->setEnabled(true);
+
+            $manager->persist($abonne);
+        
+            $abonnes[]  = $abonne;
+        }
+        
+        $manager->flush();
+        
+        for($i = 0; $i <= 3; $i++)
+        {
+            $abonne = $abonnes[$i];
+            $mask   = $this->createMaskBuilder();
+            
+            $mask->add(MaskBuilder::MASK_OPERATOR);
+            
+            $this->container->get('app.security.acl_manager')->insertObjectAce($abonne, $mask, $abonne);
+
+            $this->addReference('abonne' . $i, $abonne);
+        }
+        
+        ###
+        # Partner
+        ###
+        
+        $partners = array();
+        
+        for($i = 0; $i <= 3; $i++)
+        {
+            $partner = new Partner();
+
+            $partner->addRole(User::ROLE_DEFAULT);
+            $partner->setUsername('Partner' . $i);
+            $partner->setPassword($this->encoder->encodePassword($partner, 'password'));
+            $partner->setEmail('partner' . $i . '@nofiplus.com');
+            $partner->setEnabled(true);
+            $partner->setPhone(070707070 . $i);
+
+            $manager->persist($partner);
+        
+            $partners[]  = $partner;
+        }
+        
+        $manager->flush();
+        
+        for($i = 0; $i <= 3; $i++)
+        {
+            $partner = $partners[$i];
+            $mask   = $this->createMaskBuilder();
+            
+            $mask->add(MaskBuilder::MASK_OPERATOR);
+            
+            $this->container->get('app.security.acl_manager')->insertObjectAce($partner, $mask, $partner);
+
+            $this->addReference('partner' . $i, $partner);
+        }
     }
 }

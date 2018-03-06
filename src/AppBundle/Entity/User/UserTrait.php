@@ -8,17 +8,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User class entity
+ * User trait
  * 
  * @author Hubsine <contact@hubsine.com>
  */
-abstract class AbstractUser extends BaseUser 
+trait UserTrait
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    
     /**
      * @var string
      * 
