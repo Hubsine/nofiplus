@@ -21,6 +21,16 @@ trait CategoryTrait
      */
     private $name;
     
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="about", type="string", nullable=true)
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Type(type="string", message="assert.type")
+     */
+    private $about;
+    
     public function getName()
     {
         return $this->name;
@@ -31,5 +41,29 @@ trait CategoryTrait
         $this->name = $name;
         
         return $this;
+    }
+    
+    /**
+     * Set about
+     *
+     * @param string $about
+     *
+     * @return Carte
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string
+     */
+    public function getAbout()
+    {
+        return $this->about;
     }
 }

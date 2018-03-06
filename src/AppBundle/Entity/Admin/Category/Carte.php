@@ -39,16 +39,6 @@ class Carte implements AdminEntityInterface
      */
     private $price;
     
-    /**
-     * @var string
-     * 
-     * @ORM\Column(name="about", type="string")
-     * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="string", message="assert.type")
-     */
-    private $about;
-
     public static function getRoutePrefix(): string
     {
         return self::ROUTE_PREFIX;
@@ -86,29 +76,5 @@ class Carte implements AdminEntityInterface
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * Set about
-     *
-     * @param string $about
-     *
-     * @return Carte
-     */
-    public function setAbout($about)
-    {
-        $this->about = $about;
-
-        return $this;
-    }
-
-    /**
-     * Get about
-     *
-     * @return string
-     */
-    public function getAbout()
-    {
-        return $this->about;
     }
 }
