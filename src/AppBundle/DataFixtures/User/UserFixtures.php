@@ -65,6 +65,10 @@ class UserFixtures extends DataBaseFixtures
             $abonne->setUsername('Abonne' . $i);
             $abonne->setPassword($this->encoder->encodePassword($abonne, 'password'));
             $abonne->setEmail('abonne' . $i . '@nofiplus.com');
+            $abonne->setGender($i < 2 ? 'male' : 'female');
+            $abonne->setBirthday(new \DateTime('25-02-1983'));
+            $abonne->setFirstName('First name');
+            $abonne->setLastName('Last name');
             $abonne->setEnabled(true);
 
             $manager->persist($abonne);
@@ -103,6 +107,10 @@ class UserFixtures extends DataBaseFixtures
             $partner->setUsername('Partner' . $i);
             $partner->setPassword($this->encoder->encodePassword($partner, 'password'));
             $partner->setEmail('partner' . $i . '@nofiplus.com');
+            $partner->setGender($i < 2 ? 'male' : 'female');
+            $partner->setBirthday(new \DateTime('25-02-1983'));
+            $partner->setFirstName('First name');
+            $partner->setLastName('Last name');
             $partner->setEnabled(true);
             $partner->setPhone($phoneNumber);
 

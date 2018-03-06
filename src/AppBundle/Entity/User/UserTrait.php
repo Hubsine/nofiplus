@@ -26,7 +26,7 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(type="string", length=10, name="gender", nullable=true)
+     * @ORM\Column(type="string", length=10, name="gender")
      * 
      * @Assert\Choice(callback="getGenders", message="assert.choice")
      */
@@ -35,7 +35,7 @@ trait UserTrait
     /**
      * @var DateTime
      * 
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      * 
      * @Assert\Date(message="assert.date.birthday")
      */
@@ -44,7 +44,7 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(name="first_name", type="string", nullable=true)
+     * @ORM\Column(name="first_name", type="string")
      * 
      * @Assert\Type(type="alpha", message="assert.type")
      * @Assert\Length(max=20, maxMessage="assert.length.max")
@@ -55,7 +55,7 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(name="last_name", type="string", nullable=true)
+     * @ORM\Column(name="last_name", type="string")
      * 
      * @Assert\Type(type="alpha", message="assert.type")
      * @Assert\Length(max=50, maxMessage="assert.length.max")
