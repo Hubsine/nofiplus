@@ -18,6 +18,7 @@ assert:
     unique_entity: 
         phone: 'Le numéro de téléphon est déjà utilisé'
         social_network: 'Le réseau social existe déjà'
+        how_enjoy: 'L''élèment existe déjà'
     length:
         max: 'La valeur ne peut pas dépasser {{ limit }} characters'
         min: 'La valeur doit faire plus de {{ limit }} characters'
