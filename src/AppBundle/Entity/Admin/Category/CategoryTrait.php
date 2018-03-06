@@ -17,16 +17,15 @@ trait CategoryTrait
      * @ORM\Column(name="name", type="string")
      * 
      * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="alpha", message="assert.type")
+     * @Assert\Type(type="string", message="assert.type")
      */
     private $name;
     
     /**
      * @var string
      * 
-     * @ORM\Column(name="about", type="string", nullable=true)
+     * @ORM\Column(name="about", type="string")
      * 
-     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="string", message="assert.type")
      */
     private $about;
