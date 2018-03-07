@@ -20,9 +20,9 @@ use libphonenumber\PhoneNumberType;
  * User class entity
  * 
  * @ORM\Table(name="np_user_partner")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\UserRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\PartnerRepository")
  * 
- * @UniqueEntity("phone", message="assert.unique_entity.phone")
+ * @UniqueEntity("phoneMobile", message="assert.unique_entity.phone")
  * 
  * @author Hubsine <contact@hubsine.com>
  */
@@ -36,9 +36,9 @@ class Partner extends BaseUser implements AdminEntityInterface
     /**
      * @var integer
      * 
-     * @ORM\Column(type="phone_number")
+     * @ORM\Column(type="phone_number", unique=true)
      * 
-     * @AssertPhoneNumber(defaultRegion="FR", type="mobile", message="assert.phone.not_mobile_phone")
+     * @AssertPhoneNumber(defaultRegion="FR", type="MOBILE", message="assert.phone.not_mobile_phone")
      */
     protected $phoneMobile;
     

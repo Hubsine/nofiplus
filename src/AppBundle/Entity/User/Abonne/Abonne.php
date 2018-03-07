@@ -19,7 +19,7 @@ use AppBundle\Entity\AdminEntityInterface;
  * User class entity
  * 
  * @ORM\Table(name="np_user_abonne")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Abonne\UserRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Abonne\AbonneRepository")
  * 
  * @UniqueEntity("phone", message="assert.unique_entity.phone")
  * 
