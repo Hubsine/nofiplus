@@ -30,6 +30,10 @@ use AppBundle\Traits\DoctrineTrait;
  */
 abstract class User extends BaseUser 
 {
+    const PARTNER_TYPE  = 'partner';
+    const ABONNE_TYPE   = 'abonne';
+    const ADMIN_TYPE    = 'admin';
+    
     use DoctrineTrait;
     
     /**
