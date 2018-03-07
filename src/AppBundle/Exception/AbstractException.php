@@ -11,6 +11,6 @@ abstract class AbstractException extends \Exception
 {
     public function arrayToString(array $array)
     {
-        return implode(', ', $array);
+        return implode('or ', $array);
     }
 }

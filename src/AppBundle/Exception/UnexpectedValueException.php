@@ -11,13 +11,13 @@ use AppBundle\Exception\AbstractException;
  */
 class UnexpectedValueException extends AbstractException
 {
-    const DEFAULT_MESSAGE = 'Unexpected value. Extected value is %s.';
+    const DEFAULT_MESSAGE = 'Unexpected value "%s". Extected value is "%s".';
     
-    public function __construct($expectedValue, string $message = "", int $code = 0, \Throwable $previous = null) 
+    public function __construct($value, $expectedValue, string $message = "", int $code = 0, \Throwable $previous = null) 
     {
         if( empty($message) )
         {
-            $message    = sprintf(self::DEFAULT_MESSAGE, is_array( $expectedValue ) ? $this->arrayToString($expectedValue) : $expectedValue );
+            $message    = sprintf(self::DEFAULT_MESSAGE, $value, is_array( $expectedValue ) ? $this->arrayToString($expectedValue) : $expectedValue );
         }
         
         parent::__construct($message, $code, $previous);
