@@ -12,6 +12,9 @@ assert:
     social_network_domain: 'L''url ne correspond à aucun réseau social ou l''url ne correspond pas au bon réseau social'
     date:
         birthday: 'La date de naissance est invalide'
+        greater_than_or_equal: 'Cette valeur doit être supérieur ou égal à {{ compared_value }}'
+        less_than_or_equal: 'Cette valeur doit être inférieur ou égal à {{ compared_value }}'
+    date: 'La date est invalide'    
     phone:
         not_mobile_phone: 'Le numéro de mobile est invalide'
         not_phone: 'Le numéro de téléphone est invalide'
