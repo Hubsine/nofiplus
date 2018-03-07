@@ -160,6 +160,8 @@ menu:
     profile: Profil
     parameters: 'Paramètres'
     update: 'Modifier'
+    login: 'Connexion'
+    register: 'Inscription'
     
 profile:
     about: 'A propos'

@@ -92,6 +92,7 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: frontMain }
             - { name: knp_menu.menu_builder, method: createProfileMenu, alias: profileMenu }
+            - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logoutMenu }
             
     app.admin_menu_builder:
         class: AppBundle\Menu\AdminMenuBuilder

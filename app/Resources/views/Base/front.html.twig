@@ -3,17 +3,11 @@
 {% block body_tag_class %}front{% endblock body_tag_class %}
 
 {% block header_content %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
         <div class="container">
-            <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                {% set frontMainMenu = knp_menu_get('frontMain', [], {'_route': app.request.attributes.get('_route')}) %}
-                {{ knp_menu_render(frontMainMenu) }}
-            </div>
+            <a class="navbar-brand mr-0" href="#">Logo</a>
+            {% set logoutMenu = knp_menu_get('logoutMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+            {{ knp_menu_render(logoutMenu) }}
         </div>
     </nav>
 {% endblock header_content %}
@@ -37,7 +31,7 @@
                             {% block content_title %}
                                 Titre de la page
                             {% endblock content_title %}
-                        {% block content_title_tag_end %}</h1>{% endblock content_title_tag_end %}
+                            {% block content_title_tag_end %}</h1>{% endblock content_title_tag_end %}
                     </div>
                 </div>
             </div>
