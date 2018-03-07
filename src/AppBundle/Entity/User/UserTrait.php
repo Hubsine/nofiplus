@@ -26,8 +26,9 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(type="string", length=10, name="gender")
+     * @ORM\Column(type="string", length=10, name="gender", nullable=true)
      * 
+     * @Assert\NotBlank(message="assert.not_blank", groups={"partner"})
      * @Assert\Choice(callback="getGenders", message="assert.choice")
      */
     protected $gender;
@@ -35,8 +36,9 @@ trait UserTrait
     /**
      * @var DateTime
      * 
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      * 
+     * @Assert\NotBlank(message="assert.not_blank", groups={"partner"})
      * @Assert\Date(message="assert.date.birthday")
      */
     protected $birthday;
@@ -44,8 +46,9 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(name="first_name", type="string")
+     * @ORM\Column(name="first_name", type="string", nullable=true)
      * 
+     * @Assert\NotBlank(message="assert.not_blank", groups={"partner"})
      * @Assert\Type(type="alpha", message="assert.type")
      * @Assert\Length(max=20, maxMessage="assert.length.max")
      * 
@@ -55,8 +58,9 @@ trait UserTrait
     /**
      * @var string
      * 
-     * @ORM\Column(name="last_name", type="string")
+     * @ORM\Column(name="last_name", type="string", nullable=true)
      * 
+     * @Assert\NotBlank(message="assert.not_blank", groups={"partner"})
      * @Assert\Type(type="alpha", message="assert.type")
      * @Assert\Length(max=50, maxMessage="assert.length.max")
      */

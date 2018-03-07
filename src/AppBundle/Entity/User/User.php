@@ -57,7 +57,7 @@ abstract class User extends BaseUser
      * 
      * @ORM\Column(name="enabled_by_admin", type="boolean", nullable=true)
      */
-    protected $enbaledByAdmin;
+    protected $enabledByAdmin;
 
     /**
      * {@inheritdoc}
@@ -96,20 +96,28 @@ abstract class User extends BaseUser
      * 
      * @return boolean
      */
-    public function getEnbaledByAdmin() 
+    public function getEnabledByAdmin() 
     {
-        return $this->enbaledByAdmin;
+        return $this->enabledByAdmin;
     }
 
     /**
      * Set enabledByAdmin
      * 
-     * @param boolean $enbaledByAdmin
+     * @param boolean $enabledByAdmin
      */
-    public function setEnbaledByAdmin($enbaledByAdmin) 
+    public function setEnabledByAdmin($enabledByAdmin) 
     {
-        $this->enbaledByAdmin = $enbaledByAdmin;
+        $this->enabledByAdmin = $enabledByAdmin;
     }
 
-
+    /**
+     * Check if user account is enabled par admin 
+     * 
+     * @return boolean
+     */
+    public function isEnabledByAdmin()
+    {
+        return $this->enabledByAdmin !== false && $this->enabledByAdmin !== true ? false : $this->enabledByAdmin;
+    }
 }
