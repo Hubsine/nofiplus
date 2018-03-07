@@ -13,6 +13,7 @@ use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumbe
 use AppBundle\Entity\User\UserTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
+use libphonenumber\PhoneNumberType;
 
 /**
  * 
@@ -37,41 +38,69 @@ class Partner extends BaseUser implements AdminEntityInterface
      * 
      * @ORM\Column(type="phone_number")
      * 
-     * @AssertPhoneNumber(defaultRegion="FR", message="assert.phone.not_phone")
+     * @AssertPhoneNumber(defaultRegion="FR", type="mobile", message="assert.phone.not_mobile_phone")
      */
-    protected $phone;
+    protected $phoneMobile;
+    
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(type="phone_number")
+     * 
+     * @AssertPhoneNumber(defaultRegion="FR", type="FIXED_LINE", message="assert.phone.not_mobile_phone")
+     */
+    protected $phoneFixed;
     
     public function __construct()
     {
         parent::__construct();
     }
-    
-    public static function getRoutePrefix(): string
-    {
-        return self::ROUTE_PREFIX;
-    }
-    
+
     /**
-     * Set phone
+     * Set phoneMobile
      *
-     * @param phone_number $phone
+     * @param mixed $phoneMobile
      *
-     * @return User
+     * @return Partner
      */
-    public function setPhone($phone)
+    public function setPhoneMobile($phoneMobile)
     {
-        $this->phone = $phone;
+        $this->phoneMobile = $phoneMobile;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get phoneMobile
      *
-     * @return phone_number
+     * @return mixed
      */
-    public function getPhone()
+    public function getPhoneMobile()
     {
-        return $this->phone;
+        return $this->phoneMobile;
+    }
+
+    /**
+     * Set phoneFixed
+     *
+     * @param mixed $phoneFixed
+     *
+     * @return Partner
+     */
+    public function setPhoneFixed($phoneFixed)
+    {
+        $this->phoneFixed = $phoneFixed;
+
+        return $this;
+    }
+
+    /**
+     * Get phoneFixed
+     *
+     * @return mixed
+     */
+    public function getPhoneFixed()
+    {
+        return $this->phoneFixed;
     }
 }
