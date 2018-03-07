@@ -3,11 +3,11 @@
 namespace AppBundle\Exception;
 
 /**
- * Description of AbstractException
+ * Description of ExceptionTrait
  *
  * @author Hubsine <contact@hubsine.com>
  */
-abstract class AbstractException extends \Exception
+trait ExceptionTrait
 {
     public function arrayToString(array $array)
     {

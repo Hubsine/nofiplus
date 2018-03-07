@@ -2,15 +2,17 @@
 
 namespace AppBundle\Exception;
 
-use AppBundle\Exception\AbstractException;
+use AppBundle\Exception\ExceptionTrait;
 
 /**
  * Description of UnexpectedValueException
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class UnexpectedValueException extends AbstractException
+class UnexpectedValueException  extends \Exception
 {
+    use ExceptionTrait;
+    
     const DEFAULT_MESSAGE = 'Unexpected value "%s". Extected value is "%s".';
     
     public function __construct($value, $expectedValue, string $message = "", int $code = 0, \Throwable $previous = null) 
