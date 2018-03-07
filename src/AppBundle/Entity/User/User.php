@@ -51,7 +51,14 @@ abstract class User extends BaseUser
      * 
      */
     protected $slug;
-    
+
+    /**
+     * @var boolean
+     * 
+     * @ORM\Column(name="enabled_by_admin", type="boolean", nullable=true)
+     */
+    protected $enbaledByAdmin;
+
     /**
      * {@inheritdoc}
      */
@@ -83,4 +90,26 @@ abstract class User extends BaseUser
     {
         return $this->slug;
     }
+    
+    /**
+     * get enabledByAdmin
+     * 
+     * @return boolean
+     */
+    public function getEnbaledByAdmin() 
+    {
+        return $this->enbaledByAdmin;
+    }
+
+    /**
+     * Set enabledByAdmin
+     * 
+     * @param boolean $enbaledByAdmin
+     */
+    public function setEnbaledByAdmin($enbaledByAdmin) 
+    {
+        $this->enbaledByAdmin = $enbaledByAdmin;
+    }
+
+
 }
