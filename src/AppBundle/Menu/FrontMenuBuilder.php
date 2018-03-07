@@ -58,7 +58,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         $login  = $menu->addChild('menu.login', [
                 'route'  => 'fos_user_security_login',
-                'routeParameters'   => ['user'  => 'abonne']
+                'routeParameters'   => ['register_user'  => 'abonne']
             ])
             ->setAttribute('class', 'mr-2 nav-item')
             ->setLinkAttribute('class', 'nav-link border border-success');
@@ -68,7 +68,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         $register   = $menu->addChild('menu.register', [
                 'route'  => 'fos_user_registration_register',
-                'routeParameters'   => ['user'  => 'abonne']
+                'routeParameters'   => ['register_user'  => 'abonne']
             ])
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link border border-secondary');
