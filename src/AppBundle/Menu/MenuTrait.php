@@ -3,6 +3,8 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\ItemInterface;
+use AppBundle\Exception\ClassNotFoundException;
+use AppBundle\Exception\UndefinedConstantException;
 
 /**
  * @author Hubsine <contact@hubsine.com>
@@ -81,5 +83,31 @@ trait MenuTrait
         $paramValue =  $this->request->get($paramName);
         
         return $paramValue;
+    }
+    
+    /**
+     * Get class route name 
+     * 
+     * @param string $className
+     * @param type $prefix
+     * @return string Constant "ROUTE_PREFIX" value
+     * @throws ClassNotFoundException
+     * @throws UndefinedConstantException
+     */
+    public function getCompleteRoute($className, $prefix)
+    {
+        if( ! class_exists($className) )
+        {
+            throw new ClassNotFoundException($className);
+        }
+        
+        $constName = $className . '::' . 'ROUTE_PREFIX';
+        
+        if( ! defined($constName) )
+        {
+            throw new UndefinedConstantException($constName);
+        }
+        
+        return constant($constName) . '_' . $prefix;
     }
 }
