@@ -11,14 +11,6 @@
 
 namespace AppBundle\Controller\Front;
 
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Form\Factory\FactoryInterface;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +18,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
+use AppBundle\Controller\Controller;
+use AppBundle\Exception\UnexpectedValueException;
+use AppBundle\Entity\User\User;
+use AppBundle\Entity\User\Partner\Partner;
+use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Form\Type\User\RegistrationPartnerType;
+use AppBundle\Form\Type\User\RegistrationType;
 
 /**
  * Controller managing the registration.
@@ -35,12 +41,13 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
  */
 class RegistrationController extends Controller
 {
+    
     /**
      * @param Request $request
      *
      * @return Response
      */
-    public function registerAction(Request $request)
+    public function registerAction(Request $request, $asuser)
     {
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
@@ -49,7 +56,8 @@ class RegistrationController extends Controller
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-        $user = $userManager->createUser();
+        #$user = $this->getUserTypeEntityFromRequest($request);
+        $user = $this->getAsUserEntity();
         $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
@@ -59,20 +67,29 @@ class RegistrationController extends Controller
             return $event->getResponse();
         }
 
-        $form = $formFactory->createForm();
+        #$form = $formFactory->createForm();
+        $form = $this->getAsUserRegistrationFormType();
         $form->setData($user);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($form->isSubmitted()) 
+        {
+            $user instanceof Partner ? $user->setEnabledByAdmin(false) : $user->setEnabledByAdmin(true);
+            
+            if ($form->isValid()) 
+            {
+                
                 $event = new FormEvent($form, $request);
+                
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-
-                $userManager->updateUser($user);
+                
+                $event->setResponse($this->redirectToRoute('fos_user_registration_check_email', ['asuser'=>$asuser]));
+                
+                $this->getDoctrineUtil()->persist($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $url = $this->generateUrl('fos_user_registration_confirmed', array('asuser' => $asuser));
                     $response = new RedirectResponse($url);
                 }
 
@@ -91,6 +108,7 @@ class RegistrationController extends Controller
 
         return $this->render('@Front/User/Registration/register.html.twig', array(
             'form' => $form->createView(),
+            'asUser'  => $asuser
         ));
     }
 
@@ -101,19 +119,24 @@ class RegistrationController extends Controller
     {
         $email = $this->get('session')->get('fos_user_send_confirmation_email/email');
 
-        if (empty($email)) {
-            return new RedirectResponse($this->get('router')->generate('fos_user_registration_register'));
+        if (empty($email)) 
+        {
+            return new RedirectResponse($this->get('router')->generate('fos_user_registration_register', array('asuser' => $this->getAsUserType()) ));
         }
 
         $this->get('session')->remove('fos_user_send_confirmation_email/email');
-        $user = $this->get('fos_user.user_manager')->findUserByEmail($email);
+        
+        $user = $this->getDoctrineUtil()
+                ->getRepository( $this->getAsUserEntityClassName() )
+                ->findOneByEmail($email);
 
-        if (null === $user) {
+        if (null === $user) 
+        {
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
         return $this->render('@Front/User/Registration/check_email.html.twig', array(
-            'user' => $user,
+            'user' => $user
         ));
     }
 
@@ -127,11 +150,10 @@ class RegistrationController extends Controller
      */
     public function confirmAction(Request $request, $token)
     {
-        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
-        $userManager = $this->get('fos_user.user_manager');
+        $doctrineUtil   = $this->getDoctrineUtil();
 
-        $user = $userManager->findUserByConfirmationToken($token);
-
+        $user   = $doctrineUtil->getRepository( $this->getAsUserEntityClassName() )->findOneByConfirmationToken($token);
+        
         if (null === $user) {
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
         }
@@ -147,10 +169,10 @@ class RegistrationController extends Controller
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
 
-        $userManager->updateUser($user);
+        $doctrineUtil->persist($user);
         
         if (null === $response = $event->getResponse()) {
-            $url = $this->generateUrl('fos_user_registration_confirmed');
+            $url = $this->generateUrl('fos_user_registration_confirmed', array('asuser'  => $this->getAsUserType($request)));
             $response = new RedirectResponse($url);
         }
 
@@ -190,6 +212,96 @@ class RegistrationController extends Controller
 
         if ($this->get('session')->has($key)) {
             return $this->get('session')->get($key);
+        }
+    }
+    
+    /**
+     * Get user type from request. Are abonne or partner
+     * 
+     * @param Request $request
+     * @return string
+     * @throws UnexpectedValueException
+     */
+    private function getAsUserType(Request $request = null): string
+    {
+        $request = null === $request ? $this->get('request_stack')->getCurrentRequest() : $request;
+        
+        $avaibleAsUsers   = array(User::ABONNE_TYPE, User::PARTNER_TYPE);
+        $asUser           = $request->attributes->get('asuser');
+        
+        if( ! in_array($asUser, $avaibleAsUsers) )
+        {
+            throw new UnexpectedValueException($asUser, $avaibleAsUsers);
+        }
+        
+        return $asUser;
+    }
+    
+    /**
+     * Get form for user abonne or partner 
+     * 
+     * @param Request $request
+     * @return \Symfony\Component\Form\FormInterface;
+     * @throws UnexpectedValueException
+     */
+    protected function getAsUserRegistrationFormType(Request $request = null)
+    {
+        $asUser                   = $this->getAsUserType($request);
+        
+        switch ( $asUser )
+        {
+            case User::PARTNER_TYPE:
+                $form = $this->createForm(RegistrationPartnerType::class);    
+                break;
+            
+            default:
+                $form = $this->createForm(RegistrationType::class);   
+        }
+        
+        return $form;
+    }
+    
+    /**
+     * Get user entity by user type
+     * 
+     * @param Request $request
+     * @return mixed
+     */
+    protected function getAsUserEntity(Request $request = null)
+    {
+        $asUser = $this->getAsUserType($request);
+        
+        switch ( $asUser )
+        {
+            case User::PARTNER_TYPE:
+                $user   = new Partner();
+                break;
+            
+            default :
+                $user   = new Abonne();
+        }
+        
+        return $user;
+    }
+    
+    /**
+     * Get entity class name by user 
+     * 
+     * @param Request $request
+     * @return string User class name
+     */
+    protected function getAsUserEntityClassName(Request $request = null)
+    {
+        $asUser = $this->getAsUserType($request);
+        
+        switch ( $asUser )
+        {
+            case User::PARTNER_TYPE:
+                return Partner::class;
+                break;
+            
+            default :
+                return Abonne::class;
         }
     }
 }

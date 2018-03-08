@@ -1,5 +1,19 @@
-{% extends "@App/Base/front.html.twig" %}
+{% extends "@Front/User/Registration/index.html.twig" %}
+
+{% block content_title %}
+    {{ 'layout.register' | trans }}
+{% endblock content_title %}
 
 {% block content %}
-{% include "@Front/User/Registration/register_content.html.twig" %}
+    
+    <nav class="nav nav-pills nav-justified mb-3">
+        <a class="nav-item nav-link {{ (asUser == 'abonne' or asUser is empty) ? 'active' : '' }}" href="{{ path('fos_user_registration_register') }}">{{ 'layout.abonne' | trans }}</a>
+        <a class="nav-item nav-link {{ (asUser == 'partner') ? 'active' : '' }}" href="{{ path('fos_user_registration_register', {'asuser': 'partner'}) }}">{{ 'layout.partner' | trans }}</a>
+    </nav>
+    
+        {% if asUser == 'abonne' or asUser is empty %}
+            {% include "@Front/User/Registration/register_content_abonne.html.twig" %}
+        {% elseif asUser == 'partner' %}
+            {% include "@Front/User/Registration/register_content_partner.html.twig" %}
+        {% endif %}
 {% endblock content %}

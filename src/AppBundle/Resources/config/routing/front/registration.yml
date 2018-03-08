@@ -1,19 +1,35 @@
 fos_user_registration_register:
-    path: /
-    defaults: { _controller: AppBundle:Front\Registration:register }
+    path: /{asuser}
+    defaults: 
+        _controller: AppBundle:Front\Registration:register
+        asuser: 'abonne'
     methods: [GET, POST]
+    requirements:
+        asuser: abonne|partner
     
 fos_user_registration_check_email:
-    path: /check-email 
-    defaults: { _controller: AppBundle:Front\Registration:checkEmail } 
+    path: /{asuser}/check-email 
+    defaults: 
+        _controller: AppBundle:Front\Registration:checkEmail 
+        asuser: 'abonne'
     methods: [GET]
+    requirements:
+        asuser: abonne|partner
 
 fos_user_registration_confirm:
-    path: /confirm/{token} 
-    defaults: { _controller: AppBundle:Front\Registration:confirm }
+    path: /{asuser}/confirm/{token} 
+    defaults: 
+        _controller: AppBundle:Front\Registration:confirm 
+        asuser: 'abonne'
     methods: [GET]
+    requirements:
+        asuser: abonne|partner
 
 fos_user_registration_confirmed:
-    path: /confirmed
-    defaults: { _controller: AppBundle:Front\Registration:confirmed }
+    path: /{asuser}/confirmed
+    defaults: 
+        _controller: AppBundle:Front\Registration:confirmed 
+        asuser: 'abonne'
     methods: [GET]
+    requirements:
+        asuser: abonne|partner
