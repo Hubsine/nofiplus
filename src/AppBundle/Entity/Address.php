@@ -27,6 +27,13 @@ class Address implements EntityInterface
     
     /**
      * @var string
+     * 
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     */
+    private $address;
+    
+    /**
+     * @var string
      *
      * @ORM\Column(name="country", type="string", length=255, nullable=true)
      * 
@@ -72,6 +79,30 @@ class Address implements EntityInterface
         return $this->id;
     }
 
+    /**
+     * Get address
+     * 
+     * @return string
+     */
+    public function getAddress() 
+    {
+        return $this->address;
+    }
+    
+    /**
+     * Set address
+     * 
+     * @param string $address
+     * @return Address 
+     */
+    public function setAddress($address) 
+    {
+        $this->address = $address;
+        
+        return $this;
+    }
+
+        
     /**
      * Set country
      *
