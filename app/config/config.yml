@@ -99,7 +99,7 @@ swiftmailer:
 # FOSUserBundle    
 fos_user:
     db_driver: orm
-    user_class: AppBundle\Entity\User\Abonne\Abonne
+    user_class: AppBundle\Entity\User\User
     firewall_name: main
     from_email:
         address: "%mailer_user%"
