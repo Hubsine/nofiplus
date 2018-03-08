@@ -9,8 +9,14 @@ namespace AppBundle\Exception;
  */
 trait ExceptionTrait
 {
-    public function arrayToString(array $array)
+    /**
+     * Array to string 
+     * 
+     * @param mixed $value
+     * @return string
+     */
+    public function arrayToString($value)
     {
-        return implode('or ', $array);
+        return is_array( $value ) ? implode('or ', $value) : $value;
     }
 }
