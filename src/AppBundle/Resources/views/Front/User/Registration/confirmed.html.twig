@@ -5,7 +5,7 @@
 {% endif %}
 
 {% block content %}
-    <p>{{ ('registration.confirmed' ~ asUser)|trans({'%username%': user.username}) }}</p>
+    <p>{{ ('registration.confirmed.' ~ asUser)|trans({'%username%': user.username}) }}</p>
     {% if targetUrl %}
     <p><a href="{{ path('home') }}">{{ 'registration.back'|trans }}</a></p>
     {% endif %}
