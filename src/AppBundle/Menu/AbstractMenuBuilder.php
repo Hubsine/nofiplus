@@ -6,6 +6,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use AppBundle\Util\RouteUtil;
 use AppBundle\Menu\MenuTrait;
 
 /**
@@ -42,6 +43,11 @@ abstract class AbstractMenuBuilder
      * @var AuthorizationCheckerInterface
      */
     protected $authorizationChecker;
+    
+    /**
+     * @var RouteUtil
+     */
+    protected $routeUtil;
 
     /**
      * Constructor 
@@ -49,13 +55,14 @@ abstract class AbstractMenuBuilder
      * @param TokenInterface $factory
      */
     public function __construct(FactoryInterface $factory, RequestStack $requestStack, TokenStorageInterface $tokenStorage,
-            AuthorizationCheckerInterface $authorizationChecker)
+            AuthorizationCheckerInterface $authorizationChecker, RouteUtil $routeUtil)
     {
         $this->factory              = $factory;
         $this->requestStack         = $requestStack;
         $this->request              = $requestStack->getCurrentRequest();
         $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
+        $this->routeUtil            = $routeUtil;
     }
     
     /**
