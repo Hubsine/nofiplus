@@ -114,6 +114,7 @@ services:
             - '@request_stack'
             - '@security.token_storage'
             - '@security.authorization_checker'
+            - '@app.util.route'
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: frontMain }
             - { name: knp_menu.menu_builder, method: createProfileMenu, alias: profileMenu }
@@ -128,6 +129,7 @@ services:
             - '@request_stack'
             - '@security.token_storage'
             - '@security.authorization_checker'
+            - '@app.util.route'
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: adminMain }
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: adminSidebar }
