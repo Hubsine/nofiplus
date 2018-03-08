@@ -98,9 +98,12 @@ class UserFixtures extends DataBaseFixtures
         
         for($i = 0; $i <= 3; $i++)
         {
-            $partner        = new Partner();
-            $phoneNumber    = $this->container->get('libphonenumber.phone_number_util')->parse(
+            $partner            = new Partner();
+            $phoneNumberMobile  = $this->container->get('libphonenumber.phone_number_util')->parse(
                     '+3370707070' . $i
+                );
+            $phoneNumberFixed  = $this->container->get('libphonenumber.phone_number_util')->parse(
+                    '+3310707070' . $i
                 );
 
             $partner->addRole(User::ROLE_DEFAULT);
@@ -112,7 +115,8 @@ class UserFixtures extends DataBaseFixtures
             $partner->setFirstName('First name');
             $partner->setLastName('Last name');
             $partner->setEnabled(true);
-            $partner->setPhone($phoneNumber);
+            $partner->setPhoneMobile($phoneNumberMobile);
+            $partner->setPhoneFixed($phoneNumberFixed);
 
             $manager->persist($partner);
         
