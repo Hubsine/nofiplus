@@ -7,6 +7,8 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\User\User;
 use AppBundle\Entity\User\Partner\Partner;
+use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Exception\BadInstanceException;
 
 /**
  * @author Christophe Coevoet <stof@notk.org>
@@ -34,7 +36,6 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
     {
         $template = $this->parameters['template']['confirmation'];
         
-        
         $url = $this->router->generate('fos_user_registration_confirm', 
                 array( 
                     'token' => $user->getConfirmationToken(), 
@@ -45,6 +46,7 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
         $context = array(
             'user' => $user,
             'confirmationUrl' => $url,
+            'asUser'    => $this->getAsUserType($user)
         );
 
         $this->sendMessage($template, $context, $this->parameters['from_email']['confirmation'], (string) $user->getEmail());
@@ -56,11 +58,17 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
     public function sendResettingEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['template']['resetting'];
-        $url = $this->router->generate('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+        $url = $this->router->generate('fos_user_resetting_reset', 
+            array(
+                'token' => $user->getConfirmationToken(),
+                'asuser'    => $this->getAsUserType($user)
+            ), 
+            UrlGeneratorInterface::ABSOLUTE_URL);
 
         $context = array(
             'user' => $user,
             'confirmationUrl' => $url,
+            'asUser'    => $this->getAsUserType($user)
         );
 
         $this->sendMessage($template, $context, $this->parameters['from_email']['resetting'], (string) $user->getEmail());
@@ -99,8 +107,19 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
         $this->mailer->send($message);
     }
     
+    /**
+     * Get as user. Must be User::PARTNER_TYPE or User::ABONNE_TYPE
+     * 
+     * @param UserInterface $user
+     * @return string
+     * @throws BadInstanceException
+     */
     public function getAsUserType(UserInterface $user)
     {
-        return $user instanceof Partner ? User::PARTNER_TYPE : User::ABONNE_TYPE;
+        if( $user instanceof Partner ) return User::PARTNER_TYPE;
+        
+        if( $user instanceof Abonne ) return User::ABONNE_TYPE;
+        
+        throw new BadInstanceException( get_class($user), 'Abonne, Partner' );
     }
 }
