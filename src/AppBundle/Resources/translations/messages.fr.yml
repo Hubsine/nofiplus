@@ -33,7 +33,9 @@ change_password:
         success: 'Le mot de passe a été modifié.'
 registration:
     check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il contient un lien d''activation sur lequel il vous faudra cliquer afin d''activer votre compte.'
-    confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
+    confirmed: 
+        abonne: 'Félicitations %username%, votre compte est maintenant activé.'
+        partner: 'Félicitations %username%, votre compte est maintenant activé. Vous devez patienter qu''un Administrateur valide votre compte pour pouvoir ajouter des avantages.'
     back: 'Retour à la page d''accueil.'
     submit: 'Créer un compte'
     no_register: 'Pas encore inscrit ?'
@@ -82,6 +84,8 @@ layout:
     register: Inscription
     logged_in_as: 'Connecté en tant que %username%'
     update: Modifier
+    abonne: 'Abonne'
+    partner: 'Partenaire'
     
 form:
     group_name: 'Nom du groupe'
@@ -100,7 +104,9 @@ form:
     choose_file:
         avatar: 'Choisir un avatar'
         site_logo: 'Logo'
-    phone: 'Numéro de mobile'
+    phone: 
+        mobile: 'Numéro de mobile'
+        fixed: 'Numéro de fixe'
     quote: 'Citation'
     about: 'Description'
     site_name: 'Nom du site'

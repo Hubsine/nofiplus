@@ -1,7 +1,11 @@
 {% extends "@App/Base/front.html.twig" %}
 
+{% if asUser is not defined %}
+    {% set asUser = 'abonne' %}
+{% endif %}
+
 {% block content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    <p>{{ ('registration.confirmed' ~ asUser)|trans({'%username%': user.username}) }}</p>
     {% if targetUrl %}
     <p><a href="{{ path('home') }}">{{ 'registration.back'|trans }}</a></p>
     {% endif %}
