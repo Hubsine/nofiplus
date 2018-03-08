@@ -200,6 +200,7 @@ class RegistrationController extends Controller
         return $this->render('@Front/User/Registration/confirmed.html.twig', array(
             'user' => $user,
             'targetUrl' => $this->getTargetUrlFromSession(),
+            'asUser'    => $this->getAsUserType()
         ));
     }
 
