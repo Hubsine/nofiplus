@@ -6,8 +6,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
         <div class="container">
             <a class="navbar-brand mr-0" href="#">Logo</a>
-            {% set logoutMenu = knp_menu_get('logoutMenu', [], {'_route': app.request.attributes.get('_route')}) %}
-            {{ knp_menu_render(logoutMenu) }}
+            {% if is_granted('ROLE_USER') == false %}
+                {% set logoutMenu = knp_menu_get('logoutMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+                {{ knp_menu_render(logoutMenu) }}
+            {% endif %}
         </div>
     </nav>
 {% endblock header_content %}
