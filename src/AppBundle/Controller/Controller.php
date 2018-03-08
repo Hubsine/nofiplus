@@ -77,4 +77,14 @@ abstract class Controller extends BaseController
     {
         return $dispatcher = $this->get('event_dispatcher');
     }
+    
+    /**
+     * Get Route Util
+     * 
+     * @return \App\Util\RouteUtil
+     */
+    protected function getRouteUtil()
+    {
+        return $this->get('app.util.route');
+    }
 }
