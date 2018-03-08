@@ -54,6 +54,10 @@ services:
             - '%web_directory%'
     AppBundle\Util\MediaUtil: '@app.util.media'
     
+    app.util.route:
+        class: AppBundle\Util\RouteUtil
+        public: true
+    
     ###
     # Mailer
     ###
