@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Traits\DoctrineTrait;
+use AppBundle\Entity\User\UserTrait;
 
 /**
  * User class entity
@@ -35,6 +36,7 @@ abstract class User extends BaseUser
     const ADMIN_TYPE    = 'admin';
     
     use DoctrineTrait;
+    use UserTrait;
     
     /**
      * @ORM\Id
