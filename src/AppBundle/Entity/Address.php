@@ -28,7 +28,7 @@ class Address implements EntityInterface
     /**
      * @var string
      * 
-     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
     
