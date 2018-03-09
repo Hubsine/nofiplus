@@ -4,7 +4,7 @@ namespace AppBundle\Menu;
 
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\Admin\Category\Carte;
-use AppBundle\Entity\Admin\Category\Advantage;
+use AppBundle\Entity\Admin\Category\Offre;
 use AppBundle\Entity\Admin\Category\Compagny;
 
 /**
@@ -72,14 +72,14 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         $this->addChildByParam($carte, Compagny::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         ###
-        # Advantage
+        # Offre
         ###
-        $advantage = $category->addChild('Advantage', array('route' => Advantage::ROUTE_PREFIX . '_index'))
-                ->setExtra('_route', Advantage::ROUTE_PREFIX . '_index')
+        $offre = $category->addChild('Offre', array('route' => Offre::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', Offre::ROUTE_PREFIX . '_index')
                 ->setDisplayChildren(false);
         
-        $advantage->addChild('New', array('route'  => Advantage::ROUTE_PREFIX . '_new'));
-        $this->addChildByParam($carte, Advantage::ROUTE_PREFIX . '_update', 'id', 'Update');
+        $offre->addChild('New', array('route'  => Offre::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($carte, Offre::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         foreach ($menu as $item) 
         {

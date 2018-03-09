@@ -10,14 +10,14 @@ use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
- * Advantage
+ * Offre
  *
- * @ORM\Table(name="np_category_advantage")
- * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\AdvantageRepository")
+ * @ORM\Table(name="np_category_offre")
+ * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\OffreRepository")
  */
-class Advantage implements AdminEntityInterface
+class Offre implements AdminEntityInterface
 {
-    CONST ROUTE_PREFIX = 'category_advantage';
+    CONST ROUTE_PREFIX = 'category_offre';
             
     use CategoryTrait;
     use EntityRoutePrefixTrait;

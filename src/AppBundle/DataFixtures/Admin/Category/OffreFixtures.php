@@ -4,28 +4,28 @@ namespace AppBundle\DataFixtures\Admin\Category;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\DataFixtures\DataBaseFixtures;
-use AppBundle\Entity\Admin\Category\Advantage;
+use AppBundle\Entity\Admin\Category\Offre;
 
 /**
- * Description of AdvantageFixtures
+ * Description of OffreFixtures
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class AdvantageFixtures extends DataBaseFixtures
+class OffreFixtures extends DataBaseFixtures
 {
     
     public function load(ObjectManager $manager)
     {
         
-        $advantages  = array('Bon d\'achat', 'Réduction en %', 'Produit offert');
+        $offres  = array('Bon d\'achat', 'Réduction en %', 'Produit offert');
         
         ###
-        # Advantage
+        # Offre
         ###
         
-        foreach ($advantages as $key => $value) 
+        foreach ($offres as $key => $value) 
         {
-            $carte = new Advantage();
+            $carte = new Offre();
             
             $carte->setName($value);
             $carte->setAbout('About ' . $value);

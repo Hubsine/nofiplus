@@ -1,0 +1,20 @@
+
+category_offre_index:
+    path:     /
+    defaults: { _controller: AppBundle:Admin\Category\Offre:index }
+
+category_offre_new:
+    path:     /new
+    defaults: { _controller: AppBundle:Admin\Category\Offre:new }
+
+category_offre_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Offre:delete }
+    requirements:
+        id: '\d+'
+
+category_offre_update:
+    path:     /update/{id}
+    defaults: { _controller: AppBundle:Admin\Category\Offre:update }
+    requirements:
+        id: '\d+'

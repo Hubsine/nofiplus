@@ -154,7 +154,7 @@ form:
         name: 
             carte: 'Nom du type de carte'
             compagny: 'Type d''entreprise'
-            advantage: 'Type d''avantage'
+            offre: 'Type d''avantage'
     price: "Prix"
     how_enjoy: 
         by: 'L''offre est disponible sur'

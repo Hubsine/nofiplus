@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Form\Type\Admin\Category\CategoryType;
 
-class AdvantageType extends CategoryType
+class OffreType extends CategoryType
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class AdvantageType extends CategoryType
         parent::buildForm($builder, $options);
         
         $builder->add('name', TextType::class, array(
-                'label'     => 'form.category.name.advantage'
+                'label'     => 'form.category.name.offre'
         ));
     }
     
@@ -27,7 +27,7 @@ class AdvantageType extends CategoryType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Category\Advantage'
+            'data_class' => 'AppBundle\Entity\Admin\Category\Offre'
         ));
     }
 
