@@ -1,7 +1,5 @@
-{% extends "@Front/User/Partner/index.html.twig" %}
 
-{% block content %}
-    <div class="userSingle partner mt-3">
+    <div class="userSingle mt-3">
 
         {% if is_granted( 'EDIT', user ) %}
             <div class="text-right mb-3">
@@ -100,4 +98,3 @@
         </div>
 
     </div>
-{% endblock content %}

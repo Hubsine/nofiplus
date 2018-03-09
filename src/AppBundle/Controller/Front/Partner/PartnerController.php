@@ -17,14 +17,14 @@ class PartnerController extends Controller
     public function indexAction(Request $request, Partner $partner)
     {
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Partner/index.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/index.html.twig', [
         ]);
     }
     
     public function showAction(Request $request, Partner $partner)
     {
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Partner/show.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/show.html.twig', [
             'user'  => $partner
         ]);
     }
@@ -79,7 +79,7 @@ class PartnerController extends Controller
             return $response;
         }
         
-        return $this->render('@Front/User/Partner/edit.html.twig', array(
+        return $this->render('@Front/User/Profile/Partner/edit.html.twig', array(
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
