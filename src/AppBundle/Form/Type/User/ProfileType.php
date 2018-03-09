@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Form\Type\AddressType;
-use AppBundle\Entity\User\User;
+use AppBundle\Entity\User\UserTrait;
 
 abstract class ProfileType extends AbstractType
 {
@@ -42,7 +42,7 @@ abstract class ProfileType extends AbstractType
             ->add('gender', ChoiceType::class, array(
                 'label' => 'form.gender.label',
                 'label_attr'    => array('class'    => 'h6'),
-                'choices'   => User::getGenders(),
+                'choices'   => UserTrait::getGenders(),
                 'choice_translation_domain' => true,
                 'choice_label' => function ($value, $key, $index) {
                     return 'form.gender.'.$value;
