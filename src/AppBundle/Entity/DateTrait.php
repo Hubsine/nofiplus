@@ -25,7 +25,7 @@ trait DateTrait
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="start", type="datetime")
+     * @ORM\Column(name="end", type="datetime")
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Date(message="assert.date")
