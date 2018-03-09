@@ -109,8 +109,8 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         # Parameters 
         ###
-//        $this->addChildByParam($menu, $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'), 'slug', 'menu.partner.parameters')
-//            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'));
+        $this->addChildByParam($menu, $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'), 'slug', 'menu.partner.parameters')
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'));
         
         foreach ($menu as $item) 
         {

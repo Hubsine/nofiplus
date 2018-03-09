@@ -15,5 +15,5 @@ user_partner_edit:
     
 user_partner_edit_parameters:
     path: /{slug}/parameters
-    defaults: { _controller: AppBundle:Front\Partner\Partner:updateParameters }
+    defaults: { _controller: AppBundle:Front\Partner\Parameters:update }
     methods: [GET,POST]    
