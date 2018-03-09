@@ -5,6 +5,7 @@ namespace AppBundle\Entity\User\Abonne;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Entity\Media\ImageTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\Media\MediaInterface;
@@ -25,6 +26,7 @@ class Avatar implements MediaInterface
     const FOLDER = 'uploads/users/avatars';
     const ROUTE_PREFIX = 'profile_avatar';
 
+    use DoctrineTrait;
     use ImageTrait;
     use EntityRoutePrefixTrait;
     
