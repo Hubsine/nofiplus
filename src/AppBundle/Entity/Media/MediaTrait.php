@@ -5,7 +5,6 @@ namespace AppBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\DoctrineTrait;
 
 /**
  * Description of Media
@@ -14,8 +13,6 @@ use AppBundle\Traits\DoctrineTrait;
  */
 trait MediaTrait
 {
-    use DoctrineTrait;
-    
     /**
      * @var int
      *
