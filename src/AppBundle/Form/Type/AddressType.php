@@ -18,21 +18,17 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('address', TextType::class, array(
-                'label' => 'form.address',
-                'requirement'   => false
+                'label' => 'form.address'
             ))
             ->add('country', CountryType::class, array(
                 'label' => 'form.country',
-                'placeholder'   => 'form.choose.country',
-                'required'  => false
+                'placeholder'   => 'form.choose.country'
             ))
             ->add('city', TextType::class, array(
-                'label' => 'form.city',
-                'required'  => false
+                'label' => 'form.city'
             ))
             ->add('zipCode', IntegerType::class, array(
-                'label' => 'form.zip_code',
-                'required'  => false
+                'label' => 'form.zip_code'
             ));
     }
     

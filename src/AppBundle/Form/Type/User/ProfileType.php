@@ -24,20 +24,16 @@ abstract class ProfileType extends AbstractType
                 'label_attr'    => array('class'    => 'h6'),
                 'placeholder'   => array('year' => 'form.choose.year', 'month' => 'form.choose.month', 'day' => 'form.choose.day'),
                 'view_timezone' => 'Europe/Paris',
-                'format'    => 'dd-MM-yyyy',
-                'required'  => false,
+                'format'    => 'dd-MM-yyyy'
             ))
             ->add('username', TextType::class, array(
-                'label' => 'form.username',
-                'required'  => false
+                'label' => 'form.username'
             ))
             ->add('firstName', TextType::class, array(
-                'label' => 'form.first_name',
-                'required'  => false
+                'label' => 'form.first_name'
             ))
             ->add('lastName', TextType::class, array(
-                'label' => 'form.last_name',
-                'required'  => false
+                'label' => 'form.last_name'
             ))    
             ->add('gender', ChoiceType::class, array(
                 'label' => 'form.gender.label',
@@ -52,8 +48,7 @@ abstract class ProfileType extends AbstractType
             ))
             ->add('address', AddressType::class, array(
                 'label' => 'form.address',
-                'label_attr'    => array('class'    => 'h6'),
-                'required'  => false
+                'label_attr'    => array('class'    => 'h6')
             ))
             ;
                 
