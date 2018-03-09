@@ -1,0 +1,103 @@
+{% extends "@Front/User/Partner/index.html.twig" %}
+
+{% block content %}
+    <div class="userSingle mt-3">
+
+        {% if is_granted( 'EDIT', user ) %}
+            <div class="text-right mb-3">
+                <a href="{{ path('user_partner_edit', {'slug': app.user.slug}) }}" role="button" class="btn btn-outline-success">{{ 'layout.update' | trans }}</a>
+            </div>
+        {% endif %}
+
+        <h2 class="mt-3 mb-3">{{ user.username }}</h2>
+
+        {# About #}
+
+        <div class="about bg-light p-3 mt-2">
+            <h3 class="mb-3">{{ 'profile.show.about' | trans }}</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    {# Username and gender #}
+                    <div class="row border-bottom">
+                        <div class="col">
+                            <label>{{ 'profile.show.username' | trans }}</label>
+                        </div>
+                        <div class="col">
+                            {{ user.username }} {% if user.gender is not null %} - {{ user.gender | trans }} {% endif %}
+                        </div>
+                    </div>
+
+                    {# First and Last name #}
+                    <div class="row border-bottom">
+                        <div class="col">
+                            <label>{{ 'profile.show.name' | trans }}</label>
+                        </div>
+                        <div class="col">
+                            {% if user.firstName is not null or user.lastName is not null %}
+                                {{ user.firstName }} {{ user.lastName }}
+                            {% else %}
+                                {{ 'empty' | trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {# Birthday #}
+                    <div class="row">
+                        <div class="col">
+                            <label>{{ 'profile.show.birthday' | trans }}</label>
+                        </div>
+                        <div class="col">
+                            {% if user.birthday is not null %}
+                                {{ user.birthday |date('Y/m/d', 'Europe/Paris') |default('empty' | trans) }}
+                            {% else %}
+                                {{ 'empty' | trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="contact p-3 mt-2">
+            {# Contact #}
+            <h3 class="mb-3">{{ 'profile.show.contact' | trans }}</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    {# Mobile and Fixed phone #}
+                    <div class="row">
+                        <div class="col">
+                            <label>{{ 'profile.show.phone.phone_number' | trans }}</label>
+                        </div>
+                        <div class="col">
+                            {% if user.phoneMobile is not null or user.phoneFixed is not null %}
+                                {{ user.phoneMobile | phone_number_format('INTERNATIONAL') }} 
+                                {{ user.phoneFixed | phone_number_format('INTERNATIONAL') }}
+                            {% else %}
+                                {{ 'empty' | trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {# Addresse #}
+                    <div class="row">
+                        <div class="col">
+                            <label>{{ 'profile.show.address.address' | trans }}</label>
+                        </div>
+
+                        <div class="col">
+                            {% if user.address is not null %}
+                                {{ user.address.address }}, {{ user.address.zipCode }} - {{ user.address.city }} - {{ user.address.country }}
+                            {% else %}
+                                {{ 'empty' | trans }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

@@ -16,3 +16,7 @@ resetting:
 change_password.xml:
     resource: "@AppBundle/Resources/config/routing/front/change_password.yml"
     prefix: /profile    
+    
+partner:
+    resource: "@AppBundle/Resources/config/routing/front/partner/all.yml"
+    prefix: /partners       

@@ -1,0 +1,19 @@
+user_partner_index:
+    path: /{slug}
+    defaults: { _controller: AppBundle:Front\Partner\Partner:show }
+    methods: [GET]
+
+user_partner_show:
+    path: /{slug}
+    defaults: { _controller: AppBundle:Front\Partner\Partner:show }
+    methods: [GET]
+
+user_partner_edit:
+    path: /{slug}/edit 
+    defaults: { _controller: AppBundle:Front\Partner\Partner:update }
+    methods: [GET,POST]
+    
+user_partner_edit_parameters:
+    path: /{slug}/parameters
+    defaults: { _controller: AppBundle:Front\Partner\Partner:updateParameters }
+    methods: [GET,POST]    

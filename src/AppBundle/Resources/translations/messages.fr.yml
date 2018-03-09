@@ -21,8 +21,22 @@ security:
         login_link: 'Connexion rapide et sécurisée.'
 profile:
     show:
+        about: 'A propos'
+        contact: 'Contact'
         username: 'Nom d''utilisateur'
         email: 'Adresse e-mail'
+        birthday: 'Date de naissance'
+        name: 'Nom & Prénom'
+        first_name: 'Prénom'
+        last_name: 'Nom'
+        phone: 
+            phone_number: 'Numéro de téléphone'
+            phone: 'Numéro de téléphone'
+            mobile: 'Mobile'
+            fixed: 'Fixe'
+        address: 
+            address: 'Adresse'
+            
     edit:
         submit: 'Mettre à jour'
     flash:
@@ -126,6 +140,7 @@ form:
         year: 'Année'
         month: 'Mois'
         day: 'Jour'
+    address: 'Adresse'    
     country: 'Pays'
     zip_code: 'Code postal'
     city: 'Ville'
@@ -151,6 +166,9 @@ Day: 'Jour'
 Month: 'Mois'
 Year: 'Année'
 None: 'Laisser vide'
+male: 'Homme'
+female: 'Femme'
+empty: 'Non renseigné'
 
 flash:
     add_success: 'L''élèment a été ajouter avec succès.'
@@ -168,7 +186,8 @@ menu:
     update: 'Modifier'
     login: 'Connexion'
     register: 'Inscription'
+    partner:
+        partner: Partner
+        compagny_offres: 'Entreprises & offres'
+        parameters: 'Paramètres'
     
-profile:
-    about: 'A propos'
-    username: 'Nom d''utlisateur'
