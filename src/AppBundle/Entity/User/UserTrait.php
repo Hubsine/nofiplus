@@ -135,8 +135,6 @@ trait UserTrait
     {
         $this->address = $address;
         
-        $address->setUser($this);
-
         return $this;
     }
 
