@@ -31,3 +31,5 @@ assert:
     url:
         invalid: 'L''url est invalide'
         dns_check: 'L''hôte n''a pas pu être résolu'
+    enjoy_by:
+        null: 'Vous devez renseigner au moins une façon de profiter de l''offre'

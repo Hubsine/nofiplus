@@ -51,6 +51,16 @@ class Partner extends BaseUser implements AdminEntityInterface
      */
     protected $phoneFixed;
     
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Compagny", mappedBy="partner", cascade={"persist", "remove"})
+     * 
+     * @Assert\Type(type="\Doctrine\ORM\PersistentCollection", message="assert.type")
+     * @Assert\Valid()
+     */
+    protected $compagnies;
+
     public function __construct()
     {
         parent::__construct();
