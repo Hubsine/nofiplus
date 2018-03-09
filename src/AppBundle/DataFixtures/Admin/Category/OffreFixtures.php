@@ -17,24 +17,30 @@ class OffreFixtures extends DataBaseFixtures
     public function load(ObjectManager $manager)
     {
         
-        $offres  = array('Bon d\'achat', 'Réduction en %', 'Produit offert');
+        $offresCat  = array('Bon d\'achat', 'Réduction en %', 'Produit offert');
+        $offres     = array();
         
         ###
         # Offre
         ###
         
-        foreach ($offres as $key => $value) 
+        foreach ($offresCat as $key => $value) 
         {
-            $carte = new Offre();
+            $offre = new Offre();
             
-            $carte->setName($value);
-            $carte->setAbout('About ' . $value);
+            $offre->setName($value);
+            $offre->setAbout('About ' . $value);
             
-            $manager->persist($carte);
+            $manager->persist($offre);
+            
+            $offres[$key]   = $offre;
         }
-        
         
         $manager->flush();
             
+        foreach ($offres as $key => $offre) 
+        {
+            $this->addReference('cat_offre_' . $key, $offre);
+        }
     }
 }

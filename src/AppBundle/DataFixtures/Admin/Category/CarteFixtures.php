@@ -29,5 +29,6 @@ class CarteFixtures extends DataBaseFixtures
         $manager->persist($carte);
         $manager->flush();
             
+        $this->addReference('carte_premium', $carte);
     }
 }

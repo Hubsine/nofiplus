@@ -16,23 +16,31 @@ class CompagnyFixtures extends DataBaseFixtures
     
     public function load(ObjectManager $manager)
     {
-        $compagny   = array('Voyage', 'Réstauration', 'Mode & Beauté');
+        $compagnyCat    = array('Voyage', 'Réstauration', 'Mode & Beauté');
+        $compagnies     = array();
         
         ###
         # Compagny
         ###
         
-        foreach ($compagny as $value) 
+        foreach ($compagnyCat as $key => $value) 
         {
-            $carte = new Compagny();
+            $compagny = new Compagny();
         
-            $carte->setName($value);
-            $carte->setAbout('About ' . $value);
+            $compagny->setName($value);
+            $compagny->setAbout('About ' . $value);
             
-            $manager->persist($carte);
+            $manager->persist($compagny);
+            
+            $compagnies[$key]   = $compagny;
         }
         
         $manager->flush();
+        
+        foreach ($compagnies as $key => $value) 
+        {
+            $this->addReference('cat_compagny_' . $key, $value);
+        }
             
     }
 }
