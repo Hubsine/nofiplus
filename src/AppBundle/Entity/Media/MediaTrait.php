@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Description of Media
+ * Description of MediaTrait
  * 
  * @author Hubsine <contact@hubsine.com>
  */

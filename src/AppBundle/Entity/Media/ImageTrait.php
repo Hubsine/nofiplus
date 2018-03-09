@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Entity\Media\MediaTrait;
 
 /**
- * Description of Profile
+ * Description of ImageTrait
  * 
  * @author Hubsine <contact@hubsine.com>
  */
