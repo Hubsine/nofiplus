@@ -1,0 +1,14 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content_title_tag_start %}
+{% endblock content_title_tag_start %}
+{% block content_title_tag_end %}
+{% endblock content_title_tag_end %}
+
+{% block content_title %}
+    {% set partnerMenu = knp_menu_get('partnerMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+    {{ knp_menu_render(partnerMenu, {'currentClass': 'active bg-white'}) }}
+{% endblock content_title %}
+
+{% block content %}
+{% endblock content %}
