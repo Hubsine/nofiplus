@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 use Symfony\Component\Security\Acl\Permission\MaskBuilderInterface;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Model\MutableAclInterface;
 use Symfony\Component\Security\Acl\Model\DomainObjectInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -126,5 +127,16 @@ class AclSecurityManager
             $securityIdentity   = $this->createSecurityIdentity($user);
             $this->aclProvider->updateUserSecurityIdentity($securityIdentity, $oldUsername);
         }
+    }
+    
+    /**
+     * Get new MaskBuilder instance 
+     * 
+     * @param integer $mask
+     * @return MaskBuilder
+     */
+    public function getMaskBuilder(int $mask = 0)
+    {
+        return new MaskBuilder($mask);
     }
 }
