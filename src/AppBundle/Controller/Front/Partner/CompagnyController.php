@@ -2,30 +2,31 @@
 
 namespace AppBundle\Controller\Front\Partner;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use AppBundle\Controller\Controller;
 use AppBundle\Entity\User\Partner\Partner;
-use AppBundle\Form\Type\User\Partner\PartnerType;
+use AppBundle\Entity\User\Partner\Compagny;
+use AppBundle\Form\Type\User\Partner\CompagnyType;
 
-class PartnerController extends Controller
+class CompagnyController extends Controller
 {
-    
     /**
      * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
      * 
      * @param Request $request
      * @param Partner $partner
-     * @return Response
+     * @return type
      */
     public function indexAction(Request $request, Partner $partner)
     {
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/index.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
+            'partner'   => $partner
         ]);
     }
     
@@ -36,22 +37,29 @@ class PartnerController extends Controller
      * @param Partner $partner
      * @return Response
      */
-    public function showAction(Request $request, Partner $partner)
+    public function newAction(Request $request, Partner $partner)
     {
+        $this->isPartner($partner);
+        
+        $form   = $this->createForm( CompagnyType::class, $compagny = new Compagny() );
+        
+        $compagny->setPartner($partner);
+
+        $form->handleRequest($request);
+        
+        if( $form->isSubmitted() && $form->isValid() )
+        {
+            
+        }
+        
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/show.html.twig', [
-            'user'  => $partner
+        return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
+            'partner'  => $partner, 
+            'form'  => $form->createView(),
+            'action'    => 'new'
         ]);
     }
     
-    /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
-     * @param Request $request
-     * @param Partner $partner
-     * @return Response
-     * @throws AccessDeniedException
-     */
     public function updateAction(Request $request, Partner $partner)
     {
         $this->isGrantedWithDeny('EDIT', $partner);
@@ -106,5 +114,19 @@ class PartnerController extends Controller
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
+    }
+    
+    /**
+     * Check is Partner object instance
+     * 
+     * @param Partner $partner
+     * @throws AccessDeniedException
+     */
+    private function isPartner($partner)
+    {
+        if ( ! is_object($partner) || !$partner instanceof Partner ) 
+        {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
     }
 }

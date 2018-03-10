@@ -100,6 +100,9 @@ layout:
     update: Modifier
     abonne: 'Abonne'
     partner: 'Partenaire'
+    compagny: 
+        compagny: 'Entreprise'
+        can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'
     
 form:
     group_name: 'Nom du groupe'
@@ -161,6 +164,12 @@ form:
         location: 'Dans un lieu physique'
         web: 'Sur internet'
         tel: 'Téléphone'
+    compagny:
+        name: 'Nom de l''entreprise'
+        about: 'Description de l''entreprise'
+        addresse: 'Adresse de l''entreprise'
+        logo: 'Logo de l''entreprise'
+        category: 'Secteur d''activité de l''entreprise'
     
 Day: 'Jour'
 Month: 'Mois'

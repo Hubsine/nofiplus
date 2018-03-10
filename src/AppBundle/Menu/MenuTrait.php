@@ -9,8 +9,6 @@ use Knp\Menu\ItemInterface;
  */
 trait MenuTrait 
 {
-    protected $paramAvaibles = array('id', 'slug');
-    
     /**
      * Add "active" class on a link element if route name match
      * 
@@ -49,12 +47,6 @@ trait MenuTrait
                 'routeParameters'  => array($paramName=> $paramValue)
             ));
             
-            if ( empty( $label ) && $paramName === 'slug' )
-            {
-                $user = $this->request->attributes->get('user');
-                $itemAdded->setLabel($user->getUsername());
-            }
-            
             return $itemAdded;
         }
         
@@ -71,13 +63,6 @@ trait MenuTrait
      */
     protected function getParamValue($paramName)
     {
-        if( !in_array($paramName, $this->paramAvaibles) )
-        {
-            throw new \InvalidArgumentException(
-                    sprintf('Inavlid argument value "%s" for $paramName. $paramName must be ' . implode(' or ', $this->paramAvaibles), $paramName)
-                    );
-        }
-        
         $paramValue =  $this->request->get($paramName);
         
         return $paramValue;

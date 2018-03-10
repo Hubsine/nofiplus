@@ -5,6 +5,8 @@ namespace AppBundle\Menu;
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\User\User;
 use AppBundle\Entity\User\Partner\Partner;
+use AppBundle\Entity\User\Partner\Compagny;
+use AppBundle\Exception\BadInstanceException;
 
 /**
  * Description of FrontMenuBuilder
@@ -85,6 +87,14 @@ class FrontMenuBuilder extends AbstractMenuBuilder
      */
     public function createPartnerMenu(array $options)
     {
+        $partner = $this->request->attributes->get('partner');
+        $_route     = $this->request->attributes->get('_route');
+        
+        if ( ! $partner instanceof Partner )
+        {
+            throw new BadInstanceException($partner, Partner::class);
+        }
+        
         $menu = $this->factory->createItem('menu.partner.partner', [
                 'route' => 'home'
             ])
@@ -93,32 +103,56 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         # Partner
         ###
-        $partner = $this->addChildByParam($menu, $this->routeUtil->getCompleteRoute(Partner::class, 'index'), 'slug', 'Partner')
-             ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'index'));
+        $partnerItem = $menu->addChild('Partner', [
+            'route' => $this->routeUtil->getCompleteRoute(Partner::class, 'index'),
+            'routeParameters'   => ['partner' => $partner->getSlug()]
+        ])
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'index'))
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
         
-        $this->addChildByParam($partner, $this->routeUtil->getCompleteRoute(Partner::class, 'edit'), 'slug', 'Partner')
-             ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit'))
+        $partnerItem->addChild('partner', [
+            'route' => $this->routeUtil->getCompleteRoute(Partner::class, 'edit'),
+            'routeParameters'   => ['partner' => $partner->getSlug()]
+        ])
             ->setDisplay(false);
         
         ###
-        # Compagny @ Offres
+        # Compagny & Offres
         ###
-//        $this->addChildByParam($menu, $this->routeUtil->getCompleteRoute(Partner::class, 'index'), 'slug', 'menu.partner.compagny_offres')
-//            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit'));
+        $compagny = $menu->addChild('menu.partner.compagny_offres', [
+            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'index'),
+            'routeParameters'   => ['partner' => $partner->getSlug()]
+            ])
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Compagny::class, 'index'))
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
         
+        $compagnyNew = $compagny->addChild('compagny', [
+            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'new'),
+            'routeParameters'   => ['partner'   => $partner->getSlug()]
+            ])
+            ->setDisplay(false);
+        
+        if( $compagnyNew->isCurrent() )
+        {
+            $compagnyNew->setCurrent(false);
+            $compagny->setCurrent(true);
+        }
+                
         ###
         # Parameters 
         ###
-        $this->addChildByParam($menu, $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'), 'slug', 'menu.partner.parameters')
-            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'));
+        $menu->addChild('menu.partner.parameters', [
+            'route' => $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'),
+            'routeParameters'   => ['partner'  => $partner->getSlug()]
+        ])
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Partner::class, 'edit_parameters'))
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
         
-        foreach ($menu as $item) 
-        {
-            $item->setAttribute('class', 'nav-item')
-                 ->setLinkAttribute('class', 'nav-link');
             
-            $this->addActiveClassOnLink($item, $options, ['bg-white']);
-        }
+        #$this->addActiveClassOnLink($item, $options, ['bg-white']);
         
         return $menu;
     }

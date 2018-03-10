@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Front\Partner;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -13,7 +14,14 @@ use AppBundle\Form\Type\User\Partner\ParametersType;
 
 class ParametersController extends Controller
 {
-    
+    /**
+     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * 
+     * @param Request $request
+     * @param Partner $partner
+     * @return Response
+     * @throws AccessDeniedException
+     */
     public function updateAction(Request $request, Partner $partner)
     {
         $this->isGrantedWithDeny('EDIT', $partner);

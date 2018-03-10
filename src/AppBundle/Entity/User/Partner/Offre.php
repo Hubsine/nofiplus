@@ -200,5 +200,243 @@ class Offre
         return $this->id;
     }
 
-}
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Offre
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     *
+     * @return Offre
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Offre
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set howEnjoy
+     *
+     * @param string $howEnjoy
+     *
+     * @return Offre
+     */
+    public function setHowEnjoy($howEnjoy)
+    {
+        $this->howEnjoy = $howEnjoy;
+
+        return $this;
+    }
+
+    /**
+     * Get howEnjoy
+     *
+     * @return string
+     */
+    public function getHowEnjoy()
+    {
+        return $this->howEnjoy;
+    }
+
+    /**
+     * Set enjoyByLocation
+     *
+     * @param string $enjoyByLocation
+     *
+     * @return Offre
+     */
+    public function setEnjoyByLocation($enjoyByLocation)
+    {
+        $this->enjoyByLocation = $enjoyByLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get enjoyByLocation
+     *
+     * @return string
+     */
+    public function getEnjoyByLocation()
+    {
+        return $this->enjoyByLocation;
+    }
+
+    /**
+     * Set enjoyByWeb
+     *
+     * @param string $enjoyByWeb
+     *
+     * @return Offre
+     */
+    public function setEnjoyByWeb($enjoyByWeb)
+    {
+        $this->enjoyByWeb = $enjoyByWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get enjoyByWeb
+     *
+     * @return string
+     */
+    public function getEnjoyByWeb()
+    {
+        return $this->enjoyByWeb;
+    }
+
+    /**
+     * Set enjoyByTel
+     *
+     * @param string $enjoyByTel
+     *
+     * @return Offre
+     */
+    public function setEnjoyByTel($enjoyByTel)
+    {
+        $this->enjoyByTel = $enjoyByTel;
+
+        return $this;
+    }
+
+    /**
+     * Get enjoyByTel
+     *
+     * @return string
+     */
+    public function getEnjoyByTel()
+    {
+        return $this->enjoyByTel;
+    }
+
+    /**
+     * Set compagny
+     *
+     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     *
+     * @return Offre
+     */
+    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny = null)
+    {
+        $this->compagny = $compagny;
+
+        return $this;
+    }
+
+    /**
+     * Get compagny
+     *
+     * @return \AppBundle\Entity\User\Partner\Compagny
+     */
+    public function getCompagny()
+    {
+        return $this->compagny;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Admin\Category\Offre $category
+     *
+     * @return Offre
+     */
+    public function setCategory(\AppBundle\Entity\Admin\Category\Offre $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Admin\Category\Offre
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set featured
+     *
+     * @param \AppBundle\Entity\User\Partner\Featured $featured
+     *
+     * @return Offre
+     */
+    public function setFeatured(\AppBundle\Entity\User\Partner\Featured $featured = null)
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
+    /**
+     * Get featured
+     *
+     * @return \AppBundle\Entity\User\Partner\Featured
+     */
+    public function getFeatured()
+    {
+        return $this->featured;
+    }
+}

@@ -42,5 +42,27 @@ class CompagnyLogo implements MediaInterface
      */
     private $compagny;
 
-}
+    /**
+     * Set compagny
+     *
+     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     *
+     * @return CompagnyLogo
+     */
+    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny = null)
+    {
+        $this->compagny = $compagny;
 
+        return $this;
+    }
+
+    /**
+     * Get compagny
+     *
+     * @return \AppBundle\Entity\User\Partner\Compagny
+     */
+    public function getCompagny()
+    {
+        return $this->compagny;
+    }
+}

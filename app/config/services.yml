@@ -57,6 +57,9 @@ services:
     app.util.route:
         class: AppBundle\Util\RouteUtil
         public: true
+        arguments:
+            - '@router'
+            - '@request_stack'
     
     ###
     # Mailer

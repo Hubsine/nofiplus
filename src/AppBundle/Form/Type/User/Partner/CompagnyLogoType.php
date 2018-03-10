@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type\User\Partner;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class CompagnyLogoType extends AbstractType
 {
@@ -13,8 +14,19 @@ class CompagnyLogoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('createdAt')->add('updatedAt')->add('deletedAt')->add('mimeType')->add('size')->add('name')->add('extension')->add('path')->add('compagny');
-    }/**
+        $builder
+            ->add('file', FileType::class, array(
+                'label' => false,
+                'attr'  => array('class'    => 'custom-file-input'),
+                'label_attr'    => array(
+                    'class' => 'custom-file-label'
+                ),
+                'required'  => false
+        ))
+        ;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

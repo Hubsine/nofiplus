@@ -1,0 +1,65 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content_title_tag_start %}
+{% endblock content_title_tag_start %}
+{% block content_title_tag_end %}
+{% endblock content_title_tag_end %}
+
+{% block content_title %}
+    {% set partnerMenu = knp_menu_get('partnerMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+    {{ knp_menu_render(partnerMenu, {'currentClass': 'active'}) }}
+{% endblock content_title %}
+
+{% block content %}
+    <div class="compagnyLoop">
+
+        <div class="row">
+
+            <div class="col-md-5">
+
+                <div class="pos-f-t">
+                    <div class="collapse show" id="navbarToggleExternalContent">
+                        <div class="bg-dark pt-4">
+                            <h4 class="pl-4 pr-4 text-white">
+                                {{ 'layout.compagny.compagny' | trans }}
+                                {% if partner.enabledByAdmin %}
+                                    <a class="float-right" href="{{ path('user_partner_compagny_new', {'partner': partner.slug}) }}" title="">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                {% endif %}
+                            </h4>
+                            <ul id="compagnies" class="nav nav-pills flex-column">
+                                <li class="nav-item d-inline-block">
+                                    <a class="nav-link active rounded-0" href="#">Active
+                                        <span class="badge badge-light badge-pill float-right">14</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item d-inline-block">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item d-inline-block">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item d-inline-block">
+                                    <a class="nav-link disabled" href="#">Disabled</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-dark bg-dark d-block d-sm-none">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                {% if action is defined and action == 'new' %}
+                    {% include '@Front/User/Profile/Partner/Compagny/new.html.twig' %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

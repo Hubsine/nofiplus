@@ -64,6 +64,8 @@ class Partner extends BaseUser implements AdminEntityInterface
     public function __construct()
     {
         parent::__construct();
+        
+        $this->compagnies = new ArrayCollection();
     }
 
     /**
@@ -112,5 +114,41 @@ class Partner extends BaseUser implements AdminEntityInterface
     public function getPhoneFixed()
     {
         return $this->phoneFixed;
+    }
+
+    /**
+     * Add compagny
+     *
+     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     *
+     * @return Partner
+     */
+    public function addCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    {
+        $this->compagnies[] = $compagny;
+
+        $compagny->setPartner($this);
+        
+        return $this;
+    }
+
+    /**
+     * Remove compagny
+     *
+     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     */
+    public function removeCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    {
+        $this->compagnies->removeElement($compagny);
+    }
+
+    /**
+     * Get compagnies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCompagnies()
+    {
+        return $this->compagnies;
     }
 }

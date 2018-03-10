@@ -47,5 +47,28 @@ class Featured
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set offre
+     *
+     * @param \AppBundle\Entity\User\Partner\Offre $offre
+     *
+     * @return Featured
+     */
+    public function setOffre(\AppBundle\Entity\User\Partner\Offre $offre = null)
+    {
+        $this->offre = $offre;
+
+        return $this;
+    }
+
+    /**
+     * Get offre
+     *
+     * @return \AppBundle\Entity\User\Partner\Offre
+     */
+    public function getOffre()
+    {
+        return $this->offre;
+    }
+}

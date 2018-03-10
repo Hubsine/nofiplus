@@ -1,0 +1,29 @@
+{% if partner.enabledByAdmin %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% endif %}
+
+    <div class="pt-5">
+
+        {#{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <input name="submit" class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
+        </div>
+        {{ form_end(form) }#}
+    {% if partner.enabledByAdmin %}
+    
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_widget(form) }}
+
+        {{ form_end(form) }}
+        
+    {% else %}
+        
+        <div class="alert alert-info">
+            <p>{{ 'layout.compagny.can_add' | trans }}</p>
+        </div>
+    {% endif %}        
+    
+    </div>
