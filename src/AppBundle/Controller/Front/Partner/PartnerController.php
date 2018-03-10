@@ -24,6 +24,8 @@ class PartnerController extends Controller
      */
     public function indexAction(Request $request, Partner $partner)
     {
+        $this->isGrantedWithDeny('EDIT', $partner);
+        
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/index.html.twig', [
         ]);
@@ -38,6 +40,8 @@ class PartnerController extends Controller
      */
     public function showAction(Request $request, Partner $partner)
     {
+        $this->isGrantedWithDeny('EDIT', $partner);
+        
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/show.html.twig', [
             'user'  => $partner
