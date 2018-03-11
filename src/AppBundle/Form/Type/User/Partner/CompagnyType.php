@@ -36,7 +36,10 @@ class CompagnyType extends AbstractType
                 'label' => 'form.compagny.category',
                 'class'  => CatCompagny::class,
                 'choice_label' => 'name',
+                'multiple'  => false,
+                'expanded'  => true
             ));
+        
     }
     
     /**

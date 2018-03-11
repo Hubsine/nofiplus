@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Front\Partner;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -49,7 +50,15 @@ class CompagnyController extends Controller
         
         if( $form->isSubmitted() && $form->isValid() )
         {
+            #$this->getDoctrineUtil()->persist($partner);
             
+            #$maskBuilder    = $this->getAclManager()->getMaskBuilder(MaskBuilder::MASK_OPERATOR);
+            
+            #$this->getAclManager()->insertObjectAce($compagny, $maskBuilder);
+            
+            $this->addFlash('success', 'flash.add_success');
+            
+            return $this->redirectToRoute($this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'));
         }
         
         // replace this example code with whatever you need

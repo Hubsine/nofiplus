@@ -16,12 +16,11 @@ class CompagnyLogoType extends AbstractType
     {
         $builder
             ->add('file', FileType::class, array(
-                'label' => false,
+                'label' => 'form.compagny.logo',
                 'attr'  => array('class'    => 'custom-file-input'),
                 'label_attr'    => array(
                     'class' => 'custom-file-label'
-                ),
-                'required'  => false
+                )
         ))
         ;
     }

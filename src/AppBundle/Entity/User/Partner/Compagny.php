@@ -62,6 +62,7 @@ class Compagny implements AdminEntityInterface
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Address", cascade={"persist", "remove"})
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\Address")
      * @Assert\Valid()
      */
@@ -72,6 +73,7 @@ class Compagny implements AdminEntityInterface
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompagnyLogo", mappedBy="compagny", cascade={"persist", "remove"})
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\CompagnyLogo")
      * @Assert\Valid()
      */
@@ -92,6 +94,7 @@ class Compagny implements AdminEntityInterface
      *
      * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"persist", "remove"})
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\Doctrine\ORM\PersistentCollection", message="assert.type")
      * @Assert\Valid()
      */
@@ -102,6 +105,7 @@ class Compagny implements AdminEntityInterface
      *
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Admin\Category\Compagny")
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Compagny", message="assert.type")
      */
     private $category;

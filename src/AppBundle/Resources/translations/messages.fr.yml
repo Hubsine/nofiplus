@@ -165,9 +165,10 @@ form:
         web: 'Sur internet'
         tel: 'Téléphone'
     compagny:
+        add: 'Ajouter une entreprise'
         name: 'Nom de l''entreprise'
         about: 'Description de l''entreprise'
-        addresse: 'Adresse de l''entreprise'
+        address: 'Adresse de l''entreprise'
         logo: 'Logo de l''entreprise'
         category: 'Secteur d''activité de l''entreprise'
     

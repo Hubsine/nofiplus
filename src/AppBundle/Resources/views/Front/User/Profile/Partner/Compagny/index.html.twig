@@ -9,8 +9,8 @@
 
                 <div class="pos-f-t">
                     <div class="collapse show" id="navbarToggleExternalContent">
-                        <div class="bg-dark pt-4">
-                            <h4 class="pl-4 pr-4 text-white">
+                        <div class="bg-dark pt-3">
+                            <h4 class="pl-3 pr-3 text-white">
                                 {{ 'layout.compagny.compagny' | trans }}
                                 {% if partner.enabledByAdmin %}
                                     <a class="float-right" href="{{ path('user_partner_compagny_new', {'partner': partner.slug}) }}" title="">
@@ -20,7 +20,7 @@
                             </h4>
                             <ul id="compagnies" class="nav nav-pills flex-column">
                                 <li class="nav-item d-inline-block">
-                                    <a class="nav-link active rounded-0" href="#">Active
+                                    <a class="nav-link rounded-0" href="#">Active
                                         <span class="badge badge-light badge-pill float-right">14</span>
                                     </a>
                                 </li>
