@@ -136,3 +136,23 @@ knp_paginator:
         filter_value_name: filterValue  # filter value query paameter name
     template:                                        
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template                                    
+        
+#Easy Admin Bundle        
+easy_admin:
+    site_name: 'Dashboard | Nofi Plus'
+    design:
+        menu:
+            - { label: 'Category' }
+            - { entity: 'CategoryCarte', label: 'Carte' }
+            - { entity: 'CategoryCompagny', label: 'Compagnies' }
+            - { entity: 'CategoryOffre', label: 'Offre' }
+    entities:     
+        CategoryCarte:
+            class: AppBundle\Entity\Admin\Category\Carte
+            label: Carte
+        CategoryCompagny:
+            class: AppBundle\Entity\Admin\Category\Compagny
+            label: Compagnies
+        CategoryOffre:
+            class: AppBundle\Entity\Admin\Category\Offre
+            label: Offre
