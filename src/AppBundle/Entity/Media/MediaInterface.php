@@ -9,8 +9,4 @@ namespace AppBundle\Entity\Media;
  */
 interface MediaInterface 
 {
-    /**
-     * @return string a file path
-     */
-    public function getPath(): string;
 }

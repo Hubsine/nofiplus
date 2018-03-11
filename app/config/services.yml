@@ -1,7 +1,6 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    web_directory: '%kernel.project_dir%/web'
     app.registration.confirmation.template: '@@Front/User/Registration/email.txt.twig'
     app.resetting.email.template: '@@Front/User/Resetting/email.txt.twig'
 services:

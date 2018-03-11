@@ -5,6 +5,7 @@ namespace AppBundle\Entity\User\Partner;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Entity\Media\ImageTrait;
 use AppBundle\Entity\Media\MediaInterface;
@@ -16,11 +17,10 @@ use AppBundle\Entity\Media\MediaInterface;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\CompagnyLogoRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * @Vich\Uploadable
  */
 class CompagnyLogo implements MediaInterface
 {
-    const FOLDER = 'uploads/compagny/logos';
-    
     use DoctrineTrait;
     use ImageTrait;
     
@@ -41,6 +41,22 @@ class CompagnyLogo implements MediaInterface
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\Compagny")
      */
     private $compagny;
+    
+    /**
+     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
+     * 
+     * @Vich\UploadableField(
+     *  mapping="compagny_logo", 
+     *  fileNameProperty="image.name", 
+     *  size="image.size", 
+     *  mimeType="image.mimeType", 
+     *  originalName="image.originalName", 
+     *  dimensions="image.dimensions"
+     * )
+     * 
+     * @Assert\Image(maxSize="2M", maxSizeMessage="assert.file.max_size", mimeTypesMessage="assert.file.mime_types")
+     */
+    private $file;
 
     /**
      * Set compagny
@@ -64,5 +80,15 @@ class CompagnyLogo implements MediaInterface
     public function getCompagny()
     {
         return $this->compagny;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

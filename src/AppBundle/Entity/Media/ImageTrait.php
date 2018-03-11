@@ -6,7 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Entity\Media\MediaTrait;
+
 
 /**
  * Description of ImageTrait
@@ -21,8 +26,6 @@ trait ImageTrait
      * @var string 
      * 
      * @ORM\Column(name="mime_type", type="string")
-     * @Gedmo\UploadableFileMimeType
-     * 
      */
     private $mimeType;
 
@@ -30,16 +33,8 @@ trait ImageTrait
      * @var integer
      * 
      * @ORM\Column(name="size", type="decimal")
-     * @Gedmo\UploadableFileSize
      */
     private $size;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\File\UploadedFile
-     * 
-     * @Assert\Image(maxSize="2M", maxSizeMessage="assert.file.max_size", mimeTypesMessage="assert.file.mime_types")
-     */
-    private $file;
 
     /**
      * Set mimeType
@@ -92,16 +87,21 @@ trait ImageTrait
     /**
      * Set File
      * 
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param File|UploadedFile $file
      * @return $this
      */
-    public function setFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
+    public function setFile(File $file)
     {
         $this->file = $file;
         
+        if ($file) 
+        {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+        
         return $this;
     }
-
 
     /**
      * Get File 
@@ -111,15 +111,5 @@ trait ImageTrait
     public function getFile()
     {
         return $this->file;
-    }
-    
-    /**
-     * Get upload folder
-     * 
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return self::FOLDER;
     }
 }

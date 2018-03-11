@@ -7,6 +7,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    web_directory: '%kernel.project_dir%/web'
+    app.media.compagny.logo: '/uploadscompagny/logos'
 
 framework:
     #esi: ~
@@ -136,8 +138,20 @@ knp_paginator:
         filter_value_name: filterValue  # filter value query paameter name
     template:                                        
         pagination: '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig'     # sliding pagination controls template                                    
-        
-#Easy Admin Bundle        
+
+# Vich Uploader Bundle
+vich_uploader:
+    db_driver: orm
+    mappings:
+        compagny_logo:
+            uri_prefix: '%app.media.compagny.logo%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/files/user/contracts'
+            upload_destination: '%web_directory%%app.media.compagny.logo%'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+    
+# Easy Admin Bundle        
 easy_admin:
     site_name: 'Dashboard | Nofi Plus'
     design:

@@ -14,53 +14,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait MediaTrait
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    
-    /**
      * @var string 
      * 
-     * @ORM\Column(name="name", type="string")
+     * @ORM\Column(name="name", type="string", nullable=true)
      * 
      * @Assert\Type(type="string", message="assert.type")
-     * 
-     * @Gedmo\UploadableFileName
      */
     private $name;
     
     /**
-     * @var string file extension
-     * 
-     * @ORM\Column(name="extension", type="string")
+     * @ORM\Column(name="original_name", nullable=true)
      * 
      * @Assert\Type(type="string", message="assert.type")
      */
-    private $extension;
+    private $originalName;
     
     /**
-     * @var string 
-     * 
-     * @ORM\Column(name="path", type="string")
-     * 
-     * @Gedmo\UploadableFilePath
+     * @ORM\Column(name="dimensions", type="simple_array", nullable=true)
      */
-    private $path;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
+    private $dimensions;
+    
     /**
      * Set name
      *
@@ -84,52 +57,38 @@ trait MediaTrait
     {
         return $this->name;
     }
-
-    /**
-     * Set extension
-     *
-     * @param string $extension
-     *
-     * @return Media
-     */
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-
-        return $this;
-    }
-
-    /**
-     * Get extension
-     *
-     * @return string
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return Media
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
     
     /**
-     * After file is moved
-     * 
-     * @param array $infos
+     * Set dimensions
+     *
+     * @param array $dimensions
+     *
+     * @return CompagnyLogo
      */
-    public function afterFileMove(array $infos)
+    public function setDimensions($dimensions)
     {
-        $this->setExtension($infos['fileExtension']);
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
+    /**
+     * Get dimensions
+     *
+     * @return array
+     */
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+    
+    public function getOriginalName()
+    {
+        return $this->originalName;
+    }
+
+    public function setOriginalName(string $originalName)
+    {
+        $this->originalName = $originalName;
     }
 }
