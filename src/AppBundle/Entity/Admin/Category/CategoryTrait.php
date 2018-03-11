@@ -24,7 +24,7 @@ trait CategoryTrait
     /**
      * @var string
      * 
-     * @ORM\Column(name="about", type="string", nullable=true)
+     * @ORM\Column(name="about", type="text", nullable=true)
      * 
      * @Assert\Type(type="string", message="assert.type")
      */
