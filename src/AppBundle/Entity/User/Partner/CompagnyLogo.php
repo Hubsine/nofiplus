@@ -57,7 +57,11 @@ class CompagnyLogo implements EntityInterface, MediaInterface
      *  dimensions="dimensions"
      * )
      * 
-     * @Assert\Image(maxSize="2M", maxSizeMessage="assert.file.max_size", mimeTypesMessage="assert.file.mime_types")
+     * @Assert\Image(
+     *  maxSize="2M", 
+     *  maxSizeMessage="assert.file.max_size", 
+     *  mimeTypesMessage="assert.file.mime_types"
+     * )
      */
     private $file;
 

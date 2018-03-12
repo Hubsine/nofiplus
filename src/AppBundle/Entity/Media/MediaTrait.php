@@ -87,7 +87,7 @@ trait MediaTrait
         return $this->originalName;
     }
 
-    public function setOriginalName(string $originalName)
+    public function setOriginalName(string $originalName = null)
     {
         $this->originalName = $originalName;
     }

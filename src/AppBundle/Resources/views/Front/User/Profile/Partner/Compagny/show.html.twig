@@ -1,5 +1,14 @@
 {% extends "@Front/User/Profile/Partner/Compagny/index.html.twig" %}
 
 {% block compagnies_content %}
-    Content show
+
+    {% include '@Front/User/Profile/Partner/Compagny/single.html.twig' with {'currentCompagny': currentCompagny} %}
+    
+    <div class="border border-bottom mb-3"></div>
+    
+    <div class="compagny single offres">
+        <h4 class="h5">{{ 'layout.offres' | trans }}</h4>
+        liste des offres
+    </div>
+
 {% endblock compagnies_content %}

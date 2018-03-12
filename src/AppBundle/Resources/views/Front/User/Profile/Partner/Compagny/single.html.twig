@@ -1,0 +1,26 @@
+<div class="compagny single">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="logo">
+                <img {{ holderJs('75x75') }} src="{{ vich_uploader_asset(currentCompagny.logo, 'file') }}" alt="{{ currentCompagny.name }}" class="img-thumbnail" />
+            </div>
+            {{ renderSnippetUpdate( 'user_partner_compagny_update', {'partner': currentCompagny.partner.slug, 'slug': currentCompagny.slug} ) |raw }}
+            {{ renderSnippetDelete( 'user_partner_compagny_delete', {'partner': currentCompagny.partner.slug, 'slug': currentCompagny.slug} ) | raw }}
+        </div>
+        <div class="col-md-7">
+            <div class="about section">
+                <h4 class="h5">{{ currentCompagny.name }}</h4>
+                <p>{{ currentCompagny.about }}<p>
+            </div>
+
+            <div class="address section">
+                <h4 class="h5">{{ 'layout.address' | trans }}</h4>
+                <address>
+                    <strong>{{ currentCompagny.name }}</strong><br>
+                    {{ currentCompagny.address.address }}<br>
+                    {{ currentCompagny.address.zipCode }}, {{ currentCompagny.address.city }}, {{ currentCompagny.address.country }}<br>
+                </address>
+            </div>
+        </div>
+    </div>
+</div>

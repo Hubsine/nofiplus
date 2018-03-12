@@ -1,103 +1,15 @@
 {% extends "@Front/User/Profile/Partner/Compagny/index.html.twig" %}
 
-{% if partner.enabledByAdmin %}
-    {% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% endif %}
-
 {% block compagnies_content %}
+
     <h4>{{ 'form.compagny.add' | trans }}</h4>
 
-    {#{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div class="form-group">
-        <input name="submit" class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-    {{ form_end(form) }#}
     {% if partner.enabledByAdmin %}
-
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-
-        <div class="form-row">
-            <div class="form-group col">
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-                {{ form_errors(form.name) }}
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col">
-                {{ form_label(form.about) }}
-                {{ form_widget(form.about) }}
-                {{ form_errors(form.about) }}
-            </div>
-        </div>    
-
-        <div class="form-row">
-            <legend class="col-form-legend required">{{ form_label(form.address) }}</legend>
-            <div class="form-group col-12">
-                {{ form_label(form.address.address) }}
-                {{ form_widget(form.address.address) }}
-                {{ form_errors(form.address.address) }}
-            </div>
-
-            <div class="form-group col-6">
-                {{ form_label(form.address.zipCode) }}
-                {{ form_widget(form.address.zipCode) }}
-                {{ form_errors(form.address.zipCode) }}
-            </div>
-
-            <div class="form-group col-6">
-                {{ form_label(form.address.city) }}
-                {{ form_widget(form.address.city) }}
-                {{ form_errors(form.address.city) }}
-            </div>
-
-            <div class="form-group col-12">
-                {{ form_label(form.address.country) }}
-                {{ form_widget(form.address.country) }}
-                {{ form_errors(form.address.country) }}
-            </div>
-        </div>
-
-        <div class="mb-3">
-            {{ form_label(form.logo) }}
-            <div class="custom-file col-12">
-                {{ form_widget(form.logo.file) }}
-                {# form_label(form.logo.file) }#}
-                <label for="{{ form.logo.vars.id }}"
-                       class="custom-file-label col-form-legend {{ form.logo.vars.required ? 'required' : '' }}">
-                    {{ form.logo.vars.label | trans }}
-                </label>
-                {{ form_errors(form.logo.file) }}
-            </div>
-        </div>
-
-        <div class="form-group">
-            {{ form_label(form.category, null, {'compound': false}) }}
-            <div>
-                {% for category in form.category %}
-                    <div class="form-check form-check-inline">
-                        {{ form_widget(category) }}
-                        {{ form_label(category, {'compound': false}) }}
-                        {{ form_errors(category) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="form-group mt-3">
-            <input name="submit" class="btn btn-primary" type="submit" value="{{ 'form.new'|trans }}" />
-        </div>
-
-        {{ form_end(form) }}
-
+        {% include '@Front/User/Profile/Partner/Compagny/form.html.twig' %}
     {% else %}
-
         <div class="alert alert-info">
             <p>{{ 'layout.compagny.can_add' | trans }}</p>
         </div>
-    {% endif %}        
-
+    {% endif %}   
 {% endblock compagnies_content %}
+

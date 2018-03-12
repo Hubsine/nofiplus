@@ -100,6 +100,9 @@ layout:
     update: Modifier
     abonne: 'Abonne'
     partner: 'Partenaire'
+    address: 'Adresse'
+    offre: 'Offre'
+    offres: 'Offres'
     compagny: 
         compagny: 'Entreprise'
         can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'
@@ -166,6 +169,7 @@ form:
         tel: 'Téléphone'
     compagny:
         add: 'Ajouter une entreprise'
+        update: 'Mise à jour'
         name: 'Nom de l''entreprise'
         about: 'Description de l''entreprise'
         address: 'Adresse de l''entreprise'

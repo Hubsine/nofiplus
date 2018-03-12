@@ -14,6 +14,8 @@ use AppBundle\Event\Admin\AdminCrudEvent;
 /**
  * Description of AdminCrudSubscriber
  *
+ * @deprecated since version 1.0 To remove
+ * 
  * @author Hubsine <contact@hubsine.com>
  */
 class AdminCrudSubscriber implements EventSubscriberInterface

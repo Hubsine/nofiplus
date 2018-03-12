@@ -15,6 +15,8 @@ use AppBundle\Entity\AdminEntityInterface;
  * - view
  * - update
  * 
+ * @deprecated since version 1.0 To remove
+ * 
  * @author Hubsine <contact@hubsine.com>
  */
 trait EntityCrudTrait 

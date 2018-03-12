@@ -84,4 +84,19 @@ class DoctrineUtil
     {
         $this->em->flush();
     }
+    
+    /**
+     * Merge $persistentObject
+     * 
+     * @param EntityInterface $persistentObject
+     */
+    public function merge(EntityInterface $persistentObject, $flush = true)
+    {
+        $this->em->merge($persistentObject);
+        
+        if( $flush )
+        {
+            $this->flush();
+        }
+    }
 }

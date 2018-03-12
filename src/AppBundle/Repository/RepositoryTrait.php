@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+use AppBundle\Exception\UndefinedConstantException;
+
 /**
  * Description of RepositoryTrait
  *
@@ -30,7 +33,12 @@ trait RepositoryTrait
      */
     public function joinWithAddress(QueryBuilder $qb)
     {
-        $qb->join(self::ALIAS . '.address', 'address')
+        if( ! defined(get_class() . '::ALIAS') )
+        {
+            throw new UndefinedConstantException('ALIAS');
+        }
+        
+        $qb->leftJoin(self::ALIAS . '.address', 'address')
            ->addSelect('address');
         
         return $qb;

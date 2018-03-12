@@ -13,8 +13,14 @@ user_partner_compagny_show:
     defaults: { _controller: AppBundle:Front\Partner\Compagny:show }
     methods: [GET]
 
-user_partner_compagny_edit:
-    path: /{partner}/compagnies/{slug}/edit 
+user_partner_compagny_delete:
+    path: /{partner}/compagnies/{slug}/delete
+    defaults: { _controller: AppBundle:Front\Partner\Compagny:delete }
+    methods: [GET,POST]
+    
+    
+user_partner_compagny_update:
+    path: /{partner}/compagnies/{slug}/update
     defaults: { _controller: AppBundle:Front\Partner\Compagny:update }
     methods: [GET,POST]
     

@@ -2,7 +2,9 @@
 
 namespace AppBundle\Repository\User\Partner;
 
+use Doctrine\ORM\QueryBuilder;
 use AppBundle\Repository\RepositoryTrait;
+use AppBundle\Entity\User\Partner\Partner;
 
 /**
  * CompagnyRepository
@@ -12,5 +14,41 @@ use AppBundle\Repository\RepositoryTrait;
  */
 class CompagnyRepository extends \Doctrine\ORM\EntityRepository
 {
+    const ALIAS = 'e';
+    
     use RepositoryTrait;
+    
+    public function findAllByPartnerWithJoin(Partner $partner)
+    {
+        $qb   = $this->createQueryBuilder(self::ALIAS)
+                ->where('e.partner = :partner')
+                ->setParameter('partner', $partner);
+        
+        $this->joinWithLogo($qb);
+        $this->joinWithAddress($qb);
+        $this->joinWithCategory($qb);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    ###
+    # Joins
+    ###
+    public function joinWithLogo(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin('e.logo', 'logo')
+            ->addSelect('logo');
+        
+        return $qb;
+    }
+    
+    public function joinWithCategory(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin('e.category', 'category')
+            ->addSelect('category');
+        
+        return $qb;
+    }
 }

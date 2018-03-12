@@ -41,6 +41,11 @@ class CompagnyType extends AbstractType
                 'expanded'  => true
             ));
         
+        if( isset($options['action']) && $options['action'] === 'update')
+        { 
+            $builder->get('logo')->setRequired(false);
+        }
+        
     }
     
     /**
@@ -50,7 +55,7 @@ class CompagnyType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User\Partner\Compagny',
-            'validation_groups' => ['new']
+            'validation_groups' => []
         ));
     }
 

@@ -3,8 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
-Use Symfony\Component\Form\FormBuilderInterface;
-use AppBundle\Entity\EntityInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 /**
  * Description of Controller
@@ -86,5 +85,21 @@ abstract class Controller extends BaseController
     protected function getRouteUtil()
     {
         return $this->get('app.util.route');
+    }
+    
+    /**
+     * Check if token provided in url for delete an entity is valid
+     * 
+     * @param string $tokenName
+     * @throws TokenNotFoundException
+     */
+    public function checkDeleteToken($tokenName = 'token')
+    {
+        $submittedToken = $this->get('request_stack')->getCurrentRequest()->query->get($tokenName);
+        
+        if( ! $this->isCsrfTokenValid( 'delete-entity', $submittedToken) )
+        {
+            throw new TokenNotFoundException('Token not found');
+        }
     }
 }

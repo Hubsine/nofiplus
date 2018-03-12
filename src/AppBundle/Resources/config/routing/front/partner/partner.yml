@@ -8,8 +8,8 @@ user_partner_show:
     defaults: { _controller: AppBundle:Front\Partner\Partner:show }
     methods: [GET]
 
-user_partner_edit:
-    path: /{partner}/edit 
+user_partner_update:
+    path: /{partner}/update
     defaults: { _controller: AppBundle:Front\Partner\Partner:update }
     methods: [GET,POST]
     

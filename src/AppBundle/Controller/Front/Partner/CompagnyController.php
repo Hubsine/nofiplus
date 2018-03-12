@@ -25,10 +25,12 @@ class CompagnyController extends Controller
      */
     public function indexAction(Request $request, Partner $partner)
     {
+        $this->isGrantedWithDeny('VIEW', $partner);
+        
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
             'partner'   => $partner,
-            #'compagnies' => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAll()
+            'compagnies' => $this->getCompagniesFromPartner($partner)
         ]);
     }
     
@@ -41,13 +43,15 @@ class CompagnyController extends Controller
      */
     public function showAction(Request $request, Partner $partner, Compagny $compagny)
     {
-        $this->isGrantedWithDeny('EDIT', $partner);
+        $this->isGrantedWithDeny('VIEW', $compagny);
+        
+        $compagnies = $this->getCompagniesFromPartner($partner);
         
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/show.html.twig', [
             'partner'  => $partner, 
-            'currentCompagny'  => $compagny
-            #'action'    => 'show'
+            'currentCompagny'  => $compagny,
+            'compagnies' => $compagnies
         ]);
     }
     
@@ -60,8 +64,6 @@ class CompagnyController extends Controller
      */
     public function newAction(Request $request, Partner $partner)
     {
-        $this->isPartner($partner);
-        
         $form   = $this->createForm( CompagnyType::class, $compagny = new Compagny() );
         
         $compagny->setPartner($partner);
@@ -90,64 +92,71 @@ class CompagnyController extends Controller
         return $this->render('@Front/User/Profile/Partner/Compagny/new.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            #'action'    => 'new'
+            'currentCompagny'   => $compagny,
+            'compagnies'    => $this->getCompagniesFromPartner($partner)
         ]);
     }
     
-    public function updateAction(Request $request, Partner $partner)
+    /**
+     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * 
+     * @param Request $request
+     * @param Partner $partner
+     * @return Response
+     * @throws AccessDeniedException
+     */
+    public function updateAction(Request $request, Partner $partner, Compagny $compagny)
     {
-        $this->isGrantedWithDeny('EDIT', $partner);
-       
-        if ( ! is_object($partner) || !$partner instanceof Partner ) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
+        $this->isGrantedWithDeny('EDIT', $compagny);
         
-        /** @var $dispatcher EventDispatcherInterface */
-        $dispatcher = $this->getEventDispatcher();
+        $compagnies = $this->getCompagniesFromPartner($partner);
+                
+        $form   = $this->createForm( CompagnyType::class, $compagny, ['validation_groups'=> ['Default'], 'action'   => 'update'] );
         
-        $event = new GetResponseUserEvent($partner, $request);
-        $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
-
-        if (null !== $event->getResponse()) {
-            return $event->getResponse();
-        }
-        
-        $lastUsername   = $partner->getUsername();
-
-        $form = $this->createForm(PartnerType::class, $partner);
-        $form->setData($partner);
-
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) 
+        if( $form->isSubmitted() && $form->isValid() )
         {
+            $this->getDoctrineUtil()->merge($compagny);
             
-            $event = new FormEvent($form, $request);
+            $this->addFlash('success', 'flash.update_success');
             
-            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-            
-            $this->getDoctrineUtil()->persist($partner);
-            
-            // Update Acl if username is changed
-            $this->getAclManager()->updateUserSecurityIdentity($partner, $lastUsername);
-            
-            if ( null === $response = $event->getResponse() ) 
-            {
-                $response = $this->redirectToRoute(
-                    $this->getRouteUtil()->getCompleteRoute(Partner::class, 'index'), 
-                    ['slug'    => $partner->getSlug()]
-                );
-            }
-            
-            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($partner, $request, $response));
-            
-            return $response;
+            return $this->redirectToRoute(
+                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
+                ['partner' => $partner->getSlug()]
+            );
         }
         
-        return $this->render('@Front/User/Profile/Partner/edit.html.twig', array(
+        // replace this example code with whatever you need
+        return $this->render('@Front/User/Profile/Partner/Compagny/update.html.twig', [
+            'partner'  => $partner, 
             'form'  => $form->createView(),
-            'partner'  => $partner
-        ));
+            'currentCompagny'   => $compagny,
+            'compagnies'    => $compagnies
+        ]);
+    }
+    
+    /**
+     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * 
+     * @param Request $request
+     * @param Partner $partner
+     * @param Compagny $compagny
+     * @return Response
+     */
+    public function deleteAction(Request $request, Partner $partner, Compagny $compagny)
+    {
+        $this->isGrantedWithDeny('DELETE', $compagny);
+        $this->checkDeleteToken();
+        
+        $this->getDoctrineUtil()->remove($compagny);
+            
+        $this->addFlash('success', 'flash.delete_success');
+            
+        return $this->redirectToRoute(
+            $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
+            ['partner' => $partner->getSlug()]
+        );
     }
     
     /**
@@ -162,5 +171,15 @@ class CompagnyController extends Controller
         {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+    }
+    
+    /**
+     * 
+     * @param Partner $partner
+     * @return array[Compagny]
+     */
+    private function getCompagniesFromPartner(Partner $partner)
+    {
+        return $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByPartnerWithJoin($partner);
     }
 }

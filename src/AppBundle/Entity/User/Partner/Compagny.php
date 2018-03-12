@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\Collection;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
@@ -65,19 +66,19 @@ class Compagny implements AdminEntityInterface
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
      * @Assert\Type(type="\AppBundle\Entity\Address", groups={"new"})
-     * @Assert\Valid(groups={"new"})
+     * @Assert\Valid()
      */
     private $address;
 
     /**
      * @var \AppBundle\Entity\User\Partner\CompagnyLogo
      * 
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompagnyLogo", mappedBy="compagny", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompagnyLogo", mappedBy="compagny", orphanRemoval=true, cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\CompagnyLogo", groups={"new"})
-     * @Assert\Valid(groups={"new"})
+     * @Assert\Valid()
      */
     private $logo;
 
@@ -97,8 +98,7 @@ class Compagny implements AdminEntityInterface
      *
      * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"persist", "remove"})
      * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="\Doctrine\ORM\PersistentCollection", message="assert.type")
+     * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      * @Assert\Valid()
      */
     private $offres;

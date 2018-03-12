@@ -106,7 +106,7 @@ class PartnerController extends Controller
             return $response;
         }
         
-        return $this->render('@Front/User/Profile/Partner/edit.html.twig', array(
+        return $this->render('@Front/User/Profile/Partner/update.html.twig', array(
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
