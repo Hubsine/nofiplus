@@ -106,6 +106,9 @@ layout:
     compagny: 
         compagny: 'Entreprise'
         can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'
+    delete_confirmation:
+        title: 'Confirmation de suppression'
+        content: 'Vous êtes sur le point de supprimer un élèment de la base de données. Êtes-vous sûr de votre action ?'
     
 form:
     group_name: 'Nom du groupe'

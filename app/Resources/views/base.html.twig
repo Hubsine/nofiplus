@@ -73,5 +73,9 @@
         {% block footer_admin_script %}
 
         {% endblock footer_admin_script %}
+        
+        <div id="dialog-confirm" class="d-none" title="{{ 'layout.delete_confirmation.title' | trans }}">
+            <p>{{ 'layout.delete_confirmation.content' | trans }}</p>
+        </div>
     </body>
 </html>

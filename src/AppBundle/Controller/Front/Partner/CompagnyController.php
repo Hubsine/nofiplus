@@ -149,7 +149,7 @@ class CompagnyController extends Controller
         $this->isGrantedWithDeny('DELETE', $compagny);
         $this->checkDeleteToken();
         
-        $this->getDoctrineUtil()->remove($compagny);
+        #$this->getDoctrineUtil()->remove($compagny);
             
         $this->addFlash('success', 'flash.delete_success');
             
