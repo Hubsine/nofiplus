@@ -117,14 +117,19 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ])
             ->setDisplay(false);
         
+        if(in_array($_route, [$this->routeUtil->getCompleteRoute(Partner::class, 'edit')]))
+        {
+            $partnerItem->setCurrent(true);
+        }
+        
         ###
         # Compagny & Offres
         ###
         $compagny = $menu->addChild('menu.partner.compagny_offres', [
-            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'index'),
+            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'new'),
             'routeParameters'   => ['partner' => $partner->getSlug()]
             ])
-            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Compagny::class, 'index'))
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Compagny::class, 'new'))
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
         
@@ -133,10 +138,14 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             'routeParameters'   => ['partner'   => $partner->getSlug()]
             ])
             ->setDisplay(false);
-        
-        if( $compagnyNew->isCurrent() )
+
+        if( $compagnyNew->isCurrent() || in_array($_route, [
+                $this->routeUtil->getCompleteRoute(Compagny::class, 'show' ),
+                $this->routeUtil->getCompleteRoute(Compagny::class, 'update' )
+            ])   
+        )
         {
-            $compagnyNew->setCurrent(false);
+            #$compagnyNew->setCurrent(false);
             $compagny->setCurrent(true);
         }
                 

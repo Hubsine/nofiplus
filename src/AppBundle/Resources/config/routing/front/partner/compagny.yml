@@ -3,18 +3,18 @@ user_partner_compagny_index:
     defaults: { _controller: AppBundle:Front\Partner\Compagny:index }
     methods: [GET]
 
-#user_partner_compagny_show:
-#    path: /{partner}/{slug}
-#    defaults: { _controller: AppBundle:Front\Partner\Compagny:show }
-#    methods: [GET]
-
 user_partner_compagny_new:
     path: /{partner}/compagnies/new
     defaults: { _controller: AppBundle:Front\Partner\Compagny:new }
     methods: [GET,POST]
     
+user_partner_compagny_show:
+    path: /{partner}/compagnies/{slug}
+    defaults: { _controller: AppBundle:Front\Partner\Compagny:show }
+    methods: [GET]
+
 user_partner_compagny_edit:
-    path: /{partner}/compagny-offre/{slug}/edit 
+    path: /{partner}/compagnies/{slug}/edit 
     defaults: { _controller: AppBundle:Front\Partner\Compagny:update }
     methods: [GET,POST]
     

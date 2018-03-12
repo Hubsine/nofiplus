@@ -21,4 +21,19 @@ trait RepositoryTrait
             ->getQuery()
             ->getSingleScalarResult();
     }
+    
+    /**
+     * Get with address
+     * 
+     * @param \AppBundle\Repository\QueryBuilder $qb
+     * @return \AppBundle\Repository\QueryBuilder
+     */
+    public function joinWithAddress(QueryBuilder $qb)
+    {
+        $qb->join(self::ALIAS . '.address', 'address')
+           ->addSelect('address');
+        
+        return $qb;
+    }
+    
 }

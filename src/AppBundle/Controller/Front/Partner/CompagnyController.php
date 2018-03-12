@@ -27,7 +27,27 @@ class CompagnyController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
-            'partner'   => $partner
+            'partner'   => $partner,
+            #'compagnies' => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAll()
+        ]);
+    }
+    
+    /**
+     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * 
+     * @param Request $request
+     * @param Partner $partner
+     * @return Response
+     */
+    public function showAction(Request $request, Partner $partner, Compagny $compagny)
+    {
+        $this->isGrantedWithDeny('EDIT', $partner);
+        
+        // replace this example code with whatever you need
+        return $this->render('@Front/User/Profile/Partner/Compagny/show.html.twig', [
+            'partner'  => $partner, 
+            'currentCompagny'  => $compagny
+            #'action'    => 'show'
         ]);
     }
     
@@ -67,10 +87,10 @@ class CompagnyController extends Controller
         }
         
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Compagny/new.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            'action'    => 'new'
+            #'action'    => 'new'
         ]);
     }
     
