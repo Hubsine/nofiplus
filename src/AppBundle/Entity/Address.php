@@ -55,7 +55,7 @@ class Address implements EntityInterface
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      * 
-     * @Assert\Type(type="alpha", message="assert.type")
+     * @Assert\Type(type="string", message="assert.type")
      */
     private $city;
 
