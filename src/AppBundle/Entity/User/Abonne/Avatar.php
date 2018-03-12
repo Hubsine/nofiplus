@@ -16,7 +16,7 @@ use AppBundle\Entity\Media\MediaInterface;
  * @ORM\Table(name="np_user_abonne_avatar")
  * @ORM\Entity(repositoryClass="\AppBundle\Repository\User\Abonne\AvatarRepository")
  * 
- * @Gedmo\Uploadable(pathMethod="getPath", callback="afterFileMove", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
+ * Gedmo\Uploadable(pathMethod="getPath", callback="afterFileMove", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * 
  * @author Hubsine <contact@hubsine.com>
@@ -31,6 +31,15 @@ class Avatar implements MediaInterface
     use EntityRoutePrefixTrait;
     
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var User
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Abonne\Abonne", inversedBy="avatar")
@@ -38,6 +47,16 @@ class Avatar implements MediaInterface
      */
     private $user;
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public static function getRoutePrefix(): string
     {
         return self::ROUTE_PREFIX;
