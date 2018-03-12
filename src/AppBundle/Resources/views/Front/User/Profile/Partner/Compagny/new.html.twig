@@ -63,7 +63,11 @@
         {{ form_label(form.logo) }}
         <div class="custom-file col-12">
             {{ form_widget(form.logo.file) }}
-            {{ form_label(form.logo.file) }}
+            {# form_label(form.logo.file) }#}
+            <label for="{{ form.logo.vars.id }}"
+                   class="custom-file-label col-form-legend {{ form.logo.vars.required ? 'required' : '' }}">
+                {{ form.logo.vars.label | trans }}
+            </label>
             {{ form_errors(form.logo.file) }}
         </div>
     </div>
@@ -74,13 +78,17 @@
             {% for category in form.category %}
                 <div class="form-check form-check-inline">
                     {{ form_widget(category) }}
-                    {{ form_label(category) }}
+                    {{ form_label(category, {'compound': false}) }}
                     {{ form_errors(category) }}
                 </div>
             {% endfor %}
         </div>
     </div>
 
+    <div class="form-group mt-3">
+        <input name="submit" class="btn btn-primary" type="submit" value="{{ 'form.new'|trans }}" />
+    </div>
+    
     {{ form_end(form) }}
 
 {% else %}

@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Entity\Media\ImageTrait;
+use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\Media\MediaInterface;
 
 /**
@@ -19,7 +20,7 @@ use AppBundle\Entity\Media\MediaInterface;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @Vich\Uploadable
  */
-class CompagnyLogo implements MediaInterface
+class CompagnyLogo implements EntityInterface, MediaInterface
 {
     use DoctrineTrait;
     use ImageTrait;
@@ -37,7 +38,9 @@ class CompagnyLogo implements MediaInterface
      * @var \AppBundle\Entity\User\Partner\Compagny
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\Compagny", inversedBy="logo")
+     * @ORM\JoinColumn(nullable=false)
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\Compagny")
      */
     private $compagny;
@@ -47,11 +50,11 @@ class CompagnyLogo implements MediaInterface
      * 
      * @Vich\UploadableField(
      *  mapping="compagny_logo", 
-     *  fileNameProperty="image.name", 
-     *  size="image.size", 
-     *  mimeType="image.mimeType", 
-     *  originalName="image.originalName", 
-     *  dimensions="image.dimensions"
+     *  fileNameProperty="name", 
+     *  size="size", 
+     *  mimeType="mimeType", 
+     *  originalName="originalName", 
+     *  dimensions="dimensions"
      * )
      * 
      * @Assert\Image(maxSize="2M", maxSizeMessage="assert.file.max_size", mimeTypesMessage="assert.file.mime_types")
@@ -65,7 +68,7 @@ class CompagnyLogo implements MediaInterface
      *
      * @return CompagnyLogo
      */
-    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny = null)
+    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
     {
         $this->compagny = $compagny;
 

@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Entity\DateTrait;
+use AppBundle\Entity\EntityInterface;
 
 /**
  * Offre
@@ -17,7 +18,7 @@ use AppBundle\Entity\DateTrait;
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
-class Offre
+class Offre implements EntityInterface
 {
     const ENJOY_BY_ALL      = 'all';
     const ENJOY_BY_LOCATION = 'location';

@@ -30,7 +30,8 @@ class CompagnyType extends AbstractType
                 'label' => 'form.compagny.address'
             ))
             ->add('logo', CompagnyLogoType::class, array(
-                'label' => 'form.compagny.logo'
+                'label' => 'form.compagny.logo',
+                'by_reference'  => false
             ))
             ->add('category', EntityType::class, array(
                 'label' => 'form.compagny.category',
@@ -48,7 +49,8 @@ class CompagnyType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User\Partner\Compagny'
+            'data_class' => 'AppBundle\Entity\User\Partner\Compagny',
+            'validation_groups' => ['new']
         ));
     }
 

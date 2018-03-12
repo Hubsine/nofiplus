@@ -50,15 +50,20 @@ class CompagnyController extends Controller
         
         if( $form->isSubmitted() && $form->isValid() )
         {
-            #$this->getDoctrineUtil()->persist($partner);
+            $this->getDoctrineUtil()->persist($compagny);
             
-            #$maskBuilder    = $this->getAclManager()->getMaskBuilder(MaskBuilder::MASK_OPERATOR);
+            $maskBuilder    = $this->getAclManager()->getMaskBuilder(MaskBuilder::MASK_OPERATOR);
             
-            #$this->getAclManager()->insertObjectAce($compagny, $maskBuilder);
+            $this->getAclManager()->insertObjectAce($compagny, $maskBuilder);
+            $this->getAclManager()->insertObjectAce($compagny->getAddress(), $maskBuilder);
+            $this->getAclManager()->insertObjectAce($compagny->getLogo(), $maskBuilder);
             
             $this->addFlash('success', 'flash.add_success');
             
-            return $this->redirectToRoute($this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'));
+            return $this->redirectToRoute(
+                    $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
+                    ['partner' => $partner->getSlug()]
+                );
         }
         
         // replace this example code with whatever you need

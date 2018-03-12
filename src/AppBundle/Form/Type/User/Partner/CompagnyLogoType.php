@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CompagnyLogoType extends AbstractType
 {
@@ -15,7 +16,7 @@ class CompagnyLogoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', FileType::class, array(
+            ->add('file', VichImageType::class, array(
                 'label' => 'form.compagny.logo',
                 'attr'  => array('class'    => 'custom-file-input'),
                 'label_attr'    => array(
