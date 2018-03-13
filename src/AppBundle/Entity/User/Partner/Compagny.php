@@ -96,7 +96,7 @@ class Compagny implements AdminEntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"all"})
      * 
      * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      * @Assert\Valid()

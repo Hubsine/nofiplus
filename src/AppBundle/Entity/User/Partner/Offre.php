@@ -79,7 +79,7 @@ class Offre implements EntityInterface
     /**
      * @var \AppBundle\Entity\User\Partner\Featured
      *
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\Featured", mappedBy="offre", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\Featured", mappedBy="offre", cascade={"all"})
      * 
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\Featured")
      * @Assert\Valid()
