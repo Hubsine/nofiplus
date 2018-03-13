@@ -67,7 +67,7 @@ class ParametersController extends Controller
             return $response;
         }
         
-        return $this->render('@Front/User/Profile/Partner/edit_parameters.html.twig', array(
+        return $this->render('@Front/User/Profile/Partner/update_parameters.html.twig', array(
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
