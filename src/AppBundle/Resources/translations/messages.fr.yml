@@ -178,6 +178,17 @@ form:
         address: 'Adresse de l''entreprise'
         logo: 'Logo de l''entreprise'
         category: 'Secteur d''activité de l''entreprise'
+    offre:
+        name: 'Nom de l''offre'
+        about: 'Description de l''offre'
+        how_enjoy: 'Comment profiter de l''offre'
+        by_location: 'Décrivez comment profiter de l''offre en magasin'
+        by_web: 'Décrivez comment profiter de l''offre sur internet'
+        by_tel: 'Décrivez comment profiter de l''offre par téléphone'
+        start: 'Date de début de l''offre'
+        end: 'Date de fin de l''offre'
+        category: 'Catégory de l''offre'
+        featured: 'L''image de l''offre'
     
 Day: 'Jour'
 Month: 'Mois'

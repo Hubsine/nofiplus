@@ -60,7 +60,7 @@ class Offre implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="about", type="string", length=255)
+     * @ORM\Column(name="about", type="text", length=255)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="string", message="assert.type")

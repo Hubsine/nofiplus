@@ -22,15 +22,15 @@ jQuery(function ($)
         e.preventDefault();
 
         var targetUrl = $(this).attr('href');
-        
+
         $("#dialog-confirm").dialog({
             autoOpen: true,
             buttons: {
-                Supprimer: function () 
+                Supprimer: function ()
                 {
                     window.location.href = targetUrl;
                 },
-                Annuler: function () 
+                Annuler: function ()
                 {
                     $(this).dialog("close");
                 }
@@ -38,4 +38,29 @@ jQuery(function ($)
         });
 
     });
+});
+
+/***
+ * Tinymce Init
+ ***/
+
+jQuery(function ($)
+{
+    tinymce.init({
+        selector: 'textarea#editable'
+    });
+
+});
+
+/***
+ * Datepicker
+ ***/
+
+jQuery(function ($)
+{
+    $(".datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+
 });

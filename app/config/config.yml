@@ -9,6 +9,7 @@ parameters:
     locale: fr
     web_directory: '%kernel.project_dir%/web'
     app.media.compagny.logo: '/uploads/compagny/logos'
+    app.media.offre.featured: '/uploads/offre/featured'
 
 framework:
     #esi: ~
@@ -150,6 +151,13 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+        offre_featured:
+            uri_prefix: '%app.media.offre.featured%'
+            upload_destination: '%web_directory%%app.media.offre.featured%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true    
     
 # Easy Admin Bundle        
 easy_admin:
