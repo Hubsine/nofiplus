@@ -8,8 +8,12 @@ Encore
         // the public path used by the web server to access the previous directory
         .setPublicPath('/build')
 
+        .addEntry('global-js', './assets/js/global.js')
+
         .createSharedEntry('vendor', [
             'jquery',
+            'jquery-ui-bundle',
+            './node_modules/jquery-ui-bundle/jquery-ui.min.css',
             'popper.js',
             './vendor/twbs/bootstrap/dist/js/bootstrap.min.js',
             './assets/js/main.js',

@@ -65,7 +65,7 @@
         {% block footer_base_script %}
 
         {% endblock footer_base_script %}
-
+            <script src="{{ asset('build/global-js.js') }}"></script>
         {% block footer_front_script %}
 
         {% endblock footer_front_script %}
@@ -74,7 +74,7 @@
 
         {% endblock footer_admin_script %}
         
-        <div id="dialog-confirm" class="d-none" title="{{ 'layout.delete_confirmation.title' | trans }}">
+        <div id="dialog-confirm" class="" title="{{ 'layout.delete_confirmation.title' | trans }}">
             <p>{{ 'layout.delete_confirmation.content' | trans }}</p>
         </div>
     </body>

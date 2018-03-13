@@ -11,9 +11,6 @@ require('../scss/main.scss');
  ***/
 
 const $ = require('jquery');
+          require('jquery-ui-bundle');
 // create global $ and jQuery variables
 global.$ = global.jQuery = $;
-
-/***
- * Prevent Delete
- ***/

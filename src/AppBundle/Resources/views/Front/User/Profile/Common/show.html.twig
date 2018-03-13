@@ -3,7 +3,7 @@
 
         {% if is_granted( 'EDIT', user ) %}
             <div class="text-right mb-3">
-                <a href="{{ path('user_partner_edit', {'partner': app.user.slug}) }}" role="button" class="btn btn-outline-success">{{ 'layout.update' | trans }}</a>
+                <a href="{{ path('user_partner_update', {'partner': app.user.slug}) }}" role="button" class="btn btn-outline-success">{{ 'layout.update' | trans }}</a>
             </div>
         {% endif %}
 
