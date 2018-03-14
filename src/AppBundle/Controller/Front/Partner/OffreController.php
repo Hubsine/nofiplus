@@ -38,19 +38,19 @@ class OffreController extends Controller
      * @param Partner $partner
      * @return Response
      */
-    public function showAction(Request $request, Partner $partner, Offre $offre)
-    {
-        $this->isGrantedWithDeny('VIEW', $offre);
-        
-        $compagnies = $this->getCompagniesFromPartner($partner);
-        
-        // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Offre/show.html.twig', [
-            'partner'  => $partner, 
-            'currentOffre'  => $offre,
-            'compagnies' => $compagnies
-        ]);
-    }
+//    public function showAction(Request $request, Partner $partner, Offre $offre)
+//    {
+//        $this->isGrantedWithDeny('VIEW', $offre);
+//        
+//        $compagnies = $this->getCompagniesFromPartner($partner);
+//        
+//        // replace this example code with whatever you need
+//        return $this->render('@Front/User/Profile/Partner/Offre/show.html.twig', [
+//            'partner'  => $partner, 
+//            'currentOffre'  => $offre,
+//            'compagnies' => $compagnies
+//        ]);
+//    }
     
     /**
      * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
@@ -97,19 +97,21 @@ class OffreController extends Controller
     
     /**
      * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * @ParamConverter("compagny", options={"mapping": {"compagny": "slug"}})
      * 
      * @param Request $request
      * @param Partner $partner
+     * @param Compagny $compagny 
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner, Offre $offre)
+    public function updateAction(Request $request, Partner $partner, Compagny $compagny, Offre $offre)
     {
         $this->isGrantedWithDeny('EDIT', $offre);
         
         $compagnies = $this->getCompagniesFromPartner($partner);
                 
-        $form   = $this->createForm( OffreType::class, $offre, ['validation_groups'=> ['Default'], 'action'   => 'update'] );
+        $form   = $this->createForm( OffreType::class, $offre, ['action'   => 'update']);
         
         $form->handleRequest($request);
         
@@ -120,8 +122,8 @@ class OffreController extends Controller
             $this->addFlash('success', 'flash.update_success');
             
             return $this->redirectToRoute(
-                $this->getRouteUtil()->getCompleteRoute(Offre::class, 'index'),
-                ['partner' => $partner->getSlug()]
+                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
+                ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
             );
         }
         
@@ -136,13 +138,15 @@ class OffreController extends Controller
     
     /**
      * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
+     * @ParamConverter("compagny", options={"mapping": {"compagny": "slug"}})
      * 
      * @param Request $request
      * @param Partner $partner
+     * @param Compagny $compagny 
      * @param Offre $offre
      * @return Response
      */
-    public function deleteAction(Request $request, Partner $partner, Offre $offre)
+    public function deleteAction(Request $request, Partner $partner, Compagny $compagny, Offre $offre)
     {
         $this->isGrantedWithDeny('DELETE', $offre);
         $this->checkDeleteToken();
@@ -152,8 +156,8 @@ class OffreController extends Controller
         $this->addFlash('success', 'flash.delete_success');
             
         return $this->redirectToRoute(
-            $this->getRouteUtil()->getCompleteRoute(Offre::class, 'index'),
-            ['partner' => $partner->getSlug()]
+            $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
+            ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
         );
     }
     

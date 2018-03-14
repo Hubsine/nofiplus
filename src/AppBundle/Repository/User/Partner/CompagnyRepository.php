@@ -27,6 +27,7 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
         $this->joinWithLogo($qb);
         $this->joinWithAddress($qb);
         $this->joinWithCategory($qb);
+        $this->joinWithOffres($qb);
         
         return $qb->getQuery()->getResult();
     }
@@ -48,6 +49,15 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
         $qb
             ->leftJoin('e.category', 'category')
             ->addSelect('category');
+        
+        return $qb;
+    }
+    
+    public function joinWithOffres(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin('e.offres', 'offre')
+            ->addSelect('offre');
         
         return $qb;
     }

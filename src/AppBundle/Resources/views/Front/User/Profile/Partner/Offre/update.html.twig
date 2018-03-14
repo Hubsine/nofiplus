@@ -1,9 +1,9 @@
-{% extends "@Front/User/Profile/Partner/Compagny/index.html.twig" %}
+{% extends "@Front/User/Profile/Partner/Offre/index.html.twig" %}
 
 {% block compagnies_content %}
     
-    <h4>{{ 'form.compagny.update' | trans }}</h4>
+    <h4>{{ 'form.offre.update' | trans }}</h4>
     
-    {% include '@Front/User/Profile/Partner/Compagny/form.html.twig' with {'action': 'update'} %}
+    {% include '@Front/User/Profile/Partner/Offre/form.html.twig' with {'action': 'update'} %}
     
 {% endblock compagnies_content %}

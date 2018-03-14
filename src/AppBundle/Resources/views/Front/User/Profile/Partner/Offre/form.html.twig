@@ -21,55 +21,67 @@
 </div>    
 
 <div class="form-row">
-    <legend class="col-form-legend required">{{ form_label(form.address) }}</legend>
+    <div class="containDynamicCheckbox">
+        <div id="offreHowEnjoy">
+            {{ form_label(form.howEnjoy) }}
+            {{ form_errors(form.howEnjoy) }}
+            {{ form_widget(form.howEnjoy) }}
+
+        </div>
+    </div>
+    <div class="form-group col-12 mb-3">
+        {{ form_label(form.enjoyByLocation) }}
+        {{ form_widget(form.enjoyByLocation) }}
+        {{ form_errors(form.enjoyByLocation) }}
+    </div>
     <div class="form-group col-12">
-        {{ form_label(form.address.address) }}
-        {{ form_widget(form.address.address) }}
-        {{ form_errors(form.address.address) }}
+        {{ form_label(form.enjoyByWeb) }}
+        {{ form_widget(form.enjoyByWeb) }}
+        {{ form_errors(form.enjoyByWeb) }}
     </div>
-
-    <div class="form-group col-6">
-        {{ form_label(form.address.zipCode) }}
-        {{ form_widget(form.address.zipCode) }}
-        {{ form_errors(form.address.zipCode) }}
-    </div>
-
-    <div class="form-group col-6">
-        {{ form_label(form.address.city) }}
-        {{ form_widget(form.address.city) }}
-        {{ form_errors(form.address.city) }}
-    </div>
-
     <div class="form-group col-12">
-        {{ form_label(form.address.country) }}
-        {{ form_widget(form.address.country) }}
-        {{ form_errors(form.address.country) }}
+        {{ form_label(form.enjoyByTel) }}
+        {{ form_widget(form.enjoyByTel) }}
+        {{ form_errors(form.enjoyByTel) }}
+    </div>
+</div>    
+
+<div class="form-row">
+    <legend>Date de l'offre</legend>
+    <div class="form-group col-6">
+        {{ form_label(form.start) }}
+        {{ form_widget(form.start) }}
+        {{ form_errors(form.start) }}
+    </div>
+    <div class="form-group col-6">
+        {{ form_label(form.end) }}
+        {{ form_widget(form.end) }}
+        {{ form_errors(form.end) }}
     </div>
 </div>
+
+<div class="form-row">
+    {{ form_label(form.category) }}
+    {{ form_widget(form.category) }}
+    {{ form_errors(form.category) }}
+</div>
+
+{#<div class="form-check form-check-inline">
+    {{ form_widget(form.category) }}
+    {{ form_label(form.category) }}
+    {{ form_errors(form.category) }}
+</div>#}
 
 <div class="mb-3">
-    {{ form_label(form.logo) }}
+    {{ form_label(form.featured) }}
     <div class="custom-file col-12">
-        
-        {{ form_widget(form.logo) }}
-        {{ form_errors(form.logo) }}
-        <label for="{{ form.logo.vars.id }}"
-               class="custom-file-label col-form-legend {{ form.logo.vars.required ? 'required' : '' }}">
-            {{ form.logo.vars.label | trans }}
-        </label>
-    </div>
-</div>
 
-<div class="form-group">
-    {{ form_label(form.category, null, {'compound': false}) }}
-    <div>
-        {% for category in form.category %}
-            <div class="form-check form-check-inline">
-                {{ form_widget(category) }}
-                {{ form_label(category, {'compound': false}) }}
-                {{ form_errors(category) }}
-            </div>
-        {% endfor %}
+        {{ form_widget(form.featured) }}
+        {{ form_errors(form.featured) }}
+        <label for="{{ form.featured.vars.id }}"
+               class="custom-file-label col-form-legend {{ form.featured.vars.required ? 'required' : '' }}">
+            {{ form.featured.vars.label | trans }}
+        </label>
     </div>
 </div>
 
@@ -78,4 +90,3 @@
 </div>
 
 {{ form_end(form) }}
-

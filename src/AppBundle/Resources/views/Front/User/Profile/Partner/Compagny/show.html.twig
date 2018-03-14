@@ -3,15 +3,55 @@
 {% block compagnies_content %}
 
     {% include '@Front/User/Profile/Partner/Compagny/single.html.twig' with {'currentCompagny': currentCompagny} %}
-    
+
     <div class="border border-bottom mb-3"></div>
-    
+
     <div class="compagny single offres">
         <h4 class="h5">
             {{ 'layout.offres' | trans }}
             {{ renderSnippetNew( 'user_partner_compagny_offre_new', {'partner': currentCompagny.partner.slug, 'compagny': currentCompagny.slug} ) |raw }}
         </h4>
-        liste des offres
+
+        <div id="accordion">
+
+            {% for offre in currentCompagny.offres %}
+
+                <div class="card">
+                    <div class="card-header" id="heading{{ loop.index }}">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                {{ offre.name }}
+                            </button>
+                            <div class="float-right">
+                                {{ renderSnippetUpdate( 'user_partner_compagny_offre_update', 
+                                    {
+                                        'partner': currentCompagny.partner.slug, 
+                                        'compagny': currentCompagny.slug,
+                                        'slug': offre.slug,
+                                         
+                                    } ) |raw }}
+                                {{ renderSnippetDelete( 'user_partner_compagny_offre_delete', 
+                                    {
+                                        'partner': currentCompagny.partner.slug, 
+                                        'compagny': currentCompagny.slug,
+                                        'slug': offre.slug
+                                         
+                                    } ) |raw }}
+                            </div>
+                        </h5>
+                    </div>
+
+                    <div id="collapse{{ loop.index }}" class="collapse {{ loop.first ? 'show' }}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+                        <div class="card-body">
+                            {{ offre.about }}
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
 {% endblock compagnies_content %}

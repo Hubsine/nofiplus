@@ -46,7 +46,6 @@ class Offre implements EntityInterface
      * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\User\Partner\Compagny", inversedBy="offres")
      * 
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\Compagny")
-     * @Assert\Valid()
      */
     private $compagny;
 

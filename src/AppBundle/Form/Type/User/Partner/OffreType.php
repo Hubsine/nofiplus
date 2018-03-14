@@ -83,6 +83,11 @@ class OffreType extends AbstractType
                 'label' => 'form.offre.featured',
                 'by_reference'  => false
             ]);
+                
+            if( isset($options['action']) && $options['action'] === 'update')
+            { 
+                $builder->get('featured')->setRequired(false);
+            }
     }
     
     /**
