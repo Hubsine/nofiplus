@@ -63,9 +63,10 @@
         
         
         {% block footer_base_script %}
-
-        {% endblock footer_base_script %}
+            <script src="{{ asset('build/functions.js') }}"></script>
             <script src="{{ asset('build/global-js.js') }}"></script>
+        {% endblock footer_base_script %}
+        
         {% block footer_front_script %}
 
         {% endblock footer_front_script %}

@@ -81,7 +81,7 @@ class Featured implements EntityInterface, MediaInterface
      *
      * @return Featured
      */
-    public function setOffre(\AppBundle\Entity\User\Partner\Offre $offre = null)
+    public function setOffre(\AppBundle\Entity\User\Partner\Offre $offre)
     {
         $this->offre = $offre;
 

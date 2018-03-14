@@ -17,7 +17,7 @@ trait DateTrait
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Date(message="assert.date")
-     * @Assert\GreaterThanOrEqual("today", message="assert.date.greater_than_or_equal")
+     * @Assert\GreaterThanOrEqual("today UTC", message="assert.date.greater_than_or_equal")
      * @Assert\LessThanOrEqual(propertyPath="end", message="assert.date.less_than_or_equal")
      */
     private $start;
@@ -30,7 +30,6 @@ trait DateTrait
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Date(message="assert.date")
      * @Assert\GreaterThanOrEqual(propertyPath="start", message="assert.date.greater_than_or_equal")
-     * @Assert\LessThanOrEqual("today", message="assert.date.less_than_or_equal")
      */
     private $end;
     

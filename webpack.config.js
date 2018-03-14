@@ -7,9 +7,18 @@ Encore
         .setOutputPath('web/build/')
         // the public path used by the web server to access the previous directory
         .setPublicPath('/build')
+        
+        .addEntry('functions',  './assets/js/functions.js')
+        .addEntry('global-js',  './assets/js/global.js')
+        .addEntry('offre',      './assets/js/pages/offre.js')
 
-        .addEntry('global-js', './assets/js/global.js')
-
+//        .configureBabel(function(babelConfig) {
+//            
+//            // add additional presets
+//            babelConfig.presets.push('es2015');
+//
+//        })
+    
         .createSharedEntry('vendor', [
             'jquery',
             'jquery-ui-bundle',
@@ -38,6 +47,21 @@ Encore
                 }
             }]
         })
+//        .addLoader(
+//        {
+//            test: require.resolve('tinymce/tinymce'),
+//            use: [{
+//                loader: 'imports?this=>window'
+//                    //'exports?window.tinymce'
+//            }]
+//        }
+//        )
+//        .addLoader({
+//            test: /tinymce\/(themes|plugins)\//,
+//            use: [{
+//                loader: 'imports?this=>window'
+//            }]
+//        }  )
         // allow sass/scss files to be processed
         .enableSassLoader()
         //.autoProvidejQuery()
@@ -47,6 +71,8 @@ Encore
         .enableBuildNotifications()
 
         .autoProvidejQuery()
+        
+        .enableSourceMaps(!Encore.isProduction())
         ;
 
 module.exports = Encore.getWebpackConfig();

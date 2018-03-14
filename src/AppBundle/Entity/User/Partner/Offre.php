@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Entity\DateTrait;
 use AppBundle\Entity\EntityInterface;
+use AppBundle\Traits\EntityRoutePrefixTrait;
 
 /**
  * Offre
@@ -20,6 +21,7 @@ use AppBundle\Entity\EntityInterface;
  */
 class Offre implements EntityInterface
 {
+    const ROUTE_PREFIX      = 'user_partner_compagny_offre';
     const ENJOY_BY_ALL      = 'all';
     const ENJOY_BY_LOCATION = 'location';
     const ENJOY_BY_WEB      = 'web';
@@ -27,6 +29,7 @@ class Offre implements EntityInterface
     
     use DoctrineTrait;
     use DateTrait;
+    use EntityRoutePrefixTrait;
     
     /**
      * @var int
@@ -70,8 +73,9 @@ class Offre implements EntityInterface
     /**
      * @var \AppBundle\Entity\Admin\Category\Offre
      *
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Admin\Category\Offre")
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\Offre")
      * 
+     * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Offre", message="assert.type")
      */
     private $category;
@@ -95,12 +99,13 @@ class Offre implements EntityInterface
     private $slug;
 
     /**
-     * @var string
+     * @var array
      * 
-     * @ORM\Column(type="string", length=10, name="how_enjoy")
+     * @ORM\Column(type="array", length=10, name="how_enjoy")
      * 
      * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Choice(callback="getHowEnjoys", message="assert.choice")
+     * @Assert\Choice(callback="getHowEnjoys", multiple=true, min=1, max=4, strict=true, message="assert.choice")
+     * @Assert\Type(type="array", message="assert.type")
      */
     private $howEnjoy;
     
@@ -131,9 +136,15 @@ class Offre implements EntityInterface
      */
     private $enjoyByTel;
 
+    public function __construct() 
+    {
+        $this->start    = new \DateTime('now');
+        $this->end      = new \DateTime('+1 day');
+    }
+
     public static function getHowEnjoys()
     {
-        return array(self::ENJOY_BY_LOCATION, self::ENJOY_BY_WEB, self::ENJOY_BY_TEL, self::ENJOY_BY_ALL);
+        return array(self::ENJOY_BY_ALL, self::ENJOY_BY_LOCATION, self::ENJOY_BY_WEB, self::ENJOY_BY_TEL);
     }
 
     /**
@@ -141,53 +152,59 @@ class Offre implements EntityInterface
      */
     public function validate(ExecutionContextInterface $context, $payload)
     {
-        switch ( $this->getHowEnjoy() )
-        {       
-            /** Dans le cas où l'offre est sur "tout" il faut renseigner chaque cas **/
-            case self::ENJOY_BY_ALL:
-                empty( $this->getEnjoyByLocation() ) || '' === $this->getEnjoyByLocation() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByLocation')
-                        ->addViolation()
-                    : null;
-
-                empty( $this->getEnjoyByWeb() ) || '' === $this->getEnjoyByWeb() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByWeb')
-                        ->addViolation()
-                    : null;
-
-                empty( $this->getEnjoyByTel() ) || '' === $this->getEnjoyByTel() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByTel')
-                        ->addViolation()
-                    : null;
-            break;
+        $howEnjoys = $this->getHowEnjoy();
         
-            case self::ENJOY_BY_LOCATION:
-                empty( $this->getEnjoyByLocation() ) || '' === $this->getEnjoyByLocation() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByLocation')
-                        ->addViolation()
-                    : null;
-                break;
+        $locationViolation = function() use($context)
+        {
+            empty( $this->getEnjoyByLocation() ) || '' === $this->getEnjoyByLocation() ? 
+                $context->buildViolation('assert.not_blank')
+                    ->atPath('enjoyByLocation')
+                    ->addViolation()
+                : null;
+        };
+        
+        $webViolation = function() use($context)
+        {
+            empty( $this->getEnjoyByWeb() ) || '' === $this->getEnjoyByWeb() ? 
+                $context->buildViolation('assert.not_blank')
+                    ->atPath('enjoyByWeb')
+                    ->addViolation()
+                : null;
+        };
+        
+        $telViolation = function() use($context)
+        {
+            empty( $this->getEnjoyByTel() ) || '' === $this->getEnjoyByTel() ? 
+                $context->buildViolation('assert.not_blank')
+                    ->atPath('enjoyByTel')
+                    ->addViolation()
+                : null;
+        };
+        
+        /** Dans le cas où l'offre est sur "tout" il faut renseigner chaque cas **/
+        if ( in_array( self::ENJOY_BY_ALL, $howEnjoys ) )
+        {       
+            $locationViolation();
+            $webViolation();
+            $telViolation();
             
-            case self::ENJOY_BY_WEB:
-                empty( $this->getEnjoyByWeb() ) || '' === $this->getEnjoyByWeb() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByWeb')
-                        ->addViolation()
-                    : null;
-                break;
-            
-            case self::ENJOY_BY_TEL:
-                empty( $this->getEnjoyByTel() ) || '' === $this->getEnjoyByTel() ? 
-                    $context->buildViolation('assert.not_blank')
-                        ->atPath('enjoyByTel')
-                        ->addViolation()
-                    : null;
-                break;
-
+            return;
+        }
+        
+        if( in_array( self::ENJOY_BY_LOCATION, $howEnjoys ) )
+        {
+                $locationViolation();
+        }            
+        
+        
+        if( in_array( self::ENJOY_BY_WEB, $howEnjoys ) )
+        {
+                $webViolation();
+        }
+        
+        if( in_array( self::ENJOY_BY_TEL, $howEnjoys ) )
+        {
+            $telViolation();
         }
     }
     
@@ -276,11 +293,11 @@ class Offre implements EntityInterface
     /**
      * Set howEnjoy
      *
-     * @param string $howEnjoy
+     * @param array $howEnjoy
      *
      * @return Offre
      */
-    public function setHowEnjoy($howEnjoy)
+    public function setHowEnjoy(array $howEnjoy)
     {
         $this->howEnjoy = $howEnjoy;
 
@@ -290,7 +307,7 @@ class Offre implements EntityInterface
     /**
      * Get howEnjoy
      *
-     * @return string
+     * @return array
      */
     public function getHowEnjoy()
     {
@@ -376,7 +393,7 @@ class Offre implements EntityInterface
      *
      * @return Offre
      */
-    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny = null)
+    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
     {
         $this->compagny = $compagny;
 
@@ -400,7 +417,7 @@ class Offre implements EntityInterface
      *
      * @return Offre
      */
-    public function setCategory(\AppBundle\Entity\Admin\Category\Offre $category = null)
+    public function setCategory(\AppBundle\Entity\Admin\Category\Offre $category)
     {
         $this->category = $category;
 
@@ -424,10 +441,12 @@ class Offre implements EntityInterface
      *
      * @return Offre
      */
-    public function setFeatured(\AppBundle\Entity\User\Partner\Featured $featured = null)
+    public function setFeatured(\AppBundle\Entity\User\Partner\Featured $featured)
     {
         $this->featured = $featured;
-
+        
+        $featured->setOffre($this);
+        
         return $this;
     }
 

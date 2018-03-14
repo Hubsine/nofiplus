@@ -7,11 +7,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Form\Type\User\Partner\FeaturedType;
-use AppBundle\Entity\Admin\Category\Offre;
+use AppBundle\Entity\User\Partner\Offre;
+use AppBundle\Entity\Admin\Category\Offre as CatOffre;
 
 class OffreType extends AbstractType
 {
@@ -28,33 +29,53 @@ class OffreType extends AbstractType
                 'label' => 'form.offre.about',
                 'attr'  => ['class' => 'editable']
             ])
-            ->add('howEnjoy', RadioType::class, [
-                'label' => 'form.offre.how_enjoy'
+            ->add('howEnjoy', ChoiceType::class, [
+                'label' => 'form.offre.how_enjoy',
+                'choices'   => Offre::getHowEnjoys(),
+                'multiple'  => true,
+                'expanded'  => true,
+                'label_attr'    => ['class' => 'form-check-inline checkbox-inline'],
+                'choice_label' => function ($value, $key, $index) 
+                {
+                    return 'form.how_enjoy.' . $value;
+                },
+                'choice_attr' => function($val, $key, $index) 
+                {
+                    $class = $val === 'all' ? 'all' : 'checkboxItem ' . $val;
+                    return ['class' => $class];
+                },
             ])
             ->add('enjoyByLocation', TextareaType::class, [
                 'label' => 'form.offre.by_location',
-                'attr'  => ['class' => 'editable']
+                'attr'  => ['class' => 'editable location enjoyByTextarea']
             ])
             ->add('enjoyByWeb', TextareaType::class, [
                 'label' => 'form.offre.by_web',
-                'attr'  => ['class' => 'editable']
+                'attr'  => ['class' => 'editable web enjoyByTextarea']
             ])
             ->add('enjoyByTel', TextareaType::class, [
                 'label' => 'form.offre.by_tel',
-                'attr'  => ['class' => 'editable']
+                'attr'  => ['class' => 'editable tel enjoyByTextarea']
             ])
-            ->add('start', DateTimeType::class, [
+            ->add('start', DateType::class, [
                 'label' => 'form.offre.start',
-                'attr'  => ['class' => 'datepicker']
+                'attr'  => ['class' => 'datepicker start'],
+                'widget'    => 'single_text',
+                'html5' => false,
+                'format' => 'dd-MM-yyyy'
             ])
-            ->add('end', DateTimeType::class, [
+            ->add('end', DateType::class, [
                 'label' => 'form.offre.end',
-                'attr'  => ['class' => 'datepicker']
+                'attr'  => ['class' => 'datepicker end'],
+                'widget'    => 'single_text',
+                'html5' => false,
+                'format' => 'dd-MM-yyyy'
             ])
             ->add('category', EntityType::class, [
                 'label' => 'form.offre.category',
-                'class' => Offre::class,
+                'class' => CatOffre::class,
                 'choice_label'  => 'name',
+                'label_attr'    => ['class' => 'form-check-inline radio-inline'],
                 'multiple'  => false,
                 'expanded'  => true
             ])

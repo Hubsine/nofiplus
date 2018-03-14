@@ -1,0 +1,108 @@
+{% extends "@Front/User/Profile/Partner/Offre/index.html.twig" %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block compagnies_content %}
+
+    <h4>{{ 'form.offre.add' | trans }}</h4>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="form-row">
+        <div class="form-group col">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            {{ form_label(form.about) }}
+            {{ form_widget(form.about) }}
+            {{ form_errors(form.about) }}
+        </div>
+    </div>    
+
+    <div class="form-row">
+        <div class="containDynamicCheckbox">
+            <div id="offreHowEnjoy">
+            {{ form_label(form.howEnjoy) }}
+            {{ form_errors(form.howEnjoy) }}
+            {{ form_widget(form.howEnjoy) }}
+            
+            </div>
+        </div>
+        <div class="form-group col-12 mb-3">
+            {{ form_label(form.enjoyByLocation) }}
+            {{ form_widget(form.enjoyByLocation) }}
+            {{ form_errors(form.enjoyByLocation) }}
+        </div>
+        <div class="form-group col-12">
+            {{ form_label(form.enjoyByWeb) }}
+            {{ form_widget(form.enjoyByWeb) }}
+            {{ form_errors(form.enjoyByWeb) }}
+        </div>
+        <div class="form-group col-12">
+            {{ form_label(form.enjoyByTel) }}
+            {{ form_widget(form.enjoyByTel) }}
+            {{ form_errors(form.enjoyByTel) }}
+        </div>
+    </div>    
+
+    <div class="form-row">
+        <legend>Date de l'offre</legend>
+        <div class="form-group col-6">
+            {{ form_label(form.start) }}
+            {{ form_widget(form.start) }}
+            {{ form_errors(form.start) }}
+        </div>
+        <div class="form-group col-6">
+            {{ form_label(form.end) }}
+            {{ form_widget(form.end) }}
+            {{ form_errors(form.end) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category) }}
+        {{ form_errors(form.category) }}
+    </div>
+
+    {#<div class="form-check form-check-inline">
+        {{ form_widget(form.category) }}
+        {{ form_label(form.category) }}
+        {{ form_errors(form.category) }}
+    </div>#}
+
+    <div class="mb-3">
+        {{ form_label(form.featured) }}
+        <div class="custom-file col-12">
+
+            {{ form_widget(form.featured) }}
+            {{ form_errors(form.featured) }}
+            <label for="{{ form.featured.vars.id }}"
+                   class="custom-file-label col-form-legend {{ form.featured.vars.required ? 'required' : '' }}">
+                {{ form.featured.vars.label | trans }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <input name="submit" class="btn btn-primary" type="submit" value="{{ (action is not defined) ? 'form.new' | trans : ('form.' ~ action) | trans }}" />
+    </div>
+
+    {{ form_end(form) }}
+
+
+{% endblock compagnies_content %}
+
+{% block footer_front_script %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('build/offre.js') }}"></script>
+
+{% endblock footer_front_script %}

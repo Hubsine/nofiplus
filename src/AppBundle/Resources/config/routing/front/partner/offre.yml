@@ -1,0 +1,27 @@
+#user_partner_compagny_offre_index:
+#    path: /{partner}/compagnies
+#    defaults: { _controller: AppBundle:Front\Partner\Offre:index }
+#    methods: [GET]
+
+user_partner_compagny_offre_new:
+    path: /{partner}/compagnies/{compagny}/offre/new
+    defaults: { _controller: AppBundle:Front\Partner\Offre:new }
+    methods: [GET,POST]
+    
+#user_partner_compagny_offre_show:
+#    path: /{partner}/compagnies/{compagny}/offre
+#    defaults: { _controller: AppBundle:Front\Partner\Offre:show }
+#    methods: [GET]
+
+user_partner_compagny_offre_delete:
+    path: /{partner}/compagnies/{compagny}/offre/{slug}/delete
+    defaults: { _controller: AppBundle:Front\Partner\Offre:delete }
+    methods: [GET,POST]
+    
+    
+user_partner_compagny_offre_update:
+    path: /{partner}/compagnies/{compagny}/offre/{slug}/update
+    defaults: { _controller: AppBundle:Front\Partner\Offre:update }
+    methods: [GET,POST]
+    
+    

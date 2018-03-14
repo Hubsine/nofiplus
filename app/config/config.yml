@@ -9,7 +9,7 @@ parameters:
     locale: fr
     web_directory: '%kernel.project_dir%/web'
     app.media.compagny.logo: '/uploads/compagny/logos'
-    app.media.offre.featured: '/uploads/offre/featured'
+    app.media.offre.featured: '/uploads/offres/featured'
 
 framework:
     #esi: ~

@@ -167,6 +167,7 @@ form:
     price: "Prix"
     how_enjoy: 
         by: 'L''offre est disponible sur'
+        all: 'En physique, sur interne et par téléphone'
         location: 'Dans un lieu physique'
         web: 'Sur internet'
         tel: 'Téléphone'
@@ -179,6 +180,7 @@ form:
         logo: 'Logo de l''entreprise'
         category: 'Secteur d''activité de l''entreprise'
     offre:
+        add: 'Ajouter une offre'
         name: 'Nom de l''offre'
         about: 'Description de l''offre'
         how_enjoy: 'Comment profiter de l''offre'

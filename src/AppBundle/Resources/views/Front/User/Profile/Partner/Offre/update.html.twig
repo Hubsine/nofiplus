@@ -1,0 +1,9 @@
+{% extends "@Front/User/Profile/Partner/Compagny/index.html.twig" %}
+
+{% block compagnies_content %}
+    
+    <h4>{{ 'form.compagny.update' | trans }}</h4>
+    
+    {% include '@Front/User/Profile/Partner/Compagny/form.html.twig' with {'action': 'update'} %}
+    
+{% endblock compagnies_content %}
