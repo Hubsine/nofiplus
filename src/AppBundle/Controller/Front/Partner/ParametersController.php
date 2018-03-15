@@ -15,19 +15,16 @@ use AppBundle\Form\Type\User\Partner\ParametersType;
 class ParametersController extends Controller
 {
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * 
      * @param Request $request
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request, Partner $partner)
     {
-        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
        
-        if ( ! is_object($partner) || !$partner instanceof Partner ) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->getEventDispatcher();
         
@@ -56,7 +53,7 @@ class ParametersController extends Controller
             {
                 $response = $this->redirectToRoute(
                     $this->getRouteUtil()->getCompleteRoute(Partner::class, 'index'), 
-                    ['slug'    => $partner->getSlug()]
+                    ['partner'    => $partner->getSlug()]
                 );
             }
             

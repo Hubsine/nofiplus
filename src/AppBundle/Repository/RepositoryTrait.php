@@ -29,16 +29,19 @@ trait RepositoryTrait
      * Get with address
      * 
      * @param \AppBundle\Repository\QueryBuilder $qb
+     * @param string $alias Alias of entity 
      * @return \AppBundle\Repository\QueryBuilder
      */
-    public function joinWithAddress(QueryBuilder $qb)
+    public function joinWithAddress(QueryBuilder $qb, $alias = null)
     {
-        if( ! defined(get_class() . '::ALIAS') )
+        if(  null === $alias && ! defined(get_class() . '::ALIAS') )
         {
             throw new UndefinedConstantException('ALIAS');
         }
         
-        $qb->leftJoin(self::ALIAS . '.address', 'address')
+        $alias = ( $alias === null ) ? self::ALIAS : $alias;
+        
+        $qb->leftJoin($alias . '.address', 'address')
            ->addSelect('address');
         
         return $qb;

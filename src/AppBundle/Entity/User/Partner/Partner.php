@@ -28,7 +28,8 @@ use libphonenumber\PhoneNumberType;
  */
 class Partner extends BaseUser implements AdminEntityInterface
 {
-    CONST ROUTE_PREFIX = 'user_partner';
+    CONST ROUTE_PREFIX  = 'user_partner';
+    CONST ROLE_PARTNER  = 'ROLE_PARTNER';
     
     use UserTrait;
     use EntityRoutePrefixTrait;
@@ -65,6 +66,7 @@ class Partner extends BaseUser implements AdminEntityInterface
     {
         parent::__construct();
         
+        $this->addRole(self::ROLE_PARTNER);        
         $this->compagnies = new ArrayCollection();
     }
 

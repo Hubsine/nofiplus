@@ -89,7 +89,6 @@ class Compagny implements AdminEntityInterface
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\Partner", groups={"new"})
-     * @Assert\Valid(groups={"new"})
      */
     private $partner;
 
@@ -99,7 +98,6 @@ class Compagny implements AdminEntityInterface
      * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"all"})
      * 
      * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
-     * @Assert\Valid()
      */
     private $offres;
 

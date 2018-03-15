@@ -14,27 +14,13 @@ use AppBundle\Form\Type\User\Partner\PartnerType;
 
 class PartnerController extends Controller
 {
-    
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * 
      * @return Response
      */
-    public function indexAction()
+    public function showAction(Partner $partner)
     {
-        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
-        
-        $this->isGrantedWithDeny('EDIT', $partner);
-        
-        // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/index.html.twig', [
-        ]);
-    }
-    
-    /**
-     * @return Response
-     */
-    public function showAction()
-    {
-        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
         
         // replace this example code with whatever you need
@@ -44,19 +30,16 @@ class PartnerController extends Controller
     }
     
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * 
      * @param Request $request
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request, Partner $partner)
     {
-        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
        
-        if ( ! is_object($partner) || !$partner instanceof Partner ) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->getEventDispatcher();
         
@@ -90,7 +73,7 @@ class PartnerController extends Controller
             {
                 $response = $this->redirectToRoute(
                     $this->getRouteUtil()->getCompleteRoute(Partner::class, 'index'), 
-                    ['slug'    => $partner->getSlug()]
+                    ['partner'    => $partner->getSlug()]
                 );
             }
             
@@ -103,19 +86,5 @@ class PartnerController extends Controller
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
-    }
-    
-    /**
-     * Check if is Partner object instance
-     * 
-     * @param Partner $partner
-     * @throws AccessDeniedException
-     */
-    public static function isPartner($partner)
-    {
-        if ( ! is_object($partner) || !$partner instanceof Partner ) 
-        {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
     }
 }

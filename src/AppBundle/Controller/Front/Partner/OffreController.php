@@ -16,13 +16,14 @@ use AppBundle\Controller\Front\Partner\CompagnyController;
 class OffreController extends Controller
 {
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * 
      * @param Request $request
      * @param string $compagny slug
      * @return Response
      */
-    public function newAction(Request $request, $compagny)
+    public function newAction(Request $request, Partner $partner, $compagny)
     {
-        $partner    = $this->getUser();
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
         $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
         
@@ -53,26 +54,28 @@ class OffreController extends Controller
         return $this->render('@Front/User/Profile/Partner/Offre/new.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            'currentOffre'   => $offre,
+            #'currentOffre'   => $offre,
             'compagnies'    => $compagnies
         ]);
     }
     
     /**
-     * ParamConverter("offre", options={"mapping": {"slug": "slug"}})
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
      * @param string $compagny slug
-     * @param Offre $offre
+     * @param strig $slug slug of Offre
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, $compagny, $slug)
+    public function updateAction(Request $request, Partner $partner, $compagny, $slug)
     {
-        $partner    = $this->getUser();
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
         $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
         $offre      = self::getFilterOffres($compagny->getOffres()->getValues(), $slug);
+        
+        $request->attributes->set('compagny', $compagny);
+        $request->attributes->set('slug', $offre);
         
         $this->isGrantedWithDeny('EDIT', $offre);
         

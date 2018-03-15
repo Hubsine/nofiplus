@@ -14,33 +14,35 @@ use AppBundle\Form\Type\User\Partner\CompagnyType;
 class CompagnyController extends Controller
 {
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
      * @param Partner $partner
      * @return type
      */
-    public function indexAction()
+    public function indexAction(Partner $partner)
     {
-        $partner = $this->getUser();
         $this->isGrantedWithDeny('VIEW', $partner);
         
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
-            'partner'   => $partner,
-            'compagnies' => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner)
+            'partner'       => $partner,
+            'compagnies'    => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner)
         ]);
     }
     
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param string $slug
      * @return Response
      */
-    public function showAction($slug)
+    public function showAction(Request $request, Partner $partner, $slug)
     {
-        $partner    = $this->getUser();
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
         $compagny   = self::getFilterCompagny($compagnies, $slug);
+        
+        $request->attributes->set('slug', $compagny);
         
         $this->isGrantedWithDeny('VIEW', $compagny);
         
@@ -53,13 +55,13 @@ class CompagnyController extends Controller
     }
     
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
      * @return Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Partner $partner)
     {
-        $partner    = $this->getUser();
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
         
         $form   = $this->createForm( CompagnyType::class, $compagny = new Compagny() );
@@ -95,15 +97,18 @@ class CompagnyController extends Controller
     }
     
     /**
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForUpdateCompagny"})
+     * 
      * @param Request $request
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, $slug)
+    public function updateAction(Request $request, Partner $partner, $slug)
     {
-        $partner    = $this->getUser();
-        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
-        $compagny   = self::getFilterCompagny($compagnies, $slug);
+        $compagnies = $partner->getCompagnies();
+        $compagny   = self::getFilterCompagny($compagnies->getValues(), $slug);
+        
+        $request->attributes->set('compagny', $compagny);
         
         $this->isGrantedWithDeny('EDIT', $compagny);
         

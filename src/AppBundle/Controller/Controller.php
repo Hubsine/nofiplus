@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
+use FOS\UserBundle\Model\User;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
 /**
@@ -24,7 +25,7 @@ abstract class Controller extends BaseController
     
     /**
      * Checks if the attributes are granted against the current authentication token and optionally supplied subject.
-     * If is false, a denyAccessUnlessGranted is throw
+     * If is false, a denyAccessUnlessGranted is throw. For user with ROLE_SUPER_ADMIN access is always granted.
      * 
      * @param mixed $attributes
      * @param mixed $subject
@@ -34,8 +35,8 @@ abstract class Controller extends BaseController
     protected function isGrantedWithDeny($attributes, $subject = null, $message = 'Access Denied.') {
         
         $isGranted = $this->isGranted($attributes, $subject);
-        
-        if( $isGranted === false )
+       
+        if( $isGranted === false && ! $this->getUser()->hasRole(User::ROLE_SUPER_ADMIN) )
         {
             $this->denyAccessUnlessGranted($isGranted, $subject, $message);
         }

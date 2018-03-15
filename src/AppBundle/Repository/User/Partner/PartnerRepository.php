@@ -16,14 +16,50 @@ class PartnerRepository extends UserRepository
     
     use RepositoryTrait;
     
-    public function findOneForIndex($id)
+    public function findOneForIndex($slug)
     {
         $qb   = $this->createQueryBuilder(self::ALIAS)
-                ->where('e.id = :id')
-                ->setParameter('id', $id);
+                ->where('e.slug = :slug')
+                ->setParameter('slug', $slug);
         
         $this->joinWithAddress($qb);
         
         return $qb->getQuery()->getOneOrNullResult();
     }
+    
+    public function findOneForUpdateCompagny($slug)
+    {
+        $qb   = $this->createQueryBuilder(self::ALIAS)
+                ->where('e.slug = :slug')
+                ->setParameter('slug', $slug);
+        
+        $this->joinWithCompagnies($qb);
+        $this->joinWithCompagnyLogo($qb);
+        $this->joinWithAddress($qb, 'compagny');
+        
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+    
+    ###
+    # Joins
+    ###
+    
+    public function joinWithCompagnies(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin('e.compagnies', 'compagny')
+            ->addSelect('compagny');
+        
+        return $qb;
+    }
+    
+    public function joinWithCompagnyLogo(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin('compagny.logo', 'logo')
+            ->addSelect('logo');
+        
+        return $qb;
+    }
 }
+
