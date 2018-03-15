@@ -87,7 +87,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
      */
     public function createPartnerMenu(array $options)
     {
-        $partner = $this->request->attributes->get('partner');
+        $partner = $this->tokenStorage->getToken()->getUser();
         $_route     = $this->request->attributes->get('_route');
         
         if ( ! $partner instanceof Partner )

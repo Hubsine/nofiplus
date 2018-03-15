@@ -15,11 +15,19 @@ class UnexpectedValueException  extends \Exception
     
     const DEFAULT_MESSAGE = 'Unexpected value "%s". Extected value is "%s".';
     
-    public function __construct($value, $expectedValue, string $message = "", int $code = 0, \Throwable $previous = null) 
+    /**
+     * 
+     * @param mixed $badValue
+     * @param mixed $expectedValue
+     * @param string $message
+     * @param int $code
+     * @param \Throwable $previous
+     */
+    public function __construct($badValue, $expectedValue, string $message = "", int $code = 0, \Throwable $previous = null) 
     {
         if( empty($message) )
         {
-            $message    = sprintf(self::DEFAULT_MESSAGE, $value, is_array( $expectedValue ) ? $this->arrayToString($expectedValue) : $expectedValue );
+            $message    = sprintf(self::DEFAULT_MESSAGE, $badValue, is_array( $expectedValue ) ? $this->arrayToString($expectedValue) : $expectedValue );
         }
         
         parent::__construct($message, $code, $previous);

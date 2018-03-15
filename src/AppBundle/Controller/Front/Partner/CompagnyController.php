@@ -5,10 +5,7 @@ namespace AppBundle\Controller\Front\Partner;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
+use AppBundle\Exception\UnexpectedValueException;
 use AppBundle\Controller\Controller;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Partner\Compagny;
@@ -17,35 +14,35 @@ use AppBundle\Form\Type\User\Partner\CompagnyType;
 class CompagnyController extends Controller
 {
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
      * 
      * @param Request $request
      * @param Partner $partner
      * @return type
      */
-    public function indexAction(Request $request, Partner $partner)
+    public function indexAction()
     {
+        $partner = $this->getUser();
         $this->isGrantedWithDeny('VIEW', $partner);
         
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
             'partner'   => $partner,
-            'compagnies' => $this->getCompagniesFromPartner($partner)
+            'compagnies' => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner)
         ]);
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
      * 
-     * @param Request $request
-     * @param Partner $partner
+     * @param string $slug
      * @return Response
      */
-    public function showAction(Request $request, Partner $partner, Compagny $compagny)
+    public function showAction($slug)
     {
-        $this->isGrantedWithDeny('VIEW', $compagny);
+        $partner    = $this->getUser();
+        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
+        $compagny   = self::getFilterCompagny($compagnies, $slug);
         
-        $compagnies = $this->getCompagniesFromPartner($partner);
+        $this->isGrantedWithDeny('VIEW', $compagny);
         
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/show.html.twig', [
@@ -56,14 +53,15 @@ class CompagnyController extends Controller
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
      * 
      * @param Request $request
-     * @param Partner $partner
      * @return Response
      */
-    public function newAction(Request $request, Partner $partner)
+    public function newAction(Request $request)
     {
+        $partner    = $this->getUser();
+        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
+        
         $form   = $this->createForm( CompagnyType::class, $compagny = new Compagny() );
         
         $compagny->setPartner($partner);
@@ -92,25 +90,23 @@ class CompagnyController extends Controller
         return $this->render('@Front/User/Profile/Partner/Compagny/new.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            'currentCompagny'   => $compagny,
-            'compagnies'    => $this->getCompagniesFromPartner($partner)
+            'compagnies'    => $compagnies
         ]);
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
      * @param Request $request
-     * @param Partner $partner
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner, Compagny $compagny)
+    public function updateAction(Request $request, $slug)
     {
+        $partner    = $this->getUser();
+        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
+        $compagny   = self::getFilterCompagny($compagnies, $slug);
+        
         $this->isGrantedWithDeny('EDIT', $compagny);
         
-        $compagnies = $this->getCompagniesFromPartner($partner);
-                
         $form   = $this->createForm( CompagnyType::class, $compagny, ['validation_groups'=> ['Default'], 'action'   => 'update'] );
         
         $form->handleRequest($request);
@@ -173,13 +169,16 @@ class CompagnyController extends Controller
         }
     }
     
-    /**
-     * 
-     * @param Partner $partner
-     * @return array[Compagny]
-     */
-    private function getCompagniesFromPartner(Partner $partner)
+    public static function getFilterCompagny(array $compagnies, $compagnySlug)
     {
-        return $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByPartnerWithJoin($partner);
+        for($i = 0; $i <= count($compagnies); $i++)
+        {
+            if( $compagnies[$i]->getSlug() === $compagnySlug )
+            {
+                return $compagnies[$i];
+            }
+        }
+        
+        throw new UnexpectedValueException(null, Compagny::class);
     }
 }

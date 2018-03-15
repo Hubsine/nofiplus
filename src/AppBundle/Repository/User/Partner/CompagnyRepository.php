@@ -18,7 +18,20 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
     
     use RepositoryTrait;
     
-    public function findAllByPartnerWithJoin(Partner $partner)
+    public function findAllByForIndex(Partner $partner)
+    {
+        $qb   = $this->createQueryBuilder(self::ALIAS)
+                ->where('e.partner = :partner')
+                ->setParameter('partner', $partner);
+        
+        $this->joinWithLogo($qb);
+        $this->joinWithAddress($qb);
+        $this->joinWithCategory($qb);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function findAllByForShow(Partner $partner)
     {
         $qb   = $this->createQueryBuilder(self::ALIAS)
                 ->where('e.partner = :partner')
@@ -57,7 +70,10 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb
             ->leftJoin('e.offres', 'offre')
-            ->addSelect('offre');
+            ->addSelect('offre')
+            ->leftJoin('offre.featured', 'featured')
+            ->addSelect('featured')
+                ;
         
         return $qb;
     }
