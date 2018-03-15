@@ -56,7 +56,6 @@ class RegistrationController extends Controller
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-        #$user = $this->getUserTypeEntityFromRequest($request);
         $user = $this->getAsUserEntity();
         $user->setEnabled(true);
 
@@ -67,7 +66,6 @@ class RegistrationController extends Controller
             return $event->getResponse();
         }
 
-        #$form = $formFactory->createForm();
         $form = $this->getAsUserRegistrationFormType();
         $form->setData($user);
 

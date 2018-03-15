@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Entity\User\User;
 
 class RegistrationType extends AbstractType
@@ -47,9 +48,10 @@ class RegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => User::class,
+            'data_class' => Abonne::class,
             'csrf_token_id' => 'registration',
-            'translation_domain'    => 'messages'
+            'translation_domain'    => 'messages',
+            'validation_group' => ['default', 'Registration']
         ));
     }
 

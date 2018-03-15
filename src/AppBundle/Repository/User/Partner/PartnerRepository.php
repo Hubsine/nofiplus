@@ -4,12 +4,13 @@ namespace AppBundle\Repository\User\Partner;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use AppBundle\Repository\User\UserRepository;
 use AppBundle\Repository\RepositoryTrait;
 
 /**
  * PartnerRepository
  */
-class PartnerRepository extends EntityRepository
+class PartnerRepository extends UserRepository
 {
     CONST ALIAS = 'e';
     

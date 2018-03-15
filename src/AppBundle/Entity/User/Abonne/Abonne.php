@@ -21,8 +21,6 @@ use AppBundle\Entity\User\UserTrait;
  * @ORM\Table(name="np_user_abonne")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Abonne\AbonneRepository")
  * 
- * @UniqueEntity("phone", message="assert.unique_entity.phone")
- * 
  * @author Hubsine <contact@hubsine.com>
  */
 class Abonne extends BaseUser implements AdminEntityInterface

@@ -114,8 +114,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
-        form:
-            type: AppBundle\Form\Type\User\RegistrationType    
+        #form:
+            #type: AppBundle\Form\Type\User\RegistrationType    
 
 # KnpMenuBundle
 knp_menu:

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Traits\DoctrineTrait;
@@ -20,9 +21,12 @@ use AppBundle\Traits\DoctrineTrait;
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="discr", type="string")
  * @DiscriminatorMap({
- *  "admin" = "AppBundle\Entity\User\Admin",
- *  "abonne" = "AppBundle\Entity\User\Abonne\Abonne", 
- *  "partner" = "AppBundle\Entity\User\Partner\Partner"})
+ *  "admin"     = "AppBundle\Entity\User\Admin",
+ *  "abonne"    = "AppBundle\Entity\User\Abonne\Abonne", 
+ *  "partner"   = "AppBundle\Entity\User\Partner\Partner"})
+ * 
+ * @UniqueEntity("emailCanonical", repositoryMethod="findByUniqueCriteria", errorPath="email", message="fos_user.email.already_used")
+ * @UniqueEntity("usernameCanonical", repositoryMethod="findByUniqueCriteria", errorPath="username", message="fos_user.username.already_used")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * 

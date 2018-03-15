@@ -56,7 +56,7 @@ class Partner extends BaseUser implements AdminEntityInterface
      * 
      * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Compagny", mappedBy="partner", cascade={"persist", "remove"})
      * 
-     * @Assert\Type(type="\Doctrine\ORM\PersistentCollection", message="assert.type")
+     * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      * @Assert\Valid()
      */
     protected $compagnies;
