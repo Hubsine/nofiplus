@@ -15,16 +15,14 @@ class PartnerRepository extends EntityRepository
     
     use RepositoryTrait;
     
-    public function findOneWithJoin($id)
+    public function findOneForIndex($id)
     {
         $qb   = $this->createQueryBuilder(self::ALIAS)
                 ->where('e.id = :id')
                 ->setParameter('id', $id);
         
-        $this->joinWithCompagnies($qb);
         $this->joinWithAddress($qb);
         
         return $qb->getQuery()->getOneOrNullResult();
     }
-    
 }

@@ -15,15 +15,13 @@ use AppBundle\Form\Type\User\Partner\ParametersType;
 class ParametersController extends Controller
 {
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
      * @param Request $request
-     * @param Partner $partner
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner)
+    public function updateAction(Request $request)
     {
+        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
        
         if ( ! is_object($partner) || !$partner instanceof Partner ) {

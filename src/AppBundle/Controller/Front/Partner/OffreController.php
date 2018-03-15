@@ -5,65 +5,28 @@ namespace AppBundle\Controller\Front\Partner;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+use AppBundle\Exception\UnexpectedValueException;
 use AppBundle\Controller\Controller;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Partner\Compagny;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Form\Type\User\Partner\OffreType;
+use AppBundle\Controller\Front\Partner\CompagnyController;
 
 class OffreController extends Controller
 {
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
      * @param Request $request
-     * @param Partner $partner
-     * @return type
+     * @param string $compagny slug
+     * @return Response
      */
-    public function indexAction(Request $request)
+    public function newAction(Request $request, $compagny)
     {
-        $this->isGrantedWithDeny('VIEW', $partner);
+        $partner    = $this->getUser();
+        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
+        $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
         
-        // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Offre/index.html.twig', [
-            'partner'   => $partner
-            #'compagnies' => $this->getCompagniesFromPartner($partner)
-        ]);
-    }
-    
-    /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
-     * @param Request $request
-     * @param Partner $partner
-     * @return Response
-     */
-//    public function showAction(Request $request, Partner $partner, Offre $offre)
-//    {
-//        $this->isGrantedWithDeny('VIEW', $offre);
-//        
-//        $compagnies = $this->getCompagniesFromPartner($partner);
-//        
-//        // replace this example code with whatever you need
-//        return $this->render('@Front/User/Profile/Partner/Offre/show.html.twig', [
-//            'partner'  => $partner, 
-//            'currentOffre'  => $offre,
-//            'compagnies' => $compagnies
-//        ]);
-//    }
-    
-    /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * @ParamConverter("compagny", options={"mapping": {"compagny": "slug"}})
-     * 
-     * @param Request $request
-     * @param Partner $partner
-     * @param Compagny $compagny 
-     * @return Response
-     */
-    public function newAction(Request $request, Partner $partner, Compagny $compagny)
-    {
-        $form   = $this->createForm( OffreType::class, $offre = new Offre() );
+        $form       = $this->createForm( OffreType::class, $offre = new Offre() );
         
         $offre->setCompagny($compagny);
 
@@ -91,26 +54,28 @@ class OffreController extends Controller
             'partner'  => $partner, 
             'form'  => $form->createView(),
             'currentOffre'   => $offre,
-            'compagnies'    => $this->getCompagniesFromPartner($partner)
+            'compagnies'    => $compagnies
         ]);
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * @ParamConverter("compagny", options={"mapping": {"compagny": "slug"}})
+     * ParamConverter("offre", options={"mapping": {"slug": "slug"}})
      * 
      * @param Request $request
-     * @param Partner $partner
-     * @param Compagny $compagny 
+     * @param string $compagny slug
+     * @param Offre $offre
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner, Compagny $compagny, Offre $offre)
+    public function updateAction(Request $request, $compagny, $slug)
     {
+        $partner    = $this->getUser();
+        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
+        $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
+        $offre      = self::getFilterOffres($compagny->getOffres()->getValues(), $slug);
+        
         $this->isGrantedWithDeny('EDIT', $offre);
         
-        $compagnies = $this->getCompagniesFromPartner($partner);
-                
         $form   = $this->createForm( OffreType::class, $offre, ['action'   => 'update']);
         
         $form->handleRequest($request);
@@ -131,7 +96,7 @@ class OffreController extends Controller
         return $this->render('@Front/User/Profile/Partner/Offre/update.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            'currentOffre'   => $offre,
+            #'currentOffre'   => $offre,
             'compagnies'    => $compagnies
         ]);
     }
@@ -162,26 +127,23 @@ class OffreController extends Controller
     }
     
     /**
-     * Check is Partner object instance
+     * Get Offre from array collection of Offre
      * 
-     * @param Partner $partner
-     * @throws AccessDeniedException
+     * @param array $offres
+     * @param string $offreSlug
+     * @return array
+     * @throws UnexpectedValueException
      */
-    private function isPartner($partner)
+    public static function getFilterOffres(array $offres, $offreSlug)
     {
-        if ( ! is_object($partner) || !$partner instanceof Partner ) 
+        for($i = 0; $i < count($offres); $i++)
         {
-            throw new AccessDeniedException('This user does not have access to this section.');
+            if( $offreSlug === $offres[$i]->getSlug() )
+            {
+                return $offres[$i];
+            }
         }
-    }
-    
-    /**
-     * 
-     * @param Partner $partner
-     * @return array[Offre]
-     */
-    private function getCompagniesFromPartner(Partner $partner)
-    {
-        return $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByPartnerWithJoin($partner);
+        
+        throw new UnexpectedValueException(null, Offre::class);
     }
 }

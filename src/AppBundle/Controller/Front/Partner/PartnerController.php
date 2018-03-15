@@ -16,14 +16,12 @@ class PartnerController extends Controller
 {
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
-     * @param Request $request
-     * @param Partner $partner
      * @return Response
      */
-    public function indexAction(Request $request, Partner $partner)
+    public function indexAction()
     {
+        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
+        
         $this->isGrantedWithDeny('EDIT', $partner);
         
         // replace this example code with whatever you need
@@ -32,14 +30,11 @@ class PartnerController extends Controller
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
-     * @param Request $request
-     * @param Partner $partner
      * @return Response
      */
-    public function showAction(Request $request, Partner $partner)
+    public function showAction()
     {
+        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
         
         // replace this example code with whatever you need
@@ -49,15 +44,13 @@ class PartnerController extends Controller
     }
     
     /**
-     * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * 
      * @param Request $request
-     * @param Partner $partner
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner)
+    public function updateAction(Request $request)
     {
+        $partner    = $this->getDoctrineUtil()->getRepository(Partner::class)->findOneForIndex( $this->getUser()->getId() );
         $this->isGrantedWithDeny('EDIT', $partner);
        
         if ( ! is_object($partner) || !$partner instanceof Partner ) {
@@ -110,5 +103,19 @@ class PartnerController extends Controller
             'form'  => $form->createView(),
             'partner'  => $partner
         ));
+    }
+    
+    /**
+     * Check if is Partner object instance
+     * 
+     * @param Partner $partner
+     * @throws AccessDeniedException
+     */
+    public static function isPartner($partner)
+    {
+        if ( ! is_object($partner) || !$partner instanceof Partner ) 
+        {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
     }
 }

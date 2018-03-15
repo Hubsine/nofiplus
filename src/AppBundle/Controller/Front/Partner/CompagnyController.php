@@ -118,8 +118,8 @@ class CompagnyController extends Controller
             $this->addFlash('success', 'flash.update_success');
             
             return $this->redirectToRoute(
-                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
-                ['partner' => $partner->getSlug()]
+                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
+                ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
             );
         }
         
@@ -156,22 +156,15 @@ class CompagnyController extends Controller
     }
     
     /**
-     * Check is Partner object instance
-     * 
-     * @param Partner $partner
-     * @throws AccessDeniedException
+     * Get a Compagny from array of Compagny
+     * @param array $compagnies
+     * @param string $compagnySlug
+     * @return array
+     * @throws UnexpectedValueException
      */
-    private function isPartner($partner)
-    {
-        if ( ! is_object($partner) || !$partner instanceof Partner ) 
-        {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-    }
-    
     public static function getFilterCompagny(array $compagnies, $compagnySlug)
     {
-        for($i = 0; $i <= count($compagnies); $i++)
+        for($i = 0; $i < count($compagnies); $i++)
         {
             if( $compagnies[$i]->getSlug() === $compagnySlug )
             {
