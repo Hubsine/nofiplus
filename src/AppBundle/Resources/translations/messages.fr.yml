@@ -181,6 +181,7 @@ form:
         category: 'Secteur d''activité de l''entreprise'
     offre:
         add: 'Ajouter une offre'
+        update: 'Mise à jour d''une offre'
         name: 'Nom de l''offre'
         about: 'Description de l''offre'
         how_enjoy: 'Comment profiter de l''offre'
