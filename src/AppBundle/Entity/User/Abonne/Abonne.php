@@ -32,44 +32,8 @@ class Abonne extends BaseUser implements AdminEntityInterface
     use UserTrait;
     use EntityRoutePrefixTrait;
     
-    /**
-     * @var avatar
-     * 
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Abonne\Avatar", mappedBy="user", cascade={"persist", "remove"})
-     * 
-     * @Assert\Type(type="\AppBundle\Entity\User\Abonne\Avatar")
-     * @Assert\Valid()
-     */
-    protected $avatar;
-    
     public function __construct()
     {
         parent::__construct();
-    }
-    
-    /**
-     * Set avatar
-     *
-     * @param \AppBundle\Entity\User\Abonne\Avatar $avatar
-     *
-     * @return User
-     */
-    public function setAvatar(\AppBundle\Entity\User\Abonne\Avatar $avatar)
-    {
-        $this->avatar = $avatar;
-        
-        $avatar->setUser($this);
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return \AppBundle\Entity\User\Abonne\Avatar
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
     }
 }
