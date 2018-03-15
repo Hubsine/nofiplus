@@ -3,9 +3,9 @@
 namespace AppBundle\Menu;
 
 use AppBundle\Menu\AbstractMenuBuilder;
-use AppBundle\Entity\User\User;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Partner\Compagny;
+use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Exception\BadInstanceException;
 
 /**
@@ -133,16 +133,18 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
         
-        $compagnyNew = $compagny->addChild('compagny', [
-            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'new'),
-            'routeParameters'   => ['partner'   => $partner->getSlug()]
-            ])
-            ->setDisplay(false);
+//        $compagnyNew = $compagny->addChild('compagny', [
+//            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'new'),
+//            'routeParameters'   => ['partner'   => $partner->getSlug()]
+//            ])
+//            ->setDisplay(false);
 
-        if( $compagnyNew->isCurrent() || in_array($_route, [
+        if( in_array($_route, [
                 $this->routeUtil->getCompleteRoute(Compagny::class, 'show' ),
                 $this->routeUtil->getCompleteRoute(Compagny::class, 'new' ),
-                $this->routeUtil->getCompleteRoute(Compagny::class, 'update' )
+                $this->routeUtil->getCompleteRoute(Compagny::class, 'update' ),
+                $this->routeUtil->getCompleteRoute(Offre::class, 'new' ),
+                $this->routeUtil->getCompleteRoute(Offre::class, 'update' )
             ])   
         )
         {
