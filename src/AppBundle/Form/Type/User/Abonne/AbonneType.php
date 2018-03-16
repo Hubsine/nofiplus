@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Form\Type\User\Partner;
+namespace AppBundle\Form\Type\User\Abonne;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Form\Type\User\ParametersType as BaseParametersType;
+use AppBundle\Form\Type\User\ProfileType;
 
-class ParametersType extends BaseParametersType
+class AbonneType extends ProfileType
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class ParametersType extends BaseParametersType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User\User',
+            'data_class' => 'AppBundle\Entity\User\Abonne\Abonne',
             'validation_groups' => 'Profile'
         ));
     }
@@ -32,7 +32,7 @@ class ParametersType extends BaseParametersType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_user_partner_parameters';
+        return 'appbundle_user_abonne';
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Front\Partner;
+namespace AppBundle\Controller\Front\Abonne;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,53 +9,53 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use AppBundle\Controller\Controller;
-use AppBundle\Entity\User\Partner\Partner;
-use AppBundle\Form\Type\User\Partner\PartnerType;
+use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Form\Type\User\Abonne\AbonneType;
 
-class PartnerController extends Controller
+class AbonneController extends Controller
 {
-    const BASE_VIEW_FOLDER   = '@Front/User/Profile/Partner/';
+    const BASE_VIEW_FOLDER   = '@Front/User/Profile/Abonne/';
     
     /**
-     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * @ParamConverter("abonne", class="AppBundle:User\Abonne\Abonne", options={"repository_method" = "findOneForShow"})
      * 
      * @return Response
      */
-    public function showAction(Partner $partner)
+    public function showAction($abonne)
     {
-        $this->isGrantedWithDeny('EDIT', $partner);
+        $this->isGrantedWithDeny('EDIT', $abonne);
         
         // replace this example code with whatever you need
         return $this->render(self::BASE_VIEW_FOLDER . 'show.html.twig', [
-            'user'  => $partner
+            'user'  => $abonne
         ]);
     }
     
     /**
-     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
+     * @ParamConverter("abonne", class="AppBundle:User\Abonne\Abonne", options={"repository_method" = "findOneForUpdate"})
      * 
      * @param Request $request
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner)
+    public function updateAction(Request $request, $abonne)
     {
-        $this->isGrantedWithDeny('EDIT', $partner);
+        $this->isGrantedWithDeny('EDIT', $abonne);
        
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->getEventDispatcher();
         
-        $event = new GetResponseUserEvent($partner, $request);
+        $event = new GetResponseUserEvent($abonne, $request);
         $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
 
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
         
-        $lastUsername   = $partner->getUsername();
+        $lastUsername   = $abonne->getUsername();
 
-        $form = $this->createForm(PartnerType::class, $partner);
-        $form->setData($partner);
+        $form = $this->createForm(AbonneType::class, $abonne);
+        $form->setData($abonne);
 
         $form->handleRequest($request);
         
@@ -66,27 +66,27 @@ class PartnerController extends Controller
             
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
             
-            $this->getDoctrineUtil()->persist($partner);
+            $this->getDoctrineUtil()->persist($abonne);
             
             // Update Acl if username is changed
-            $this->getAclManager()->updateUserSecurityIdentity($partner, $lastUsername);
+            $this->getAclManager()->updateUserSecurityIdentity($abonne, $lastUsername);
             
             if ( null === $response = $event->getResponse() ) 
             {
                 $response = $this->redirectToRoute(
-                    $this->getRouteUtil()->getCompleteRoute(Partner::class, 'index'), 
-                    ['partner'    => $partner->getSlug()]
+                    $this->getRouteUtil()->getCompleteRoute(Abonne::class, 'index'), 
+                    ['abonne'    => $abonne->getSlug()]
                 );
             }
             
-            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($partner, $request, $response));
+            $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($abonne, $request, $response));
             
             return $response;
         }
         
-        return $this->render(self::BASE_VIEW_FOLDER . 'update.html.twig', array(
+        return $this->render( self::BASE_VIEW_FOLDER . 'update.html.twig', array(
             'form'  => $form->createView(),
-            'partner'  => $partner
+            'abonne'  => $abonne
         ));
     }
 }

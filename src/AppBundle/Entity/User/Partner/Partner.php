@@ -69,7 +69,22 @@ class Partner extends BaseUser implements AdminEntityInterface
         $this->addRole(self::ROLE_PARTNER);        
         $this->compagnies = new ArrayCollection();
     }
+    
+    public function isAdmin()
+    {
+        return false;
+    }
 
+    public function isPartner()
+    {
+        return true;
+    }
+    
+    public function isAbonne()
+    {
+        return false;
+    }
+    
     /**
      * Set phoneMobile
      *

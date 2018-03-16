@@ -217,6 +217,9 @@ menu:
     update: 'Modifier'
     login: 'Connexion'
     register: 'Inscription'
+    abonne:
+        abonne: 'Compte'
+        parameters: 'Paramètres'
     partner:
         partner: Partner
         compagny_offres: 'Entreprises & offres'

@@ -121,7 +121,7 @@ services:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: frontMain }
             - { name: knp_menu.menu_builder, method: createProfileMenu, alias: profileMenu }
             - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logoutMenu }
-            - { name: knp_menu.menu_builder, method: createPartnerMenu, alias: partnerMenu }
+            - { name: knp_menu.menu_builder, method: createUserAccountMenu, alias: userAccountMenu }
             
     app.admin_menu_builder:
         class: AppBundle\Menu\AdminMenuBuilder

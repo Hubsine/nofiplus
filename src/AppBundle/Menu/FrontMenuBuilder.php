@@ -4,6 +4,7 @@ namespace AppBundle\Menu;
 
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\User\Partner\Partner;
+use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Entity\User\Partner\Compagny;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Exception\BadInstanceException;
@@ -79,15 +80,27 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         return $menu;
     }
     
+    public function createUserAccountMenu(array $options)
+    {
+        $partner    = $this->request->attributes->get('partner');
+        $abonne     = $this->request->attributes->get('abonne');
+        
+        if( ! $partner instanceof Partner && ! $abonne instanceof Abonne)
+        {
+            throw new BadInstanceException($partner, Partner::class);
+        }
+        
+        return $menu = $partner instanceof Partner ? $this->createPartnerMenu($options, $partner) : $this->createAbonneMenu($options, $abonne);
+    }
+    
     /**
      * Create Partner Menu
      * 
      * @param array $options
      * @return \Knp\Menu\ItemInterface
      */
-    public function createPartnerMenu(array $options)
+    private function createPartnerMenu(array $options, $partner)
     {
-        $partner = $this->request->attributes->get('partner');
         $_route     = $this->request->attributes->get('_route');
         
         if ( ! $partner instanceof Partner )
@@ -165,6 +178,62 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         
             
         #$this->addActiveClassOnLink($item, $options, ['bg-white']);
+        
+        return $menu;
+    }
+    
+    /**
+     * Create Partner Menu
+     * 
+     * @param array $options
+     * @return \Knp\Menu\ItemInterface
+     */
+    private function createAbonneMenu(array $options, $abonne)
+    {
+        $_route     = $this->request->attributes->get('_route');
+        
+        if ( ! $abonne instanceof Abonne )
+        {
+            throw new BadInstanceException($abonne, Abonne::class);
+        }
+        
+        $menu = $this->factory->createItem('menu.abonne.abonne', [
+                'route' => 'home'
+            ])
+            ->setChildrenAttribute('class', 'nav');
+
+        ###
+        # Abonne
+        ###
+        $abonneItem = $menu->addChild('Abonne', [
+            'route' => $this->routeUtil->getCompleteRoute(Abonne::class, 'index'),
+            'routeParameters'   => ['abonne' => $abonne->getSlug()]
+        ])
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Abonne::class, 'index'))
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
+        
+        $abonneItem->addChild('abonne', [
+            'route' => $this->routeUtil->getCompleteRoute(Abonne::class, 'update'),
+            'routeParameters'   => ['abonne' => $abonne->getSlug()]
+        ])
+            ->setDisplay(false);
+        
+        if(in_array($_route, [$this->routeUtil->getCompleteRoute(Abonne::class, 'update')]))
+        {
+            $abonneItem->setCurrent(true);
+        }
+        
+        ###
+        # Parameters 
+        ###
+        $menu->addChild('menu.abonne.parameters', [
+            'route' => $this->routeUtil->getCompleteRoute(Abonne::class, 'edit_parameters'),
+            'routeParameters'   => ['abonne'  => $abonne->getSlug()]
+        ])
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Abonne::class, 'edit_parameters'))
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
         
         return $menu;
     }

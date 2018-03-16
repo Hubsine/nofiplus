@@ -34,4 +34,19 @@ class Abonne extends BaseUser implements AdminEntityInterface
     {
         parent::__construct();
     }
+    
+    public function isAdmin()
+    {
+        return false;
+    }
+    
+    public function isPartner()
+    {
+        return false;
+    }
+    
+    public function isAbonne()
+    {
+        return true;
+    }
 }

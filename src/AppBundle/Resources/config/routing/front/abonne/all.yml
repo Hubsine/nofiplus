@@ -1,0 +1,4 @@
+# front/offre/all
+abonne:
+    resource: "@AppBundle/Resources/config/routing/front/abonne/abonne.yml"
+    

@@ -1,0 +1,19 @@
+user_abonne_index:
+    path: /{abonne}
+    defaults: { _controller: AppBundle:Front\Abonne\Abonne:show }
+    methods: [GET]
+
+user_abonne_show:
+    path: /{abonne}
+    defaults: { _controller: AppBundle:Front\Abonne\Abonne:show }
+    methods: [GET]
+
+user_abonne_update:
+    path: /{abonne}/update
+    defaults: { _controller: AppBundle:Front\Abonne\Abonne:update }
+    methods: [GET,POST]
+    
+user_abonne_edit_parameters:
+    path: /{abonne}/parameters
+    defaults: { _controller: AppBundle:Front\Abonne\Parameters:update }
+    methods: [GET,POST]    

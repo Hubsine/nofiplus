@@ -63,6 +63,12 @@ abstract class User extends BaseUser
      */
     protected $enabledByAdmin;
 
+    abstract public function isAdmin();
+    
+    abstract public function isPartner();
+    
+    abstract public function isAbonne();
+    
     /**
      * {@inheritdoc}
      */
