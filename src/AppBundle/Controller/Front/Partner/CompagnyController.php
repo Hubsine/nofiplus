@@ -27,7 +27,7 @@ class CompagnyController extends Controller
         // replace this example code with whatever you need
         return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
             'partner'       => $partner,
-            'compagnies'    => $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner)
+            'compagnies'    => $partner->getCompagnies()
         ]);
     }
     

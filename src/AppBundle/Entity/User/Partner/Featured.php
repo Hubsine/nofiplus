@@ -14,7 +14,7 @@ use AppBundle\Entity\Media\MediaInterface;
 /**
  * Featured
  *
- * @ORM\Table(name="np_user_partner_featured")
+ * @ORM\Table(name="np_user_partner_offre_featured")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\FeaturedRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)

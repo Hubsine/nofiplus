@@ -25,7 +25,7 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('partner', $partner);
         
         $this->joinWithLogo($qb);
-        $this->joinWithAddress($qb);
+        $this->joinWithAddress($qb, 'e');
         $this->joinWithCategory($qb);
         
         return $qb->getQuery()->getResult();
@@ -38,7 +38,7 @@ class CompagnyRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('partner', $partner);
         
         $this->joinWithLogo($qb);
-        $this->joinWithAddress($qb);
+        $this->joinWithAddress($qb, 'e');
         $this->joinWithCategory($qb);
         $this->joinWithOffres($qb);
         

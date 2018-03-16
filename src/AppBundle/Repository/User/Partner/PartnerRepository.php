@@ -22,7 +22,11 @@ class PartnerRepository extends UserRepository
                 ->where('e.slug = :slug')
                 ->setParameter('slug', $slug);
         
-        $this->joinWithAddress($qb);
+        $this->joinWithAddress($qb, 'e');
+        $this->joinWithCompagnies($qb);
+        $this->joinWithCompagnyOffres($qb, 'compagny');
+        $this->joinWithCompagnyLogo($qb, 'compagny');
+        $this->joinWithAddress($qb, 'compagny');
         
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -34,7 +38,7 @@ class PartnerRepository extends UserRepository
                 ->setParameter('slug', $slug);
         
         $this->joinWithCompagnies($qb);
-        $this->joinWithCompagnyLogo($qb);
+        $this->joinWithCompagnyLogo($qb, 'compagny');
         $this->joinWithAddress($qb, 'compagny');
         
         return $qb->getQuery()->getOneOrNullResult();
@@ -53,11 +57,23 @@ class PartnerRepository extends UserRepository
         return $qb;
     }
     
-    public function joinWithCompagnyLogo(QueryBuilder $qb)
+    public function joinWithCompagnyLogo(QueryBuilder $qb, $alias)
     {
         $qb
-            ->leftJoin('compagny.logo', 'logo')
+            ->leftJoin($alias . '.logo', 'logo')
             ->addSelect('logo');
+        
+        return $qb;
+    }
+    
+    public function joinWithCompagnyOffres(QueryBuilder $qb, $alias)
+    {
+        $qb
+            ->leftJoin($alias . '.offres', 'offre')
+            ->addSelect('offre')
+            ->leftJoin('offre.featured', 'featured')
+            ->addSelect('featured')
+            ;
         
         return $qb;
     }

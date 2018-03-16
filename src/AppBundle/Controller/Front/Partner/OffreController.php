@@ -19,13 +19,14 @@ class OffreController extends Controller
      * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
-     * @param string $compagny slug
+     * @param string $compagny is slug, not Compagny object
      * @return Response
      */
     public function newAction(Request $request, Partner $partner, $compagny)
     {
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
         $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
+        $request->attributes->set('compagny', $compagny);
         
         $form       = $this->createForm( OffreType::class, $offre = new Offre() );
         
@@ -55,6 +56,7 @@ class OffreController extends Controller
             'partner'  => $partner, 
             'form'  => $form->createView(),
             #'currentOffre'   => $offre,
+            'currentCompagny'   => $compagny,
             'compagnies'    => $compagnies
         ]);
     }
@@ -72,6 +74,9 @@ class OffreController extends Controller
     {
         $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
         $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
+        
+        $request->attributes->set('compagny', $compagny);
+        
         $offre      = self::getFilterOffres($compagny->getOffres()->getValues(), $slug);
         
         $request->attributes->set('compagny', $compagny);
@@ -100,6 +105,7 @@ class OffreController extends Controller
             'partner'  => $partner, 
             'form'  => $form->createView(),
             #'currentOffre'   => $offre,
+            'currentCompagny'   => $compagny,
             'compagnies'    => $compagnies
         ]);
     }
