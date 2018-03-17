@@ -6,13 +6,12 @@ use AppBundle\Entity\User\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as DoctrineArrayCollectionInterface;
-use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+use Doctrine\Common\Collections\Collection;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 use AppBundle\Entity\User\UserTrait;
+use AppBundle\Entity\Payment\CarteOrder;
 
 /**
  * 
@@ -29,10 +28,21 @@ class Abonne extends BaseUser implements AdminEntityInterface
     
     use UserTrait;
     use EntityRoutePrefixTrait;
-    
+
+    /**
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\CarteOrder", mappedBy="user", cascade={"all"})
+     * 
+     * @Assert\Type(type="Collection", message="assert.type")
+     */
+    private $orderCartes;
+
     public function __construct()
     {
         parent::__construct();
+        
+        $this->orderCartes  = new ArrayCollection();
     }
     
     public function isAdmin()
@@ -48,5 +58,39 @@ class Abonne extends BaseUser implements AdminEntityInterface
     public function isAbonne()
     {
         return true;
+    }
+
+    /**
+     * Add orderCarte
+     *
+     * @param \AppBundle\Entity\User\Abonne\CarteOrder $orderCarte
+     *
+     * @return Abonne
+     */
+    public function addOrderCarte(\AppBundle\Entity\User\Abonne\CarteOrder $orderCarte)
+    {
+        $this->orderCartes[] = $orderCarte;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderCarte
+     *
+     * @param \AppBundle\Entity\User\Abonne\CarteOrder $orderCarte
+     */
+    public function removeOrderCarte(\AppBundle\Entity\User\Abonne\CarteOrder $orderCarte)
+    {
+        $this->orderCartes->removeElement($orderCarte);
+    }
+
+    /**
+     * Get orderCartes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderCartes()
+    {
+        return $this->orderCartes;
     }
 }
