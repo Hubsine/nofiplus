@@ -81,7 +81,7 @@ abstract class Controller extends BaseController
     /**
      * Get Route Util
      * 
-     * @return \App\Util\RouteUtil
+     * @return AppBundle\Util\RouteUtil
      */
     protected function getRouteUtil()
     {
@@ -89,12 +89,26 @@ abstract class Controller extends BaseController
     }
     
     /**
+     * Get complete route 
+     * 
+     * @uses AppBundle\Util\RouteUtil::getCompleteRoute
+     * 
+     * @param string $className
+     * @param string $prefix
+     * @return string 
+     */
+    protected function getCompleteRoute($className, $prefix)
+    {
+        return $this->getRouteUtil()->getCompleteRoute($className, $prefix);
+    }
+
+    /**
      * Check if token provided in url for delete an entity is valid
      * 
      * @param string $tokenName
      * @throws TokenNotFoundException
      */
-    public function checkDeleteToken($tokenName = 'token')
+    protected function checkDeleteToken($tokenName = 'token')
     {
         $submittedToken = $this->get('request_stack')->getCurrentRequest()->query->get($tokenName);
         
