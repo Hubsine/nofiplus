@@ -75,6 +75,12 @@ doctrine:
             softdeleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
+        mappings:
+            JMSPaymentCoreBundle:
+                type: xml
+                dir: '%kernel.project_dir%/app/Resources/config/JMSPaymentCoreBundle'
+                prefix: JMS\Payment\CoreBundle\Entity
+                alias: JMSPaymentCoreBundle
         
 
 # Stof Doctrine Extension
@@ -183,3 +189,9 @@ easy_admin:
 jms_payment_core:
     encryption:
         secret: def0000020e6cf28cb2ad80a5aecbb490577490f5e051bee7a99f43ceb2ab441cca2d617106471bfa5475101232ed8d4699ad1fc4229504328d07ff3f151e39b190e8992
+        
+# JMS Payment PayPal Plugin        
+jms_payment_paypal:
+    username: groupnofi_api1.gmail.com 
+    password: M8FUMX2485R8TNJP
+    signature: AoNB-1eMvfdupacZeervP-FX318PA4Syes8u81IJF2RqiLFU.AvlFrqy

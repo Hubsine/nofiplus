@@ -29,6 +29,7 @@
         "friendsofsymfony/user-bundle": "^2.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/payment-core-bundle": "^1.3",
+        "jms/payment-paypal-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.2",
         "knplabs/knp-paginator-bundle": "^2.7",
         "misd/phone-number-bundle": "^1.3",

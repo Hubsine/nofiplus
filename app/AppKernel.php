@@ -9,24 +9,41 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
+            ###
+            # Symfony
+            ###
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             new Symfony\Bundle\AclBundle\AclBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            ###
+            # Doctrine
+            ###
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            ### 
+            # FOS
+            ###
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+            ###
+            # KNP
+            ###
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
-            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            ###
+            #JMS
+            ###
             new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
+            new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
+            ###
+            # Others
+            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+            new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(), #no used, to remove
+            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new AppBundle\AppBundle(),
         ];

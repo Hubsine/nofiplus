@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a20e1ff7524ef113df388ccc5166047",
+    "content-hash": "cddc35640095d940fd9c0436821e2a5b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1721,6 +1721,59 @@
                 "payment"
             ],
             "time": "2017-01-22T17:49:09+00:00"
+        },
+        {
+            "name": "jms/payment-paypal-bundle",
+            "version": "1.1.2",
+            "target-dir": "JMS/Payment/PaypalBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/JMSPaymentPaypalBundle.git",
+                "reference": "8986862ac94ddfbbbb47473a7bb8f96ad14f595c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/JMSPaymentPaypalBundle/zipball/8986862ac94ddfbbbb47473a7bb8f96ad14f595c",
+                "reference": "8986862ac94ddfbbbb47473a7bb8f96ad14f595c",
+                "shasum": ""
+            },
+            "require": {
+                "jms/payment-core-bundle": "~1.0",
+                "php": ">=5.3.2",
+                "symfony/browser-kit": "~2.0|~3.0",
+                "symfony/config": "~2.0|~3.0",
+                "symfony/dependency-injection": "~2.0|~3.0",
+                "symfony/form": "~2.0|~3.0",
+                "symfony/http-foundation": "~2.0|~3.0",
+                "symfony/http-kernel": "~2.0|~3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8|~5.4",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "JMS\\Payment\\PaypalBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Payment Bundle providing access to the PayPal API",
+            "homepage": "http://jmsyst.com/bundles/JMSPaymentPaypalBundle",
+            "keywords": [
+                "payment",
+                "paypal"
+            ],
+            "time": "2017-04-09T12:34:22+00:00"
         },
         {
             "name": "knplabs/knp-components",
