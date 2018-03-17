@@ -2,11 +2,11 @@
 
 namespace AppBundle\Controller\Admin\Category;
 
-use AppBundle\Controller\Admin\Controller;
+use AppBundle\Controller\Admin\AbstractAdminController;
 use AppBundle\Entity\Admin\Category\Offre;
 use AppBundle\Form\Type\Admin\Category\OffreType;
 
-class OffreController extends Controller
+class OffreController extends AbstractAdminController
 {
     const BASE_ROUTE    = Offre::ROUTE_PREFIX . '_index';
     const ENTITY        = Offre::class;
