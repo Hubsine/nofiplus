@@ -178,3 +178,8 @@ easy_admin:
         CategoryOffre:
             class: AppBundle\Entity\Admin\Category\Offre
             label: Offre
+            
+# JMS Payment Core Bundle            
+jms_payment_core:
+    encryption:
+        secret: def0000020e6cf28cb2ad80a5aecbb490577490f5e051bee7a99f43ceb2ab441cca2d617106471bfa5475101232ed8d4699ad1fc4229504328d07ff3f151e39b190e8992
