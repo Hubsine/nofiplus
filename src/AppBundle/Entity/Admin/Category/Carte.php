@@ -40,6 +40,16 @@ class Carte implements AdminEntityInterface
      * @Assert\Type(type="integer", message="assert.type")
      */
     private $price;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="decimal", precision=10, scale=2)
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Type(type="float", message="assert.type")
+     */
+    private $amount;
 
     /**
      * Get id
@@ -73,5 +83,29 @@ class Carte implements AdminEntityInterface
     public function getPrice()
     {
         return $this->price;
+    }
+    
+    /**
+     * Set amount
+     *
+     * @param string $amount
+     *
+     * @return CarteOrder
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = (float) $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->amount;
     }
 }
