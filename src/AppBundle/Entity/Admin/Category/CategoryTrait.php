@@ -30,6 +30,14 @@ trait CategoryTrait
      */
     private $about;
     
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="slug")
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
+    
     public function getName()
     {
         return $this->name;
@@ -64,5 +72,29 @@ trait CategoryTrait
     public function getAbout()
     {
         return $this->about;
+    }
+    
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return User
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
