@@ -49,7 +49,7 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     /**
      * @var float
      *
-     * @ORM\Column(name="amount", type="decimal", precision=10, scale=5)
+     * @ORM\Column(name="amount", type="decimal", precision=10, scale=2)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="float", message="assert.type")
