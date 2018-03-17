@@ -21,4 +21,4 @@ partner:
     
 abonne:
     resource: "@AppBundle/Resources/config/routing/front/abonne/all.yml"
-    prefix: /abonne
+    prefix: /abonnes
