@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait AddressTrait 
 {
     /**
-     * @var string
+     * @var \AppBundle\Entity\Address
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Address", cascade={"persist", "remove"})
      * 
