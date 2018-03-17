@@ -13,11 +13,10 @@ use AppBundle\Entity\Media\MediaInterface;
 /**
  * Description of Avatar
  *
- * @ORM\Table(name="np_user_abonne_avatar")
- * @ORM\Entity(repositoryClass="\AppBundle\Repository\User\Abonne\AvatarRepository")
+ * ORM\Table(name="np_user_abonne_avatar")
+ * ORM\Entity(repositoryClass="\AppBundle\Repository\User\Abonne\AvatarRepository")
  * 
- * Gedmo\Uploadable(pathMethod="getPath", callback="afterFileMove", filenameGenerator="SHA1", allowOverwrite=true, appendNumber=true)
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * 
  * @author Hubsine <contact@hubsine.com>
  */
