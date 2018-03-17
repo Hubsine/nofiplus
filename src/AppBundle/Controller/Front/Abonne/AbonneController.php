@@ -86,7 +86,7 @@ class AbonneController extends Controller
         
         return $this->render( self::BASE_VIEW_FOLDER . 'update.html.twig', array(
             'form'  => $form->createView(),
-            'abonne'  => $abonne
+            'user'  => $abonne
         ));
     }
 }
