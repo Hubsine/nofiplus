@@ -135,3 +135,18 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: adminMain }
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: adminSidebar }
+            
+    ###
+    # Form
+    ###
+    app.form.type.order_carte:
+        class: AppBundle\Form\Type\Payment\OrderCarteType
+        arguments:
+            - '@payment.plugin_controller.entity'
+            - 
+                paypal_express_checkout: JMS\Payment\PaypalBundle\Form\ExpressCheckoutType
+    
+    ###
+    # Alias
+    ###
+    JMS\Payment\CoreBundle\PluginController\PluginControllerInterface: '@payment.plugin_controller.entity'

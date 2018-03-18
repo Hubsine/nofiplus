@@ -1,10 +1,141 @@
 {% extends "@Front/Payment/OrderCarte/index.html.twig" %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block content %}
-    Total price: € {{ orderCarte.amount }}
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Pay € {{ orderCarte.amount }}" />
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ 'form.order.order' | trans }}</h5>
+                    {# Gender, first name and last name #}
+                    <div class="form-row mb-2">
+                        <div class="form-group col-md-4">
+                            {{ form_label(form.user.gender) }}
+                            {{ form_widget(form.user.gender) }}
+                            {{ form_errors(form.user.gender) }}
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            {{ form_label(form.user.firstName) }}
+                            {{ form_widget(form.user.firstName) }}
+                            {{ form_errors(form.user.firstName) }}
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            {{ form_label(form.user.lastName) }}
+                            {{ form_widget(form.user.lastName) }}
+                            {{ form_errors(form.user.lastName) }}
+                        </div>
+
+                    </div>
+
+                    {# Birthday #}
+                    <div class="form-row alert-success mb-2 p-2">
+                        {#{ dump(form.user.birthday.vars.errors) }#}
+                        <div class="form-group w-100">
+                            {{ form_label(form.user.birthday) }}
+                            {{ form_widget(form.user.birthday) }}
+                            {{ form_errors(form.user.birthday) }}
+                        </div>
+                    </div>
+
+                    {# Address de livraison #}
+                    <div class="form-row mb-2">
+
+                        {{ form_label(form.user.address, 'form.order.address.shipping') }}
+                        <div class="form-group col-6">
+                            {{ form_label(form.user.address.address) }}
+                            {{ form_widget(form.user.address.address) }}
+                            {{ form_errors(form.user.address.address) }}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.user.address.country) }}
+                            {{ form_widget(form.user.address.country) }}
+                            {{ form_errors(form.user.address.country) }}
+                        </div>
+                        <div class="form-group col">
+                            {{ form_label(form.user.address.zipCode) }}
+                            {{ form_widget(form.user.address.zipCode) }}
+                            {{ form_errors(form.user.address.zipCode) }}
+                        </div>
+                        <div class="form-group col">
+                            {{ form_label(form.user.address.city) }}
+                            {{ form_widget(form.user.address.city) }}
+                            {{ form_errors(form.user.address.city) }}
+                        </div>
+                    </div>   
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            {{ form_label(form.shipping_as_billing_address) }}
+                            {{ form_widget(form.shipping_as_billing_address, {'attr': {'class': 'shipping_as_billing_address'} }) }}
+                            {{ form_errors(form.shipping_as_billing_address) }}
+                        </div>
+                    </div>
+
+                    <div id="billingAddress" class="form-row mb-2">
+                        {{ form_label(form.address, 'form.order.address.billing') }}
+                        <div class="form-group col-6">
+                            {{ form_label(form.address.address) }}
+                            {{ form_widget(form.address.address) }}
+                            {{ form_errors(form.address.address) }}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.address.country) }}
+                            {{ form_widget(form.address.country) }}
+                            {{ form_errors(form.address.country) }}
+                        </div>
+                        <div class="form-group col">
+                            {{ form_label(form.address.zipCode) }}
+                            {{ form_widget(form.address.zipCode) }}
+                            {{ form_errors(form.address.zipCode) }}
+                        </div>
+                        <div class="form-group col">
+                            {{ form_label(form.address.city) }}
+                            {{ form_widget(form.address.city) }}
+                            {{ form_errors(form.address.city) }}
+                        </div>
+                    </div>  
+
+                </div><!-- .card-body -->
+            </div><!-- .card -->
+        </div><!-- .col-sm-8 -->
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ 'form.order.product' | trans }}</h5>
+
+                    <p>
+                        {{ orderCarte.carte.name }}
+                    </p>
+
+                    {# Methode de paiement #}
+                    <div class="form-row">
+                        <div class="form-group col">
+                            {{ form_label(form.method) }}
+                            {{ form_widget(form.method) }}
+                            {{ form_errors(form.method) }}
+                        </div>
+                    </div>
+
+                    {# Total #}
+                    <h6 class="h5">{{ 'form.order.total' | trans }}</h6>
+                    <p>{{ orderCarte.amount }} €</p>
+
+                </div>
+                <input class="btn btn-primary rounded-0 rounded-bottom" type="submit" value="{{ 'form.order.buy' | trans }}" />
+            </div>
+        </div>
+    </div>
+
     {{ form_end(form) }}
 {% endblock content %}
+
+{% block footer_front_script %}
+    <script src="{{ asset('build/order.js') }}"></script>
+{% endblock footer_front_script %}

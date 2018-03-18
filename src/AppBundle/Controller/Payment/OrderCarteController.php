@@ -5,10 +5,14 @@ namespace AppBundle\Controller\Payment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
+use JMS\Payment\PaypalBundle\Form\ExpressCheckoutType;
+use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Form\Type\Payment\OrderCarteType;
+use AppBundle\Exception\InvalidObjectValuesException;
 
 /**
  * @author Hubsine <contact@hubsine.com>
@@ -38,16 +42,23 @@ class OrderCarteController extends AbstractPaymentController
             'paymentInstruction'    => null
         ]);
         
-        $carteOrder = ( ! $pendingOrderCarte instanceof OrderCarte ) ? new OrderCarte() : $pendingOrderCarte;
+        $orderCarte = ( ! $pendingOrderCarte instanceof OrderCarte ) ? new OrderCarte() : $pendingOrderCarte;
         
-        $carteOrder->setAmount($carte->getAmount());
-        $carteOrder->setCarte($carte);
-        $carteOrder->setUser($this->getUser());
+        $orderCarte->setAmount($carte->getAmount());
+        $orderCarte->setCarte($carte);
+        $orderCarte->setUser($this->getUser());
         
-        ( is_integer( $carteOrder->getId() ) ) ? $this->getDoctrineUtil()->flush() : $this->getDoctrineUtil()->persist($carteOrder);
+        $errors = $this->get('validator')->validate($orderCarte, null, ['new']);
+        
+        if( count($errors) > 0 )
+        {
+            throw new InvalidObjectValuesException( get_class( $orderCarte ) );
+        }
+    
+        ( is_integer( $orderCarte->getId() ) ) ? $this->getDoctrineUtil()->flush() : $this->getDoctrineUtil()->persist($orderCarte);
         
         return $this->redirectToRoute($this->getCompleteRoute(OrderCarte::class, 'show'), [
-            'order' => $carteOrder->getId()
+            'order' => $orderCarte->getId()
         ]);
     }
     
@@ -58,17 +69,86 @@ class OrderCarteController extends AbstractPaymentController
      * @param OrderCarte $orderCarte
      * @return Response
      */
-    public function showAction(OrderCarte $orderCarte)
+    public function showAction(Request $request, OrderCarte $orderCarte)
     {
-        
-        $form = $this->createForm(ChoosePaymentMethodType::class, null, [
+        $form = $this->createForm(OrderCarteType::class, null, [
             'amount'   => $orderCarte->getAmount(),
             'currency' => 'EUR',
+            'default_method'    => 'paypal_express_checkout',
+            'allowed_methods' => ['paypal_express_checkout'],
+            'method_options' => [
+                'paypal_express_checkout' => [
+                    'label' => false
+                ],
+            ],
+            'user'  => $this->getUser()
         ]);
+        
+        $form->handleRequest($request);
+        
+        if( $form->isSubmitted() && $form->isValid() )
+        {
+            $ppc = $this->get('payment.plugin_controller');
+            $ppc->createPaymentInstruction($instruction = $form->getData());
+
+            $orderCarte->setPaymentInstruction($instruction);
+
+            $this->getDoctrineUtil()->flush();
+
+            return $this->redirectToRoute('carte_order_payment_create', [
+                'order' => $orderCarte->getId(),
+            ]);
+        }
 
         return $this->render(self::BASE_VIEW_FOLDER . 'show.html.twig',[
             'orderCarte' => $orderCarte,
             'form'  => $form->createView(),
         ]);
     }
+    
+    /**
+     * @ParamConverter("orderCarte", options={"mapping": {"order" = "id"}})
+     * @param OrderCarte $order
+     * @return RedirectResponse
+     */
+    public function paymentCreateAction(OrderCarte $order)
+    {
+        
+        $payment    = $this->createPayment($order);
+        $result     = $this->getResult($payment);
+
+        if ($result->getStatus() === Result::STATUS_SUCCESS) 
+        {
+            return $this->redirectToRoute('carte_order_payment_complete', [
+                'order' => $order->getId(),
+            ]);
+        }
+    
+        if ($result->getStatus() === Result::STATUS_PENDING) 
+        {
+            $ex = $result->getPluginException();
+
+            if ($ex instanceof ActionRequiredException) {
+                $action = $ex->getAction();
+
+                if ($action instanceof VisitUrl) {
+                    return $this->redirect($action->getUrl());
+                }
+            }
+        }
+        
+        #$this->addFlash('danger', 'flash.payment.unknow_error');
+        
+        throw $result->getPluginException();
+
+        // In a real-world application you wouldn't throw the exception. You would,
+        // for example, redirect to the showAction with a flash message informing
+        // the user that the payment was not successful.
+    }
+
+    public function paymentCompleteAction(OrderCarte $orderCarte)
+    {
+        return $this->render('Payment complete');
+    }
+    
 }

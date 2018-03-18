@@ -11,6 +11,7 @@ Encore
         .addEntry('functions',  './assets/js/functions.js')
         .addEntry('global-js',  './assets/js/global.js')
         .addEntry('offre',      './assets/js/pages/offre.js')
+        .addEntry('order',      './assets/js/pages/order.js')
 
 //        .configureBabel(function(babelConfig) {
 //            

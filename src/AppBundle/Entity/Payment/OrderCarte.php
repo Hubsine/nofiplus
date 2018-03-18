@@ -8,9 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\AdminEntityInterface;
-use AppBundle\Entity\AddressTrait;
+use AppBundle\Entity\Payment\OrderEntityInterface;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
+use AppBundle\Entity\Payment\OrderTrait;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\User\Abonne\Abonne;
 
@@ -24,13 +25,13 @@ use AppBundle\Entity\User\Abonne\Abonne;
  * 
  * @UniqueEntity(fields={"user", "carte", "createdAt"}, message="assert.unique_entity.carte_order")
  */
-class OrderCarte implements EntityInterface, AdminEntityInterface
+class OrderCarte implements EntityInterface, OrderEntityInterface, AdminEntityInterface
 {
     const ROUTE_PREFIX  = 'carte_order';
     
     use DoctrineTrait;
     use EntityRoutePrefixTrait;
-    use AddressTrait;
+    use OrderTrait;
     
     /**
      * @var int
@@ -42,33 +43,13 @@ class OrderCarte implements EntityInterface, AdminEntityInterface
     private $id;
 
     /**
-     * @var \JMS\Payment\CoreBundle\Entity\PaymentInstruction
-     *
-     * @ORM\OneToOne(targetEntity="\JMS\Payment\CoreBundle\Entity\PaymentInstruction", cascade={"all"})
-     * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="JMS\Payment\CoreBundle\Model\PaymentInstructionInterface", message="assert.type")
-     */
-    private $paymentInstruction;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="amount", type="decimal", precision=10, scale=2)
-     * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="float", message="assert.type")
-     */
-    private $amount;
-
-    /**
      * @var Carte
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Category\Carte")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="Carte", message="assert.type")
+     * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
+     * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Carte", message="assert.type", groups={"new"})
      */
     private $carte;
     
@@ -78,21 +59,11 @@ class OrderCarte implements EntityInterface, AdminEntityInterface
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Abonne\Abonne", inversedBy="orderCartes")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="Abonne", message="assert.type")
+     * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
+     * @Assert\Type(type="\AppBundle\Entity\User\Abonne\Abonne", message="assert.type", groups={"new"})
+     * @Assert\Valid(groups={"Order"})
      */
     private $user;
-    
-    /**
-     * @var \AppBundle\Entity\Address
-     * 
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Address", cascade={"all"})
-     * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="\AppBundle\Entity\Address")
-     * @Assert\Valid()
-     */
-    private $address;
     
     /**
      * Get id
@@ -102,54 +73,6 @@ class OrderCarte implements EntityInterface, AdminEntityInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set amount
-     *
-     * @param string $amount
-     *
-     * @return CarteOrder
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = (float) $amount;
-
-        return $this;
-    }
-
-    /**
-     * Get amount
-     *
-     * @return string
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Set paymentInstruction
-     *
-     * @param \JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction
-     *
-     * @return CarteOrder
-     */
-    public function setPaymentInstruction(\JMS\Payment\CoreBundle\Entity\PaymentInstruction $paymentInstruction)
-    {
-        $this->paymentInstruction = $paymentInstruction;
-
-        return $this;
-    }
-
-    /**
-     * Get paymentInstruction
-     *
-     * @return \JMS\Payment\CoreBundle\Entity\PaymentInstruction
-     */
-    public function getPaymentInstruction()
-    {
-        return $this->paymentInstruction;
     }
 
     /**
@@ -175,7 +98,7 @@ class OrderCarte implements EntityInterface, AdminEntityInterface
     {
         return $this->carte;
     }
-
+    
     /**
      * Set user
      *

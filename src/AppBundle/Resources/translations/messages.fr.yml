@@ -111,6 +111,16 @@ layout:
         content: 'Vous êtes sur le point de supprimer un élèment de la base de données. Êtes-vous sûr de votre action ?'
     
 form:
+    infos: 'Informations'
+    order:
+        order: 'Informations de commande'
+        product: 'Produit'
+        buy: 'Acheter'
+        total: 'Total de la commande'
+        address: 
+            shipping: 'Adresse de livraison'
+            billing: 'Adresse de facturation'
+            shipping_as_billing_address: 'Utiliser mon adresse de livraison comme adresse de facturation'
     group_name: 'Nom du groupe'
     username: 'Nom d''utilisateur'
     email: 'Adresse e-mail'
@@ -192,6 +202,8 @@ form:
         end: 'Date de fin de l''offre'
         category: 'Catégory de l''offre'
         featured: 'L''image de l''offre'
+    label:
+        paypal_express_checkout: 'Paiement carte bleue PayPal'
     
 Day: 'Jour'
 Month: 'Mois'
