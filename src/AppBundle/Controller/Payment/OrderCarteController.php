@@ -7,15 +7,15 @@ use Symfony\Component\HttpFoundation\Request;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Entity\Admin\Category\Carte;
-use AppBundle\Entity\Payment\CarteOrder;
+use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
 
 /**
  * @author Hubsine <contact@hubsine.com>
  */
-class CarteOrderController extends AbstractPaymentController
+class OrderCarteController extends AbstractPaymentController
 {
-    const BASE_VIEW_FOLDER   = '@Front/Payment/CarteOrder/';
+    const BASE_VIEW_FOLDER   = '@Front/Payment/OrderCarte/';
     
     /**
      * @ParamConverter("carte", options={"mapping": {"carte": "slug"}})
@@ -32,13 +32,13 @@ class CarteOrderController extends AbstractPaymentController
             throw $this->createAccessDeniedException();
         }
         
-        $pendingCarteOrder = $this->getDoctrineUtil()->getRepository(CarteOrder::class)->findOneBy([
+        $pendingOrderCarte = $this->getDoctrineUtil()->getRepository(OrderCarte::class)->findOneBy([
             'user'  => $user->getId(),
             'carte' => $carte->getId(), 
             'paymentInstruction'    => null
         ]);
         
-        $carteOrder = ( ! $pendingCarteOrder instanceof CarteOrder ) ? new CarteOrder() : $pendingCarteOrder;
+        $carteOrder = ( ! $pendingOrderCarte instanceof OrderCarte ) ? new OrderCarte() : $pendingOrderCarte;
         
         $carteOrder->setAmount($carte->getAmount());
         $carteOrder->setCarte($carte);
@@ -46,28 +46,28 @@ class CarteOrderController extends AbstractPaymentController
         
         ( is_integer( $carteOrder->getId() ) ) ? $this->getDoctrineUtil()->flush() : $this->getDoctrineUtil()->persist($carteOrder);
         
-        return $this->redirectToRoute($this->getCompleteRoute(CarteOrder::class, 'show'), [
+        return $this->redirectToRoute($this->getCompleteRoute(OrderCarte::class, 'show'), [
             'order' => $carteOrder->getId()
         ]);
     }
     
     /**
-     * @ParamConverter("carteOrder", options={"mapping": {"order" = "id"}})
+     * @ParamConverter("orderCarte", options={"mapping": {"order" = "id"}})
      * 
      * @param Request $request
-     * @param CarteOrder $carteOrder
+     * @param OrderCarte $orderCarte
      * @return Response
      */
-    public function showAction(Request $request, CarteOrder $carteOrder)
+    public function showAction(OrderCarte $orderCarte)
     {
         
         $form = $this->createForm(ChoosePaymentMethodType::class, null, [
-            'amount'   => $carteOrder->getAmount(),
+            'amount'   => $orderCarte->getAmount(),
             'currency' => 'EUR',
         ]);
 
         return $this->render(self::BASE_VIEW_FOLDER . 'show.html.twig',[
-            'carteOrder' => $carteOrder,
+            'orderCarte' => $orderCarte,
             'form'  => $form->createView(),
         ]);
     }

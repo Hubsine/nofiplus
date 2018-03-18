@@ -1,0 +1,10 @@
+{% extends "@Front/Payment/OrderCarte/index.html.twig" %}
+
+{% block content %}
+    Total price: € {{ orderCarte.amount }}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Pay € {{ orderCarte.amount }}" />
+    {{ form_end(form) }}
+{% endblock content %}

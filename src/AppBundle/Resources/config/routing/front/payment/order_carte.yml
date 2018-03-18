@@ -1,9 +1,9 @@
 carte_order_new:
     path: /{carte}
-    defaults: { _controller: AppBundle:Payment\CarteOrder:new }
+    defaults: { _controller: AppBundle:Payment\OrderCarte:new }
     methods: [GET]    
     
 carte_order_show:
     path: /{order}/show
-    defaults: { _controller: AppBundle:Payment\CarteOrder:show }    
+    defaults: { _controller: AppBundle:Payment\OrderCarte:show }    
     methods: [GET,POST]    

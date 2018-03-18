@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 use AppBundle\Entity\User\UserTrait;
-use AppBundle\Entity\Payment\CarteOrder;
+use AppBundle\Entity\Payment\OrderCarte;
 
 /**
  * 
@@ -32,7 +32,7 @@ class Abonne extends BaseUser implements AdminEntityInterface
     /**
      * @var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\CarteOrder", mappedBy="user", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\OrderCarte", mappedBy="user", cascade={"all"})
      * 
      * @Assert\Type(type="Collection", message="assert.type")
      */
@@ -63,11 +63,11 @@ class Abonne extends BaseUser implements AdminEntityInterface
     /**
      * Add orderCarte
      *
-     * @param \AppBundle\Entity\User\Abonne\CarteOrder $orderCarte
+     * @param \AppBundle\Entity\User\Abonne\OrderCarte $orderCarte
      *
      * @return Abonne
      */
-    public function addOrderCarte(\AppBundle\Entity\User\Abonne\CarteOrder $orderCarte)
+    public function addOrderCarte(\AppBundle\Entity\User\Abonne\OrderCarte $orderCarte)
     {
         $this->orderCartes[] = $orderCarte;
 
@@ -77,9 +77,9 @@ class Abonne extends BaseUser implements AdminEntityInterface
     /**
      * Remove orderCarte
      *
-     * @param \AppBundle\Entity\User\Abonne\CarteOrder $orderCarte
+     * @param \AppBundle\Entity\User\Abonne\OrderCarte $orderCarte
      */
-    public function removeOrderCarte(\AppBundle\Entity\User\Abonne\CarteOrder $orderCarte)
+    public function removeOrderCarte(\AppBundle\Entity\User\Abonne\OrderCarte $orderCarte)
     {
         $this->orderCartes->removeElement($orderCarte);
     }

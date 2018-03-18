@@ -17,14 +17,14 @@ use AppBundle\Entity\User\Abonne\Abonne;
 /**
  * CarteOrder
  *
- * @ORM\Table(name="np_carte_order")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Payment\CarteOrderRepository")
+ * @ORM\Table(name="np_order_carte")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\Payment\OrderCarteRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * 
  * @UniqueEntity(fields={"user", "carte", "createdAt"}, message="assert.unique_entity.carte_order")
  */
-class CarteOrder implements EntityInterface, AdminEntityInterface
+class OrderCarte implements EntityInterface, AdminEntityInterface
 {
     const ROUTE_PREFIX  = 'carte_order';
     
