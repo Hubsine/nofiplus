@@ -1,0 +1,11 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content %}
+
+    {% for carte in cartes %}
+        <a href="{{ path('carte_order_new', {'carte': carte.slug}) }}" title="{{ carte.name }}">
+            {{ 'pages.carte.order' | trans }}
+        </a>
+    {% endfor %}
+    
+{% endblock content %}    

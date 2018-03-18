@@ -1,0 +1,6 @@
+###
+# Order
+###
+carte_order:
+    resource: "@AppBundle/Resources/config/routing/front/payment/carte_order.yml"
+    prefix: /carte

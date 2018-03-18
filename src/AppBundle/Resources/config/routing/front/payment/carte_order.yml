@@ -1,0 +1,9 @@
+carte_order_new:
+    path: /{carte}
+    defaults: { _controller: AppBundle:Payment\CarteOrder:new }
+    methods: [GET]    
+    
+carte_order_show:
+    path: /{order}/show
+    defaults: { _controller: AppBundle:Payment\CarteOrder:show }    
+    methods: [GET,POST]    

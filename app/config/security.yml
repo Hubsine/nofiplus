@@ -50,4 +50,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/partners/, role: ROLE_PARTNER }
+        - { path: ^/orders/carte/new, role: ROLE_USER }
+        - { path: ^/orders/carte/show, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }

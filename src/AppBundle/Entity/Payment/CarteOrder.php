@@ -5,8 +5,10 @@ namespace AppBundle\Entity\Payment;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\AdminEntityInterface;
+use AppBundle\Entity\AddressTrait;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\Admin\Category\Carte;
@@ -19,6 +21,8 @@ use AppBundle\Entity\User\Abonne\Abonne;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Payment\CarteOrderRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * 
+ * @UniqueEntity(fields={"user", "carte", "createdAt"}, message="assert.unique_entity.carte_order")
  */
 class CarteOrder implements EntityInterface, AdminEntityInterface
 {
@@ -26,6 +30,7 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     
     use DoctrineTrait;
     use EntityRoutePrefixTrait;
+    use AddressTrait;
     
     /**
      * @var int
@@ -39,7 +44,7 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     /**
      * @var \JMS\Payment\CoreBundle\Entity\PaymentInstruction
      *
-     * @ORM\OneToOne(targetEntity="\JMS\Payment\CoreBundle\Entity\PaymentInstruction")
+     * @ORM\OneToOne(targetEntity="\JMS\Payment\CoreBundle\Entity\PaymentInstruction", cascade={"all"})
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="JMS\Payment\CoreBundle\Model\PaymentInstructionInterface", message="assert.type")
@@ -59,7 +64,8 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     /**
      * @var Carte
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Admin\Category\Carte")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Admin\Category\Carte")
+     * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="Carte", message="assert.type")
@@ -70,12 +76,24 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
      * @var Abonne
      * 
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Abonne\Abonne", inversedBy="orderCartes")
+     * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="Abonne", message="assert.type")
      */
     private $user;
-
+    
+    /**
+     * @var \AppBundle\Entity\Address
+     * 
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Address", cascade={"all"})
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Type(type="\AppBundle\Entity\Address")
+     * @Assert\Valid()
+     */
+    private $address;
+    
     /**
      * Get id
      *
@@ -137,11 +155,11 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     /**
      * Set carte
      *
-     * @param \AppBundle\Entity\Payment\Carte $carte
+     * @param \AppBundle\Entity\Admin\Category\Carte $carte
      *
      * @return CarteOrder
      */
-    public function setCarte(\AppBundle\Entity\Payment\Carte $carte)
+    public function setCarte(\AppBundle\Entity\Admin\Category\Carte $carte)
     {
         $this->carte = $carte;
 
@@ -151,7 +169,7 @@ class CarteOrder implements EntityInterface, AdminEntityInterface
     /**
      * Get carte
      *
-     * @return \AppBundle\Entity\Payment\Carte
+     * @return \AppBundle\Entity\Admin\Category\Carte
      */
     public function getCarte()
     {

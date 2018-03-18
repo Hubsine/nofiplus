@@ -225,3 +225,6 @@ menu:
         compagny_offres: 'Entreprises & offres'
         parameters: 'Paramètres'
     
+pages:
+    carte:
+        order: 'Commander'

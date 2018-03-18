@@ -14,3 +14,17 @@ admin:
 ###
 front:
     resource: "@AppBundle/Resources/config/routing/front/all.yml"
+    
+###
+# Payment
+###
+payment:
+    resource: "@AppBundle/Resources/config/routing/front/payment/all.yml"
+    prefix: /orders
+    
+###
+# Pages
+###
+pages:
+    resource: "@AppBundle/Resources/config/routing/front/pages/all.yml"
+    prefix: /pages

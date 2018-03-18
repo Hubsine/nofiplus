@@ -1,0 +1,4 @@
+page_carte_index:
+    path: /
+    defaults: { _controller: AppBundle:Front\Pages\Carte:index }
+    methods: [GET]    
