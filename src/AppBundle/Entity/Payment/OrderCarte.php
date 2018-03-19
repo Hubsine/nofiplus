@@ -61,7 +61,7 @@ class OrderCarte implements EntityInterface, OrderEntityInterface, AdminEntityIn
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
      * @Assert\Type(type="\AppBundle\Entity\User\Abonne\Abonne", message="assert.type", groups={"new"})
-     * @Assert\Valid(groups={"Order"})
+     * @Assert\Valid()
      */
     private $user;
     

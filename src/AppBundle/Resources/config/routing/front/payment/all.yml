@@ -1,6 +1,14 @@
+    
+###
+# Payment
+###
+payment:
+    resource: "@AppBundle/Resources/config/routing/front/payment/payment.yml"
+    prefix: /payment
+    
 ###
 # Order
 ###
 carte_order:
     resource: "@AppBundle/Resources/config/routing/front/payment/order_carte.yml"
-    prefix: /carte
+    prefix: /orders/carte

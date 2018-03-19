@@ -19,7 +19,7 @@ trait UserTrait
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Address", cascade={"persist", "remove"})
      * 
      * @Assert\Type(type="\AppBundle\Entity\Address", groups={"Order"})
-     * @Assert\Valid(groups={"Order"})
+     * @Assert\Valid()
      */
     protected $address;
     

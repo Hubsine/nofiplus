@@ -16,11 +16,10 @@ front:
     resource: "@AppBundle/Resources/config/routing/front/all.yml"
     
 ###
-# Payment
+# Payment and Orders
 ###
 payment:
     resource: "@AppBundle/Resources/config/routing/front/payment/all.yml"
-    prefix: /orders
     
 ###
 # Pages

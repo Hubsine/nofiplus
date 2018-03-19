@@ -34,3 +34,9 @@ assert:
         dns_check: 'L''hôte n''a pas pu être résolu'
     enjoy_by:
         null: 'Vous devez renseigner au moins une façon de profiter de l''offre'
+        
+form:
+    error:
+        payment_method_required: 'Vous devez choisir une méthode de paiement'
+        invalid_payment_method: 'La méthode de paiement est invalide'
+        invalid_payment_instruction: 'Invalid payment instruction'

@@ -5,7 +5,7 @@
 {% block content %}
 
     {{ form_start(form) }}
-
+   
     <div class="row">
         <div class="col-sm-8">
             <div class="card">
@@ -14,90 +14,90 @@
                     {# Gender, first name and last name #}
                     <div class="form-row mb-2">
                         <div class="form-group col-md-4">
-                            {{ form_label(form.user.gender) }}
-                            {{ form_widget(form.user.gender) }}
-                            {{ form_errors(form.user.gender) }}
+                            {{ form_label(form.orderCarte.user.gender) }}
+                            {{ form_widget(form.orderCarte.user.gender) }}
+                            {{ form_errors(form.orderCarte.user.gender) }}
                         </div>
 
                         <div class="form-group col-md-4">
-                            {{ form_label(form.user.firstName) }}
-                            {{ form_widget(form.user.firstName) }}
-                            {{ form_errors(form.user.firstName) }}
+                            {{ form_label(form.orderCarte.user.firstName) }}
+                            {{ form_widget(form.orderCarte.user.firstName) }}
+                            {{ form_errors(form.orderCarte.user.firstName) }}
                         </div>
 
                         <div class="form-group col-md-4">
-                            {{ form_label(form.user.lastName) }}
-                            {{ form_widget(form.user.lastName) }}
-                            {{ form_errors(form.user.lastName) }}
+                            {{ form_label(form.orderCarte.user.lastName) }}
+                            {{ form_widget(form.orderCarte.user.lastName) }}
+                            {{ form_errors(form.orderCarte.user.lastName) }}
                         </div>
 
                     </div>
 
                     {# Birthday #}
                     <div class="form-row alert-success mb-2 p-2">
-                        {#{ dump(form.user.birthday.vars.errors) }#}
+                        {#{ dump(form.orderCarte.user.birthday.vars.errors) }#}
                         <div class="form-group w-100">
-                            {{ form_label(form.user.birthday) }}
-                            {{ form_widget(form.user.birthday) }}
-                            {{ form_errors(form.user.birthday) }}
+                            {{ form_label(form.orderCarte.user.birthday) }}
+                            {{ form_widget(form.orderCarte.user.birthday) }}
+                            {{ form_errors(form.orderCarte.user.birthday) }}
                         </div>
                     </div>
 
                     {# Address de livraison #}
                     <div class="form-row mb-2">
 
-                        {{ form_label(form.user.address, 'form.order.address.shipping') }}
-                        <div class="form-group col-6">
-                            {{ form_label(form.user.address.address) }}
-                            {{ form_widget(form.user.address.address) }}
-                            {{ form_errors(form.user.address.address) }}
+                        {{ form_label(form.orderCarte.user.address, 'form.order.address.shipping') }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.user.address.address) }}
+                            {{ form_widget(form.orderCarte.user.address.address) }}
+                            {{ form_errors(form.orderCarte.user.address.address) }}
                         </div>
-                        <div class="form-group col-6">
-                            {{ form_label(form.user.address.country) }}
-                            {{ form_widget(form.user.address.country) }}
-                            {{ form_errors(form.user.address.country) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.user.address.country) }}
+                            {{ form_widget(form.orderCarte.user.address.country) }}
+                            {{ form_errors(form.orderCarte.user.address.country) }}
                         </div>
-                        <div class="form-group col">
-                            {{ form_label(form.user.address.zipCode) }}
-                            {{ form_widget(form.user.address.zipCode) }}
-                            {{ form_errors(form.user.address.zipCode) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.user.address.zipCode) }}
+                            {{ form_widget(form.orderCarte.user.address.zipCode) }}
+                            {{ form_errors(form.orderCarte.user.address.zipCode) }}
                         </div>
-                        <div class="form-group col">
-                            {{ form_label(form.user.address.city) }}
-                            {{ form_widget(form.user.address.city) }}
-                            {{ form_errors(form.user.address.city) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.user.address.city) }}
+                            {{ form_widget(form.orderCarte.user.address.city) }}
+                            {{ form_errors(form.orderCarte.user.address.city) }}
                         </div>
                     </div>   
 
                     <div class="form-row">
                         <div class="form-group col">
-                            {{ form_label(form.shipping_as_billing_address) }}
-                            {{ form_widget(form.shipping_as_billing_address, {'attr': {'class': 'shipping_as_billing_address'} }) }}
-                            {{ form_errors(form.shipping_as_billing_address) }}
+                            {{ form_label(form.orderCarte.shipping_as_billing_address) }}
+                            {{ form_widget(form.orderCarte.shipping_as_billing_address, {'attr': {'class': 'shipping_as_billing_address'} }) }}
+                            {{ form_errors(form.orderCarte.shipping_as_billing_address) }}
                         </div>
                     </div>
 
                     <div id="billingAddress" class="form-row mb-2">
-                        {{ form_label(form.address, 'form.order.address.billing') }}
-                        <div class="form-group col-6">
-                            {{ form_label(form.address.address) }}
-                            {{ form_widget(form.address.address) }}
-                            {{ form_errors(form.address.address) }}
+                        {{ form_label(form.orderCarte.address, 'form.order.address.billing') }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.address.address) }}
+                            {{ form_widget(form.orderCarte.address.address) }}
+                            {{ form_errors(form.orderCarte.address.address) }}
                         </div>
-                        <div class="form-group col-6">
-                            {{ form_label(form.address.country) }}
-                            {{ form_widget(form.address.country) }}
-                            {{ form_errors(form.address.country) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.address.country) }}
+                            {{ form_widget(form.orderCarte.address.country) }}
+                            {{ form_errors(form.orderCarte.address.country) }}
                         </div>
-                        <div class="form-group col">
-                            {{ form_label(form.address.zipCode) }}
-                            {{ form_widget(form.address.zipCode) }}
-                            {{ form_errors(form.address.zipCode) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.address.zipCode) }}
+                            {{ form_widget(form.orderCarte.address.zipCode) }}
+                            {{ form_errors(form.orderCarte.address.zipCode) }}
                         </div>
-                        <div class="form-group col">
-                            {{ form_label(form.address.city) }}
-                            {{ form_widget(form.address.city) }}
-                            {{ form_errors(form.address.city) }}
+                        <div class="form-group col-md-6">
+                            {{ form_label(form.orderCarte.address.city) }}
+                            {{ form_widget(form.orderCarte.address.city) }}
+                            {{ form_errors(form.orderCarte.address.city) }}
                         </div>
                     </div>  
 

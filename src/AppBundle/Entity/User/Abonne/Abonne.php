@@ -34,7 +34,7 @@ class Abonne extends BaseUser implements AdminEntityInterface
      * 
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Payment\OrderCarte", mappedBy="user", cascade={"all"})
      * 
-     * @Assert\Type(type="Collection", message="assert.type")
+     * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      */
     private $orderCartes;
 

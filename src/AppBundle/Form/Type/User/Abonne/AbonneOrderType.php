@@ -25,7 +25,7 @@ class AbonneOrderType extends ProfileType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User\Abonne\Abonne',
-            'validation_groups' => 'Order'
+            'validation_groups' => ['Order']
         ));
     }
 

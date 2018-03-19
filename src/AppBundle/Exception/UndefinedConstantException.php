@@ -5,7 +5,7 @@ namespace AppBundle\Exception;
 use AppBundle\Exception\ExceptionTrait;
 
 /**
- * Description of BadInstanceException
+ * Description of UndefinedConstantException
  *
  * @author Hubsine <contact@hubsine.com>
  */

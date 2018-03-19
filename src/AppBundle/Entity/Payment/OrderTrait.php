@@ -40,7 +40,7 @@ trait OrderTrait
      * @Assert\Valid()
      */
     private $address;
-
+    
     /**
      * Set amount
      *

@@ -192,6 +192,7 @@ jms_payment_core:
         
 # JMS Payment PayPal Plugin        
 jms_payment_paypal:
+    debug: true
     username: groupnofi_api1.gmail.com 
     password: M8FUMX2485R8TNJP
     signature: AoNB-1eMvfdupacZeervP-FX318PA4Syes8u81IJF2RqiLFU.AvlFrqy

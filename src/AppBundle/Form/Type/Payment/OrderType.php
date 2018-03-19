@@ -6,8 +6,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use AppBundle\Form\Type\AddressType;
+use AppBundle\Entity\Address;
+use AppBundle\Entity\User\Abonne\Abonne;
 
-abstract class OrderType extends ChoosePaymentMethodType
+abstract class OrderType extends \Symfony\Component\Form\AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,7 +20,8 @@ abstract class OrderType extends ChoosePaymentMethodType
         
         $builder
             ->add('address', AddressType::class, [
-                'label' => 'form.order.address.billing'
+                'label' => 'form.order.address.billing',
+                'data_class'    => Address::class
             ]);
         
     }
@@ -30,9 +33,8 @@ abstract class OrderType extends ChoosePaymentMethodType
     {
         parent::configureOptions($resolver);
         
-        $resolver->setDefaults(array(
-            'user'  => null
-        ));
+        $resolver->setRequired('user');
+        $resolver->setAllowedTypes('user', Abonne::class);
     }
     
     /**

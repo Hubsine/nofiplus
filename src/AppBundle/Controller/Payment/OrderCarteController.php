@@ -4,13 +4,17 @@ namespace AppBundle\Controller\Payment;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use JMS\Payment\PaypalBundle\Form\ExpressCheckoutType;
+use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
+use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Entity\Payment\OrderEntityInterface;
 use AppBundle\Form\Type\Payment\OrderCarteType;
 use AppBundle\Exception\InvalidObjectValuesException;
 
@@ -19,7 +23,8 @@ use AppBundle\Exception\InvalidObjectValuesException;
  */
 class OrderCarteController extends AbstractPaymentController
 {
-    const BASE_VIEW_FOLDER   = '@Front/Payment/OrderCarte/';
+    const BASE_VIEW_FOLDER  = '@Front/Payment/OrderCarte/';
+    const COMPLETE_ROUTE    = 'carte_order_payment_complete';
     
     /**
      * @ParamConverter("carte", options={"mapping": {"carte": "slug"}})
@@ -71,17 +76,12 @@ class OrderCarteController extends AbstractPaymentController
      */
     public function showAction(Request $request, OrderCarte $orderCarte)
     {
-        $form = $this->createForm(OrderCarteType::class, null, [
-            'amount'   => $orderCarte->getAmount(),
-            'currency' => 'EUR',
-            'default_method'    => 'paypal_express_checkout',
-            'allowed_methods' => ['paypal_express_checkout'],
-            'method_options' => [
-                'paypal_express_checkout' => [
-                    'label' => false
-                ],
-            ],
-            'user'  => $this->getUser()
+        $form = $this->createPaymentMethodForm($orderCarte);
+        
+        $form->add('orderCarte', OrderCarteType::class, [
+            'user'  => $this->getUser(),
+            'constraints'  => new \Symfony\Component\Validator\Constraints\Valid(),
+            'data'  => $this->getUser()
         ]);
         
         $form->handleRequest($request);
@@ -111,7 +111,7 @@ class OrderCarteController extends AbstractPaymentController
      * @param OrderCarte $order
      * @return RedirectResponse
      */
-    public function paymentCreateAction(OrderCarte $order)
+    public function paymentCreateAction(OrderEntityInterface $order)
     {
         
         $payment    = $this->createPayment($order);
@@ -146,9 +146,9 @@ class OrderCarteController extends AbstractPaymentController
         // the user that the payment was not successful.
     }
 
-    public function paymentCompleteAction(OrderCarte $orderCarte)
-    {
-        return $this->render('Payment complete');
-    }
-    
+//    public function paymentCompleteAction(OrderEntityInterface $orderCarte)
+//    {
+//        //
+//        return $this->render('Payment complete');
+//    }
 }

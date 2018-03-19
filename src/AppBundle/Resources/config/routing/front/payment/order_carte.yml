@@ -12,6 +12,10 @@ carte_order_payment_create:
     path: /{order}/payment-create
     defaults: { _controller: AppBundle:Payment\OrderCarte:paymentCreate }    
     
-carte_order_payment_complete:
-    path: /{order}/payment-complete
-    defaults: { _controller: AppBundle:Payment\OrderCarte:paymentComplete }        
+#carte_order_payment_complete:
+#    path: /{order}/payment-complete
+#    defaults: { _controller: AppBundle:Payment\OrderCarte:paymentComplete } 
+#    
+#carte_order_payment_cancel:
+#    path: /{order}/payment-cancel
+#    defaults: { _controller: AppBundle:Payment\OrderCarte:paymentCancel }     

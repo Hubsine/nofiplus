@@ -73,7 +73,7 @@ abstract class ProfileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User\User',
-            'validation_groups' => 'Profile'
+            'validation_groups' => ['Profile']
         ));
     }
 

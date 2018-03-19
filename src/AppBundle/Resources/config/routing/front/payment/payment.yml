@@ -1,17 +1,14 @@
-carte_order_new:
-    path: /{carte}
-    defaults: { _controller: AppBundle:Payment\OrderCarte:new }
+return_payment:
+    path: /return/{order}
+    defaults: { _controller: AppBundle:Payment\Payment:returnPayment }
     methods: [GET]    
     
-carte_order_show:
-    path: /{order}/show
-    defaults: { _controller: AppBundle:Payment\OrderCarte:show }    
-    methods: [GET,POST]    
+cancel_payment:
+    path: /cancel/{order}
+    defaults: { _controller: AppBundle:Payment\Payment:cancelPayment }    
+    methods: [GET] 
     
-carte_order_payment_create:
-    path: /{order}/payment-create
-    defaults: { _controller: AppBundle:Payment\OrderCarte:paymentCreate }    
-    
-carte_order_payment_complete:
-    path: /{order}/payment-complete
-    defaults: { _controller: AppBundle:Payment\OrderCarte:paymentComplete }        
+notify_payment:
+    path: /notify/{order}
+    defaults: { _controller: AppBundle:Payment\Payment:notifyPayment }    
+    methods: [GET]     
