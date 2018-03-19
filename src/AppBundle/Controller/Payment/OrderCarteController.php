@@ -81,7 +81,6 @@ class OrderCarteController extends AbstractPaymentController
         $form->add('orderCarte', OrderCarteType::class, [
             'user'  => $this->getUser(),
             'constraints'  => new \Symfony\Component\Validator\Constraints\Valid(),
-            'data'  => $this->getUser()
         ]);
         
         $form->handleRequest($request);
@@ -107,11 +106,11 @@ class OrderCarteController extends AbstractPaymentController
     }
     
     /**
-     * @ParamConverter("orderCarte", options={"mapping": {"order" = "id"}})
+     * @ParamConverter("order", options={"mapping": {"order" = "id"}})
      * @param OrderCarte $order
      * @return RedirectResponse
      */
-    public function paymentCreateAction(OrderEntityInterface $order)
+    public function paymentCreateAction(OrderCarte $order)
     {
         
         $payment    = $this->createPayment($order);

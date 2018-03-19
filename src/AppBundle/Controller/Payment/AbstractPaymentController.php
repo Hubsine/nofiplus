@@ -93,18 +93,21 @@ abstract class AbstractPaymentController extends BaseController
             'paypal_express_checkout' => [
                 'return_url' => $this->generateUrl('return_payment', [
                     'order' => $order->getId(),
-                ]),
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'cancel_url' => $this->generateUrl('cancel_payment', [
                     'order' => $order->getId(),
-                ]),
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'notify_url' => $this->generateUrl('notify_payment', [
                     'order' => $order->getId(),
-                ]),
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'useraction'                        => 'commit',
                 'checkout_params' => [
                     'PAYMENTREQUEST_0_SHIPTONAME'       => $user->getFirstName() . ' ' . $user->getLastName(),
                     'PAYMENTREQUEST_0_EMAIL'            => $user->getEmail(),
                     'L_PAYMENTREQUEST_0_NAME0'          => $carte->getName(),
+                    'L_PAYMENTREQUEST_0_NUMBER0'        => 1,
+                    'L_PAYMENTREQUEST_0_AMT0'           => $order->getAmount(),
+                    'L_PAYMENTREQUEST_0_QTY0'           => 1,
                     'L_PAYMENTREQUEST_0_DESC0'          => $carte->getAbout(),
                     'ADDROVERRIDE'                      => 1, # Override shipping address
                     'PAYMENTREQUEST_0_SHIPTOSTREET'     => $address->getAddress(),
@@ -133,5 +136,4 @@ abstract class AbstractPaymentController extends BaseController
         return $form;
     }
     
-    abstract public function paymentCreateAction(OrderEntityInterface $order);
 }

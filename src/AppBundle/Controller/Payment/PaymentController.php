@@ -13,16 +13,14 @@ use AppBundle\Entity\Payment\OrderEntityInterface;
 class PaymentController extends AbstractPaymentController
 {
     /**
-     * @ParamConverter("order", options={"mapping": {"order" = "id"}})
-     * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function returnPaymentAction(Request $request, OrderEntityInterface $order)
+    public function returnPaymentAction(Request $request, $order)
     {
         // Here create user carte
         
-        return $this->render('Return Payment');
+        return new \Symfony\Component\HttpFoundation\Response('Return Payment');
     }
     
     /**
@@ -31,7 +29,7 @@ class PaymentController extends AbstractPaymentController
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function cancelPaymentAction(Request $request, OrderEntityInterface $order)
+    public function cancelPaymentAction(Request $request, $order)
     {
         return $this->render('Cancel Payment');
     }
@@ -42,7 +40,7 @@ class PaymentController extends AbstractPaymentController
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function notifyPaymentAction(Request $request, OrderEntityInterface $order)
+    public function notifyPaymentAction(Request $request, $order)
     {
         return $this->render('Cancel Payment');
     }

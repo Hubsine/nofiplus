@@ -27,7 +27,8 @@ class OrderCarteType extends OrderType
         $builder
             ->add('user', AbonneOrderType::class, [
                 'label' => 'form.infos',
-                'data_class'    => Abonne::class
+                'data_class'    => Abonne::class,
+                'data'  => $options['user']
             ]);
         
         $builder
