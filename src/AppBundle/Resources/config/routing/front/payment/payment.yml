@@ -1,24 +1,32 @@
 return_payment:
-    path: /return/{order}
+    path: /return/{productType}-{order}
     defaults: { _controller: AppBundle:Payment\Payment:returnPayment }
     methods: [GET]    
+    requirements:
+        productType: carte
     
 cancel_payment:
-    path: /cancel/{order}
+    path: /cancel/{productType}-{order}
     defaults: { _controller: AppBundle:Payment\Payment:cancelPayment }    
     methods: [GET] 
     
 complete_payment:
-    path: /complete/{order}
+    path: /complete/{productType}-{order}
     defaults: { _controller: AppBundle:Payment\Payment:completePayment }    
     methods: [GET]  
     
 fail_payment:
-    path: /fail/{order}
+    path: /fail/{productType}-{order}
     defaults: { _controller: AppBundle:Payment\Payment:failPayment }    
     methods: [GET]      
     
-notify_payment:
-    path: /notify/{order}
-    defaults: { _controller: AppBundle:Payment\Payment:notifyPayment }    
-    methods: [GET]     
+notify_paypal_payment:
+    path: /notify/paypal/{productType}-{order}
+    defaults: { _controller: AppBundle:Payment\Payment:notifyPayPalPayment }    
+    methods: [GET,POST]     
+    
+#nofitify_paypal_ipn_payment:
+#    path: /notify/paypal-ipn
+#    defaults: { _controller: AppBundle:Payment\Payment:notifyPayPalIpnPayment }    
+#    methods: [GET,POST]  
+#    schemes:  [https]

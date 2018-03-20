@@ -8,5 +8,5 @@ namespace AppBundle\Entity;
  */
 interface ProductEntityInterface 
 {
-    
+    const PRODUCT_TYPE_CARTE    = 'carte';
 }

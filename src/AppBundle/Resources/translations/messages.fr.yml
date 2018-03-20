@@ -93,6 +93,7 @@ resetting:
             L'équipe
 
 layout:
+    go_profile: 'Aller sur mon profil'
     logout: Déconnexion
     login: Connexion
     register: Inscription
@@ -246,5 +247,11 @@ menu:
 pages:
     carte:
         order: 'Commander'
+    payment_return: |
+        Nous accusons récéption de votre paiement. Vous pouvez suivre sa validation dans votre profile.
+        Une fois votre paiement validé vous allez recevoir votre carte Nofi+.
+        
+        Toute l'équie de NOFI Plus vous remercie.
+        
         
         

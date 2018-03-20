@@ -9,6 +9,7 @@ use JMS\Payment\CoreBundle\PluginController\Result;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use AppBundle\Controller\Controller as BaseController;
 use AppBundle\Entity\Payment\OrderEntityInterface;
+use AppBundle\Controller\Payment\PaymentController;
 use AppBundle\Exception\BadInstanceException;
 use AppBundle\Exception\UndefinedFunctionException;
 use AppBundle\Exception\InvalidTypeException;
@@ -20,6 +21,7 @@ use AppBundle\Exception\InvalidTypeException;
  */
 abstract class AbstractPaymentController extends BaseController
 {
+    
     /**
      * Check if object implement OrderEntityInterface class
      * 
@@ -73,7 +75,7 @@ abstract class AbstractPaymentController extends BaseController
      * @param OrderEntityInterface $order
      * @return FormInterface
      */
-    protected function createPaymentMethodForm(OrderEntityInterface $order)
+    protected function createPaymentMethodForm(OrderEntityInterface $order, $productType)
     {
         if( ! method_exists( $order, 'getId' ) )
         {
@@ -88,18 +90,13 @@ abstract class AbstractPaymentController extends BaseController
         $address    = $order->getUser()->getAddress();
         $user       = $order->getUser();
         $carte      = $order->getCarte();
+        $routeParams= ['productType'   => $productType, 'order' => $order->getId()];
         
         $config = [
             'paypal_express_checkout' => [
-                'return_url' => $this->generateUrl('return_payment', [
-                    'order' => $order->getId(),
-                ], UrlGeneratorInterface::ABSOLUTE_URL),
-                'cancel_url' => $this->generateUrl('cancel_payment', [
-                    'order' => $order->getId(),
-                ], UrlGeneratorInterface::ABSOLUTE_URL),
-                'notify_url' => $this->generateUrl('notify_payment', [
-                    'order' => $order->getId(),
-                ], UrlGeneratorInterface::ABSOLUTE_URL),
+                'return_url' => $this->generateUrl(PaymentController::RETURN_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
+                'cancel_url' => $this->generateUrl(PaymentController::CANCEL_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
+                'notify_url' => $this->generateUrl(PaymentController::NOTIFY_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
                 'useraction'                        => 'commit',
                 'checkout_params' => [
                     'PAYMENTREQUEST_0_SHIPTONAME'       => $user->getFirstName() . ' ' . $user->getLastName(),

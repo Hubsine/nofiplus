@@ -4,12 +4,13 @@ namespace AppBundle\Controller\Payment;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Controller\Payment\PaymentControllerInterface;
+use AppBundle\Entity\Payment\OrderEntityInterface;
+use AppBundle\Entity\ProductEntityInterface;
 use AppBundle\Controller\Payment\PaymentController;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Payment\OrderCarte;
@@ -76,7 +77,7 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
      */
     public function showAction(Request $request, OrderCarte $orderCarte)
     {
-        $form = $this->createPaymentMethodForm($orderCarte);
+        $form = $this->createPaymentMethodForm($orderCarte, ProductEntityInterface::PRODUCT_TYPE_CARTE);
         
         $form->add('orderCarte', OrderCarteType::class, [
             'user'  => $this->getUser(),
@@ -106,16 +107,19 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
     }
     
     /**
-     * @ParamConverter("order", options={"mapping": {"order" = "id"}})
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderCarte", options={"mapping": {"order" = "id"}})
      * @param OrderCarte $order
      * @return RedirectResponse
      */
-    public function paymentCreateAction(OrderCarte $order)
+    public function paymentCreateAction(OrderEntityInterface $order)
     {
         
         $payment    = $this->createPayment($order);
         $result     = $this->getResult($payment);
-        $routeParam = ['order'   => $order->getId()];
+        $routeParam = [
+            'productType'   => 'carte',
+            'order'   => $order->getId()
+        ];
 
         if ($result->getStatus() === Result::STATUS_PENDING) 
         {

@@ -6,6 +6,8 @@ use AppBundle\Exception\ExceptionTrait;
 
 /**
  * Description of InvalidObjectValuesException
+ * 
+ * Exception est utilisé lorsque l'object ne contient pas les valeurs attendus.
  *
  * @author Hubsine <contact@hubsine.com>
  */

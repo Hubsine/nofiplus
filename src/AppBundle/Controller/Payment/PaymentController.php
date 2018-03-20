@@ -3,7 +3,9 @@
 namespace AppBundle\Controller\Payment;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Entity\Payment\OrderEntityInterface;
 
@@ -21,25 +23,32 @@ class PaymentController extends AbstractPaymentController
     const NOTIFY_ROUTE      = 'notify_payment';
     
     /**
-     * Url de retour après le payment sur PayPal 
+     * Url de retour après le payment sur le site de paiement. Exemple PayPal.
+     * 
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderEntityInterface", options={"mapping": {"order" = "id"}})
      * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function returnPaymentAction(Request $request, $order)
+    public function returnPaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
-        // Here create user carte
+        $paymentStatus  = $order->getPaymentInstruction()->getState();
         
-        return $this->render(self::BASE_VIEW_FOLDER . 'return.html.twig');
+        // Here create user carte
+        return $this->render(self::BASE_VIEW_FOLDER . 'return.html.twig', [
+            'order' => $order
+        ]);
     }
     
     /**
      * Url de retour en cas d'annulation de paiement
      * 
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderEntityInterface", options={"mapping": {"order" = "id"}})
+     * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function cancelPaymentAction(Request $request, $order)
+    public function cancelPaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
         return $this->render(self::BASE_VIEW_FOLDER . 'cancel.html.twig');
     }
@@ -47,12 +56,14 @@ class PaymentController extends AbstractPaymentController
     /**
      * Echec de paiement 
      * 
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderEntityInterface", options={"mapping": {"order" = "id"}})
+     * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function failPaymentAction(Request $request, $order)
+    public function failPaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
-        return $this->render(self::BASE_VIEW_FOLDER . 'complete.html.twig');
+        return $this->render(self::BASE_VIEW_FOLDER . 'fail.html.twig');
     }
     
     /**
@@ -67,14 +78,34 @@ class PaymentController extends AbstractPaymentController
     }
     
     /**
-     * @ParamConverter("order", options={"mapping": {"order" = "id"}})
+     * 
+     * Notification function 
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderEntityInterface", options={"mapping": {"order" = "id"}})
      * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function notifyPaymentAction(Request $request, $order)
+    public function notifyPayPalPaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
-        return $this->render('Cancel Payment');
+        // IPN Data from paypal
+        $postData     = $request->request;
+        $payment        = $order->getPaymentInstruction()->getPayments();
+        
+        $paymentStatus = $postData['payment_status'];
+        
+        if( strtolower($paymentStatus) === 'complere')
+        {
+            $order->getPaymentInstruction()->setState($state);
+        }
+        return new JsonResponse('ok');
     }
     
+    /**
+     * @param Request $request
+     * @param OrderEntityInterface $order
+     */
+    public function notifyPayPalIpnPaymentAction()
+    {
+        return new \Symfony\Component\HttpFoundation\JsonResponse('OK');
+    }
 }

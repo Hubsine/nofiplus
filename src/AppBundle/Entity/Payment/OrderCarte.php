@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\AdminEntityInterface;
 use AppBundle\Entity\Payment\OrderEntityInterface;
+use AppBundle\Entity\ProductEntityInterface;
 use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\Payment\OrderTrait;

@@ -1,5 +1,8 @@
 {% extends "@Front/Payment/index.html.twig" %}
 
 {% block content %}
-    return page
+    {{ dump(order) }}
+    {{ 'pages.payment_return' | trans | raw }}
+    
+    <a href="{{ path('user_abonne_index', {'abonne': order.user.slug}) }}" title="{{ order.user.slug }}">{{ 'layout.go_profile' | trans }}</a>
 {% endblock content %}

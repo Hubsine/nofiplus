@@ -67,7 +67,7 @@ class Abonne extends BaseUser implements AdminEntityInterface
      *
      * @return Abonne
      */
-    public function addOrderCarte(\AppBundle\Entity\User\Abonne\OrderCarte $orderCarte)
+    public function addOrderCarte(\AppBundle\Entity\Payment\OrderCarte $orderCarte)
     {
         $this->orderCartes[] = $orderCarte;
 
@@ -77,9 +77,9 @@ class Abonne extends BaseUser implements AdminEntityInterface
     /**
      * Remove orderCarte
      *
-     * @param \AppBundle\Entity\User\Abonne\OrderCarte $orderCarte
+     * @param AppBundle\Entity\Payment\OrderCarte $orderCarte
      */
-    public function removeOrderCarte(\AppBundle\Entity\User\Abonne\OrderCarte $orderCarte)
+    public function removeOrderCarte(\AppBundle\Entity\Payment\OrderCarte $orderCarte)
     {
         $this->orderCartes->removeElement($orderCarte);
     }
