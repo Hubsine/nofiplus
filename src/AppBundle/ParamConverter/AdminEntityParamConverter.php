@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Prophecy\Exception\Doubler\ClassNotFoundException;
 
 /**
- * DoctrineParamConverter ne converti absolument aucune entity. La class se contente de modifier 
+ * AdminEntityParamConverter ne converti absolument aucune entity. La class se contente de modifier 
  * le ParamConverter avec le bon nom et la bonne class :
  *  - adminEntityInterface DEVIENT nomDeEntity
  *  - AppBundle:AdminEntityInterface DEVIENT AppBundle:Admin\ClassDeEntity
@@ -19,7 +19,7 @@ use Prophecy\Exception\Doubler\ClassNotFoundException;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class DoctrineParamConverter implements ParamConverterInterface
+class AdminEntityParamConverter implements ParamConverterInterface
 {
     const ADMIN_CLASS = 'AppBundle:AdminEntityInterface';
  
