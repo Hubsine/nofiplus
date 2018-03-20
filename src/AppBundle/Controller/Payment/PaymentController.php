@@ -45,5 +45,4 @@ class PaymentController extends AbstractPaymentController
         return $this->render('Cancel Payment');
     }
     
-    public function paymentCreateAction(OrderEntityInterface $order){}
 }

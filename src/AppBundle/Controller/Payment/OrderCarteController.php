@@ -4,27 +4,23 @@ namespace AppBundle\Controller\Payment;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
-use JMS\Payment\PaypalBundle\Form\ExpressCheckoutType;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
+use AppBundle\Controller\Payment\PaymentControllerInterface;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
-use AppBundle\Entity\Payment\OrderEntityInterface;
 use AppBundle\Form\Type\Payment\OrderCarteType;
 use AppBundle\Exception\InvalidObjectValuesException;
 
 /**
  * @author Hubsine <contact@hubsine.com>
  */
-class OrderCarteController extends AbstractPaymentController
+class OrderCarteController extends AbstractPaymentController implements PaymentControllerInterface
 {
     const BASE_VIEW_FOLDER  = '@Front/Payment/OrderCarte/';
-    const COMPLETE_ROUTE    = 'carte_order_payment_complete';
     
     /**
      * @ParamConverter("carte", options={"mapping": {"carte": "slug"}})
@@ -144,10 +140,4 @@ class OrderCarteController extends AbstractPaymentController
         // for example, redirect to the showAction with a flash message informing
         // the user that the payment was not successful.
     }
-
-//    public function paymentCompleteAction(OrderEntityInterface $orderCarte)
-//    {
-//        //
-//        return $this->render('Payment complete');
-//    }
 }
