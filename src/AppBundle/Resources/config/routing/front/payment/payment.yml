@@ -8,6 +8,16 @@ cancel_payment:
     defaults: { _controller: AppBundle:Payment\Payment:cancelPayment }    
     methods: [GET] 
     
+complete_payment:
+    path: /complete/{order}
+    defaults: { _controller: AppBundle:Payment\Payment:completePayment }    
+    methods: [GET]  
+    
+fail_payment:
+    path: /fail/{order}
+    defaults: { _controller: AppBundle:Payment\Payment:failPayment }    
+    methods: [GET]      
+    
 notify_payment:
     path: /notify/{order}
     defaults: { _controller: AppBundle:Payment\Payment:notifyPayment }    

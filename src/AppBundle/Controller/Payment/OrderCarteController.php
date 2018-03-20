@@ -4,16 +4,20 @@ namespace AppBundle\Controller\Payment;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Controller\Payment\PaymentControllerInterface;
+use AppBundle\Controller\Payment\PaymentController;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Form\Type\Payment\OrderCarteType;
 use AppBundle\Exception\InvalidObjectValuesException;
+
+use Symfony\Bridge\Monolog\Logger;
 
 /**
  * @author Hubsine <contact@hubsine.com>
@@ -111,14 +115,8 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
         
         $payment    = $this->createPayment($order);
         $result     = $this->getResult($payment);
+        $routeParam = ['order'   => $order->getId()];
 
-        if ($result->getStatus() === Result::STATUS_SUCCESS) 
-        {
-            return $this->redirectToRoute('carte_order_payment_complete', [
-                'order' => $order->getId(),
-            ]);
-        }
-    
         if ($result->getStatus() === Result::STATUS_PENDING) 
         {
             $ex = $result->getPluginException();
@@ -132,9 +130,17 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
             }
         }
         
-        #$this->addFlash('danger', 'flash.payment.unknow_error');
+        if ($result->getStatus() === Result::STATUS_SUCCESS) 
+        {
+            return $this->redirectToRoute(PaymentController::COMPLETE_ROUTE, $routeParam);
+        }
         
-        throw $result->getPluginException();
+        $this->addFlash('danger', 'flash.payment.unknow_error');
+        $this->get('logger')->addCritical('Payment failed', $result->getPluginException());
+        
+        return $this->redirectToRoute(PaymentController::FAIL_ROUTE, $routeParam);
+        
+        #throw $result->getPluginException();
 
         // In a real-world application you wouldn't throw the exception. You would,
         // for example, redirect to the showAction with a flash message informing

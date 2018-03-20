@@ -122,4 +122,22 @@ class OrderCarte implements EntityInterface, OrderEntityInterface, AdminEntityIn
     {
         return $this->user;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct() : ProductEntityInterface
+    {
+        return $this->carte;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setProduct(ProductEntityInterface $product)
+    {
+        $this->carte    = $product;
+        
+        return $this;
+    }
 }

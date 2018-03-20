@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Admin\Category\CategoryTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
+use AppBundle\Entity\ProductEntityInterface;
 
 /**
  * Carte
@@ -15,7 +16,7 @@ use AppBundle\Entity\AdminEntityInterface;
  * @ORM\Table(name="np_category_carte")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Admin\Category\CarteRepository")
  */
-class Carte implements AdminEntityInterface
+class Carte implements AdminEntityInterface, ProductEntityInterface
 {
     CONST ROUTE_PREFIX = 'category_carte';
             

@@ -222,6 +222,8 @@ flash:
     update_success: 'L''élèment a été mise à jour avec succès.'
     delete_success: 'L''élèment a été supprimer avec succès.'
     delete_failure: 'Une erreur inconnue s''est produite. L''élèment n''a pas pu être supprimé.'
+    payment: 
+        unknow_error: 'Une erreure inconnue nous empêche de finaliser votre commande. Ré-essayer.'
     
 menu:
     home: Accueil
