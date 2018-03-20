@@ -140,11 +140,11 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
         }
         
         $this->addFlash('danger', 'flash.payment.unknow_error');
-        $this->get('logger')->addCritical('Payment failed', $result->getPluginException());
+        #$this->get('logger')->addInfo('Payment failed', $result->getFinancialTransaction());
         
-        return $this->redirectToRoute(PaymentController::FAIL_ROUTE, $routeParam);
+        #return $this->redirectToRoute(PaymentController::FAIL_ROUTE, $routeParam);
         
-        #throw $result->getPluginException();
+        throw $result->getPluginException();
 
         // In a real-world application you wouldn't throw the exception. You would,
         // for example, redirect to the showAction with a flash message informing

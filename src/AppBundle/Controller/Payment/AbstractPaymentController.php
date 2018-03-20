@@ -96,7 +96,7 @@ abstract class AbstractPaymentController extends BaseController
             'paypal_express_checkout' => [
                 'return_url' => $this->generateUrl(PaymentController::RETURN_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
                 'cancel_url' => $this->generateUrl(PaymentController::CANCEL_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
-                'notify_url' => $this->generateUrl(PaymentController::NOTIFY_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
+                'notify_url' => $this->generateUrl(PaymentController::PAYPAL_NOTIFY_ROUTE, $routeParams, UrlGeneratorInterface::ABSOLUTE_URL),
                 'useraction'                        => 'commit',
                 'checkout_params' => [
                     'PAYMENTREQUEST_0_SHIPTONAME'       => $user->getFirstName() . ' ' . $user->getLastName(),
