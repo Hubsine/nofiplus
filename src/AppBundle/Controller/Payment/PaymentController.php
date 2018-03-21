@@ -5,7 +5,6 @@ namespace AppBundle\Controller\Payment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use JMS\Payment\CoreBundle\Entity\FinancialTransaction;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use JMS\Payment\CoreBundle\Model\PaymentInterface;
 use JMS\Payment\CoreBundle\PluginController\Result;
@@ -35,11 +34,10 @@ class PaymentController extends AbstractPaymentController
      */
     public function returnPaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
-        $paymentStatus  = $order->getPaymentInstruction()->getState();
-        
         // Here create user carte
         return $this->render(self::BASE_VIEW_FOLDER . 'return.html.twig', [
-            'order' => $order
+            'order' => $order,
+            'array' => (array) $order->getPaymentInstruction()->getPendingTransaction()
         ]);
     }
     

@@ -28,7 +28,7 @@ class OrderCarteType extends OrderType
             ->add('user', AbonneOrderType::class, [
                 'label' => 'form.infos',
                 'data_class'    => Abonne::class,
-                'data'  => $options['user']
+                #'data'  => $options['user']
             ]);
         
         $builder
@@ -44,9 +44,10 @@ class OrderCarteType extends OrderType
             function (FormEvent $event) 
             {
                 $form = $event->getForm();
-                $orderCarte = $event->getData();
+                $orderCarte = $event->getData();// Submited data
                 
                 $shippingAddress = $orderCarte['user']['address'];
+                
                 
                 if( isset( $orderCarte['shipping_as_billing_address'] ) )
                 {
@@ -55,8 +56,6 @@ class OrderCarteType extends OrderType
                     
                     $event->setData($orderCarte);
                 }
-                
-                
             }
         );
     }

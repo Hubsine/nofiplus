@@ -82,6 +82,7 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
         $form->add('orderCarte', OrderCarteType::class, [
             'user'  => $this->getUser(),
             'constraints'  => new \Symfony\Component\Validator\Constraints\Valid(),
+            'data'  => $orderCarte
         ]);
         
         $form->handleRequest($request);
@@ -92,7 +93,8 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
             $ppc->createPaymentInstruction($instruction = $form->getData());
 
             $orderCarte->setPaymentInstruction($instruction);
-
+            
+            $this->getDoctrineUtil()->persist($orderCarte);
             $this->getDoctrineUtil()->flush();
 
             return $this->redirectToRoute('carte_order_payment_create', [
@@ -140,11 +142,10 @@ class OrderCarteController extends AbstractPaymentController implements PaymentC
         }
         
         $this->addFlash('danger', 'flash.payment.unknow_error');
-        #$this->get('logger')->addInfo('Payment failed', $result->getFinancialTransaction());
         
-        #return $this->redirectToRoute(PaymentController::FAIL_ROUTE, $routeParam);
+        return $this->redirectToRoute(PaymentController::FAIL_ROUTE, $routeParam);
         
-        throw $result->getPluginException();
+        #throw $result->getPluginException();
 
         // In a real-world application you wouldn't throw the exception. You would,
         // for example, redirect to the showAction with a flash message informing
