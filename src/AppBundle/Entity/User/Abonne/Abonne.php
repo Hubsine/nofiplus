@@ -37,12 +37,22 @@ class Abonne extends BaseUser implements AdminEntityInterface
      * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      */
     private $orderCartes;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Abonne\Carte", mappedBy="user", cascade={"all"})
+     * 
+     * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
+     */
+    private $cartes;
 
     public function __construct()
     {
         parent::__construct();
         
         $this->orderCartes  = new ArrayCollection();
+        $this->cartes       = new ArrayCollection();
     }
     
     public function isAdmin()
@@ -92,5 +102,41 @@ class Abonne extends BaseUser implements AdminEntityInterface
     public function getOrderCartes()
     {
         return $this->orderCartes;
+    }
+
+    /**
+     * Add carte
+     *
+     * @param \AppBundle\Entity\User\Abonne\Carte $carte
+     *
+     * @return Abonne
+     */
+    public function addCarte(\AppBundle\Entity\User\Abonne\Carte $carte)
+    {
+        $this->cartes[] = $carte;
+        
+        $carte->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove carte
+     *
+     * @param \AppBundle\Entity\User\Abonne\Carte $carte
+     */
+    public function removeCarte(\AppBundle\Entity\User\Abonne\Carte $carte)
+    {
+        $this->cartes->removeElement($carte);
+    }
+
+    /**
+     * Get cartes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCartes()
+    {
+        return $this->cartes;
     }
 }

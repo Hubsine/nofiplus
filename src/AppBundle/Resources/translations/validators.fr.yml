@@ -14,6 +14,9 @@ assert:
         birthday: 'La date de naissance est invalide'
         greater_than_or_equal: 'Cette valeur doit être supérieur ou égal à {{ compared_value }}'
         less_than_or_equal: 'Cette valeur doit être inférieur ou égal à {{ compared_value }}'
+        equal_to: 'Cette valeur doit être égal à {{ compared_value }}'
+        less_than: 'Cette valeur doit être inférieure à {{ compared_value }}'
+        greater_than: 'Cette valeur doit être supérieur à {{ compared_value }}'
     date: 'La date est invalide'    
     phone:
         not_mobile_phone: 'Le numéro de mobile est invalide'
@@ -23,6 +26,7 @@ assert:
         social_network: 'Le réseau social existe déjà'
         how_enjoy: 'L''élèment existe déjà'
         carte_order: 'Vous avez déjà passé commande pour cette carte pour l''année en cours'
+        carte_number: 'Le numéro de carte existe déjà'
     length:
         max: 'La valeur ne peut pas dépasser {{ limit }} characters'
         min: 'La valeur doit faire plus de {{ limit }} characters'
