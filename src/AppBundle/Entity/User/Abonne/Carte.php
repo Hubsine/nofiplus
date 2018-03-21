@@ -11,6 +11,8 @@ use AppBundle\Entity\DateTrait;
 use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Entity\Admin\Category\Carte as CatCarte;
+use AppBundle\Entity\Payment\OrderEntityInterface;
+use AppBundle\Entity\Payment\OrderCarte;
 
 /**
  * Carte
@@ -19,6 +21,7 @@ use AppBundle\Entity\Admin\Category\Carte as CatCarte;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Abonne\CarteRepository")
  * 
  * @UniqueEntity(fields="number", message="assert.unique_entity.carte_number");
+ * @UniqueEntity(fields={"user", "order"}, message="assert.unique_entity.user_carte_order");
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
@@ -78,7 +81,7 @@ class Carte implements EntityInterface
      * @Assert\Date(message="assert.date")
      * @Assert\EqualTo("today UTC", message="assert.date.equal_to")
      * @Assert\LessThan(propertyPath="end", message="assert.date.less_than")
-     * @Assert\LessThan(value="-1 year", message="assert.date.less_than")
+     * @Assert\LessThan(value="+1 year", message="assert.date.less_than")
      */
     private $start;
     
@@ -90,9 +93,34 @@ class Carte implements EntityInterface
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Date(message="assert.date")
      * @Assert\GreaterThan(propertyPath="start", message="assert.date.greater_than")
-     * @Assert\GreaterThan(value="+1 year", message="assert.date.greater_than")
+     * @Assert\GreaterThan(value="-1 year", message="assert.date.greater_than")
      */
     private $end;
+
+    /**
+     * @var \AppBundle\Entity\Payment\OrderCarte
+     * 
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Payment\OrderCarte", inversedBy="abonneCarte")
+     * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Type(type="\AppBundle\Entity\Payment\OrderCarte")
+     */
+    private $order;
+
+    public function __construct(OrderEntityInterface $order = null) 
+    {
+        $this->start =  new \DateTime('today');
+        $this->end   = date_modify( new \DateTime('today'), '+1 year' );
+        
+        if( $order instanceof OrderEntityInterface)
+        {
+            $this->setOrder($order);
+            $this->number = self::createNewNumber($order->getUser());
+            $this->user   = $order->getUser();
+            $this->category = $order->getCarte();
+        }
+    }
     
     /**
      * Get id
@@ -175,5 +203,38 @@ class Carte implements EntityInterface
     public function getUser()
     {
         return $this->user;
+    }
+    
+    public static function createNewNumber(Abonne $abonne)
+    {
+        $userId = $abonne->getId();
+        $number = mt_rand(10000000, 90000000); // Get un entier de longueur 8
+        $sub = substr( $number, 0, 8 - strlen($userId) ); 
+
+        return (int) $userId .= $sub;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Payment\OrderCarte $order
+     *
+     * @return Carte
+     */
+    public function setOrder(\AppBundle\Entity\Payment\OrderCarte $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Payment\OrderCarte
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

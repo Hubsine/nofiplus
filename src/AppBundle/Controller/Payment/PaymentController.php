@@ -10,6 +10,8 @@ use JMS\Payment\CoreBundle\Model\PaymentInterface;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use AppBundle\Controller\Payment\AbstractPaymentController;
 use AppBundle\Entity\Payment\OrderEntityInterface;
+use AppBundle\Entity\Admin\Category\Carte as CatCarte;
+use AppBundle\Entity\User\Abonne\Carte;
 
 /**
  * @author Hubsine <contact@hubsine.com>
@@ -36,8 +38,7 @@ class PaymentController extends AbstractPaymentController
     {
         // Here create user carte
         return $this->render(self::BASE_VIEW_FOLDER . 'return.html.twig', [
-            'order' => $order,
-            'array' => (array) $order->getPaymentInstruction()->getPendingTransaction()
+            'order' => $order
         ]);
     }
     
@@ -70,12 +71,25 @@ class PaymentController extends AbstractPaymentController
     /**
      * Paiement réussi 
      * 
+     * @ParamConverter("order", class="AppBundle\Entity\Payment\OrderEntityInterface", options={"mapping": {"order" = "id"}})
+     * 
      * @param Request $request
      * @param OrderEntityInterface $order
      */
-    public function completePaymentAction(Request $request, $order)
+    public function completePaymentAction(Request $request, $productType, OrderEntityInterface $order)
     {
-        return $this->render(self::BASE_VIEW_FOLDER . 'complete.html.twig');
+//        $carte = new Carte($order);
+//        
+//        $errors = $this->get('validator')->validate($carte);
+//        
+//        if( count($errors) === 0 && $order->getPaymentInstruction()->get)
+//        {
+//            $this->getDoctrineUtil()->persist($carte);
+//        }
+        
+        return $this->render(self::BASE_VIEW_FOLDER . 'complete.html.twig', [
+           # 'errors'    => $errors
+        ]);
     }
     
     /**
@@ -106,9 +120,8 @@ class PaymentController extends AbstractPaymentController
         
          $instruction = $payment->getPaymentInstruction();
          
-         $this->applyTransaction($request->request->all(), $payment);
-         
-         
+         $this->applyTransaction($request->request->all(), $payment, $order);
+        
         return new JsonResponse('ok');
     }
     
@@ -123,7 +136,7 @@ class PaymentController extends AbstractPaymentController
      * @throws Exception If the transaction type is not supported
      * @throws Exception Generic error
      */
-    private function applyTransaction ($notification, PaymentInterface $payment)
+    private function applyTransaction ($notification, PaymentInterface $payment, OrderEntityInterface $order)
     {
         $ppc        = $this->get('payment.plugin_controller');
         $result     = null;
@@ -158,6 +171,14 @@ class PaymentController extends AbstractPaymentController
                 if ($payment->getState() === PaymentInterface::STATE_NEW ||
                     $payment->getState() === PaymentInterface::STATE_APPROVING) {
                     $result = $ppc->approveAndDeposit($payment->getId(), $amount);
+                }
+                
+                $carte = new Carte($order);
+                $errors = $this->get('validator')->validate($carte);
+
+                if( count($errors) === 0 )
+                {
+                    $this->getDoctrineUtil()->persist($carte);
                 }
                 break;
 //            case 'Refunded':

@@ -14,6 +14,7 @@ use AppBundle\Traits\DoctrineTrait;
 use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\Payment\OrderTrait;
 use AppBundle\Entity\Admin\Category\Carte;
+use AppBundle\Entity\User\Abonne\Carte as AbonneCarte;
 use AppBundle\Entity\User\Abonne\Abonne;
 
 /**
@@ -66,6 +67,15 @@ class OrderCarte implements EntityInterface, OrderEntityInterface, AdminEntityIn
      */
     private $user;
     
+    /**
+     * @var \AppBundle\Entity\User\Abonne\Carte
+     * 
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Abonne\Carte", mappedBy="order")
+     * 
+     * @Assert\Type(type="\AppBundle\Entity\User\Abonne\Carte", message="assert.type")
+     */
+    private $abonneCarte;
+
     /**
      * Get id
      *
@@ -140,5 +150,29 @@ class OrderCarte implements EntityInterface, OrderEntityInterface, AdminEntityIn
         $this->carte    = $product;
         
         return $this;
+    }
+
+    /**
+     * Set abonneCarte
+     *
+     * @param \AppBundle\Entity\User\Abonne\Carte $abonneCarte
+     *
+     * @return OrderCarte
+     */
+    public function setAbonneCarte(\AppBundle\Entity\User\Abonne\Carte $abonneCarte = null)
+    {
+        $this->abonneCarte = $abonneCarte;
+
+        return $this;
+    }
+
+    /**
+     * Get abonneCarte
+     *
+     * @return \AppBundle\Entity\User\Abonne\Carte
+     */
+    public function getAbonneCarte()
+    {
+        return $this->abonneCarte;
     }
 }
