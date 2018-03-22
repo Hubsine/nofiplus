@@ -122,10 +122,11 @@ services:
             - '@security.authorization_checker'
             - '@app.util.route'
         tags:
-            - { name: knp_menu.menu_builder, method: createMainMenu, alias: frontMain }
-            - { name: knp_menu.menu_builder, method: createProfileMenu, alias: profileMenu }
-            - { name: knp_menu.menu_builder, method: createLogoutMenu, alias: logoutMenu }
-            - { name: knp_menu.menu_builder, method: createUserAccountMenu, alias: userAccountMenu }
+            - { name: knp_menu.menu_builder,    method: createMainMenu,            alias: frontMain }
+            - { name: knp_menu.menu_builder,    method: createProfileMenu,         alias: profileMenu }
+            - { name: knp_menu.menu_builder,    method: createLogoutMenu,          alias: logoutMenu }
+            - { name: knp_menu.menu_builder,    method: createUserAccountMenu,     alias: userAccountMenu }
+            - { name: knp_menu.menu_builder,    method: createSidebarMenu,         alias: sidebarMenu }
             
     app.admin_menu_builder:
         class: AppBundle\Menu\AdminMenuBuilder
@@ -137,8 +138,8 @@ services:
             - '@security.authorization_checker'
             - '@app.util.route'
         tags:
-            - { name: knp_menu.menu_builder, method: createMainMenu, alias: adminMain }
-            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: adminSidebar }
+            - { name: knp_menu.menu_builder,    method: createMainMenu,        alias: adminMain }
+            - { name: knp_menu.menu_builder,    method: createSidebarMenu,     alias: adminSidebar }
             
     ###
     # Form

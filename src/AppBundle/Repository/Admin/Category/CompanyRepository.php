@@ -13,4 +13,16 @@ use AppBundle\Repository\RepositoryTrait;
 class CompanyRepository extends \Doctrine\ORM\EntityRepository
 {
     use RepositoryTrait;
+    
+    const ALIAS = 'c';
+    
+    public function findAllForHomePage()
+    {
+        $qb     = $this->createQueryBuilder(self::ALIAS);
+    }
+    
+    ###
+    # Join
+    ###
+    
 }

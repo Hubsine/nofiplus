@@ -2,6 +2,7 @@
 
 namespace AppBundle\Menu;
 
+use Doctrine\Common\Collections\Collection;
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
@@ -237,4 +238,39 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         
         return $menu;
     }
+    
+    public function createSidebarMenu(array $options)
+    {
+        $categories     = $options['categories'];
+        
+        $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center';
+        $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center';
+        
+        $menu   = $this->factory->createItem('menu.sidebar', [
+                'route' => 'home'
+            ])
+            ->setChildrenAttribute('class', 'nav flex-column');
+        
+        $menu
+            ->addChild('menu.sidebar.all', [
+                'route' => 'home'
+            ])
+            ->setAttribute('class', $navItemClass)
+            ->setLinkAttribute('class', $navLinkClass)
+            ;
+        
+        foreach ($categories as $category) 
+        {
+            $menu->addChild($category->getName(), [
+                'route' => 'home_compagny_category',
+                'routeParameters'   => ['slug'  => $category->getSlug()]
+            ])
+            ->setAttribute('class', $navItemClass)
+            ->setLinkAttribute('class', $navLinkClass)        
+            ;
+        }
+        
+        return $menu;
+    }
+    
 }

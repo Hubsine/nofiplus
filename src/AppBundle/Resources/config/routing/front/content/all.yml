@@ -1,0 +1,21 @@
+home:
+    path: /
+    defaults: { _controller: AppBundle:Front\Content\Content:index }
+    
+###
+# Category
+###
+
+## Affichage de toutes les offres d'une category
+home_compagny_category:
+    path: /category/{slug}
+    defaults: { _controller: AppBundle:Front\Content\Content:showSingleCategory }
+
+###
+# Offre
+###
+
+## Affichage d'une offre    
+offre_single:
+    path: /offres/{slug}
+    defaults: { _controller: AppBundle:Front\Content\Content:showSingleOffre }

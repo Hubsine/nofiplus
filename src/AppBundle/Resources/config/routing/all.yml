@@ -1,7 +1,3 @@
-home:
-    path: /
-    defaults: { _controller: AppBundle:Default:index }
-
 ###
 # ADMIN
 ###
@@ -14,16 +10,3 @@ admin:
 ###
 front:
     resource: "@AppBundle/Resources/config/routing/front/all.yml"
-    
-###
-# Payment and Orders
-###
-payment:
-    resource: "@AppBundle/Resources/config/routing/front/payment/all.yml"
-    
-###
-# Pages
-###
-pages:
-    resource: "@AppBundle/Resources/config/routing/front/pages/all.yml"
-    prefix: /pages

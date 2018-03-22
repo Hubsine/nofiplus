@@ -22,3 +22,23 @@ partner:
 abonne:
     resource: "@AppBundle/Resources/config/routing/front/abonne/all.yml"
     prefix: /abonnes
+    
+    
+###
+# Payment and Orders
+###
+payment:
+    resource: "@AppBundle/Resources/config/routing/front/payment/all.yml"
+    
+###
+# Pages
+###
+pages:
+    resource: "@AppBundle/Resources/config/routing/front/pages/all.yml"
+    prefix: /pages    
+    
+###
+# Content
+###
+content:
+    resource: "@AppBundle/Resources/config/routing/front/content/all.yml"

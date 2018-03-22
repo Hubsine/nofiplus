@@ -4,3 +4,4 @@
 carte_order:
     resource: "@AppBundle/Resources/config/routing/front/pages/carte/carte.yml"
     prefix: /cartes
+    

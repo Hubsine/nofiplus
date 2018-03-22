@@ -262,6 +262,8 @@ menu:
         partner: Partner
         company_offres: 'Entreprises & offres'
         parameters: 'Paramètres'
+    sidebar:
+        all: 'Toutes les catégories'
     
 pages:
     carte:

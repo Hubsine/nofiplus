@@ -1,0 +1,27 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+
+{% block page_title %}
+{% endblock page_title %}
+
+{% block content %}
+    
+    <div class="row">
+        <nav class="col-md-4 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                {% set menu = knp_menu_get('sidebarMenu', [], {'_route': app.request.attributes.get('_route'), 'categories': categories}) %}
+                {{ knp_menu_render(menu, {'currentClass': 'active bg-light'}) }}
+                {# <span class="badge badge-primary badge-pill">14</span> #}
+            </div>
+        </nav>
+
+        <main class="col-md-7 ml-sm-auto col-lg-8 pt-3 px-4">
+            {% block content_page %}
+                all offre
+            {% endblock content_page %}    
+        </main>
+    </div>
+
+{% endblock content %}    
