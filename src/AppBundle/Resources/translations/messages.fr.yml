@@ -22,7 +22,8 @@ security:
 profile:
     show:
         about: 'A propos'
-        contact: 'Contact'
+        contact: 'Adresse de livraison'
+        cartes: 'Cartes'
         username: 'Nom d''utilisateur'
         email: 'Adresse e-mail'
         birthday: 'Date de naissance'
@@ -36,6 +37,24 @@ profile:
             fixed: 'Fixe'
         address: 
             address: 'Adresse'
+        carte: 
+            number: 'Numéro de carte'
+            category: 'Type de carte'
+            validity: 'Validité de la carte'
+        products: 'Produits'
+        product_carte:
+            name: 'Nom du produit'
+            amount: 'Prix'
+            about: 'Descripton du produit'
+        order:
+            history: 'Historique de commande'
+        payment:
+            state: 
+                canceled: 'Annulé'
+                failed: 'Echoué'
+                new: 'Nouveau'
+                pending: 'En attente'
+                success: 'Réussi'
             
     edit:
         submit: 'Mettre à jour'
@@ -104,8 +123,8 @@ layout:
     address: 'Adresse'
     offre: 'Offre'
     offres: 'Offres'
-    compagny: 
-        compagny: 'Entreprise'
+    company: 
+        company: 'Entreprise'
         can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'
     delete_confirmation:
         title: 'Confirmation de suppression'
@@ -173,7 +192,7 @@ form:
     category:
         name: 
             carte: 'Nom du type de carte'
-            compagny: 'Type d''entreprise'
+            company: 'Type d''entreprise'
             offre: 'Type d''avantage'
     price: "Prix"
     how_enjoy: 
@@ -182,7 +201,7 @@ form:
         location: 'Dans un lieu physique'
         web: 'Sur internet'
         tel: 'Téléphone'
-    compagny:
+    company:
         add: 'Ajouter une entreprise'
         update: 'Mise à jour'
         name: 'Nom de l''entreprise'
@@ -241,7 +260,7 @@ menu:
         parameters: 'Paramètres'
     partner:
         partner: Partner
-        compagny_offres: 'Entreprises & offres'
+        company_offres: 'Entreprises & offres'
         parameters: 'Paramètres'
     
 pages:

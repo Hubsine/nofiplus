@@ -5,7 +5,7 @@ namespace AppBundle\Menu;
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
-use AppBundle\Entity\User\Partner\Compagny;
+use AppBundle\Entity\User\Partner\Company;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Exception\BadInstanceException;
 
@@ -136,33 +136,33 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         }
         
         ###
-        # Compagny & Offres
+        # Company & Offres
         ###
-        $compagny = $menu->addChild('menu.partner.compagny_offres', [
-            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'index'),
+        $company = $menu->addChild('menu.partner.company_offres', [
+            'route' => $this->routeUtil->getCompleteRoute(Company::class, 'index'),
             'routeParameters'   => ['partner' => $partner->getSlug()]
             ])
-            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Compagny::class, 'index'))
+            ->setExtra('_route', $this->routeUtil->getCompleteRoute(Company::class, 'index'))
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
         
-//        $compagnyNew = $compagny->addChild('compagny', [
-//            'route' => $this->routeUtil->getCompleteRoute(Compagny::class, 'new'),
+//        $companyNew = $company->addChild('company', [
+//            'route' => $this->routeUtil->getCompleteRoute(Company::class, 'new'),
 //            'routeParameters'   => ['partner'   => $partner->getSlug()]
 //            ])
 //            ->setDisplay(false);
 
         if( in_array($_route, [
-                $this->routeUtil->getCompleteRoute(Compagny::class, 'show' ),
-                $this->routeUtil->getCompleteRoute(Compagny::class, 'new' ),
-                $this->routeUtil->getCompleteRoute(Compagny::class, 'update' ),
+                $this->routeUtil->getCompleteRoute(Company::class, 'show' ),
+                $this->routeUtil->getCompleteRoute(Company::class, 'new' ),
+                $this->routeUtil->getCompleteRoute(Company::class, 'update' ),
                 $this->routeUtil->getCompleteRoute(Offre::class, 'new' ),
                 $this->routeUtil->getCompleteRoute(Offre::class, 'update' )
             ])   
         )
         {
-            #$compagnyNew->setCurrent(false);
-            $compagny->setCurrent(true);
+            #$companyNew->setCurrent(false);
+            $company->setCurrent(true);
         }
                 
         ###

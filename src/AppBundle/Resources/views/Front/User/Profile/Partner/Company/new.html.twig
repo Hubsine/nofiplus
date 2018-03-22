@@ -1,0 +1,15 @@
+{% extends "@Front/User/Profile/Partner/Company/index.html.twig" %}
+
+{% block compagnies_content %}
+
+    <h4>{{ 'form.company.add' | trans }}</h4>
+
+    {% if partner.enabledByAdmin %}
+        {% include '@Front/User/Profile/Partner/Company/form.html.twig' %}
+    {% else %}
+        <div class="alert alert-info">
+            <p>{{ 'layout.company.can_add' | trans }}</p>
+        </div>
+    {% endif %}   
+{% endblock compagnies_content %}
+

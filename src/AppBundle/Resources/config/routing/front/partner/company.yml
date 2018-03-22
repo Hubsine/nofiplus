@@ -1,0 +1,27 @@
+user_partner_company_index:
+    path: /{partner}/compagnies
+    defaults: { _controller: AppBundle:Front\Partner\Company:index }
+    methods: [GET]
+
+user_partner_company_new:
+    path: /{partner}/compagnies/new
+    defaults: { _controller: AppBundle:Front\Partner\Company:new }
+    methods: [GET,POST]
+    
+user_partner_company_show:
+    path: /{partner}/compagnies/{slug}
+    defaults: { _controller: AppBundle:Front\Partner\Company:show }
+    methods: [GET]
+
+user_partner_company_delete:
+    path: /{partner}/compagnies/{slug}/delete
+    defaults: { _controller: AppBundle:Front\Partner\Company:delete }
+    methods: [GET,POST]
+    
+    
+user_partner_company_update:
+    path: /{partner}/compagnies/{slug}/update
+    defaults: { _controller: AppBundle:Front\Partner\Company:update }
+    methods: [GET,POST]
+    
+    

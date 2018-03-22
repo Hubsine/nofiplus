@@ -12,15 +12,15 @@ use AppBundle\Entity\EntityInterface;
 use AppBundle\Entity\Media\MediaInterface;
 
 /**
- * CompagnyLogo
+ * CompanyLogo
  *
- * @ORM\Table(name="np_user_partner_compagny_logo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\CompagnyLogoRepository")
+ * @ORM\Table(name="np_user_partner_company_logo")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\CompanyLogoRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @Vich\Uploadable
  */
-class CompagnyLogo implements EntityInterface, MediaInterface
+class CompanyLogo implements EntityInterface, MediaInterface
 {
     use DoctrineTrait;
     use ImageTrait;
@@ -35,21 +35,21 @@ class CompagnyLogo implements EntityInterface, MediaInterface
     private $id;
 
     /**
-     * @var \AppBundle\Entity\User\Partner\Compagny
+     * @var \AppBundle\Entity\User\Partner\Company
      * 
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\Compagny", inversedBy="logo")
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\Company", inversedBy="logo")
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="\AppBundle\Entity\User\Partner\Compagny")
+     * @Assert\Type(type="\AppBundle\Entity\User\Partner\Company")
      */
-    private $compagny;
+    private $company;
     
     /**
      * @var \Symfony\Component\HttpFoundation\File\UploadedFile
      * 
      * @Vich\UploadableField(
-     *  mapping="compagny_logo", 
+     *  mapping="company_logo", 
      *  fileNameProperty="name", 
      *  size="size", 
      *  mimeType="mimeType", 
@@ -66,27 +66,27 @@ class CompagnyLogo implements EntityInterface, MediaInterface
     private $file;
 
     /**
-     * Set compagny
+     * Set company
      *
-     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     * @param \AppBundle\Entity\User\Partner\Company $company
      *
-     * @return CompagnyLogo
+     * @return CompanyLogo
      */
-    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    public function setCompany(\AppBundle\Entity\User\Partner\Company $company)
     {
-        $this->compagny = $compagny;
+        $this->company = $company;
 
         return $this;
     }
 
     /**
-     * Get compagny
+     * Get company
      *
-     * @return \AppBundle\Entity\User\Partner\Compagny
+     * @return \AppBundle\Entity\User\Partner\Company
      */
-    public function getCompagny()
+    public function getCompany()
     {
-        return $this->compagny;
+        return $this->company;
     }
 
     /**

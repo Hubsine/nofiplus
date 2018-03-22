@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class CompagnyLogoType extends AbstractType
+class CompanyLogoType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,7 +16,7 @@ class CompagnyLogoType extends AbstractType
     {
         $builder
             ->add('file', FileType::class, array(
-                'label' => 'form.compagny.logo',
+                'label' => 'form.company.logo',
                 'attr'  => array('class'    => 'custom-file-input'),
                 'label_attr'    => array(
                     'class' => 'custom-file-label'
@@ -31,7 +31,7 @@ class CompagnyLogoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User\Partner\CompagnyLogo'
+            'data_class' => 'AppBundle\Entity\User\Partner\CompanyLogo'
         ));
     }
 
@@ -40,7 +40,7 @@ class CompagnyLogoType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_user_partner_compagnylogo';
+        return 'appbundle_user_partner_companylogo';
     }
 
 

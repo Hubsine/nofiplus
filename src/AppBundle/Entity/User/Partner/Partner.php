@@ -55,7 +55,7 @@ class Partner extends BaseUser implements AdminEntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      * 
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Compagny", mappedBy="partner", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Company", mappedBy="partner", cascade={"persist", "remove"})
      * 
      * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      * @Assert\Valid()
@@ -134,29 +134,29 @@ class Partner extends BaseUser implements AdminEntityInterface
     }
 
     /**
-     * Add compagny
+     * Add company
      *
-     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     * @param \AppBundle\Entity\User\Partner\Company $company
      *
      * @return Partner
      */
-    public function addCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    public function addCompany(\AppBundle\Entity\User\Partner\Company $company)
     {
-        $this->compagnies[] = $compagny;
+        $this->compagnies[] = $company;
 
-        $compagny->setPartner($this);
+        $company->setPartner($this);
         
         return $this;
     }
 
     /**
-     * Remove compagny
+     * Remove company
      *
-     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     * @param \AppBundle\Entity\User\Partner\Company $company
      */
-    public function removeCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    public function removeCompany(\AppBundle\Entity\User\Partner\Company $company)
     {
-        $this->compagnies->removeElement($compagny);
+        $this->compagnies->removeElement($company);
     }
 
     /**

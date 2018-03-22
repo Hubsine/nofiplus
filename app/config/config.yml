@@ -8,7 +8,7 @@ imports:
 parameters:
     locale: fr
     web_directory: '%kernel.project_dir%/web'
-    app.media.compagny.logo: '/uploads/compagny/logos'
+    app.media.company.logo: '/uploads/company/logos'
     app.media.offre.featured: '/uploads/offres/featured'
 
 framework:
@@ -150,9 +150,9 @@ knp_paginator:
 vich_uploader:
     db_driver: orm
     mappings:
-        compagny_logo:
-            uri_prefix: '%app.media.compagny.logo%'
-            upload_destination: '%web_directory%%app.media.compagny.logo%'
+        company_logo:
+            uri_prefix: '%app.media.company.logo%'
+            upload_destination: '%web_directory%%app.media.company.logo%'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
             inject_on_load: false
             delete_on_update: true
@@ -172,14 +172,14 @@ easy_admin:
         menu:
             - { label: 'Category' }
             - { entity: 'CategoryCarte', label: 'Carte' }
-            - { entity: 'CategoryCompagny', label: 'Compagnies' }
+            - { entity: 'CategoryCompany', label: 'Compagnies' }
             - { entity: 'CategoryOffre', label: 'Offre' }
     entities:     
         CategoryCarte:
             class: AppBundle\Entity\Admin\Category\Carte
             label: Carte
-        CategoryCompagny:
-            class: AppBundle\Entity\Admin\Category\Compagny
+        CategoryCompany:
+            class: AppBundle\Entity\Admin\Category\Company
             label: Compagnies
         CategoryOffre:
             class: AppBundle\Entity\Admin\Category\Offre

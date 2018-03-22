@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Form\Type\Admin\Category\CategoryType;
 
-class CompagnyType extends CategoryType
+class CompanyType extends CategoryType
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class CompagnyType extends CategoryType
         parent::buildForm($builder, $options);
         
         $builder->add('name', TextType::class, array(
-            'label'     => 'form.category.name.compagny'
+            'label'     => 'form.category.name.company'
         ));
     }
     
@@ -27,7 +27,7 @@ class CompagnyType extends CategoryType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Admin\Category\Compagny'
+            'data_class' => 'AppBundle\Entity\Admin\Category\Company'
         ));
     }
 

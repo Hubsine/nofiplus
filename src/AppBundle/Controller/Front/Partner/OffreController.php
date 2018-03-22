@@ -8,10 +8,10 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\Exception\UnexpectedValueException;
 use AppBundle\Controller\Controller;
 use AppBundle\Entity\User\Partner\Partner;
-use AppBundle\Entity\User\Partner\Compagny;
+use AppBundle\Entity\User\Partner\Company;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Form\Type\User\Partner\OffreType;
-use AppBundle\Controller\Front\Partner\CompagnyController;
+use AppBundle\Controller\Front\Partner\CompanyController;
 
 class OffreController extends Controller
 {
@@ -19,18 +19,18 @@ class OffreController extends Controller
      * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
-     * @param string $compagny is slug, not Compagny object
+     * @param string $company is slug, not Company object
      * @return Response
      */
-    public function newAction(Request $request, Partner $partner, $compagny)
+    public function newAction(Request $request, Partner $partner, $company)
     {
-        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
-        $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
-        $request->attributes->set('compagny', $compagny);
+        $compagnies = $this->getDoctrineUtil()->getRepository(Company::class)->findAllByForIndex($partner);
+        $company   = CompanyController::getFilterCompany($compagnies, $company);
+        $request->attributes->set('company', $company);
         
         $form       = $this->createForm( OffreType::class, $offre = new Offre() );
         
-        $offre->setCompagny($compagny);
+        $offre->setCompany($company);
 
         $form->handleRequest($request);
         
@@ -46,8 +46,8 @@ class OffreController extends Controller
             $this->addFlash('success', 'flash.add_success');
             
             return $this->redirectToRoute(
-                    $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
-                    ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
+                    $this->getRouteUtil()->getCompleteRoute(Company::class, 'show'),
+                    ['partner' => $partner->getSlug(), 'slug'   => $company->getSlug()]
                 );
         }
         
@@ -56,7 +56,7 @@ class OffreController extends Controller
             'partner'  => $partner, 
             'form'  => $form->createView(),
             #'currentOffre'   => $offre,
-            'currentCompagny'   => $compagny,
+            'currentCompany'   => $company,
             'compagnies'    => $compagnies
         ]);
     }
@@ -65,21 +65,21 @@ class OffreController extends Controller
      * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
      * 
      * @param Request $request
-     * @param string $compagny slug
+     * @param string $company slug
      * @param strig $slug slug of Offre
      * @return Response
      * @throws AccessDeniedException
      */
-    public function updateAction(Request $request, Partner $partner, $compagny, $slug)
+    public function updateAction(Request $request, Partner $partner, $company, $slug)
     {
-        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
-        $compagny   = CompagnyController::getFilterCompagny($compagnies, $compagny);
+        $compagnies = $this->getDoctrineUtil()->getRepository(Company::class)->findAllByForShow($partner);
+        $company   = CompanyController::getFilterCompany($compagnies, $company);
         
-        $request->attributes->set('compagny', $compagny);
+        $request->attributes->set('company', $company);
         
-        $offre      = self::getFilterOffres($compagny->getOffres()->getValues(), $slug);
+        $offre      = self::getFilterOffres($company->getOffres()->getValues(), $slug);
         
-        $request->attributes->set('compagny', $compagny);
+        $request->attributes->set('company', $company);
         $request->attributes->set('slug', $offre);
         
         $this->isGrantedWithDeny('EDIT', $offre);
@@ -95,8 +95,8 @@ class OffreController extends Controller
             $this->addFlash('success', 'flash.update_success');
             
             return $this->redirectToRoute(
-                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
-                ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
+                $this->getRouteUtil()->getCompleteRoute(Company::class, 'show'),
+                ['partner' => $partner->getSlug(), 'slug'   => $company->getSlug()]
             );
         }
         
@@ -105,22 +105,22 @@ class OffreController extends Controller
             'partner'  => $partner, 
             'form'  => $form->createView(),
             #'currentOffre'   => $offre,
-            'currentCompagny'   => $compagny,
+            'currentCompany'   => $company,
             'compagnies'    => $compagnies
         ]);
     }
     
     /**
      * @ParamConverter("partner", options={"mapping": {"partner": "slug"}})
-     * @ParamConverter("compagny", options={"mapping": {"compagny": "slug"}})
+     * @ParamConverter("company", options={"mapping": {"company": "slug"}})
      * 
      * @param Request $request
      * @param Partner $partner
-     * @param Compagny $compagny 
+     * @param Company $company 
      * @param Offre $offre
      * @return Response
      */
-    public function deleteAction(Request $request, Partner $partner, Compagny $compagny, Offre $offre)
+    public function deleteAction(Request $request, Partner $partner, Company $company, Offre $offre)
     {
         $this->isGrantedWithDeny('DELETE', $offre);
         $this->checkDeleteToken();
@@ -130,8 +130,8 @@ class OffreController extends Controller
         $this->addFlash('success', 'flash.delete_success');
             
         return $this->redirectToRoute(
-            $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
-            ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
+            $this->getRouteUtil()->getCompleteRoute(Company::class, 'show'),
+            ['partner' => $partner->getSlug(), 'slug'   => $company->getSlug()]
         );
     }
     

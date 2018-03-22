@@ -102,5 +102,129 @@
             </div>
         </div>
 
+        {% if user.isAbonne %}
+            <div class="cartes section bg-light p-3 mt-2">
+                {# Cartes #}
+                <h3 class="sectionTitle mb-3">{{ 'profile.show.cartes' | trans }}</h3>
+
+                <div class="row">
+                    <div class="col-12">
+                        {# Cartes liste #}
+                        {% for carte in user.cartes %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>{{ carte.order.carte.name }}</label>
+                                </div>
+
+                                <div class="col-md-6">
+                                    {# numéro carte #}
+                                    <div class="row border-bottom">
+                                        <div class="col">
+                                            {{ 'profile.show.carte.number' | trans }}
+                                        </div>
+                                        <div class="col">
+                                            {{ carte.number }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-bottom">
+                                        <div class="col">
+                                            {{ 'profile.show.carte.category' | trans }}
+                                        </div>
+                                        <div class="col">
+                                            {{ carte.category.name }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row border-bottom">
+                                        <div class="col">
+                                            {{ 'profile.show.carte.validity' | trans }}
+                                        </div>
+                                        <div class="col">
+                                            {{ carte.start | date('d/m/Y') }} - {{ carte.end | date('d/m/Y') }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="orderHistory section p-3 mt-2">
+                {# Historique de commande #}
+                <h3 class="sectionTitle mb-3">{{ 'profile.show.order.history' | trans }}</h3>
+
+                {# Order liste #}
+                <div id="accordion">
+                    {% for order in user.orderCartes %}
+
+                        {% set paymentInst = order.paymentInstruction %}
+                        {% set payment     = paymentInst.payments[0] %}
+                        {% set transaction = payment.transactions[0] %}
+                        {% set product     = order.carte %}
+
+                        <div class="card mb-3">
+                            <div class="card-header" id="heading{{ loop.index }}">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                                        Commande numéro #{{ order.id }}
+                                    </button>
+                                    {{ renderPaymentState(transaction.state) | raw }}
+                                </h5>
+                            </div>
+
+                            <div id="collapse{{ loop.index }}" class="collapse {% if loop.index == 1 %}show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
+                                <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>{{ 'profile.show.products' | trans }}</label>
+                                            </div>
+
+                                            <div class="col-md-9">
+                                                
+                                                <div class="row border-bottom">
+                                                    <div class="col">
+                                                        {{ 'profile.show.product_carte.name' | trans }}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{ product.name }}
+                                                    </div>
+                                                </div>
+                                                    
+                                                <div class="row border-bottom">
+                                                    <div class="col">
+                                                        {{ 'profile.show.product_carte.amount' | trans }}
+                                                    </div>
+                                                    <div class="col">
+                                                        {{ product.amount }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="row border-bottom">
+                                                    <div class="col">
+                                                        {{ 'profile.show.product_carte.about' | trans }}
+                                                    </div>
+                                                    <div class="col">
+                                                        <p>
+                                                            {{ product.about }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                                        
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% endif %}
+
     </div>
 {% endblock content %}

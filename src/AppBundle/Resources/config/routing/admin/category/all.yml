@@ -6,6 +6,6 @@ admin_category_offre:
     resource: "@AppBundle/Resources/config/routing/admin/category/offre.yml"
     prefix: /offre
     
-admin_category_compagny:
-    resource: "@AppBundle/Resources/config/routing/admin/category/compagny.yml"
-    prefix: /compagny
+admin_category_company:
+    resource: "@AppBundle/Resources/config/routing/admin/category/company.yml"
+    prefix: /company

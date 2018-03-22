@@ -1,26 +1,26 @@
-#user_partner_compagny_offre_index:
+#user_partner_company_offre_index:
 #    path: /{partner}/compagnies
 #    defaults: { _controller: AppBundle:Front\Partner\Offre:index }
 #    methods: [GET]
 
-user_partner_compagny_offre_new:
-    path: /{partner}/compagnies/{compagny}/offre/new
+user_partner_company_offre_new:
+    path: /{partner}/compagnies/{company}/offre/new
     defaults: { _controller: AppBundle:Front\Partner\Offre:new }
     methods: [GET,POST]
     
-#user_partner_compagny_offre_show:
-#    path: /{partner}/compagnies/{compagny}/offre
+#user_partner_company_offre_show:
+#    path: /{partner}/compagnies/{company}/offre
 #    defaults: { _controller: AppBundle:Front\Partner\Offre:show }
 #    methods: [GET]
 
-user_partner_compagny_offre_delete:
-    path: /{partner}/compagnies/{compagny}/offre/{slug}/delete
+user_partner_company_offre_delete:
+    path: /{partner}/compagnies/{company}/offre/{slug}/delete
     defaults: { _controller: AppBundle:Front\Partner\Offre:delete }
     methods: [GET,POST]
     
     
-user_partner_compagny_offre_update:
-    path: /{partner}/compagnies/{compagny}/offre/{slug}/update
+user_partner_company_offre_update:
+    path: /{partner}/compagnies/{company}/offre/{slug}/update
     defaults: { _controller: AppBundle:Front\Partner\Offre:update }
     methods: [GET,POST]
     

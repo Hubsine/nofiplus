@@ -8,10 +8,10 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\Exception\UnexpectedValueException;
 use AppBundle\Controller\Controller;
 use AppBundle\Entity\User\Partner\Partner;
-use AppBundle\Entity\User\Partner\Compagny;
-use AppBundle\Form\Type\User\Partner\CompagnyType;
+use AppBundle\Entity\User\Partner\Company;
+use AppBundle\Form\Type\User\Partner\CompanyType;
 
-class CompagnyController extends Controller
+class CompanyController extends Controller
 {
     /**
      * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForIndex"})
@@ -25,7 +25,7 @@ class CompagnyController extends Controller
         $this->isGrantedWithDeny('VIEW', $partner);
         
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Compagny/index.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Company/index.html.twig', [
             'partner'       => $partner,
             'compagnies'    => $partner->getCompagnies()
         ]);
@@ -39,17 +39,17 @@ class CompagnyController extends Controller
      */
     public function showAction(Request $request, Partner $partner, $slug)
     {
-        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForShow($partner);
-        $compagny   = self::getFilterCompagny($compagnies, $slug);
+        $compagnies = $this->getDoctrineUtil()->getRepository(Company::class)->findAllByForShow($partner);
+        $company   = self::getFilterCompany($compagnies, $slug);
         
-        $request->attributes->set('slug', $compagny);
+        $request->attributes->set('slug', $company);
         
-        $this->isGrantedWithDeny('VIEW', $compagny);
+        $this->isGrantedWithDeny('VIEW', $company);
         
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Compagny/show.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Company/show.html.twig', [
             'partner'  => $partner, 
-            'currentCompagny'  => $compagny,
+            'currentCompany'  => $company,
             'compagnies' => $compagnies
         ]);
     }
@@ -62,34 +62,34 @@ class CompagnyController extends Controller
      */
     public function newAction(Request $request, Partner $partner)
     {
-        $compagnies = $this->getDoctrineUtil()->getRepository(Compagny::class)->findAllByForIndex($partner);
+        $compagnies = $this->getDoctrineUtil()->getRepository(Company::class)->findAllByForIndex($partner);
         
-        $form   = $this->createForm( CompagnyType::class, $compagny = new Compagny() );
+        $form   = $this->createForm( CompanyType::class, $company = new Company() );
         
-        $compagny->setPartner($partner);
+        $company->setPartner($partner);
 
         $form->handleRequest($request);
         
         if( $form->isSubmitted() && $form->isValid() )
         {
-            $this->getDoctrineUtil()->persist($compagny);
+            $this->getDoctrineUtil()->persist($company);
             
             $maskBuilder    = $this->getAclManager()->getMaskBuilder(MaskBuilder::MASK_OPERATOR);
             
-            $this->getAclManager()->insertObjectAce($compagny, $maskBuilder);
-            $this->getAclManager()->insertObjectAce($compagny->getAddress(), $maskBuilder);
-            $this->getAclManager()->insertObjectAce($compagny->getLogo(), $maskBuilder);
+            $this->getAclManager()->insertObjectAce($company, $maskBuilder);
+            $this->getAclManager()->insertObjectAce($company->getAddress(), $maskBuilder);
+            $this->getAclManager()->insertObjectAce($company->getLogo(), $maskBuilder);
             
             $this->addFlash('success', 'flash.add_success');
             
             return $this->redirectToRoute(
-                    $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
+                    $this->getRouteUtil()->getCompleteRoute(Company::class, 'index'),
                     ['partner' => $partner->getSlug()]
                 );
         }
         
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Compagny/new.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Company/new.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
             'compagnies'    => $compagnies
@@ -97,7 +97,7 @@ class CompagnyController extends Controller
     }
     
     /**
-     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForUpdateCompagny"})
+     * @ParamConverter("partner", class="AppBundle:User\Partner\Partner", options={"repository_method" = "findOneForUpdateCompany"})
      * 
      * @param Request $request
      * @return Response
@@ -106,33 +106,33 @@ class CompagnyController extends Controller
     public function updateAction(Request $request, Partner $partner, $slug)
     {
         $compagnies = $partner->getCompagnies();
-        $compagny   = self::getFilterCompagny($compagnies->getValues(), $slug);
+        $company   = self::getFilterCompany($compagnies->getValues(), $slug);
         
-        $request->attributes->set('compagny', $compagny);
+        $request->attributes->set('company', $company);
         
-        $this->isGrantedWithDeny('EDIT', $compagny);
+        $this->isGrantedWithDeny('EDIT', $company);
         
-        $form   = $this->createForm( CompagnyType::class, $compagny, ['validation_groups'=> ['Default'], 'action'   => 'update'] );
+        $form   = $this->createForm( CompanyType::class, $company, ['validation_groups'=> ['Default'], 'action'   => 'update'] );
         
         $form->handleRequest($request);
         
         if( $form->isSubmitted() && $form->isValid() )
         {
-            $this->getDoctrineUtil()->merge($compagny);
+            $this->getDoctrineUtil()->merge($company);
             
             $this->addFlash('success', 'flash.update_success');
             
             return $this->redirectToRoute(
-                $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'show'),
-                ['partner' => $partner->getSlug(), 'slug'   => $compagny->getSlug()]
+                $this->getRouteUtil()->getCompleteRoute(Company::class, 'show'),
+                ['partner' => $partner->getSlug(), 'slug'   => $company->getSlug()]
             );
         }
         
         // replace this example code with whatever you need
-        return $this->render('@Front/User/Profile/Partner/Compagny/update.html.twig', [
+        return $this->render('@Front/User/Profile/Partner/Company/update.html.twig', [
             'partner'  => $partner, 
             'form'  => $form->createView(),
-            'currentCompagny'   => $compagny,
+            'currentCompany'   => $company,
             'compagnies'    => $compagnies
         ]);
     }
@@ -142,41 +142,41 @@ class CompagnyController extends Controller
      * 
      * @param Request $request
      * @param Partner $partner
-     * @param Compagny $compagny
+     * @param Company $company
      * @return Response
      */
-    public function deleteAction(Request $request, Partner $partner, Compagny $compagny)
+    public function deleteAction(Request $request, Partner $partner, Company $company)
     {
-        $this->isGrantedWithDeny('DELETE', $compagny);
+        $this->isGrantedWithDeny('DELETE', $company);
         $this->checkDeleteToken();
         
-        $this->getDoctrineUtil()->remove($compagny);
+        $this->getDoctrineUtil()->remove($company);
             
         $this->addFlash('success', 'flash.delete_success');
             
         return $this->redirectToRoute(
-            $this->getRouteUtil()->getCompleteRoute(Compagny::class, 'index'),
+            $this->getRouteUtil()->getCompleteRoute(Company::class, 'index'),
             ['partner' => $partner->getSlug()]
         );
     }
     
     /**
-     * Get a Compagny from array of Compagny
+     * Get a Company from array of Company
      * @param array $compagnies
-     * @param string $compagnySlug
+     * @param string $companySlug
      * @return array
      * @throws UnexpectedValueException
      */
-    public static function getFilterCompagny(array $compagnies, $compagnySlug)
+    public static function getFilterCompany(array $compagnies, $companySlug)
     {
         for($i = 0; $i < count($compagnies); $i++)
         {
-            if( $compagnies[$i]->getSlug() === $compagnySlug )
+            if( $compagnies[$i]->getSlug() === $companySlug )
             {
                 return $compagnies[$i];
             }
         }
         
-        throw new UnexpectedValueException(null, Compagny::class);
+        throw new UnexpectedValueException(null, Company::class);
     }
 }

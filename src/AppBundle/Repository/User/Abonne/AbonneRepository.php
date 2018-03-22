@@ -2,9 +2,8 @@
 
 namespace AppBundle\Repository\User\Abonne;
 
-use Doctrine\ORM\EntityRepository;
 use AppBundle\Repository\User\UserRepository;
-use AppBundle\Repository\RepositoryTrait;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * AbonneRepository
@@ -21,6 +20,10 @@ class AbonneRepository extends UserRepository
                 ->setParameter('slug', $slug)
                 ;
         
+        $this->joinWithOrders($qb);
+        $this->joinWithCartes($qb);
+        $this->joinWithAddress($qb, self::ALIAS);
+        
         return $qb->getQuery()->getOneOrNullResult();
     }
     
@@ -33,5 +36,35 @@ class AbonneRepository extends UserRepository
                 ;
         
         return $qb->getQuery()->getOneOrNullResult();
+    }
+    
+    ###
+    # Joins
+    ###
+    
+    public function joinWithCartes(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin(self::ALIAS . '.cartes', 'carte')
+            ->addSelect('carte')
+            ;
+        
+        return $qb;
+    }
+    
+    public function joinWithOrders(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin(self::ALIAS . '.orderCartes', 'orderCarte')
+            ->addSelect('orderCarte')
+            ->leftJoin('orderCarte.paymentInstruction', 'instruction')
+            ->addSelect('instruction')
+            ->leftJoin('instruction.payments', 'payment')
+            ->addSelect('payment') 
+            ->leftJoin('payment.transactions', 'transaction')
+            ->addSelect('transaction')     
+            ;
+        
+        return $qb;
     }
 }

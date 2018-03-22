@@ -21,7 +21,7 @@ use AppBundle\Traits\EntityRoutePrefixTrait;
  */
 class Offre implements EntityInterface
 {
-    const ROUTE_PREFIX      = 'user_partner_compagny_offre';
+    const ROUTE_PREFIX      = 'user_partner_company_offre';
     const ENJOY_BY_ALL      = 'all';
     const ENJOY_BY_LOCATION = 'location';
     const ENJOY_BY_WEB      = 'web';
@@ -41,13 +41,13 @@ class Offre implements EntityInterface
     private $id;
 
     /**
-     * @var \AppBundle\Entity\User\Partner\Compagny
+     * @var \AppBundle\Entity\User\Partner\Company
      *
-     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\User\Partner\Compagny", inversedBy="offres")
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\User\Partner\Company", inversedBy="offres")
      * 
-     * @Assert\Type(type="\AppBundle\Entity\User\Partner\Compagny")
+     * @Assert\Type(type="\AppBundle\Entity\User\Partner\Company")
      */
-    private $compagny;
+    private $company;
 
     /**
      * @var string
@@ -386,27 +386,27 @@ class Offre implements EntityInterface
     }
 
     /**
-     * Set compagny
+     * Set company
      *
-     * @param \AppBundle\Entity\User\Partner\Compagny $compagny
+     * @param \AppBundle\Entity\User\Partner\Company $company
      *
      * @return Offre
      */
-    public function setCompagny(\AppBundle\Entity\User\Partner\Compagny $compagny)
+    public function setCompany(\AppBundle\Entity\User\Partner\Company $company)
     {
-        $this->compagny = $compagny;
+        $this->company = $company;
 
         return $this;
     }
 
     /**
-     * Get compagny
+     * Get company
      *
-     * @return \AppBundle\Entity\User\Partner\Compagny
+     * @return \AppBundle\Entity\User\Partner\Company
      */
-    public function getCompagny()
+    public function getCompany()
     {
-        return $this->compagny;
+        return $this->company;
     }
 
     /**

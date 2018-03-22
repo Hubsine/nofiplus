@@ -14,17 +14,17 @@ use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
- * Compagny
+ * Company
  *
- * @ORM\Table(name="np_user_partner_compagny")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\CompagnyRepository")
+ * @ORM\Table(name="np_user_partner_company")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\User\Partner\CompanyRepository")
  * 
  * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * 
  */
-class Compagny implements AdminEntityInterface
+class Company implements AdminEntityInterface
 {
-    const ROUTE_PREFIX  = 'user_partner_compagny';
+    const ROUTE_PREFIX  = 'user_partner_company';
     
     use DoctrineTrait;
     use EntityRoutePrefixTrait;
@@ -71,13 +71,13 @@ class Compagny implements AdminEntityInterface
     private $address;
 
     /**
-     * @var \AppBundle\Entity\User\Partner\CompagnyLogo
+     * @var \AppBundle\Entity\User\Partner\CompanyLogo
      * 
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompagnyLogo", mappedBy="compagny", orphanRemoval=true, cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompanyLogo", mappedBy="company", orphanRemoval=true, cascade={"all"})
      * @ORM\JoinColumn(nullable=true)
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
-     * @Assert\Type(type="\AppBundle\Entity\User\Partner\CompagnyLogo", groups={"new"})
+     * @Assert\Type(type="\AppBundle\Entity\User\Partner\CompanyLogo", groups={"new"})
      * @Assert\Valid()
      */
     private $logo;
@@ -95,20 +95,20 @@ class Compagny implements AdminEntityInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="compagny", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="company", cascade={"all"})
      * 
      * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
      */
     private $offres;
 
     /**
-     * @var \AppBundle\Entity\Admin\Category\Compagny
+     * @var \AppBundle\Entity\Admin\Category\Company
      *
-     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\Compagny")
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\Company")
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
-     * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Compagny", message="assert.type", groups={"new"})
+     * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Company", message="assert.type", groups={"new"})
      */
     private $category;
 
@@ -143,7 +143,7 @@ class Compagny implements AdminEntityInterface
      *
      * @param string $name
      *
-     * @return Compagny
+     * @return Company
      */
     public function setName($name)
     {
@@ -191,7 +191,7 @@ class Compagny implements AdminEntityInterface
      *
      * @param string $slug
      *
-     * @return Compagny
+     * @return Company
      */
     public function setSlug($slug)
     {
@@ -215,7 +215,7 @@ class Compagny implements AdminEntityInterface
      *
      * @param \AppBundle\Entity\Address $address
      *
-     * @return Compagny
+     * @return Company
      */
     public function setAddress(\AppBundle\Entity\Address $address)
     {
@@ -237,15 +237,15 @@ class Compagny implements AdminEntityInterface
     /**
      * Set logo
      *
-     * @param \AppBundle\Entity\User\Partner\CompagnyLogo $logo
+     * @param \AppBundle\Entity\User\Partner\CompanyLogo $logo
      *
-     * @return Compagny
+     * @return Company
      */
-    public function setLogo(\AppBundle\Entity\User\Partner\CompagnyLogo $logo)
+    public function setLogo(\AppBundle\Entity\User\Partner\CompanyLogo $logo)
     {
         $this->logo = $logo;
         
-        $logo->setCompagny($this);
+        $logo->setCompany($this);
 
         return $this;
     }
@@ -253,7 +253,7 @@ class Compagny implements AdminEntityInterface
     /**
      * Get logo
      *
-     * @return \AppBundle\Entity\User\Partner\CompagnyLogo
+     * @return \AppBundle\Entity\User\Partner\CompanyLogo
      */
     public function getLogo()
     {
@@ -265,7 +265,7 @@ class Compagny implements AdminEntityInterface
      *
      * @param \AppBundle\Entity\User\Partner\Partner $partner
      *
-     * @return Compagny
+     * @return Company
      */
     public function setPartner(\AppBundle\Entity\User\Partner\Partner $partner)
     {
@@ -289,13 +289,13 @@ class Compagny implements AdminEntityInterface
      *
      * @param \AppBundle\Entity\User\Partner\Offre $offre
      *
-     * @return Compagny
+     * @return Company
      */
     public function addOffre(\AppBundle\Entity\User\Partner\Offre $offre)
     {
         $this->offres[] = $offre;
         
-        $offre->setCompagny($this);
+        $offre->setCompany($this);
 
         return $this;
     }
@@ -323,11 +323,11 @@ class Compagny implements AdminEntityInterface
     /**
      * Set category
      *
-     * @param \AppBundle\Entity\Admin\Category\Compagny $category
+     * @param \AppBundle\Entity\Admin\Category\Company $category
      *
-     * @return Compagny
+     * @return Company
      */
-    public function setCategory(\AppBundle\Entity\Admin\Category\Compagny $category)
+    public function setCategory(\AppBundle\Entity\Admin\Category\Company $category)
     {
         $this->category = $category;
 
@@ -337,7 +337,7 @@ class Compagny implements AdminEntityInterface
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Admin\Category\Compagny
+     * @return \AppBundle\Entity\Admin\Category\Company
      */
     public function getCategory()
     {

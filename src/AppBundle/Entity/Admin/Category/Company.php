@@ -10,14 +10,14 @@ use AppBundle\Traits\EntityRoutePrefixTrait;
 use AppBundle\Entity\AdminEntityInterface;
 
 /**
- * Compagny
+ * Company
  *
- * @ORM\Table(name="np_category_compagny")
- * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\CompagnyRepository")
+ * @ORM\Table(name="np_category_company")
+ * @ORM\Entity(repositoryClass="\AppBundle\Repository\Admin\Category\CompanyRepository")
  */
-class Compagny implements AdminEntityInterface
+class Company implements AdminEntityInterface
 {
-    CONST ROUTE_PREFIX = 'category_compagny';
+    CONST ROUTE_PREFIX = 'category_company';
             
     use CategoryTrait;
     use EntityRoutePrefixTrait;

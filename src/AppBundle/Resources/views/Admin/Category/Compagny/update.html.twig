@@ -1,7 +1,7 @@
-{% extends "@Admin/Category/Compagny/index.html.twig" %}
+{% extends "@Admin/Category/Company/index.html.twig" %}
 
 {% block content %}
 
-    {{ simpleForm(form, 'category_compagny_update', 'update', { 'id': app.request.attributes.get('id') })|raw }} 
+    {{ simpleForm(form, 'category_company_update', 'update', { 'id': app.request.attributes.get('id') })|raw }} 
 
 {% endblock content %}

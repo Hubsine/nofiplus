@@ -2,8 +2,8 @@
 partner:
     resource: "@AppBundle/Resources/config/routing/front/partner/partner.yml"
     
-compagny:
-    resource: "@AppBundle/Resources/config/routing/front/partner/compagny.yml"
+company:
+    resource: "@AppBundle/Resources/config/routing/front/partner/company.yml"
 
 offre:
     resource: "@AppBundle/Resources/config/routing/front/partner/offre.yml"

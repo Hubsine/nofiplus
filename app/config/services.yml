@@ -95,6 +95,10 @@ services:
         tags: ['twig.extension']  
         arguments:
             - '@app.util.media'
+            
+    app.twig.extension.payment:
+        class: AppBundle\Twig\Extensions\PaymentExtension
+        tags: ['twig.extension']       
 
     ###
     # Doctrine

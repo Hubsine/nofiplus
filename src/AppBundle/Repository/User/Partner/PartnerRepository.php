@@ -24,22 +24,22 @@ class PartnerRepository extends UserRepository
         
         $this->joinWithAddress($qb, 'e');
         $this->joinWithCompagnies($qb);
-        $this->joinWithCompagnyOffres($qb, 'compagny');
-        $this->joinWithCompagnyLogo($qb, 'compagny');
-        $this->joinWithAddress($qb, 'compagny');
+        $this->joinWithCompanyOffres($qb, 'company');
+        $this->joinWithCompanyLogo($qb, 'company');
+        $this->joinWithAddress($qb, 'company');
         
         return $qb->getQuery()->getOneOrNullResult();
     }
     
-    public function findOneForUpdateCompagny($slug)
+    public function findOneForUpdateCompany($slug)
     {
         $qb   = $this->createQueryBuilder(self::ALIAS)
                 ->where('e.slug = :slug')
                 ->setParameter('slug', $slug);
         
         $this->joinWithCompagnies($qb);
-        $this->joinWithCompagnyLogo($qb, 'compagny');
-        $this->joinWithAddress($qb, 'compagny');
+        $this->joinWithCompanyLogo($qb, 'company');
+        $this->joinWithAddress($qb, 'company');
         
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -51,13 +51,13 @@ class PartnerRepository extends UserRepository
     public function joinWithCompagnies(QueryBuilder $qb)
     {
         $qb
-            ->leftJoin('e.compagnies', 'compagny')
-            ->addSelect('compagny');
+            ->leftJoin('e.compagnies', 'company')
+            ->addSelect('company');
         
         return $qb;
     }
     
-    public function joinWithCompagnyLogo(QueryBuilder $qb, $alias)
+    public function joinWithCompanyLogo(QueryBuilder $qb, $alias)
     {
         $qb
             ->leftJoin($alias . '.logo', 'logo')
@@ -66,7 +66,7 @@ class PartnerRepository extends UserRepository
         return $qb;
     }
     
-    public function joinWithCompagnyOffres(QueryBuilder $qb, $alias)
+    public function joinWithCompanyOffres(QueryBuilder $qb, $alias)
     {
         $qb
             ->leftJoin($alias . '.offres', 'offre')

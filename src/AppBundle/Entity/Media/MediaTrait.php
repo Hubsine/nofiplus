@@ -63,7 +63,7 @@ trait MediaTrait
      *
      * @param array $dimensions
      *
-     * @return CompagnyLogo
+     * @return CompanyLogo
      */
     public function setDimensions($dimensions)
     {

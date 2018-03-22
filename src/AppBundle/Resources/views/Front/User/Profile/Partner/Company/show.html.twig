@@ -1,20 +1,20 @@
-{% extends "@Front/User/Profile/Partner/Compagny/index.html.twig" %}
+{% extends "@Front/User/Profile/Partner/Company/index.html.twig" %}
 
 {% block compagnies_content %}
 
-    {% include '@Front/User/Profile/Partner/Compagny/single.html.twig' with {'currentCompagny': currentCompagny} %}
+    {% include '@Front/User/Profile/Partner/Company/single.html.twig' with {'currentCompany': currentCompany} %}
 
     <div class="border border-bottom mb-3"></div>
 
-    <div class="compagny single offres">
+    <div class="company single offres">
         <h4 class="h5">
             {{ 'layout.offres' | trans }}
-            {{ renderSnippetNew( 'user_partner_compagny_offre_new', {'partner': currentCompagny.partner.slug, 'compagny': currentCompagny.slug} ) |raw }}
+            {{ renderSnippetNew( 'user_partner_company_offre_new', {'partner': currentCompany.partner.slug, 'company': currentCompany.slug} ) |raw }}
         </h4>
 
         <div id="accordion">
 
-            {% for offre in currentCompagny.offres %}
+            {% for offre in currentCompany.offres %}
 
                 <div class="card">
                     <div class="card-header" id="heading{{ loop.index }}">
@@ -23,17 +23,17 @@
                                 {{ offre.name }}
                             </button>
                             <div class="float-right">
-                                {{ renderSnippetUpdate( 'user_partner_compagny_offre_update', 
+                                {{ renderSnippetUpdate( 'user_partner_company_offre_update', 
                                     {
-                                        'partner': currentCompagny.partner.slug, 
-                                        'compagny': currentCompagny.slug,
+                                        'partner': currentCompany.partner.slug, 
+                                        'company': currentCompany.slug,
                                         'slug': offre.slug,
                                          
                                     } ) |raw }}
-                                {{ renderSnippetDelete( 'user_partner_compagny_offre_delete', 
+                                {{ renderSnippetDelete( 'user_partner_company_offre_delete', 
                                     {
-                                        'partner': currentCompagny.partner.slug, 
-                                        'compagny': currentCompagny.slug,
+                                        'partner': currentCompany.partner.slug, 
+                                        'company': currentCompany.slug,
                                         'slug': offre.slug
                                          
                                     } ) |raw }}

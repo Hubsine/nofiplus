@@ -5,7 +5,7 @@ namespace AppBundle\Menu;
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\Admin\Category\Carte;
 use AppBundle\Entity\Admin\Category\Offre;
-use AppBundle\Entity\Admin\Category\Compagny;
+use AppBundle\Entity\Admin\Category\Company;
 
 /**
  * Description of AdminMenuBuilder
@@ -62,14 +62,14 @@ class AdminMenuBuilder extends AbstractMenuBuilder
         $this->addChildByParam($carte, Carte::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         ###
-        # Compagny
+        # Company
         ###
-        $compagny = $category->addChild('Compagny', array('route' => Compagny::ROUTE_PREFIX . '_index'))
-                ->setExtra('_route', Compagny::ROUTE_PREFIX . '_index')
+        $company = $category->addChild('Company', array('route' => Company::ROUTE_PREFIX . '_index'))
+                ->setExtra('_route', Company::ROUTE_PREFIX . '_index')
                 ->setDisplayChildren(false);
         
-        $compagny->addChild('New', array('route'  => Compagny::ROUTE_PREFIX . '_new'));
-        $this->addChildByParam($carte, Compagny::ROUTE_PREFIX . '_update', 'id', 'Update');
+        $company->addChild('New', array('route'  => Company::ROUTE_PREFIX . '_new'));
+        $this->addChildByParam($carte, Company::ROUTE_PREFIX . '_update', 'id', 'Update');
         
         ###
         # Offre
