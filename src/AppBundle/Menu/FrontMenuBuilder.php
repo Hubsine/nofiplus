@@ -241,34 +241,48 @@ class FrontMenuBuilder extends AbstractMenuBuilder
     
     public function createSidebarMenu(array $options)
     {
-        $categories     = $options['categories'];
+        $allCount       = 0;
         
+        $extraLabelHtml = '<span class="badge badge-primary badge-pill">%s</span>';
         $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center';
         $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center';
+        
+        $categories     = $options['categories'];
         
         $menu   = $this->factory->createItem('menu.sidebar', [
                 'route' => 'home'
             ])
             ->setChildrenAttribute('class', 'nav flex-column');
         
-        $menu
-            ->addChild('menu.sidebar.all', [
-                'route' => 'home'
-            ])
-            ->setAttribute('class', $navItemClass)
-            ->setLinkAttribute('class', $navLinkClass)
+        $allItem = $menu
+                ->addChild('menu.sidebar.all', [
+                    'route' => 'home'
+                ])
+                ->setAttribute('class', $navItemClass)
+                ->setLinkAttribute('class', $navLinkClass)
             ;
         
         foreach ($categories as $category) 
         {
+            $countOffre = $category->getOffres()->count();
+            
             $menu->addChild($category->getName(), [
                 'route' => 'home_compagny_category',
                 'routeParameters'   => ['slug'  => $category->getSlug()]
             ])
             ->setAttribute('class', $navItemClass)
-            ->setLinkAttribute('class', $navLinkClass)        
+            ->setLinkAttribute('class', $navLinkClass)
+            ->setLabel($category->getName() . sprintf($extraLabelHtml, $countOffre))
+            ->setExtra('safe_label', true)        
             ;
+            
+            $allCount += $countOffre;
         }
+        
+        $allItem
+            ->setLabel('menu.sidebar.all' . sprintf($extraLabelHtml, $allCount))
+            ->setExtra('safe_label', true)   
+        ;
         
         return $menu;
     }

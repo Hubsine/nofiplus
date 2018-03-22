@@ -34,6 +34,15 @@ class OffreDomain implements AdminEntityInterface
     private $id;
     
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * 
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\User\Partner\Offre", mappedBy="offreDomain", cascade={"all"})
+     * 
+     * @Assert\Type(type="\Doctrine\Common\Collections\Collection", message="assert.type")
+     */
+    private $offres;
+
+    /**
      * Get id
      *
      * @return int
@@ -41,5 +50,46 @@ class OffreDomain implements AdminEntityInterface
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+}
+
+    /**
+     * Add offre
+     *
+     * @param \AppBundle\Entity\User\Partner\Offre $offre
+     *
+     * @return OffreDomain
+     */
+    public function addOffre(\AppBundle\Entity\User\Partner\Offre $offre)
+    {
+        $this->offres[] = $offre;
+
+        return $this;
+    }
+
+    /**
+     * Remove offre
+     *
+     * @param \AppBundle\Entity\User\Partner\Offre $offre
+     */
+    public function removeOffre(\AppBundle\Entity\User\Partner\Offre $offre)
+    {
+        $this->offres->removeElement($offre);
+    }
+
+    /**
+     * Get offres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffres()
+    {
+        return $this->offres;
     }
 }

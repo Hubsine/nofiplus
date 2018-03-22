@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Front\Content;
 use AppBundle\Controller\Front\Content\AbstractContentController;
 use AppBundle\Entity\Admin\Category\Company;
 use AppBundle\Entity\User\Partner\Offre;
+use AppBundle\Entity\Admin\Category\OffreDomain;
 
 /**
  * Description of ContentController
@@ -22,12 +23,12 @@ class ContentController extends AbstractContentController
     {
         $doctrineUtil   = $this->getDoctrineUtil();
         
-        $categories = $doctrineUtil->getRepository(Company::class)->findAll();
-        $offres     = $doctrineUtil->getRepository(Offre::class)->findAll();
+        $categories = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
+        #$offres     = $doctrineUtil->getRepository(Offre::class)->findAll();
         
         return $this->render( self::BASE_VIEW_FOLDER . 'index.html.twig', [
             'categories'    => $categories,
-            'offres'        => $offres
+            #'offres'        => $offres
         ]);
     }
 }

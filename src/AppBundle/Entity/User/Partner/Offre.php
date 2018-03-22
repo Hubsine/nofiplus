@@ -93,8 +93,8 @@ class Offre implements EntityInterface
     /**
      * @var \AppBundle\Entity\Admin\Category\OffreDomain
      *
-     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\OffreDomain")
-     * ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\OffreDomain", inversedBy="offres")
+     * @ORM\JoinColumn(nullable=false)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="\AppBundle\Entity\Admin\Category\OffreDomain", message="assert.type")

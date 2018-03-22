@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository\Admin\Category;
 
+use Doctrine\ORM\QueryBuilder;
 use AppBundle\Repository\RepositoryTrait;
 
 /**
@@ -12,5 +13,34 @@ use AppBundle\Repository\RepositoryTrait;
  */
 class OffreDomainRepository extends \Doctrine\ORM\EntityRepository
 {
+    const ALIAS     = 'o';
+    
     use RepositoryTrait;
+    
+    public function findAllForHomePage()
+    {
+        $qb     = $this->createQueryBuilder(self::ALIAS);
+        
+        $this->joinWithOffres($qb);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    ###
+    # Join 
+    ###
+    
+    public function joinWithOffres(QueryBuilder $qb)
+    {
+        $qb
+            ->leftJoin(self::ALIAS . '.offres', 'offre')
+            ->addSelect('offre')
+            ->leftJoin('offre.featured', 'featured')
+            ->addSelect('featured')
+            ->leftJoin('offre.company', 'company')
+            ->addSelect('company')
+          ;
+        
+        return $qb;
+    }
 }
