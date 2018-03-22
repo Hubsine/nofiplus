@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use AppBundle\Form\Type\User\Partner\FeaturedType;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Entity\Admin\Category\Offre as CatOffre;
+use AppBundle\Entity\Admin\Category\OffreDomain;
 
 class OffreType extends AbstractType
 {
@@ -79,6 +80,14 @@ class OffreType extends AbstractType
                 'multiple'  => false,
                 'expanded'  => true
             ])
+            ->add('offreDomain', EntityType::class, [
+                'label' => 'form.offre.offre_domain',
+                'class' => OffreDomain::class,
+                'choice_label'  => 'name',
+                'label_attr'    => ['class' => 'form-check-inline radio-inline'],
+                'multiple'  => false,
+                'expanded'  => true
+            ])
             ->add('featured', FeaturedType::class, [
                 'label' => 'form.offre.featured',
                 'by_reference'  => false
@@ -96,7 +105,8 @@ class OffreType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User\Partner\Offre'
+            'data_class' => 'AppBundle\Entity\User\Partner\Offre',
+            'validation_groups' => ['new']
         ));
     }
 

@@ -173,7 +173,8 @@ easy_admin:
             - { label: 'Category' }
             - { entity: 'CategoryCarte', label: 'Carte' }
             - { entity: 'CategoryCompany', label: 'Compagnies' }
-            - { entity: 'CategoryOffre', label: 'Offre' }
+            - { entity: 'TypeOffre', label: 'Type d''offre' }
+            - { entity: 'CategoryOffre', label: 'Catégorie d''offre' }
     entities:     
         CategoryCarte:
             class: AppBundle\Entity\Admin\Category\Carte
@@ -181,9 +182,16 @@ easy_admin:
         CategoryCompany:
             class: AppBundle\Entity\Admin\Category\Company
             label: Compagnies
-        CategoryOffre:
+        TypeOffre:
             class: AppBundle\Entity\Admin\Category\Offre
             label: Offre
+        CategoryOffre:
+            class: AppBundle\Entity\Admin\Category\OffreDomain
+            label: 'Catégorie d''offre'
+            form:
+                fields:
+                    - { property: name, label: 'Nom' }
+                    - { property: about, label: 'Description' }
             
 # JMS Payment Core Bundle            
 jms_payment_core:

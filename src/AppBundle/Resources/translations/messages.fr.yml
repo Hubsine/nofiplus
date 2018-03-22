@@ -220,7 +220,8 @@ form:
         by_tel: 'Décrivez comment profiter de l''offre par téléphone'
         start: 'Date de début de l''offre'
         end: 'Date de fin de l''offre'
-        category: 'Catégory de l''offre'
+        category: 'Type d''offre'
+        offre_domain: 'Catégorie de l''offre'
         featured: 'L''image de l''offre'
     label:
         paypal_express_checkout: 'Paiement carte bleue PayPal'

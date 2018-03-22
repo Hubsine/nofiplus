@@ -41,6 +41,17 @@ class Offre implements EntityInterface
     private $id;
 
     /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="start", type="datetime")
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Date(message="assert.date")
+     * @Assert\LessThanOrEqual(propertyPath="end", message="assert.date.less_than_or_equal")
+     */
+    private $start;
+    
+    /**
      * @var \AppBundle\Entity\User\Partner\Company
      *
      * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\User\Partner\Company", inversedBy="offres")
@@ -78,6 +89,17 @@ class Offre implements EntityInterface
      * @Assert\Type(type="\AppBundle\Entity\Admin\Category\Offre", message="assert.type")
      */
     private $category;
+    
+    /**
+     * @var \AppBundle\Entity\Admin\Category\OffreDomain
+     *
+     * @ORM\ManyToOne(targetEntity="\AppBundle\Entity\Admin\Category\OffreDomain")
+     * ORM\JoinColumn(nullable=false)
+     * 
+     * @Assert\NotBlank(message="assert.not_blank")
+     * @Assert\Type(type="\AppBundle\Entity\Admin\Category\OffreDomain", message="assert.type")
+     */
+    private $offreDomain;
 
     /**
      * @var \AppBundle\Entity\User\Partner\Featured
@@ -440,11 +462,14 @@ class Offre implements EntityInterface
      *
      * @return Offre
      */
-    public function setFeatured(\AppBundle\Entity\User\Partner\Featured $featured)
+    public function setFeatured(\AppBundle\Entity\User\Partner\Featured $featured = null)
     {
         $this->featured = $featured;
         
-        $featured->setOffre($this);
+        if( $featured instanceof Featured )
+        {
+            $featured->setOffre($this);
+        }
         
         return $this;
     }
@@ -457,5 +482,29 @@ class Offre implements EntityInterface
     public function getFeatured()
     {
         return $this->featured;
+    }
+
+    /**
+     * Set offreDomain
+     *
+     * @param \AppBundle\Entity\Admin\Category\OffreDomain $offreDomain
+     *
+     * @return Offre
+     */
+    public function setOffreDomain(\AppBundle\Entity\Admin\Category\OffreDomain $offreDomain)
+    {
+        $this->offreDomain = $offreDomain;
+
+        return $this;
+    }
+
+    /**
+     * Get offreDomain
+     *
+     * @return \AppBundle\Entity\Admin\Category\OffreDomain
+     */
+    public function getOffreDomain()
+    {
+        return $this->offreDomain;
     }
 }

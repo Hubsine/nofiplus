@@ -76,9 +76,9 @@ class CompanyController extends Controller
             
             $maskBuilder    = $this->getAclManager()->getMaskBuilder(MaskBuilder::MASK_OPERATOR);
             
-            $this->getAclManager()->insertObjectAce($company, $maskBuilder);
-            $this->getAclManager()->insertObjectAce($company->getAddress(), $maskBuilder);
-            $this->getAclManager()->insertObjectAce($company->getLogo(), $maskBuilder);
+            $this->getAclManager()->insertObjectAce($company, $maskBuilder, $partner);
+            $this->getAclManager()->insertObjectAce($company->getAddress(), $maskBuilder, $partner);
+            $this->getAclManager()->insertObjectAce($company->getLogo(), $maskBuilder, $partner);
             
             $this->addFlash('success', 'flash.add_success');
             

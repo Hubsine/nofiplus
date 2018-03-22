@@ -66,11 +66,11 @@
     {{ form_errors(form.category) }}
 </div>
 
-{#<div class="form-check form-check-inline">
-    {{ form_widget(form.category) }}
-    {{ form_label(form.category) }}
-    {{ form_errors(form.category) }}
-</div>#}
+<div class="form-row">
+    {{ form_label(form.offreDomain) }}
+    {{ form_widget(form.offreDomain) }}
+    {{ form_errors(form.offreDomain) }}
+</div>
 
 <div class="mb-3">
     {{ form_label(form.featured) }}
