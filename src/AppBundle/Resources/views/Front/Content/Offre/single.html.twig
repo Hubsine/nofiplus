@@ -1,0 +1,78 @@
+{% extends "@Front/Content/index.html.twig" %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+{% endblock breadcrumb %}
+
+
+{% block content_page %}
+
+    {# Compagny #}
+    <h1 class="h4 font-weight-normal border-bottom pb-2">{{ offre.company.name }}</h1>
+    <div class="w-100 mt-3">
+        <img class="w-100 mx-auto" {{ holderJs('75x75') }} src="{{ vich_uploader_asset(offre.company.logo, 'file') }}" alt="">
+    </div>
+
+    {# L'Offre #}
+    <h1 class="h4 font-weight-normal border-bottom mt-5 pb-2">L'offre</h1>
+    <div class="row mt-4">
+        <div class="col-sm-6">
+            <img class="w-100 mx-auto" {{ holderJs('75x75') }} src="{{ vich_uploader_asset(offre.featured, 'file') }}" alt="">
+        </div>
+        <div class="col-sm-6 text-center">
+            {{ offre.about }}
+        </div>
+    </div>
+
+    {# Comment profiter de l'offre #}
+    <h1 class="h4 font-weight-normal border-bottom mt-5 pb-2">Comment profiter de l'offre</h1>
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <h6>En physique</h6>
+        </div>
+        <div class="col-sm-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">En physique</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border mt-3"></div>
+
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <h6>En physique</h6>
+        </div>
+        <div class="col-sm-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">En physique</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border mt-3"></div>
+
+    <div class="row mt-3">
+        <div class="col-sm-4">
+            <h6>En physique</h6>
+        </div>
+        <div class="col-sm-8 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">En physique</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content_page %} 

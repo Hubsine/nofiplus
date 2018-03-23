@@ -8,7 +8,7 @@ home:
 
 ## Affichage de toutes les offres d'une category
 home_compagny_category:
-    path: /category/{slug}
+    path: /categories/{slug}
     defaults: { _controller: AppBundle:Front\Content\Content:showSingleCategory }
 
 ###

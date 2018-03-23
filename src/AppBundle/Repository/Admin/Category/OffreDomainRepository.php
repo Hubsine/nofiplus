@@ -39,6 +39,8 @@ class OffreDomainRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('featured')
             ->leftJoin('offre.company', 'company')
             ->addSelect('company')
+            ->leftJoin('company.logo', 'logo')
+            ->addSelect('logo')
           ;
         
         return $qb;

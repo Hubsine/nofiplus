@@ -11,4 +11,43 @@ use AppBundle\Controller\Controller as BaseController;
  */
 abstract class AbstractContentController extends BaseController
 {
+    /**
+     * Get offres from OffreDomain
+     * 
+     * @param array $offreDomains
+     * @param string $slug
+     * @return array
+     */
+    protected function getOffresByOffreDomain(array $offreDomains, $slug)
+    {
+        foreach ($offreDomains as $category)
+        {
+            if( $category->getSlug() === $slug )
+            {
+                return $category->getOffres();
+            }
+        }
+        
+        return [];
+    }
+    
+    /**
+     * Get current offre 
+     * 
+     * @param array $offres
+     * @param string $slug
+     * @return array
+     */
+    protected function getCurrentOffre(array $offres, $slug)
+    {
+        foreach ($offres as $offre)
+        {
+            if( $offre->getSlug() === $slug )
+            {
+                return $offre;
+            }
+        }
+        
+        return [];
+    }
 }

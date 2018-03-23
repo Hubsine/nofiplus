@@ -1,6 +1,6 @@
 <div class="card mb-3 rounded-0">
     <a href="{{ path('offre_single', {'slug': offre.slug }) }}" title="{{ offre.name }}">
-        <img {{ holderJs('75x75') }}  class="card-img-top" src="{{ vich_uploader_asset(offre.featured, 'file') }}" alt="{{ offre.name }}">
+        <img {{ holderJs('75x75') }}  class="card-img-top rounded-0" src="{{ vich_uploader_asset(offre.featured, 'file') }}" alt="{{ offre.name }}">
     </a>
     
     <div class="card-body text-center p-0">
