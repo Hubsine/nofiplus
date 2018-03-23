@@ -12,5 +12,18 @@ use AppBundle\Repository\RepositoryTrait;
  */
 class OffreRepository extends \Doctrine\ORM\EntityRepository
 {
+    const ALIAS = 'o';
+    
     use RepositoryTrait;
+    
+    public function findAllForHomePage()
+    {
+        $qb     = $this->createQueryBuilder(self::ALIAS);
+        
+        $this->joinWithOffres($qb);
+        
+        return $qb->getQuery()->getResult();
+    }
+    
+    
 }

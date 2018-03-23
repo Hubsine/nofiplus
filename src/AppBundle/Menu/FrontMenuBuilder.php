@@ -280,7 +280,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         }
         
         $allItem
-            ->setLabel('menu.sidebar.all' . sprintf($extraLabelHtml, $allCount))
+            ->setLabel('menu.sidebar.all')
             ->setExtra('safe_label', true)   
         ;
         

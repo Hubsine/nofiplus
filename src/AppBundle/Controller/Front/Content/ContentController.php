@@ -24,11 +24,11 @@ class ContentController extends AbstractContentController
         $doctrineUtil   = $this->getDoctrineUtil();
         
         $categories = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
-        #$offres     = $doctrineUtil->getRepository(Offre::class)->findAll();
+        $offres     = $doctrineUtil->getRepository(Offre::class)->findAll();
         
         return $this->render( self::BASE_VIEW_FOLDER . 'index.html.twig', [
             'categories'    => $categories,
-            #'offres'        => $offres
+            'offres'        => $offres
         ]);
     }
 }
