@@ -121,7 +121,6 @@ layout:
     abonne: 'Abonne'
     partner: 'Partenaire'
     address: 'Adresse'
-    offre: 'Offre'
     offres: 'Offres'
     company: 
         company: 'Entreprise'
@@ -129,6 +128,10 @@ layout:
     delete_confirmation:
         title: 'Confirmation de suppression'
         content: 'Vous êtes sur le point de supprimer un élèment de la base de données. Êtes-vous sûr de votre action ?'
+    offre:
+        location: 'En physique'
+        web: 'Sur internet'
+        tel: 'Par téléphone'
     
 form:
     infos: 'Informations'
