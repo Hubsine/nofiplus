@@ -23,7 +23,9 @@
         {% block breadcrumb %}
             <div id="breadcrumb">
                 <div class="container">
-                    {% include '@App/Menu/breadcrumb.html.twig' with {'aliasMenu': 'frontMain'} %}
+                    {% block breadcrumb_menu %}
+                        {% include '@App/Menu/breadcrumb.html.twig' with {'aliasMenu': 'frontMain'} %}
+                    {% endblock breadcrumb_menu %}
                 </div>
             </div>
         {% endblock breadcrumb %}

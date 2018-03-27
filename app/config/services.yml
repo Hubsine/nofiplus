@@ -120,6 +120,7 @@ services:
             - '@request_stack'
             - '@security.token_storage'
             - '@security.authorization_checker'
+            - '@translator'
             - '@app.util.route'
         tags:
             - { name: knp_menu.menu_builder,    method: createMainMenu,            alias: frontMain }
@@ -136,6 +137,7 @@ services:
             - '@request_stack'
             - '@security.token_storage'
             - '@security.authorization_checker'
+            - '@translator'
             - '@app.util.route'
         tags:
             - { name: knp_menu.menu_builder,    method: createMainMenu,        alias: adminMain }

@@ -7,7 +7,7 @@ home:
 ###
 
 ## Affichage de toutes les offres d'une category
-home_compagny_category:
+user_partner_company_offre_category:
     path: /categories/{slug}
     defaults: { _controller: AppBundle:Front\Content\Content:showSingleCategory }
 
@@ -16,6 +16,6 @@ home_compagny_category:
 ###
 
 ## Affichage d'une offre    
-offre_single:
+user_partner_company_offre_single:
     path: /offres/{slug}
     defaults: { _controller: AppBundle:Front\Content\Content:showSingleOffre }

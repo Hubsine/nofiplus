@@ -24,7 +24,7 @@ class ContentController extends AbstractContentController
         $doctrineUtil   = $this->getDoctrineUtil();
         
         $categories = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
-        $offres     = $doctrineUtil->getRepository(Offre::class)->findAll();
+        $offres     = $doctrineUtil->getRepository(Offre::class)->findAllForHomePage();
         
         return $this->render( self::BASE_VIEW_FOLDER . 'index.html.twig', [
             'categories'    => $categories,
@@ -64,7 +64,7 @@ class ContentController extends AbstractContentController
         
         $categories     = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
         
-        $offres         = $doctrineUtil->getRepository(Offre::class)->findAll();
+        $offres         = $doctrineUtil->getRepository(Offre::class)->findAllForHomePage();
         $offre          = $this->getCurrentOffre($offres, $slug);
         
         return $this->render(self::BASE_VIEW_FOLDER . '/Offre/single.html.twig', [

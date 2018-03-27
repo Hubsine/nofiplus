@@ -1,11 +1,12 @@
 <div class="card mb-3 rounded-0">
-    <a href="{{ path('offre_single', {'slug': offre.slug }) }}" title="{{ offre.name }}">
+    <a href="{{ path(constant( 'ROUTE_PREFIX', offre ) ~ '_single', {'slug': offre.slug }) }}" title="{{ offre.name }}">
         <img {{ holderJs('75x75') }}  class="card-img-top rounded-0" src="{{ vich_uploader_asset(offre.featured, 'file') }}" alt="{{ offre.name }}">
     </a>
+    
+    <div class="position-absolute pt-1 pb-1 pl-2 pr-2 bg-light">{{ offre.category.name }}</div>
     
     <div class="card-body text-center p-0">
         <h5 class="card-title h6 m-0 p-1 border-bottom font-weight-light">{{ offre.offreDomain.name }}</h5>
         <h5 class="p-2 m-0 font-weight-normal">{{ offre.company.name }}</h5>
     </div>
 </div>
-{#% include '@Front/Content/Offre/Loop/all.html.twig' %#}

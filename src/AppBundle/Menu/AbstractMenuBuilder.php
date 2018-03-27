@@ -6,6 +6,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Translation\DataCollectorTranslator;
 use AppBundle\Util\RouteUtil;
 use AppBundle\Menu\MenuTrait;
 
@@ -45,6 +46,11 @@ abstract class AbstractMenuBuilder
     protected $authorizationChecker;
     
     /**
+     * @var DataCollectorTranslator
+     */
+    protected $translator;
+
+    /**
      * @var RouteUtil
      */
     protected $routeUtil;
@@ -55,13 +61,14 @@ abstract class AbstractMenuBuilder
      * @param TokenInterface $factory
      */
     public function __construct(FactoryInterface $factory, RequestStack $requestStack, TokenStorageInterface $tokenStorage,
-            AuthorizationCheckerInterface $authorizationChecker, RouteUtil $routeUtil)
+            AuthorizationCheckerInterface $authorizationChecker, DataCollectorTranslator $translator, RouteUtil $routeUtil)
     {
         $this->factory              = $factory;
         $this->requestStack         = $requestStack;
         $this->request              = $requestStack->getCurrentRequest();
         $this->tokenStorage         = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
+        $this->translator           = $translator;
         $this->routeUtil            = $routeUtil;
     }
     
@@ -76,5 +83,15 @@ abstract class AbstractMenuBuilder
         $requestUser    = $this->request->attributes->get('user');
         
         return $this->authorizationChecker->isGranted('EDIT', $requestUser);
+    }
+    
+    /**
+     * Get route name from request attributes
+     * 
+     * @return string
+     */
+    protected function getRouteName()
+    {
+        return $this->request->attributes->get('_route');
     }
 }

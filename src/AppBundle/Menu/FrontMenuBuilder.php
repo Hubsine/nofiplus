@@ -241,15 +241,17 @@ class FrontMenuBuilder extends AbstractMenuBuilder
     
     public function createSidebarMenu(array $options)
     {
+        $_route         = $this->getRouteName();
         $allCount       = 0;
         
-        $extraLabelHtml = '<span class="badge badge-primary badge-pill">%s</span>';
+        $extraLabelHtml = '<span class="badge badge-primary badge-pill ml-3">%s</span>';
         $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center';
         $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center';
         
         $categories     = $options['categories'];
+        $offre          = $options['offre'];
         
-        $menu   = $this->factory->createItem('menu.sidebar', [
+        $menu   = $this->factory->createItem('menu.home', [
                 'route' => 'home'
             ])
             ->setChildrenAttribute('class', 'nav flex-column');
@@ -266,8 +268,8 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         {
             $countOffre = $category->getOffres()->count();
             
-            $menu->addChild($category->getName(), [
-                'route' => 'home_compagny_category',
+            $menuItem = $menu->addChild($category->getName(), [
+                'route' => $this->routeUtil->getCompleteRoute(Offre::class, 'category'),
                 'routeParameters'   => ['slug'  => $category->getSlug()]
             ])
             ->setAttribute('class', $navItemClass)
@@ -276,13 +278,27 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             ->setExtra('safe_label', true)        
             ;
             
+            if( $_route === $this->routeUtil->getCompleteRoute(Offre::class, 'single') && $offre instanceof Offre && $category->getOffres()->contains($offre) )
+            {
+                $menuItem
+                    ->addChild($offre->getName(), [
+                        'route' => $this->routeUtil->getCompleteRoute(Offre::class, 'single'),
+                        'routeParameters'   => [ 'slug'  => $offre->getSlug() ]
+                    ])
+                    ->setDisplay(false)
+                    ;
+                
+                $menuItem->setAttribute('class', $navItemClass . ' ' . 'active bg-light' );
+            }
+        
             $allCount += $countOffre;
         }
         
         $allItem
-            ->setLabel('menu.sidebar.all')
+            ->setLabel( $this->translator->trans('menu.home') . sprintf($extraLabelHtml, $allCount))
             ->setExtra('safe_label', true)   
         ;
+        
         
         return $menu;
     }

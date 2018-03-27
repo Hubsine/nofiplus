@@ -1,5 +1,7 @@
 {% extends "@Front/Content/index.html.twig" %}
 
-{% block breadcrumb %}
-    {{ parent() }}
-{% endblock breadcrumb %}
+    
+{% block breadcrumb_menu %}
+    {% include '@App/Menu/breadcrumb.html.twig' with {'aliasMenu': menu} %}
+{% endblock breadcrumb_menu %}
+    
