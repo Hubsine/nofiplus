@@ -7,11 +7,12 @@ Encore
         .setOutputPath('web/build/')
         // the public path used by the web server to access the previous directory
         .setPublicPath('/build')
-        
-        .addEntry('functions',  './assets/js/functions.js')
-        .addEntry('global-js',  './assets/js/global.js')
-        .addEntry('offre',      './assets/js/pages/offre.js')
-        .addEntry('order',      './assets/js/pages/order.js')
+
+        .addEntry('functions', './assets/js/functions.js')
+        .addEntry('global-js', './assets/js/global.js')
+        .addEntry('offre', './assets/js/pages/offre.js')
+        .addEntry('front_offre', './assets/js/pages/front_offre.js')
+        .addEntry('order', './assets/js/pages/order.js')
 
 //        .configureBabel(function(babelConfig) {
 //            
@@ -19,7 +20,7 @@ Encore
 //            babelConfig.presets.push('es2015');
 //
 //        })
-    
+
         .createSharedEntry('vendor', [
             'jquery',
             'jquery-ui-bundle',
@@ -38,16 +39,73 @@ Encore
                     'holder': 'holderjs',
                     'window.Holder': 'holderjs'
                 }), 10)
-         
+        ////
+        // File Loader
+        ////
+//        .addLoader({
+//            test: /\.(png|svg|jpg|gif)$/,
+//            use: [
+//                {
+//                    loader: 'file-loader',
+//                    options: {
+//                        name: '[name].[ext]',
+//                        publicPath: 'assets/',
+//                        outputPath: 'images/'
+//                    }
+//                }
+//            ]
+//        })
+        ////
+        // Image Webpack Loader
+        /////
         .addLoader({
             test: /\.(png|svg|jpg|gif)$/,
-            use: [{
-                loader: 'file-loader',
-                options: {
-                    name: 'images/[name].[ext]'
-                }
-            }]
+            use: [
+                //'file-loader',
+                //'url-loader',
+                {
+                    loader: 'image-webpack-loader',
+                    options:
+                            {
+                                bypassOnDebug: true,
+                                //outputPath: 'images/'
+//                                mozjpeg: {
+//                                    progressive: false,
+//                                    quality: 65
+//                                },
+//                                // optipng.enabled: false will disable optipng
+//                                optipng: {
+//                                    enabled: false,
+//                                },
+//                                pngquant: {
+//                                    quality: '65-90',
+//                                    speed: 4
+//                                },
+//                                gifsicle: {
+//                                    interlaced: false,
+//                                },
+//                                // the webp option will enable WEBP
+//                                webp: {
+//                                    enabled: false,
+//                                    quality: 75
+//                                }
+                            }
+                }]
         })
+        ////
+        // Url Loader
+        /////
+//        .addLoader({
+//            test: /\.(png|svg|jpg|gif)$/,
+//            use: [
+//                {
+//                    loader: 'url-loader',
+//                    options: {
+//                        //limit: 35000
+//                    }
+//                }
+//            ]
+//        })
 //        .addLoader(
 //        {
 //            test: require.resolve('tinymce/tinymce'),
@@ -72,7 +130,7 @@ Encore
         .enableBuildNotifications()
 
         .autoProvidejQuery()
-        
+
         .enableSourceMaps(!Encore.isProduction())
         ;
 

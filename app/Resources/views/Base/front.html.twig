@@ -1,11 +1,23 @@
 {% extends "base.html.twig" %}
 
 {% block body_tag_class %}front{% endblock body_tag_class %}
+{% block header_tag_class %}d-none d-sm-block{% endblock header_tag_class %}
 
 {% block header_content %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-        <div class="container">
-            <a class="navbar-brand mr-0" href="#">Logo</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-light bg-light" role="navigation">
+        <div class="container position-relative">
+
+            <ul class="nav position-absolute left-0 ml-3">
+                <li class="mr-2 nav-item first">        
+                    <a href="{{ path('fos_user_registration_register', {'asuser': 'partner'}) }}" class="nav-link border border-success">    
+                        {{ 'layout.join_network' | trans }}
+                    </a>        
+                </li>
+            </ul>
+
+            <a class="header-logo background-logo navbar-brand mx-auto p-0 text-hide" href="{{ path('home') }}">
+                <span>NofiPlus.com</span>
+            </a>
             {% if is_granted('ROLE_USER') == false %}
                 {% set logoutMenu = knp_menu_get('logoutMenu', [], {'_route': app.request.attributes.get('_route')}) %}
                 {{ knp_menu_render(logoutMenu) }}
@@ -53,3 +65,62 @@
         </div>
     </main>
 {% endblock container_content %}
+
+{% block footer_tag_class %}
+
+{% endblock footer_tag_class %}
+
+{% block footer_content %}
+
+    <div class="d-block d-sm-none">
+
+        {% set authorizeRoutes = ['home', 'user_partner_company_offre_category', 'user_partner_company_offre_single'] %}
+
+        {# Category Menu #}
+        {% if app.request.attributes.get('_route') in authorizeRoutes %}
+            
+            {% set menu = knp_menu_get('sidebarMenu', [], {'_route': app.request.attributes.get('_route'), 'offre': offre, 'categories': categories, 'is': 'footer'}) %}
+
+            <div class="footer-category-menu fixed-bottom">
+                <div class="collapse w-100" id="navbarToggleCategoryMenu">
+                    <div class="bg-dark pt-2 pb-2 pl-0 pr-0">
+                        <h4 class="d-none">Category Menu</h4>
+                        {{ knp_menu_render(menu, {'currentClass': 'active bg-light rounded-0 border-left-0 border-right-0', 'allow_safe_labels': true}) }}
+                    </div>
+                </div>
+                <nav class="navbar navbar-dark bg-secondary text-white">
+                    <span class="current-category-name text-white"></span>
+                    <i class="fas fa-caret-up cursor-pointer toggle-footer-category-menu" data-toggle="collapse" data-target="#navbarToggleCategoryMenu" aria-controls="navbarToggleCategoryMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    </i>
+                </nav>
+            </div>
+                    
+        {% endif %}
+
+        {# Footer Menu #}
+        <div class="pos-f-t fixed-bottom">
+            <div class="collapse" id="navbarToggleFooterMenu">
+                <div class="bg-dark p-4">
+                    <h4 class="text-white">Collapsed content</h4>
+                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                </div>
+            </div>
+            <nav class="navbar navbar-light bg-dark d-flex align-items-center text-white">
+
+                <i class="fas cursor-pointer fa-bars position-absolute left-0 ml-3" data-toggle="collapse" data-target="#navbarToggleFooterMenu" aria-controls="navbarToggleFooterMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </i>
+
+                <a class="footer-logo navbar-brand background-logo text-hide mx-auto" href="{{ path('home') }}">
+                    <span>NofiPlus.com</span>
+                </a>
+                <a href="{{ path('fos_user_registration_register') }}" title="{{ 'layout.buy' | trans }}" class="position-absolute right-0 mr-3 btn btn-sm btn-outline-secondary border border-success">
+                    {{ 'layout.buy' | trans }}
+                </a>
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="d-none d-sm-block">Desktop footer content</div>
+{% endblock footer_content %}

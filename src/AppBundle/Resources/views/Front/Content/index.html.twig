@@ -36,3 +36,11 @@
     </div>
 
 {% endblock content %}    
+
+{% block footer_front_script %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('build/front_offre.js') }}"></script>
+
+{% endblock footer_front_script %}

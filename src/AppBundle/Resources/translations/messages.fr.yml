@@ -115,6 +115,7 @@ layout:
     go_profile: 'Aller sur mon profil'
     logout: Déconnexion
     login: Connexion
+    buy: 'Commander'
     register: Inscription
     logged_in_as: 'Connecté en tant que %username%'
     update: Modifier
@@ -122,6 +123,7 @@ layout:
     partner: 'Partenaire'
     address: 'Adresse'
     offres: 'Offres'
+    join_network: 'Réjoindre le réseau'
     company: 
         company: 'Entreprise'
         can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'

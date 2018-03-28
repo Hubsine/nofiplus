@@ -1,4 +1,4 @@
-import img from '../images/default_avatar.png';
+//import nofiplus_logo from '../images/nofiplus_logo_noir.png';
 
 /***
  * Required

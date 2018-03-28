@@ -56,7 +56,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
     public function createLogoutMenu(array $options)
     {
         $menu = $this->factory->createItem('menu.home', ['route'=>'home'])
-               ->setChildrenAttribute('class', 'nav');
+               ->setChildrenAttribute('class', 'nav position-absolute right-0 mr-3');
         
         ###
         # Login 
@@ -243,15 +243,18 @@ class FrontMenuBuilder extends AbstractMenuBuilder
     {
         $_route         = $this->getRouteName();
         $allCount       = 0;
+        $is             = isset( $options['is'] ) ? $options['is'] : 'header';
         
         $extraLabelHtml = '<span class="badge badge-primary badge-pill ml-3">%s</span>';
         $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center';
+        $navItemClass  .= $is === 'footer' ? ' p-0 bg-dark' : '';
         $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center';
+        $navLinkClass   .= $is === 'footer' ? ' text-white' : '';
         
         $categories     = $options['categories'];
         $offre          = $options['offre'];
         
-        $menu   = $this->factory->createItem('menu.home', [
+        $menu   = $this->factory->createItem('menu.sidebar.all', [
                 'route' => 'home'
             ])
             ->setChildrenAttribute('class', 'nav flex-column');
@@ -295,10 +298,9 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         }
         
         $allItem
-            ->setLabel( $this->translator->trans('menu.home') . sprintf($extraLabelHtml, $allCount))
+            ->setLabel( $this->translator->trans('menu.sidebar.all') . sprintf($extraLabelHtml, $allCount))
             ->setExtra('safe_label', true)   
         ;
-        
         
         return $menu;
     }
