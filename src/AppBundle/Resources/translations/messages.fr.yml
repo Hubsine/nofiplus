@@ -117,6 +117,7 @@ layout:
     logout: Déconnexion
     login: Connexion
     buy: 'Commander'
+    buy_carte: 'Commander ma carte'
     register: Inscription
     logged_in_as: 'Connecté en tant que %username%'
     update: Modifier

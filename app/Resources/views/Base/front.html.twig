@@ -16,6 +16,16 @@
                     </li>
                 </ul>
             {% endif %}
+            
+            {% if is_granted('ROLE_USER') %}
+                <ul class="nav position-absolute left-0 ml-3">
+                    <li class="mr-2 nav-item first">        
+                        <a href="{{ path('page_carte_index') }}" class="nav-link border border-success">    
+                            {{ 'layout.buy_carte' | trans }}
+                        </a>        
+                    </li>
+                </ul>
+            {% endif %}
 
             <a class="header-logo background-logo navbar-brand mx-auto p-0 text-hide" href="{{ path('home') }}">
                 <span>NofiPlus.com</span>
@@ -49,7 +59,15 @@
                         </li>
                     </ul>
                             
-                {% endif %} 
+                {% else %} 
+                    <ul class="nav position-absolute right-0">
+                        <li class="mr-2 nav-item first">        
+                            <a href="{{ path('fos_user_security_logout') }}" class="nav-link border border-danger mr-2">    
+                                <i class="fas fa-sign-out-alt mr-2"></i>{{ 'layout.logout' | trans }}
+                            </a>        
+                        </li>
+                    </ul>
+                {% endif %}
                 
             {% endif %}
             
