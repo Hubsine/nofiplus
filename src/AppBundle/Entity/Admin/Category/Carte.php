@@ -33,16 +33,6 @@ class Carte implements AdminEntityInterface, ProductEntityInterface
     private $id;
     
     /**
-     * @var integer
-     * 
-     * @ORM\Column(type="integer", name="price")
-     * 
-     * @Assert\NotBlank(message="assert.not_blank")
-     * @Assert\Type(type="integer", message="assert.type")
-     */
-    private $price;
-    
-    /**
      * @var float
      *
      * @ORM\Column(name="amount", type="decimal", precision=10, scale=2)
@@ -62,30 +52,6 @@ class Carte implements AdminEntityInterface, ProductEntityInterface
         return $this->id;
     }
 
-    /**
-     * Set price
-     *
-     * @param integer $price
-     *
-     * @return Carte
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return integer
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-    
     /**
      * Set amount
      *

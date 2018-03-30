@@ -1,11 +1,32 @@
 {% extends "@App/Base/front.html.twig" %}
 
+{% block content_title %}
+    {{ 'layout.carte.discover' | trans }}
+{% endblock content_title %}
+
 {% block content %}
 
-    {% for carte in cartes %}
-        <a href="{{ path('carte_order_new', {'carte': carte.slug}) }}" title="{{ carte.name }}">
-            {{ 'pages.carte.order' | trans }}
-        </a>
-    {% endfor %}
-    
+    <div class="card-deck mb-3 text-center">
+
+        {% for carte in cartes %}
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ carte.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title h3 pricing-card-title"><i class="fas fa-euro-sign"></i> {{ carte.amount }} <small class="text-muted">/ {{ 'Year' | trans }}</small></h1>
+                    <div class="mb-3">
+                        {% autoescape %}
+                            {{ carte.about | raw }}
+                        {% endautoescape %}
+                    </div>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{{ path('carte_order_new', {'carte': carte.slug}) }}" title="{{ carte.name }}" title="{{ carte.name }}">
+                        {{ 'pages.carte.order' | trans }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
 {% endblock content %}    

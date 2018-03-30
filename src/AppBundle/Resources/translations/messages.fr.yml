@@ -137,6 +137,8 @@ layout:
         location: 'En physique'
         web: 'Sur internet'
         tel: 'Par téléphone'
+    carte:
+        discover: 'Découvrez nos cartes'
     
 form:
     infos: 'Informations'
