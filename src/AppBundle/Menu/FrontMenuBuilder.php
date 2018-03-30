@@ -8,6 +8,7 @@ use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Entity\User\Partner\Company;
 use AppBundle\Entity\User\Partner\Offre;
+use Symfony\Component\Security\Core\User\UserInterface;
 use AppBundle\Exception\BadInstanceException;
 
 /**
@@ -33,6 +34,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         $login      = $menu->addChild('menu.login', ['route'  => 'fos_user_security_login'])
                     ->setDisplay(false);
+        
         $register   = $menu->addChild('menu.register', ['route'  => 'fos_user_registration_register'])
                     ->setDisplay(false);
         
@@ -44,6 +46,73 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             $this->addActiveClassOnLink($item, $options);
         }
         
+        return $menu;
+    }
+    
+    public function createMainMobileMenu(array $options)
+    {
+        $user           = $this->tokenStorage->getToken()->getUser();
+        $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center bg-dark p-0';
+        $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center text-white';
+
+        $menu   = $this
+            ->factory->createItem('menu.home', [
+                'route'     => 'home',
+            ])
+            ->setChildrenAttribute('class', 'nav flex-column')    
+            ;
+
+        if( $user instanceof UserInterface )
+        {
+            if( $user->isPartner() )
+            {
+                $menu->addChild('menu.account', [
+                    'route'             => $this->routeUtil->getCompleteRoute(Partner::class, 'index'),
+                    'routeParameters'   => ['partner'    => $user->getSlug()]
+                ])
+                    ->setAttribute('class', $navItemClass)
+                    ->setLinkAttribute('class', $navLinkClass);
+            }
+
+            if( $user->isAbonne() )
+            {
+                $menu->addChild('menu.account', [
+                    'route'             => $this->routeUtil->getCompleteRoute(Abonne::class, 'index'),
+                    'routeParameters'   => ['abonne'    => $user->getSlug()]
+                ])
+                    ->setAttribute('class', $navItemClass)
+                    ->setLinkAttribute('class', $navLinkClass);
+            }
+            
+            $menu->addChild('layout.logout', [
+                'route'             => 'fos_user_security_logout'
+            ])
+                ->setAttribute('class', $navItemClass)
+                ->setLinkAttribute('class', $navLinkClass);
+        }    
+        else
+        {   
+            ###
+            # Login 
+            ###
+            $menu->addChild('menu.login', [
+                    'route'  => 'fos_user_security_login',
+                    #'routeParameters'   => ['asuser'  => 'abonne'] pas necessaire
+                ])
+                ->setAttribute('class', $navItemClass)
+                ->setLinkAttribute('class', $navLinkClass);
+
+            ###
+            # Register
+            ###
+            $menu->addChild('menu.register', [
+                    'route'  => 'fos_user_registration_register',
+                    'routeParameters'   => ['asuser'  => 'abonne']
+                ])
+                ->setAttribute('class', $navItemClass)
+                ->setLinkAttribute('class', $navLinkClass);
+            }
+            
         return $menu;
     }
     
@@ -247,7 +316,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         
         $extraLabelHtml = '<span class="badge badge-primary badge-pill ml-3">%s</span>';
         $navItemClass   = 'nav-item list-group-item d-flex justify-content-between align-items-center';
-        $navItemClass  .= $is === 'footer' ? ' p-0 bg-dark' : '';
+        $navItemClass  .= $is === 'footer' ? ' bg-dark p-0' : '';
         $navLinkClass   = 'nav-link w-100 d-flex justify-content-between align-items-center';
         $navLinkClass   .= $is === 'footer' ? ' text-white' : '';
         
@@ -304,5 +373,4 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         
         return $menu;
     }
-    
 }

@@ -128,6 +128,7 @@ services:
             - { name: knp_menu.menu_builder,    method: createLogoutMenu,          alias: logoutMenu }
             - { name: knp_menu.menu_builder,    method: createUserAccountMenu,     alias: userAccountMenu }
             - { name: knp_menu.menu_builder,    method: createSidebarMenu,         alias: sidebarMenu }
+            - { name: knp_menu.menu_builder,    method: createMainMobileMenu,      alias: mainMobileMenuMenu }
             
     app.admin_menu_builder:
         class: AppBundle\Menu\AdminMenuBuilder

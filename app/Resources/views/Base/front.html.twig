@@ -7,21 +7,52 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-light bg-light" role="navigation">
         <div class="container position-relative">
 
-            <ul class="nav position-absolute left-0 ml-3">
-                <li class="mr-2 nav-item first">        
-                    <a href="{{ path('fos_user_registration_register', {'asuser': 'partner'}) }}" class="nav-link border border-success">    
-                        {{ 'layout.join_network' | trans }}
-                    </a>        
-                </li>
-            </ul>
+            {% if is_granted('ROLE_USER') == false %}
+                <ul class="nav position-absolute left-0 ml-3">
+                    <li class="mr-2 nav-item first">        
+                        <a href="{{ path('fos_user_registration_register', {'asuser': 'partner'}) }}" class="nav-link border border-success">    
+                            {{ 'layout.join_network' | trans }}
+                        </a>        
+                    </li>
+                </ul>
+            {% endif %}
 
             <a class="header-logo background-logo navbar-brand mx-auto p-0 text-hide" href="{{ path('home') }}">
                 <span>NofiPlus.com</span>
             </a>
+
             {% if is_granted('ROLE_USER') == false %}
                 {% set logoutMenu = knp_menu_get('logoutMenu', [], {'_route': app.request.attributes.get('_route')}) %}
                 {{ knp_menu_render(logoutMenu) }}
+            {% else %}
+
+                {% if app.user.isAdmin == false %}    
+                    
+                    {% if app.user.isPartner %}
+                        {% set routeName = 'user_partner_index' %}
+                        {% set routeParameter = {'partner': app.user.slug} %}
+                    {% else %}
+                        {% set route = 'user_abonne_index' %}
+                        {% set routeParameter = {'abonne': app.user.slug} %}
+                    {% endif %}
+
+                    <ul class="nav position-absolute right-0">
+                        <li class="mr-2 nav-item first">        
+                            <a href="{{ path(route, routeParameter) }}" class="nav-link border border-success mr-2">    
+                                <i class="fas fa-user mr-2"></i>{{ 'menu.account' | trans }}
+                            </a>        
+                        </li>
+                        <li class="mr-2 nav-item first">        
+                            <a href="{{ path('fos_user_security_logout') }}" class="nav-link border border-danger mr-2">    
+                                <i class="fas fa-sign-out-alt mr-2"></i>{{ 'layout.logout' | trans }}
+                            </a>        
+                        </li>
+                    </ul>
+                            
+                {% endif %} 
+                
             {% endif %}
+            
         </div>
     </nav>
 {% endblock header_content %}
@@ -67,7 +98,7 @@
 {% endblock container_content %}
 
 {% block footer_tag_class %}
-
+fixed-bottom
 {% endblock footer_tag_class %}
 
 {% block footer_content %}
@@ -78,14 +109,14 @@
 
         {# Category Menu #}
         {% if app.request.attributes.get('_route') in authorizeRoutes %}
-            
+
             {% set menu = knp_menu_get('sidebarMenu', [], {'_route': app.request.attributes.get('_route'), 'offre': offre, 'categories': categories, 'is': 'footer'}) %}
 
             <div class="footer-category-menu fixed-bottom">
                 <div class="collapse w-100" id="navbarToggleCategoryMenu">
                     <div class="bg-dark pt-2 pb-2 pl-0 pr-0">
                         <h4 class="d-none">Category Menu</h4>
-                        {{ knp_menu_render(menu, {'currentClass': 'active bg-light rounded-0 border-left-0 border-right-0', 'allow_safe_labels': true}) }}
+                        {{ knp_menu_render(menu, {'currentClass': 'active rounded-0 border-left-0 border-right-0', 'allow_safe_labels': true}) }}
                     </div>
                 </div>
                 <nav class="navbar navbar-dark bg-secondary text-white">
@@ -94,15 +125,15 @@
                     </i>
                 </nav>
             </div>
-                    
+
         {% endif %}
 
         {# Footer Menu #}
         <div class="pos-f-t fixed-bottom">
             <div class="collapse" id="navbarToggleFooterMenu">
                 <div class="bg-dark p-4">
-                    <h4 class="text-white">Collapsed content</h4>
-                    <span class="text-muted">Toggleable via the navbar brand.</span>
+                    {% set menu = knp_menu_get('mainMobileMenuMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+                    {{ knp_menu_render(menu, {'currentClass': 'active', 'allow_safe_labels': true}) }}
                 </div>
             </div>
             <nav class="navbar navbar-light bg-dark d-flex align-items-center text-white">
@@ -114,7 +145,7 @@
                 <a class="footer-logo navbar-brand background-logo text-hide mx-auto" href="{{ path('home') }}">
                     <span>NofiPlus.com</span>
                 </a>
-                <a href="{{ path('fos_user_registration_register') }}" title="{{ 'layout.buy' | trans }}" class="position-absolute right-0 mr-3 btn btn-sm btn-outline-secondary border border-success">
+                <a href="{{ path('page_carte_index') }}" title="{{ 'layout.buy' | trans }}" class="position-absolute right-0 mr-3 btn btn-sm btn-outline-secondary border border-success">
                     {{ 'layout.buy' | trans }}
                 </a>
             </nav>

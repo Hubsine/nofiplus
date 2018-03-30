@@ -112,6 +112,7 @@ resetting:
             L'équipe
 
 layout:
+    account: 'Compte'
     go_profile: 'Aller sur mon profil'
     logout: Déconnexion
     login: Connexion
@@ -257,6 +258,7 @@ menu:
     users: 
         all: Profiles
         show: Username
+    account: 'Compte'
     profile: Profil
     parameters: 'Paramètres'
     update: 'Modifier'
@@ -270,7 +272,7 @@ menu:
         company_offres: 'Entreprises & offres'
         parameters: 'Paramètres'
     sidebar:
-        all: 'Toutes les catégories'
+        all: 'Toutes les offres'
     
 pages:
     carte:

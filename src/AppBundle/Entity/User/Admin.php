@@ -30,17 +30,17 @@ class Admin extends BaseUser implements AdminEntityInterface
         parent::__construct();
     }
     
-    public function isAdmin(): boolean
+    public function isAdmin()
     {
         return true;
     }
     
-    public function isPartner(): boolean
+    public function isPartner()
     {
         return false;
     }
     
-    public function isAbonne(): boolean
+    public function isAbonne()
     {
         return false;
     }
