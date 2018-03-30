@@ -46,6 +46,7 @@ class AppKernel extends Kernel
             new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(), #no used, to remove
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new AppBundle\AppBundle()
         ];
 
