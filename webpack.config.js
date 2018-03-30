@@ -14,13 +14,6 @@ Encore
         .addEntry('front_offre', './assets/js/pages/front_offre.js')
         .addEntry('order', './assets/js/pages/order.js')
 
-//        .configureBabel(function(babelConfig) {
-//            
-//            // add additional presets
-//            babelConfig.presets.push('es2015');
-//
-//        })
-
         .createSharedEntry('vendor', [
             'jquery',
             'jquery-ui-bundle',
@@ -29,7 +22,6 @@ Encore
             './vendor/twbs/bootstrap/dist/js/bootstrap.min.js',
             './assets/js/main.js',
             './assets/js/jquery.collection.js',
-            'tinymce',
             'holderjs'
         ])
 
@@ -39,22 +31,6 @@ Encore
                     'holder': 'holderjs',
                     'window.Holder': 'holderjs'
                 }), 10)
-        ////
-        // File Loader
-        ////
-//        .addLoader({
-//            test: /\.(png|svg|jpg|gif)$/,
-//            use: [
-//                {
-//                    loader: 'file-loader',
-//                    options: {
-//                        name: '[name].[ext]',
-//                        publicPath: 'assets/',
-//                        outputPath: 'images/'
-//                    }
-//                }
-//            ]
-//        })
         ////
         // Image Webpack Loader
         /////
@@ -92,35 +68,6 @@ Encore
                             }
                 }]
         })
-        ////
-        // Url Loader
-        /////
-//        .addLoader({
-//            test: /\.(png|svg|jpg|gif)$/,
-//            use: [
-//                {
-//                    loader: 'url-loader',
-//                    options: {
-//                        //limit: 35000
-//                    }
-//                }
-//            ]
-//        })
-//        .addLoader(
-//        {
-//            test: require.resolve('tinymce/tinymce'),
-//            use: [{
-//                loader: 'imports?this=>window'
-//                    //'exports?window.tinymce'
-//            }]
-//        }
-//        )
-//        .addLoader({
-//            test: /tinymce\/(themes|plugins)\//,
-//            use: [{
-//                loader: 'imports?this=>window'
-//            }]
-//        }  )
         // allow sass/scss files to be processed
         .enableSassLoader()
         //.autoProvidejQuery()
