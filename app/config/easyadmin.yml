@@ -1,0 +1,62 @@
+# Easy Admin Bundle        
+easy_admin:
+    site_name: 'Dashboard | Nofi Plus'
+    formats:
+        date:     'd/m/Y'
+        time:     'H:i'
+        datetime: 'd/m/Y H:i:s'
+    design:
+        menu:
+            - { label: 'Category' }
+            - { entity: 'CategoryCarte', label: 'Carte' }
+            - { entity: 'CategoryCompany', label: 'Compagnies' }
+            - { entity: 'TypeOffre', label: 'Type d''offre' }
+            - { entity: 'CategoryOffre', label: 'Catégorie d''offre' }
+            # Pages
+            - { label: 'Pages' }
+            - { entity: 'Pages', label: 'Pages' }
+            - { entity: 'Maintenance', label: 'Maintenance' }
+    entities:     
+        CategoryCarte:
+            class: AppBundle\Entity\Admin\Category\Carte
+            label: Carte
+            form:
+                fields:
+                    - { property: name, label: 'Nom' }
+                    - { property: amount, label: 'Prix' }
+                    - { property: about, label: 'A propos', type: 'ckeditor' }
+        CategoryCompany:
+            class: AppBundle\Entity\Admin\Category\Company
+            label: Compagnies
+        TypeOffre:
+            class: AppBundle\Entity\Admin\Category\Offre
+            label: Offre
+        CategoryOffre:
+            class: AppBundle\Entity\Admin\Category\OffreDomain
+            label: 'Catégorie d''offre'
+            form:
+                fields:
+                    - { property: name, label: 'Nom' }
+                    - { property: about, label: 'Description' }
+        Pages:
+            class: AppBundle\Entity\Admin\Pages\Page
+            label: Pages
+            list:
+                fields: ['id', 'title', 'label', 'uniqueStringId', 'createdAt', deletedAt']
+            form:
+                fields:
+                    - { property: title, label: 'Titre de la page' }
+                    - { property: label, help: 'Label du menu dans le front' }
+                    - { property: uniqueStringId, type: choice, type_options: {choices: {'Laisser vide': '', Contact: contact, CGV: cgv, 'Mentions légales': 'mentions-legales'} }, label: 'Type de page' }
+                    #- { property: locale, type: locale, type_options: {required: true}, label: 'Langue de la page' }
+                    - { property: content, trans: true, type: ckeditor }
+        Maintenance:
+            class: AppBundle\Entity\Admin\Pages\Maintenance
+            list:
+                fields: ['id', 'enable', 'title', 'createdAt', deletedAt']
+            form:
+                fields:
+                    - { property: title, label: 'Titre de la page' }
+                    - enable
+                    #- { property: locale, type: locale }
+                    - { property: content, trans: true, type: ckeditor }

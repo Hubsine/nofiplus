@@ -28,6 +28,7 @@ assert:
         carte_order: 'Vous avez déjà passé commande pour cette carte pour l''année en cours'
         carte_number: 'Le numéro de carte existe déjà'
         user_carte_order: 'Une carte exite déjà pour cette commande et cet utilisateur'
+        unique_string_id: 'Une page existe déjà avec cet identifiant'
     length:
         max: 'La valeur ne peut pas dépasser {{ limit }} characters'
         min: 'La valeur doit faire plus de {{ limit }} characters'
