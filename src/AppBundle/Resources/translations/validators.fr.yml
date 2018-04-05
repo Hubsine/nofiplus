@@ -5,6 +5,7 @@ app:
 assert:
     not_blank: 'Ce champ est obligatoire'
     type: 'Cette valeur doit être de type {{ type }}'        
+    email: 'L''adresse e-mail est invalide'
     mobile_phone_number: 'Le numéro de mobile est invalide'
     country: 'Le pays n''est pas valide'
     choice: 'Le choix est incorrect'

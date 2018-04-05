@@ -239,6 +239,12 @@ form:
         payment_method_required: 'Vous devez choisir une méthode de paiement'
         invalid_payment_method: 'La méthode de paiement est invalide'
         invalid_payment_instruction: 'Invalid payment instruction'    
+    contact:
+        fromName: 'Nom'
+        fromEmail: 'E-mail'
+        subject: 'Sujet'
+        message: 'Message'
+        submit: 'Envoyer'
     
 Day: 'Jour'
 Month: 'Mois'
@@ -253,6 +259,8 @@ flash:
     update_success: 'L''élèment a été mise à jour avec succès.'
     delete_success: 'L''élèment a été supprimer avec succès.'
     delete_failure: 'Une erreur inconnue s''est produite. L''élèment n''a pas pu être supprimé.'
+    contact:
+        success: 'Votre message a été envoyé.'
     payment: 
         unknow_error: 'Une erreure inconnue nous empêche de finaliser votre commande. Ré-essayer.'
     

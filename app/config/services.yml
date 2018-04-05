@@ -3,6 +3,8 @@
 parameters:
     app.registration.confirmation.template: '@@Front/User/Registration/email.txt.twig'
     app.resetting.email.template: '@@Front/User/Resetting/email.txt.twig'
+    app.contact.template: '@@Front/contact.txt.twig'
+    app.contact.from_email: 'shonen.shojo@gmail.com'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -74,9 +76,11 @@ services:
                 template:
                     confirmation: '%app.registration.confirmation.template%'
                     resetting: '%app.resetting.email.template%'
+                    contact: '%app.contact.template%'
                 from_email:
                     confirmation: '%fos_user.registration.confirmation.from_email%'
                     resetting: '%fos_user.resetting.email.from_email%'
+                    contact: '%app.contact.from_email%'
     AppBundle\Mailer\TwigSwiftMailer: '@app.mailer.twig_swift_mailer'
     
     ###

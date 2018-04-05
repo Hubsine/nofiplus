@@ -1,5 +1,9 @@
 {% extends "@App/Base/front.html.twig" %}
 
+{% if form is defined %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% endif %}
+
 {% block content_title %}
     {% autoescape %} {{ page.title }} {% endautoescape %}
 {% endblock content_title %}
@@ -7,9 +11,21 @@
 {% block content %}
 
     {% autoescape %}
-    
+
         {{ page.content | raw }}
-    
+
     {% endautoescape %}
-    
+
+    {% if form is defined %}
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="form-group">
+            <input name="submit" class="btn btn-primary" type="submit" value="{{ 'form.contact.submit' | trans }}" />
+        </div>
+        
+        {{ form_end(form) }}
+
+    {% endif %}
+
 {% endblock content %}    

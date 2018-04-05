@@ -1,0 +1,13 @@
+# Easy Admin Bundle   
+easy_admin:
+    design:
+        menu:
+            # Pages
+            - { label: 'Contact' }
+            - { entity: 'Contact', label: 'Messages' }
+    entities:     
+        Contact:
+            class: AppBundle\Entity\Contact
+            disabled_actions: ['new','edit']
+            list:
+                fields: [id, fromName, fromEmail, subject, message, 'createdAt', deletedAt']

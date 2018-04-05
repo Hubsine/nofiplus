@@ -2,7 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: easyadmin.yml }
+    - { resource: easyadmin/basic.yml }
+    - { resource: easyadmin/category.yml }
+    - { resource: easyadmin/pages.yml }
+    - { resource: easyadmin/contact.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration

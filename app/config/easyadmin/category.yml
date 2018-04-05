@@ -1,0 +1,32 @@
+# Easy Admin Bundle   
+easy_admin:
+    design:
+        menu:
+            - { label: 'Category' }
+            - { entity: 'CategoryCarte', label: 'Carte' }
+            - { entity: 'CategoryCompany', label: 'Compagnies' }
+            - { entity: 'TypeOffre', label: 'Type d''offre' }
+            - { entity: 'CategoryOffre', label: 'Catégorie d''offre' }
+    entities:     
+        CategoryCarte:
+            class: AppBundle\Entity\Admin\Category\Carte
+            label: Carte
+            form:
+                fields:
+                    - { property: name, label: 'Nom' }
+                    - { property: amount, label: 'Prix' }
+                    - { property: about, label: 'A propos', type: 'ckeditor' }
+        CategoryCompany:
+            class: AppBundle\Entity\Admin\Category\Company
+            label: Compagnies
+        TypeOffre:
+            class: AppBundle\Entity\Admin\Category\Offre
+            label: Offre
+        CategoryOffre:
+            class: AppBundle\Entity\Admin\Category\OffreDomain
+            label: 'Catégorie d''offre'
+            form:
+                fields:
+                    - { property: name, label: 'Nom' }
+                    - { property: about, label: 'Description' }
+        

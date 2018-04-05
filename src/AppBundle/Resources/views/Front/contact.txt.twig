@@ -1,0 +1,12 @@
+{% block subject %}
+{%- autoescape -%}
+{{ subject }}
+{%- endautoescape -%}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape %}
+{{ message }}
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

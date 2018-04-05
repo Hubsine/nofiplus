@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use AppBundle\Entity\User\User;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Entity\Contact;
 use AppBundle\Exception\BadInstanceException;
 
 /**
@@ -73,14 +74,30 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
 
         $this->sendMessage($template, $context, $this->parameters['from_email']['resetting'], (string) $user->getEmail());
     }
+    
+    public function sendContactMessage(Contact $contact)
+    {
+        $template   = $this->parameters['template']['contact'];
+        $fromEmail  = $this->parameters['from_email']['contact'];
+        
+        $fromSenderEmail  = $contact->getFromEmail();
+        $fromSenderName   = $contact->getFromName();
+        
+        $context    = [
+            'subject'   => $contact->getSubject(),
+            'message'   => $contact->getMessage()
+        ];
+        
+        $this->sendMessage($template, $context, [$fromEmail => 'Contact - NOFI Plus'], $fromEmail, [$fromSenderEmail  => $fromSenderName]);
+    }
 
     /**
      * @param string $templateName
      * @param array  $context
      * @param array  $fromEmail
-     * @param string $toEmail
+     * @param strin|array $toEmail
      */
-    protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
+    protected function sendMessage($templateName, $context, $fromEmail, $toEmail, $replyTo = [])
     {
         $template = $this->twig->load($templateName);
         $subject = $template->renderBlock('subject', $context);
@@ -95,7 +112,8 @@ class TwigSwiftMailer extends BaseTwigSwiftMailer
         $message = (new \Swift_Message())
             ->setSubject($subject)
             ->setFrom($fromEmail)
-            ->setTo($toEmail);
+            ->setTo($toEmail)
+            ->setReplyTo($replyTo);
 
         if (!empty($htmlBody)) {
             $message->setBody($htmlBody, 'text/html')
