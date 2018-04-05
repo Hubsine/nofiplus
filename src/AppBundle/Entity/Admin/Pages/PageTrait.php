@@ -37,7 +37,7 @@ trait PageTrait
      *
      * @Gedmo\Translatable
      * 
-     * @ORM\Column(name="content", type="string", length=255)
+     * @ORM\Column(name="content", type="text", columnDefinition="longtext", length=255)
      * 
      * @Assert\NotBlank(message="assert.not_blank")
      * @Assert\Type(type="string", message="assert.type")

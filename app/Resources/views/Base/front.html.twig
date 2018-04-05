@@ -16,7 +16,7 @@
                     </li>
                 </ul>
             {% endif %}
-            
+
             {% if is_granted('ROLE_USER') %}
                 <ul class="nav position-absolute left-0 ml-3">
                     <li class="mr-2 nav-item first">        
@@ -37,7 +37,7 @@
             {% else %}
 
                 {% if app.user.isAdmin == false %}    
-                    
+
                     {% if app.user.isPartner %}
                         {% set routeName = 'user_partner_index' %}
                         {% set routeParameter = {'partner': app.user.slug} %}
@@ -58,7 +58,7 @@
                             </a>        
                         </li>
                     </ul>
-                            
+
                 {% else %} 
                     <ul class="nav position-absolute right-0">
                         <li class="mr-2 nav-item first">        
@@ -68,9 +68,9 @@
                         </li>
                     </ul>
                 {% endif %}
-                
+
             {% endif %}
-            
+
         </div>
     </nav>
 {% endblock header_content %}
@@ -116,7 +116,7 @@
 {% endblock container_content %}
 
 {% block footer_tag_class %}
-fixed-bottom
+    fixed-bottom
 {% endblock footer_tag_class %}
 
 {% block footer_content %}
@@ -150,7 +150,7 @@ fixed-bottom
         <div class="pos-f-t fixed-bottom">
             <div class="collapse" id="navbarToggleFooterMenu">
                 <div class="bg-dark p-4">
-                    {% set menu = knp_menu_get('mainMobileMenuMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+                    {% set menu = knp_menu_get('mainMobileMenu', [], {'_route': app.request.attributes.get('_route')}) %}
                     {{ knp_menu_render(menu, {'currentClass': 'active', 'allow_safe_labels': true}) }}
                 </div>
             </div>
@@ -171,5 +171,8 @@ fixed-bottom
 
     </div>
 
-    <div class="d-none d-sm-block">Desktop footer content</div>
+    <div class="d-none d-sm-block bg-light">
+        {% set footerMenu = knp_menu_get('footerMenu', [], {'_route': app.request.attributes.get('_route')}) %}
+        {{ knp_menu_render(footerMenu) }}
+    </div>
 {% endblock footer_content %}

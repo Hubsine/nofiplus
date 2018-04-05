@@ -276,6 +276,10 @@ menu:
         parameters: 'Paramètres'
     sidebar:
         all: 'Toutes les offres'
+    footer:
+        contact: Contact
+        cgv: CGV
+        mentions_legales: 'Mentions légales'
     
 pages:
     carte:

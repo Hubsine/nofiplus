@@ -73,6 +73,16 @@ abstract class AbstractMenuBuilder
     }
     
     /**
+     * Create parent menu item 
+     * 
+     * @return \Knp\Menu\ItemInterface
+     */
+    public function createParentItem()
+    {
+        return $this->factory->createItem('menu.home', ['route'=>'home']);
+    }
+    
+    /**
      * Check if current user is equal to request user
      * Can be used to show MenuItem element 
      * 

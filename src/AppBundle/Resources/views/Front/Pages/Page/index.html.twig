@@ -1,0 +1,15 @@
+{% extends "@App/Base/front.html.twig" %}
+
+{% block content_title %}
+    {% autoescape %} {{ page.title }} {% endautoescape %}
+{% endblock content_title %}
+
+{% block content %}
+
+    {% autoescape %}
+    
+        {{ page.content | raw }}
+    
+    {% endautoescape %}
+    
+{% endblock content %}    

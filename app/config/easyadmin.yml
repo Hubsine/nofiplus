@@ -48,6 +48,7 @@ easy_admin:
                     - { property: title, label: 'Titre de la page' }
                     - { property: label, help: 'Label du menu dans le front' }
                     - { property: uniqueStringId, type: choice, type_options: {choices: {'Laisser vide': '', Contact: contact, CGV: cgv, 'Mentions légales': 'mentions-legales'} }, label: 'Type de page' }
+                    - createdAt
                     #- { property: locale, type: locale, type_options: {required: true}, label: 'Langue de la page' }
                     - { property: content, trans: true, type: ckeditor }
         Maintenance:

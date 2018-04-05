@@ -5,3 +5,7 @@ carte_order:
     resource: "@AppBundle/Resources/config/routing/front/pages/carte/carte.yml"
     prefix: /cartes
     
+pages_index:
+    path: /{slug}
+    defaults: { _controller: AppBundle:Front\Pages\Page:index }
+    prefix: /pages

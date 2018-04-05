@@ -2,13 +2,13 @@
 
 namespace AppBundle\Menu;
 
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use AppBundle\Menu\AbstractMenuBuilder;
 use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Entity\User\Partner\Company;
 use AppBundle\Entity\User\Partner\Offre;
-use Symfony\Component\Security\Core\User\UserInterface;
+use AppBundle\Entity\Admin\Pages\Page;
 use AppBundle\Exception\BadInstanceException;
 
 /**
@@ -46,9 +46,48 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             $this->addActiveClassOnLink($item, $options);
         }
         
+        ###
+        # Pages 
+        ###
+        $pages  = $this->request->attributes->get('pages');
+        
+        foreach ($pages as $page) 
+        {
+            $menu
+                ->addChild($page->getLabel(), [
+                    'route' => $this->routeUtil->getCompleteRoute(Page::class, 'index'),
+                    'routeParameters'   => ['slug'  => $page->getSlug()]
+                ])
+                ->setChildrenAttribute('class', 'nav-item')
+                ->setLinkAttribute('class', 'nav-link')
+                ;
+        }
+        
         return $menu;
     }
     
+    public function createFooterMenu(array $options)
+    {
+        $pages  = $this->request->attributes->get('pages');
+        
+        $menu   = $this->factory->createItem('menu.home', ['route'=>'home'])
+                ->setChildrenAttribute('class', 'nav justify-content-center');
+        
+        foreach ($pages as $page) 
+        {
+            $menu
+                ->addChild($page->getLabel(), [
+                    'route' => $this->routeUtil->getCompleteRoute(Page::class, 'index'),
+                    'routeParameters'   => ['slug'  => $page->getSlug()]
+                ])
+                ->setChildrenAttribute('class', 'nav-item')
+                ->setLinkAttribute('class', 'nav-link')
+                ;
+        }
+        
+        return $menu;
+    }
+
     public function createMainMobileMenu(array $options)
     {
         $user           = $this->tokenStorage->getToken()->getUser();
