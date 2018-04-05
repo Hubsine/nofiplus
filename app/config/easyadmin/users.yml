@@ -1,0 +1,39 @@
+# Easy Admin Bundle   
+easy_admin:
+    design:
+        menu:
+            # Users
+            - { label: 'Users' }
+            - label: 'Abonne'
+              children:
+                - { entity: 'Abonne', label: 'Abonnes' }
+            - label: 'Partners'
+              children:
+                - { entity: 'Partner', label: 'Partenaires' }
+            - label: 'Admin'
+              children:
+                - { entity: 'Admin', label: 'Admins' }
+    entities:
+        Abonne:
+            class: AppBundle\Entity\User\Abonne\Abonne
+            disabled_actions: ['new','delete']
+            list: 
+                fields: [id, username, email, enabled, enabledByAdmin, lastLogin]
+        Partner:
+            class: AppBundle\Entity\User\Partner\Partner
+            disabled_actions: ['new','delete']
+            list: 
+                fields: 
+                    - id
+                    - username
+                    - email
+                    - enabled
+                    - enabledByAdmin
+                    - { property: phoneMobile, template: 'field_phone.html.twig' }
+                    - { property: phoneFixed, template: 'field_phone.html.twig' }
+                    - lastLogin
+        Admin:
+            class: AppBundle\Entity\User\Admin
+            disabled_actions: ['delete']
+            list: 
+                fields: [id, username, email, enabled, enabledByAdmin, lastLogin]

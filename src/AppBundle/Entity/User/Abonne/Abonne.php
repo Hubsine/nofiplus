@@ -53,6 +53,8 @@ class Abonne extends BaseUser implements AdminEntityInterface
         
         $this->orderCartes  = new ArrayCollection();
         $this->cartes       = new ArrayCollection();
+        
+        $this->setEnabledByAdmin(true);
     }
     
     public function isAdmin()

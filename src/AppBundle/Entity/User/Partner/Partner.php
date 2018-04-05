@@ -37,7 +37,7 @@ class Partner extends BaseUser implements AdminEntityInterface
     /**
      * @var integer
      * 
-     * @ORM\Column(type="phone_number", unique=true)
+     * @ORM\Column(type="phone_number", unique=true, nullable=true)
      * 
      * @AssertPhoneNumber(defaultRegion="FR", type="MOBILE", message="assert.phone.not_mobile_phone")
      */
@@ -46,7 +46,7 @@ class Partner extends BaseUser implements AdminEntityInterface
     /**
      * @var integer
      * 
-     * @ORM\Column(type="phone_number")
+     * @ORM\Column(type="phone_number", nullable=true)
      * 
      * @AssertPhoneNumber(defaultRegion="FR", type="FIXED_LINE", message="assert.phone.not_mobile_phone")
      */
