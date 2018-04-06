@@ -7,18 +7,42 @@ easy_admin:
             - label: 'Abonne'
               children:
                 - { entity: 'Abonne', label: 'Abonnes' }
+                - { entity: Carte, label: 'Cartes' }
             - label: 'Partners'
               children:
                 - { entity: 'Partner', label: 'Partenaires' }
+                - { entity: Company, label: Entreprises }
+                - { entity: Offre, label: Offres }
             - label: 'Admin'
               children:
                 - { entity: 'Admin', label: 'Admins' }
     entities:
+        ###
+        # Abonne
+        ###
         Abonne:
             class: AppBundle\Entity\User\Abonne\Abonne
             disabled_actions: ['new','delete']
             list: 
                 fields: [id, username, email, enabled, enabledByAdmin, lastLogin]
+        Carte:
+            class: AppBundle\Entity\User\Abonne\Carte
+            disabled_actions: ['new','delete']
+            list: 
+                fields: 
+                    - id
+                    - number
+                    - start 
+                    - end 
+                    - user
+                    - category
+                    - order
+        OrderCarte:
+            class: AppBundle\Entity\Payment\OrderCarte
+            disabled_actions: ['new','delete']
+        ###
+        # Partner
+        ###
         Partner:
             class: AppBundle\Entity\User\Partner\Partner
             disabled_actions: ['new','delete']
@@ -32,6 +56,46 @@ easy_admin:
                     - { property: phoneMobile, template: 'field_phone.html.twig' }
                     - { property: phoneFixed, template: 'field_phone.html.twig' }
                     - lastLogin
+            show:        
+                fields: 
+                    - id
+                    - username
+                    - email
+                    - enabled
+                    - enabledByAdmin
+                    - { property: phoneMobile, template: 'field_phone.html.twig' }
+                    - { property: phoneFixed, template: 'field_phone.html.twig' }
+                    - lastLogin
+        Company: 
+            class: AppBundle\Entity\User\Partner\Company
+            disabled_actions: ['new','delete']
+            list:
+                fields: 
+                    - id 
+                    - name 
+                    - about 
+                    - partner
+                    - address
+                    - { property: logo.name, type: 'image', base_path: '%app.media.company.logo%' }
+                    - category
+        Offre:
+            class: AppBundle\Entity\User\Partner\Offre
+            disabled_actions: ['new','delete']
+            list:
+                fields: 
+                    - id 
+                    - name
+                    - about 
+                    - start
+                    - end
+                    - company
+                    - { property: category.name, label: 'Type de réduction'}
+                    - { property: offreDomain.name, label: 'Catégorie' }
+                    - { property: featured.name, label: 'Image de l''offre', type: image, base_path: '%app.media.offre.featured%'}
+                    - howEnjoy
+        ###
+        # Admin
+        ###
         Admin:
             class: AppBundle\Entity\User\Admin
             disabled_actions: ['delete']
