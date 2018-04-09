@@ -23,14 +23,6 @@ class PaymentExtension extends \Twig_Extension
      */
     private $twig;
     
-    public static $avaibleStateCode = [
-        FinancialTransactionInterface::STATE_CANCELED   => 'canceled',
-        FinancialTransactionInterface::STATE_FAILED     => 'failed',
-        FinancialTransactionInterface::STATE_NEW        => 'new',   
-        FinancialTransactionInterface::STATE_PENDING    => 'pending',
-        FinancialTransactionInterface::STATE_SUCCESS    => 'success'
-    ];
-    
     /**
      * Constructor
      * 

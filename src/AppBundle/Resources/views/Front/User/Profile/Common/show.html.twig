@@ -161,8 +161,10 @@
                     {% for order in user.orderCartes %}
 
                         {% set paymentInst = order.paymentInstruction %}
-                        {% set payment     = paymentInst.payments[0] %}
-                        {% set transaction = payment.transactions[0] %}
+                        {% if paymentInst is not empty %}
+                            {% set payment     = paymentInst.payments[0] %}
+                            {% set transaction = payment.transactions[0] %}
+                        {% endif %}
                         {% set product     = order.carte %}
 
                         <div class="card mb-3">
@@ -177,45 +179,47 @@
 
                             <div id="collapse{{ loop.index }}" class="collapse {% if loop.index == 1 %}show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-parent="#accordion">
                                 <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>{{ 'profile.show.products' | trans }}</label>
-                                            </div>
-
-                                            <div class="col-md-9">
-                                                
-                                                <div class="row border-bottom">
-                                                    <div class="col">
-                                                        {{ 'profile.show.product_carte.name' | trans }}
-                                                    </div>
-                                                    <div class="col">
-                                                        {{ product.name }}
-                                                    </div>
-                                                </div>
-                                                    
-                                                <div class="row border-bottom">
-                                                    <div class="col">
-                                                        {{ 'profile.show.product_carte.amount' | trans }}
-                                                    </div>
-                                                    <div class="col">
-                                                        {{ product.amount }}
-                                                    </div>
-                                                </div>
-
-                                                <div class="row border-bottom">
-                                                    <div class="col">
-                                                        {{ 'profile.show.product_carte.about' | trans }}
-                                                    </div>
-                                                    <div class="col">
-                                                        <p>
-                                                            {{ product.about }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                                        
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>{{ 'profile.show.products' | trans }}</label>
                                         </div>
+
+                                        <div class="col-md-9">
+
+                                            <div class="row border-bottom">
+                                                <div class="col">
+                                                    {{ 'profile.show.product_carte.name' | trans }}
+                                                </div>
+                                                <div class="col">
+                                                    {{ product.name }}
+                                                </div>
+                                            </div>
+
+                                            <div class="row border-bottom">
+                                                <div class="col">
+                                                    {{ 'profile.show.product_carte.amount' | trans }}
+                                                </div>
+                                                <div class="col">
+                                                    {{ product.amount }}
+                                                </div>
+                                            </div>
+
+                                            <div class="row border-bottom">
+                                                <div class="col">
+                                                    {{ 'profile.show.product_carte.about' | trans }}
+                                                </div>
+                                                <div class="col">
+                                                    <p>
+                                                        {% autoescape %}
+                                                            {{ product.about | raw }}
+                                                        {% endautoescape %}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
