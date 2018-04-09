@@ -1,0 +1,10 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: nofiplus
+    database_user: root
+    database_password: nofinofi
+    mailer_transport: smtp
+    mailer_host: smtp.auth.1and1.com
+    mailer_user: contact@nofiplus.com
+    mailer_password: #nofiplus2018

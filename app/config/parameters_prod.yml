@@ -1,0 +1,10 @@
+parameters:
+    database_host: localhost:3306
+    database_port: null
+    database_name: np_v1_
+    database_user: hTkh_j75gf_--H6d
+    database_password: 5Gaj2@o3/;H6FDh23
+    mailer_transport: smtp
+    mailer_host: smtp.auth.1and1.com
+    mailer_user: contact@nofiplus.com
+    mailer_password: #nofiplus2018
