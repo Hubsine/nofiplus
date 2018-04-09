@@ -2,7 +2,7 @@
 
 namespace AppBundle\Util;
 
-use JMS\Payment\CoreBundle\Model\PaymentInterface;
+use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
 use AppBundle\Exception\UnexpectedValueException;
 
 /**
@@ -13,14 +13,11 @@ use AppBundle\Exception\UnexpectedValueException;
 class PaymentUtil 
 {
     public static $avaibleStateCode = [
-        PaymentInterface::STATE_APPROVED    => 'approved',
-        PaymentInterface::STATE_APPROVING   => 'approving',
-        PaymentInterface::STATE_CANCELED    => 'canceled',
-        PaymentInterface::STATE_EXPIRED     => 'expired',
-        PaymentInterface::STATE_FAILED      => 'failed',
-        PaymentInterface::STATE_NEW         => 'new',
-        PaymentInterface::STATE_DEPOSITING  => 'depositing',
-        PaymentInterface::STATE_DEPOSITED   => 'deposited'
+        FinancialTransactionInterface::STATE_CANCELED   => 'canceled',
+        FinancialTransactionInterface::STATE_FAILED     => 'failed',
+        FinancialTransactionInterface::STATE_NEW        => 'new',   
+        FinancialTransactionInterface::STATE_PENDING    => 'pending',
+        FinancialTransactionInterface::STATE_SUCCESS    => 'success'
     ];
     
     public function getHumanPaymentState(int $stateCode)

@@ -50,14 +50,9 @@ profile:
             history: 'Historique de commande'
         payment:
             state: 
-                approved: 'Approuvé'
-                approving: 'En cours'
                 canceled: 'Annulé'
-                expired: 'Expiré'
                 failed: 'Echoué'
                 new: 'Nouveau'
-                depositing: 'En dépostition'
-                deposited: 'Déposé'
                 pending: 'En attente'
                 success: 'Réussi'
             

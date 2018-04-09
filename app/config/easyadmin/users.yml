@@ -64,7 +64,7 @@ easy_admin:
                     - createdAt
                     - currency
                     - paymentSystemName
-                    - { property: paymentInstruction, template: 'field_payment.html.twig' }
+                    - { property: paymentInstruction, label: 'Status du paiement', template: 'field_payment.html.twig' }
             list:
                 fields:
                     - id
@@ -73,7 +73,7 @@ easy_admin:
                     - createdAt
                     - currency
                     - paymentSystemName
-                    - { property: paymentInstruction, template: 'field_payment.html.twig' }
+                    - { property: paymentInstruction, label: 'Status du paiement', template: 'field_payment.html.twig' }
 #        Payment:
 #            class: JMS\Payment\CoreBundle\Entity\Payment
 #            disabled_action: ['new']

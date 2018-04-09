@@ -173,7 +173,7 @@
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
                                         Commande numéro #{{ order.id }}
                                     </button>
-                                    {{ renderPaymentState(transaction.state) | raw }}
+                                    {{ renderPaymentState(payment.state) | raw }}
                                 </h5>
                             </div>
 

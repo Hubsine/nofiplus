@@ -2,6 +2,14 @@
     {% autoescape %}
         {{ renderPaymentState(payment.state) | raw }}
     {% endautoescape %}
+
+    {% if view == 'show' %}
+        <ul>
+            <li>Reason code : {{ payment.transactions[0].reasonCode }}</li>
+            <li>Response code: {{ payment.transactions[0].responseCode }}</li>
+        </ul>
+    {% endif %}
+    
 {% endfor %}
 
 {#{ dump() }#}
