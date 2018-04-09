@@ -1,0 +1,217 @@
+# Logfile created on 2018-04-09 16:30:00 +0200 by logger.rb/61378
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:30:00 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [9f4051a9] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [9f4051a9] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:31:20 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [edc973df] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [edc973df] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [edc973df] Finished in 20.338 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [c6b354bf] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [c6b354bf] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [c6b354bf] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [a8a7bda0] Running /usr/bin/env git ls-remote git@github.com:Hubsine/nofiplus.git HEAD as nofiplus@94.23.206.21
+ DEBUG [a8a7bda0] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote git@github.com:Hubsine/nofiplus.git HEAD )
+ DEBUG [a8a7bda0] 	Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+ DEBUG [a8a7bda0] 	Permission denied (publickey).
+ DEBUG [a8a7bda0] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:32:38 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [0c9a5577] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [0c9a5577] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:34:24 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [ddc45289] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [ddc45289] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [ddc45289] Finished in 15.668 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [85b1b2de] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [85b1b2de] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [85b1b2de] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [efbfddb9] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [efbfddb9] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [efbfddb9] 	Warning: Permanently added 'nofiplus.com,94.23.206.21' (ED25519) to the list of known hosts.
+ DEBUG [efbfddb9] 	Permission denied (publickey,password).
+ DEBUG [efbfddb9] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:38:47 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [332e73fb] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [332e73fb] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [332e73fb] Finished in 4.514 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [5387e740] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [5387e740] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [5387e740] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [76429662] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [76429662] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [76429662] 	Permission denied (publickey,password).
+ DEBUG [76429662] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:43:27 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [b0302757] Running /usr/bin/env mkdir -p /tmp as admin@94.23.206.21
+ DEBUG [b0302757] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:44:16 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [96ee22a2] Running /usr/bin/env mkdir -p /tmp as root@94.23.206.21
+ DEBUG [96ee22a2] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [96ee22a2] Finished in 1.983 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [be239aaa] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as root@94.23.206.21
+ DEBUG [be239aaa] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [be239aaa] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [cf83fdab] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as root@94.23.206.21
+ DEBUG [cf83fdab] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [cf83fdab] 	Warning: Permanently added 'nofiplus.com,94.23.206.21' (ED25519) to the list of known hosts.
+ DEBUG [cf83fdab] 	Permission denied (publickey,password).
+ DEBUG [cf83fdab] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:45:01 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [0770e383] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [0770e383] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [0770e383] Finished in 1.851 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [ab576695] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [ab576695] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [ab576695] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [338710d3] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [338710d3] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [338710d3] 	Permission denied (publickey,password).
+ DEBUG [338710d3] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:48:04 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [637ceaa1] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [637ceaa1] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [637ceaa1] Finished in 13.681 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [0d146c2c] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [0d146c2c] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [0d146c2c] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [63471f26] Running /usr/bin/env git ls-remote  HEAD as nofiplus@94.23.206.21
+ DEBUG [63471f26] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote  HEAD )
+ DEBUG [63471f26] 	fatal: 'HEAD' does not appear to be a git repository
+ DEBUG [63471f26] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:50:49 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [4a58a7da] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [4a58a7da] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [4a58a7da] Finished in 2.023 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [9ce39991] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [9ce39991] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [9ce39991] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [afb83ea6] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [afb83ea6] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [afb83ea6] 	Permission denied (publickey,password).
+ DEBUG [afb83ea6] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:51:45 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [980f0197] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [980f0197] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [980f0197] Finished in 2.581 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-production-dev.sh 100.0%
+  INFO [b1acce00] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh as nofiplus@94.23.206.21
+ DEBUG [b1acce00] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-production-dev.sh )
+  INFO [b1acce00] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [f1ec887a] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [f1ec887a] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-production-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [f1ec887a] 	Permission denied (publickey,password).
+ DEBUG [f1ec887a] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:54:47 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [29cade9e] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [29cade9e] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [29cade9e] Finished in 12.778 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 100.0%
+  INFO [0399fdeb] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh as nofiplus@94.23.206.21
+ DEBUG [0399fdeb] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh )
+  INFO [0399fdeb] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [f3737f52] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [f3737f52] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [f3737f52] 	Permission denied (publickey,password).
+ DEBUG [f3737f52] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:56:32 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [6526cf71] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [6526cf71] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [6526cf71] Finished in 2.654 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 100.0%
+  INFO [8cd531b0] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh as nofiplus@94.23.206.21
+ DEBUG [8cd531b0] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh )
+  INFO [8cd531b0] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [95ceca99] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as nofiplus@94.23.206.21
+ DEBUG [95ceca99] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [95ceca99] 	Permission denied (publickey,password).
+ DEBUG [95ceca99] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-09 16:57:00 +0200 cap production deploy:check
+  INFO ---------------------------------------------------------------------------
+  INFO [ae92fbd4] Running /usr/bin/env mkdir -p /tmp as root@94.23.206.21
+ DEBUG [ae92fbd4] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [ae92fbd4] Finished in 1.972 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 100.0%
+  INFO [893feef9] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh as root@94.23.206.21
+ DEBUG [893feef9] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh )
+  INFO [893feef9] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [4d9a4c28] Running /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD as root@94.23.206.21
+ DEBUG [4d9a4c28] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git ls-remote ssh://nofiplus@nofiplus.com/var/www/vhosts/nofiplus.com/git/nofiplus.com HEAD )
+ DEBUG [4d9a4c28] 	Permission denied (publickey,password).
+ DEBUG [4d9a4c28] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
