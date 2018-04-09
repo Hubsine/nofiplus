@@ -8,6 +8,10 @@ easy_admin:
               children:
                 - { entity: 'Abonne', label: 'Abonnes' }
                 - { entity: Carte, label: 'Cartes' }
+                - label: Commandes
+                - { entity: OrderCarte, label: Commandes }
+                - { entity: PaymentInstruction, label: 'Instruction de paiement' }
+                #- { entity: Payment, label: Paiement }
             - label: 'Partners'
               children:
                 - { entity: 'Partner', label: 'Partenaires' }
@@ -40,6 +44,40 @@ easy_admin:
         OrderCarte:
             class: AppBundle\Entity\Payment\OrderCarte
             disabled_actions: ['new','delete']
+            list:
+                fields:
+                    - id 
+                    - amount 
+                    - carte 
+                    - user 
+                    - abonneCarte
+                    - createdAt
+                    - paymentInstruction
+        PaymentInstruction:
+            class: JMS\Payment\CoreBundle\Entity\PaymentInstruction
+            disabled_actions: ['new']
+            show: 
+                fields:
+                    - id
+                    - approvedAmount
+                    - approvingAmount
+                    - createdAt
+                    - currency
+                    - paymentSystemName
+                    - { property: paymentInstruction, template: 'field_payment.html.twig' }
+            list:
+                fields:
+                    - id
+                    - approvedAmount
+                    - approvingAmount
+                    - createdAt
+                    - currency
+                    - paymentSystemName
+                    - { property: paymentInstruction, template: 'field_payment.html.twig' }
+#        Payment:
+#            class: JMS\Payment\CoreBundle\Entity\Payment
+#            disabled_action: ['new']
+            
         ###
         # Partner
         ###

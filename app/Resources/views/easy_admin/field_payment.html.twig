@@ -1,0 +1,7 @@
+{% for payment in item.payments %}
+    {% autoescape %}
+        {{ renderPaymentState(payment.state) | raw }}
+    {% endautoescape %}
+{% endfor %}
+
+{#{ dump() }#}

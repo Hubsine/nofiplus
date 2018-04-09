@@ -53,3 +53,4 @@ security:
         - { path: ^/orders/carte/new, role: ROLE_USER }
         - { path: ^/orders/carte/show, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/dashboard/, role: ROLE_ADMIN }

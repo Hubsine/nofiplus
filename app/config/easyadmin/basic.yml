@@ -4,3 +4,17 @@ easy_admin:
         date:     'd/m/Y'
         time:     'H:i'
         datetime: 'd/m/Y H:i:s'
+    list:
+        actions: ['show']    
+    entities:
+        Address:
+            class: AppBundle\Entity\Address
+            disabled_actions: ['new','delete']
+            list:
+                fields: 
+                    - id 
+                    - address
+                    - country
+                    - region 
+                    - city
+                    - zipCode

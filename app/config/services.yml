@@ -61,6 +61,10 @@ services:
         arguments:
             - '@router'
             - '@request_stack'
+            
+    app.util.payment:
+        class: AppBundle\Util\PaymentUtil
+        public: true
     
     ###
     # Mailer

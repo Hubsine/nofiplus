@@ -4,7 +4,7 @@ namespace AppBundle\Twig\Extensions;
 
 use Symfony\Component\Templating\EngineInterface;
 use JMS\Payment\CoreBundle\Model\FinancialTransactionInterface;
-use AppBundle\Exception\UnexpectedValueException;
+use AppBundle\Util\PaymentUtil;
 
 /**
  * Description of PaymentExtension
@@ -13,6 +13,16 @@ use AppBundle\Exception\UnexpectedValueException;
  */
 class PaymentExtension extends \Twig_Extension
 {
+    /**
+     * @var PaymentUtil
+     */
+    private $paymentUtil;
+    
+    /**
+     * @var TwigInterface $twig
+     */
+    private $twig;
+    
     public static $avaibleStateCode = [
         FinancialTransactionInterface::STATE_CANCELED   => 'canceled',
         FinancialTransactionInterface::STATE_FAILED     => 'failed',
@@ -22,18 +32,14 @@ class PaymentExtension extends \Twig_Extension
     ];
     
     /**
-     * @var TwigInterface $twig
-     */
-    private $twig;
-    
-    /**
      * Constructor
      * 
      * @param EngineInterface $twig
      */
-    public function __construct(EngineInterface $twig) 
+    public function __construct(EngineInterface $twig, PaymentUtil $paymentUtil) 
     {
         $this->twig         = $twig;
+        $this->paymentUtil  = $paymentUtil;
     }
     
     /**
@@ -42,48 +48,43 @@ class PaymentExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('getPaymentState',        array($this, 'getPaymentState')),
+            new \Twig_SimpleFunction('getHumanPaymentState',        array($this, 'getHumanPaymentState')),
             new \Twig_SimpleFunction('renderPaymentState',     array($this, 'renderPaymentState'))
         );
     }
     
-    public function getPaymentState(int $stateCode)
+    public function getHumanPaymentState(int $stateCode)
     {  
-        if( ! array_key_exists($stateCode, self::$avaibleStateCode) )
-        {
-            throw new UnexpectedValueException($stateCode, self::$avaibleStateCode);
-        }
-        
-        return self::$avaibleStateCode[$stateCode];
+        return $this->paymentUtil->getHumanPaymentState($stateCode);
     }
     
     public function renderPaymentState(int $stateCode)
     {
-        $stateString        = $this->getPaymentState($stateCode);
-        $stateBadgeClass    = '';
+        $stateString        = $this->getHumanPaymentState($stateCode);
+        $stateBadgeClass    = 'success';
         
-        switch ( $stateCode )
-        {
-            case FinancialTransactionInterface::STATE_CANCELED:
-                $stateBadgeClass .= 'secondery';
-                break;
-            
-            case FinancialTransactionInterface::STATE_FAILED:
-                $stateBadgeClass .= 'danger';
-                break;
-            
-            case FinancialTransactionInterface::STATE_NEW:
-                $stateBadgeClass .= 'primary';
-                break;
-            
-            case FinancialTransactionInterface::STATE_PENDING:
-                $stateBadgeClass .= 'warning';
-                break;
-            
-            case FinancialTransactionInterface::STATE_SUCCESS:
-                $stateBadgeClass .= 'success';
-                break;
-        }
+//        switch ( $stateCode )
+//        {
+//            case FinancialTransactionInterface::STATE_CANCELED:
+//                $stateBadgeClass .= 'secondery';
+//                break;
+//            
+//            case FinancialTransactionInterface::STATE_FAILED:
+//                $stateBadgeClass .= 'danger';
+//                break;
+//            
+//            case FinancialTransactionInterface::STATE_NEW:
+//                $stateBadgeClass .= 'primary';
+//                break;
+//            
+//            case FinancialTransactionInterface::STATE_PENDING:
+//                $stateBadgeClass .= 'warning';
+//                break;
+//            
+//            case FinancialTransactionInterface::STATE_SUCCESS:
+//                $stateBadgeClass .= 'success';
+//                break;
+//        }
         
         return $this->twig->render('@App/Snippet/payment_state.html.twig', [
             'stateBadgeClass'   => $stateBadgeClass,
