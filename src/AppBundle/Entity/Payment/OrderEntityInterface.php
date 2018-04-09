@@ -12,7 +12,7 @@ use AppBundle\Entity\ProductEntityInterface;
  */
 interface OrderEntityInterface 
 {
-    public function getPaymentInstruction() : PaymentInstructionInterface;
+    public function getPaymentInstruction();
     
     /**
      * Get product

@@ -84,7 +84,7 @@ trait OrderTrait
      *
      * @return PaymentInstructionInterface
      */
-    public function getPaymentInstruction() : PaymentInstructionInterface
+    public function getPaymentInstruction()
     {
         return $this->paymentInstruction;
     }
