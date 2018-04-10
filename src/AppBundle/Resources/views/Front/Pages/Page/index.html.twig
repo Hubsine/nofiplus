@@ -4,6 +4,11 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% endif %}
 
+{% block body_tag_class %}
+    {{ parent() }}
+    page
+{% endblock body_tag_class %}
+
 {% block content_title %}
     {% autoescape %} {{ page.title }} {% endautoescape %}
 {% endblock content_title %}

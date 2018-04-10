@@ -1,0 +1,31 @@
+{% extends "@Front/Pages/Page/index.html.twig" %}
+
+{% block title %}Mantenance Mode{% endblock %}
+
+{% block body_tag_class %}
+    {{ parent() }}
+    maintenance
+{% endblock body_tag_class %}
+{% block content_tag_class %}container{% endblock content_tag_class %}
+
+{% block container_content %}
+    <div class="row text-center">
+        <div class="col-12">
+            <a class="header-logo navbar-brand mx-auto" href="{{ path('home') }}">
+                <img src="{{ asset('build/images/nofiplus_logo_noir.png') }}" alt="Nofiplus.com" />
+            </a>
+        </div>
+        <div class="col-12">
+
+            {% autoescape %}
+
+                {{ page.content | raw }}
+
+            {% endautoescape %}
+            
+        </div>
+    </div>
+{% endblock container_content %}
+
+{% block main_header %}{% endblock main_header %}
+{% block main_footer %}{% endblock main_footer %}

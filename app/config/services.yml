@@ -54,7 +54,7 @@ services:
             - '@stof_doctrine_extensions.uploadable.manager'
             - '%web_directory%'
     AppBundle\Util\MediaUtil: '@app.util.media'
-    
+   
     app.util.route:
         class: AppBundle\Util\RouteUtil
         public: true
@@ -65,6 +65,19 @@ services:
     app.util.payment:
         class: AppBundle\Util\PaymentUtil
         public: true
+    
+    ###
+    # Event
+    ###
+    app.event_subscriber.maintenance_mode:
+        class: AppBundle\EventSubscriber\MaintenanceModeSubscriber
+        arguments:
+            - '@app.doctrine.util'
+            - '@security.token_storage'
+            - '@security.authorization_checker'
+            - '@twig'
+            - '%kernel.environment%'
+    AppBundle\EventSubscriber\MaintenanceModeSubscriber: '@app.event_subscriber.maintenance_mode'
     
     ###
     # Mailer
@@ -88,7 +101,7 @@ services:
     AppBundle\Mailer\TwigSwiftMailer: '@app.mailer.twig_swift_mailer'
     
     ###
-    # Twig
+    # Twig Extensions
     ###
     app.twig.extension.simple_form:
         class: AppBundle\Twig\Extensions\SimpleFormExtension
@@ -116,7 +129,7 @@ services:
         public: true
         arguments:
             - '@doctrine.orm.entity_manager'
-            
+
     ###
     # Knp Menu
     ###
@@ -167,3 +180,4 @@ services:
     # Alias
     ###
     JMS\Payment\CoreBundle\PluginController\PluginControllerInterface: '@payment.plugin_controller.entity'
+    
