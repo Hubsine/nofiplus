@@ -19,9 +19,6 @@
 
             {% block content %}
 
-                <h1 class="h3">{{ 'error.title' |  trans }}</h1>
-                <h2 class="h6">{{ 'error.text'  |  trans({'%status_code%': status_code, '%status_text%': status_text}) }}</h2>
-
             {% endblock content %}
 
             <p>
