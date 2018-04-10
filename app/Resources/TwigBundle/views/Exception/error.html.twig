@@ -1,1 +1,8 @@
 {% extends "@App/Base/error.html.twig" %}
+
+{% block content %}
+
+    <h1 class="h3">{{ ('error.' ~ status_code ~ '.title')   |  trans({'%status_code%': status_code, '%status_text%': status_text}) }}</h1>
+    <h2 class="h6">{{ ('error.' ~ status_code ~ '.text')  |  trans }}</h2>
+
+{% endblock content %}

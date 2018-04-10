@@ -6,6 +6,9 @@ error:
     404:
         title: 'Page introuvable : "%status_code% %status_text%".'
         text: 'Nous sommes désolé, la page demandée est introuvable ou n''est plus disponible."'
+    403:
+        title: 'Accès refusé : "%status_code% %status_text%".'
+        text: 'Nous sommes désolé, la resource demandé n''est pas accessible."'    
 group:
     edit:
         submit: 'Mettre à jour le groupe'
@@ -271,6 +274,7 @@ flash:
         success: 'Votre message a été envoyé.'
     payment: 
         unknow_error: 'Une erreure inconnue nous empêche de finaliser votre commande. Ré-essayer.'
+        can_not_buy: 'Vous n''avez pas les droits pour commander une carte.'
     
 menu:
     home: Accueil

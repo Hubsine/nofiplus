@@ -18,8 +18,6 @@ use AppBundle\Entity\User\Abonne\Abonne;
 use AppBundle\Form\Type\Payment\OrderCarteType;
 use AppBundle\Exception\InvalidObjectValuesException;
 
-use Symfony\Bridge\Monolog\Logger;
-
 /**
  * @author Hubsine <contact@hubsine.com>
  */
