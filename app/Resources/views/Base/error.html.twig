@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ status_text }} : {{ status_code }}{% endblock %}
+
+{% block body_tag_class %}error{% endblock body_tag_class %}
+{% block content_tag_class %}container{% endblock content_tag_class %}
+
+{% block main_header %}{% endblock main_header %}
+{% block main_footer %}{% endblock main_footer %}
+
+{% block container_content %}
+    <div class="row align-items-center justify-content-center">
+        <div class="col">
+            <a class="header-logo navbar-brand mx-auto" href="{{ path('home') }}">
+                <img src="{{ asset('build/images/nofiplus_logo_noir.png') }}" alt="Nofiplus.com" />
+            </a>
+        </div>
+        <div class="col">
+
+            {% block content %}
+
+                <h1 class="h3">{{ 'error.title' |  trans }}</h1>
+                <h2 class="h6">{{ 'error.text'  |  trans({'%status_code%': status_code, '%status_text%': status_text}) }}</h2>
+
+            {% endblock content %}
+
+            <p>
+                {% set url = '<a href="'~path('home')~'" title="">'~ 'menu.home' | trans ~'</a>' %}
+
+                {% autoescape %}
+                    {{ 'error.back' | trans({'%url%': url }) | raw }}
+                {% endautoescape %}
+            </p>
+        </div>
+    </div>
+{% endblock container_content %}

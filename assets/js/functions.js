@@ -24,3 +24,13 @@ function dynamicCheckboxChange(checkboxContainer, checkboxs)
     return checkedCheckbox;
 }
 window.dynamicCheckboxChange = dynamicCheckboxChange;
+
+/**
+ * 
+ * @param {string} selector
+ */
+function fixedItemHeightByWindow(selector)
+{
+   $(selector).height(window.innerHeight);
+};
+window.fixedItemHeightByWindow = fixedItemHeightByWindow;

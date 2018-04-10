@@ -39,3 +39,20 @@ jQuery(function ($)
 
     });
 });
+
+/***
+* Error Page - Par exempe 404 not found error
+***/
+
+jQuery(function($)
+{
+   var selector = 'body.error .row.align-items-center';
+   
+   fixedItemHeightByWindow(selector);
+   
+   $(window).resize(function()
+   {
+       fixedItemHeightByWindow(selector);
+   });
+   
+});

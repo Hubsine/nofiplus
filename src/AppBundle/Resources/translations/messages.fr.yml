@@ -1,3 +1,11 @@
+error:
+    occurred: 'Une erreur est survenue'
+    back: 'Nous vous invitons à retourner sur la page %url%.'
+    title: 'Oops! Une erreur est survenue.'
+    text: 'Le serveur a retourné la réponse : "%status_code% %status_text%".'
+    404:
+        title: 'Page introuvable : "%status_code% %status_text%".'
+        text: 'Nous sommes désolé, la page demandée est introuvable ou n''est plus disponible."'
 group:
     edit:
         submit: 'Mettre à jour le groupe'

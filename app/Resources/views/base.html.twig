@@ -43,21 +43,27 @@
         {% block body %}
 
             {### HEADER ###}
+            {% block main_header %}
             <header class="mainHeader {% block header_tag_class %}{% endblock header_tag_class %}">
                 {% block header_content %}{% endblock header_content %}
             </header>
+            {% endblock main_header %}
             
             {### CONTENT ###}
+            {% block main_content %}
             <div id="mainContent" class="{% block content_tag_class %}{% endblock content_tag_class %}">
                     {% block container_content %}{% endblock container_content %}
             </div>
+            {% endblock main_content %}
             
             {### FOOTER ###}
+            {% block main_footer %}
             <footer class="footer {% block footer_tag_class %}{% endblock footer_tag_class %}">
                 <div class="{% block footer_container_tag_class %}container{% endblock footer_container_tag_class %}">
                 {% block footer_content %}{% endblock footer_content %}
                 </div>
             </footer>
+            {% endblock main_footer %}
         {% endblock body %}
         
         
@@ -75,7 +81,7 @@
 
         {% endblock footer_admin_script %}
         
-        <div id="dialog-confirm" class="" title="{{ 'layout.delete_confirmation.title' | trans }}">
+        <div id="dialog-confirm" class="" style="display: none;" title="{{ 'layout.delete_confirmation.title' | trans }}">
             <p>{{ 'layout.delete_confirmation.content' | trans }}</p>
         </div>
     </body>
