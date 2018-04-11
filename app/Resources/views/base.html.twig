@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{{ 'layout.site.name' | trans }} | {% block title %} {{ 'layout.site.slogan' | trans }} {% endblock %}</title>
         
         {### HEAD BLOCK STYLESHEET ###}
         {% block base_stylesheet %}

@@ -1,5 +1,7 @@
 {% extends "@Front/User/Profile/Common/index.html.twig" %}
 
+{% block title %} {{ 'layout.update' | trans }} - {{ app.user.username }} {% endblock %}
+
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block content %}

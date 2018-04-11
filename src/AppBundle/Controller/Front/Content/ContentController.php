@@ -40,13 +40,15 @@ class ContentController extends AbstractContentController
      */
     public function showSingleCategoryAction($slug)
     {
-        $doctrineUtil   = $this->getDoctrineUtil();
+        $doctrineUtil       = $this->getDoctrineUtil();
         
-        $categories     = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
-        $offres         = $this->getOffresByOffreDomain($categories, $slug);
+        $categories         = $doctrineUtil->getRepository(OffreDomain::class)->findAllForHomePage();
+        $currentOffreDomain = $this->getCurrentOffreDomain($categories, $slug);
+        $offres             = $currentOffreDomain->getOffres();
         
         return $this->render( self::BASE_VIEW_FOLDER . '/Offre/category.html.twig', [
-           'categories'     => $categories,
+            'categories'     => $categories,
+            'currentOffreDomain'    => $currentOffreDomain,
             'offres'        =>  $offres
         ]);
     }

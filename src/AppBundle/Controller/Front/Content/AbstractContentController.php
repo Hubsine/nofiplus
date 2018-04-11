@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Front\Content;
 
 use AppBundle\Controller\Controller as BaseController;
+use AppBundle\Entity\Admin\Category\OffreDomain;
 
 /**
  * Description of AbstractContentController
@@ -12,23 +13,23 @@ use AppBundle\Controller\Controller as BaseController;
 abstract class AbstractContentController extends BaseController
 {
     /**
-     * Get offres from OffreDomain
+     * Get current OffreDomain
      * 
      * @param array $offreDomains
      * @param string $slug
-     * @return array
+     * @return OffreDomaine|null
      */
-    protected function getOffresByOffreDomain(array $offreDomains, $slug)
+    protected function getCurrentOffreDomain(array $offreDomains, $slug)
     {
         foreach ($offreDomains as $category)
         {
             if( $category->getSlug() === $slug )
             {
-                return $category->getOffres();
+                return $category;
             }
         }
         
-        return [];
+        return null;
     }
     
     /**

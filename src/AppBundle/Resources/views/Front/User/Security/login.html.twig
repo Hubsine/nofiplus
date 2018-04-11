@@ -1,5 +1,7 @@
 {% extends "@App/Base/front.html.twig" %}
 
+{% block title %} {{ 'layout.login' | trans }} {% endblock %}
+
 {% block content %}
     {{ include('@Front/User/Security/login_content.html.twig') }}
 {% endblock content %}

@@ -123,10 +123,16 @@ resetting:
             L'équipe
 
 layout:
+    site:
+        name: 'Nofi+'
+        slogan: 'Bien plus qu''une carte'
+        about: 'Une seule carte, des réductions, des bons plans, dans plusieurs business Afros...'
     account: 'Compte'
+    update_parameters: 'Mise à jour des paramètres'
     go_profile: 'Aller sur mon profil'
     logout: Déconnexion
     login: Connexion
+    reset: 'Mot de passe oublié'
     buy: 'Commander'
     buy_carte: 'Commander ma carte'
     register: Inscription
@@ -138,6 +144,7 @@ layout:
     offres: 'Offres'
     join_network: 'Réjoindre le réseau'
     company: 
+        companies: 'Entreprises'
         company: 'Entreprise'
         can_add: 'Vous devez attendre qu''un Administrateur active votre compte afin que vous puissiez ajouter des entreprises et des offres.'
     delete_confirmation:

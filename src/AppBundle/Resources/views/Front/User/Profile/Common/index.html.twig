@@ -1,5 +1,7 @@
 {% extends "@App/Base/front.html.twig" %}
 
+{% block title %} {{ 'layout.account' | trans }} - {{ app.user.username }} {% endblock %}
+
 {% block content_title_tag_start %}
 {% endblock content_title_tag_start %}
 {% block content_title_tag_end %}
