@@ -6889,3 +6889,122 @@ To initialize a project, please create a composer.json file as described in the 
   INFO [83dd0970] Running /usr/bin/env echo "Branch prod (at ec61dbfcb3eefd45124304935659a850fdf6d9ba) deployed as release 20180412172958 by dev" >> /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/revisions.log as nofiplus@94.23.206.21
  DEBUG [83dd0970] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases && ( export SYMFONY_ENV="prod" ; /usr/bin/env echo "Branch prod (at ec61dbfcb3eefd45124304935659a850fdf6d9ba) deployed as release 20180412172958 by dev" >> /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/revisions.log )
   INFO [83dd0970] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-04-12 19:32:39 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [6e37323a] Running /usr/bin/env mkdir -p /tmp as nofiplus@94.23.206.21
+ DEBUG [6e37323a] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /tmp )
+  INFO [6e37323a] Finished in 9.381 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 0.0%
+  INFO Uploading /tmp/git-ssh-nofi_plus-prod-dev.sh 100.0%
+  INFO [292e450a] Running /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh as nofiplus@94.23.206.21
+ DEBUG [292e450a] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env chmod 700 /tmp/git-ssh-nofi_plus-prod-dev.sh )
+  INFO [292e450a] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [74e27cc4] Running /usr/bin/env git ls-remote git@github.com:Hubsine/nofiplus.git HEAD as nofiplus@94.23.206.21
+ DEBUG [74e27cc4] Command: ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git ls-remote git@github.com:Hubsine/nofiplus.git HEAD )
+ DEBUG [74e27cc4] 	d9199665735ca0d32daf0863ee36abd8be4a6320	HEAD
+  INFO [74e27cc4] Finished in 1.433 seconds with exit status 0 (successful).
+  INFO [a9c3222e] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases as nofiplus@94.23.206.21
+ DEBUG [a9c3222e] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases )
+  INFO [a9c3222e] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [b7198b33] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/var/logs as nofiplus@94.23.206.21
+ DEBUG [b7198b33] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/var/logs )
+  INFO [b7198b33] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [9cb00e43] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config as nofiplus@94.23.206.21
+ DEBUG [9cb00e43] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config )
+  INFO [9cb00e43] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [6c74043c] Running [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config/parameters.yml ] as nofiplus@94.23.206.21
+ DEBUG [6c74043c] Command: [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config/parameters.yml ]
+ DEBUG [6c74043c] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [2589093b] Running [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/current/REVISION ] as nofiplus@94.23.206.21
+ DEBUG [2589093b] Command: [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/current/REVISION ]
+ DEBUG [2589093b] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [42b07a10] Running /usr/bin/env cat /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/current/REVISION 2>/dev/null as nofiplus@94.23.206.21
+ DEBUG [42b07a10] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env cat /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/current/REVISION 2>/dev/null )
+ DEBUG [42b07a10] 	ec61dbfcb3eefd45124304935659a850fdf6d9ba
+ DEBUG [42b07a10] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [0d326f9f] Running [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo/HEAD ] as nofiplus@94.23.206.21
+ DEBUG [0d326f9f] Command: [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo/HEAD ]
+ DEBUG [0d326f9f] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo
+ DEBUG [3165b989] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [3165b989] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi
+ DEBUG [3165b989] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [db6e5262] Running /usr/bin/env git remote set-url origin git@github.com:Hubsine/nofiplus.git as nofiplus@94.23.206.21
+ DEBUG [db6e5262] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo && ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git remote set-url origin git@github.com:Hubsine/nofiplus.git )
+  INFO [db6e5262] Finished in 0.121 seconds with exit status 0 (successful).
+  INFO [1834ecb4] Running /usr/bin/env git remote update --prune as nofiplus@94.23.206.21
+ DEBUG [1834ecb4] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo && ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [1834ecb4] 	Récupération de origin
+  INFO [1834ecb4] Finished in 1.274 seconds with exit status 0 (successful).
+ DEBUG [9632d0c9] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [9632d0c9] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi
+ DEBUG [9632d0c9] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [53fa634f] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 as nofiplus@94.23.206.21
+ DEBUG [53fa634f] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo && ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 )
+  INFO [53fa634f] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [7ca58737] Running /usr/bin/env git archive prod | /usr/bin/env tar -x -f - -C /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 as nofiplus@94.23.206.21
+ DEBUG [7ca58737] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo && ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git archive prod | /usr/bin/env tar -x -f - -C /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 )
+  INFO [7ca58737] Finished in 0.084 seconds with exit status 0 (successful).
+ DEBUG [4a748dfb] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [4a748dfb] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo'" 1>&2; false; fi
+ DEBUG [4a748dfb] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [c2724ec7] Running /usr/bin/env git rev-list --max-count=1 prod as nofiplus@94.23.206.21
+ DEBUG [c2724ec7] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/repo && ( export SYMFONY_ENV="prod" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-nofi_plus-prod-dev.sh" ; /usr/bin/env git rev-list --max-count=1 prod )
+ DEBUG [c2724ec7] 	ec61dbfcb3eefd45124304935659a850fdf6d9ba
+ DEBUG [c2724ec7] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [6b8907b1] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [6b8907b1] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250'" 1>&2; false; fi
+ DEBUG [6b8907b1] Finished in 0.057 seconds with exit status 0 (successful).
+  INFO [65fdc8cb] Running /usr/bin/env echo "ec61dbfcb3eefd45124304935659a850fdf6d9ba" >> REVISION as nofiplus@94.23.206.21
+ DEBUG [65fdc8cb] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 && ( export SYMFONY_ENV="prod" ; /usr/bin/env echo "ec61dbfcb3eefd45124304935659a850fdf6d9ba" >> REVISION )
+  INFO [65fdc8cb] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [44bbf890] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config as nofiplus@94.23.206.21
+ DEBUG [44bbf890] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config )
+  INFO [44bbf890] Finished in 0.057 seconds with exit status 0 (successful).
+ DEBUG [e404b2e7] Running [ -L /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml ] as nofiplus@94.23.206.21
+ DEBUG [e404b2e7] Command: [ -L /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml ]
+ DEBUG [e404b2e7] Finished in 0.057 seconds with exit status 1 (failed).
+ DEBUG [ecba2a77] Running [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml ] as nofiplus@94.23.206.21
+ DEBUG [ecba2a77] Command: [ -f /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml ]
+ DEBUG [ecba2a77] Finished in 0.056 seconds with exit status 1 (failed).
+  INFO [6db4617e] Running /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config/parameters.yml /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml as nofiplus@94.23.206.21
+ DEBUG [6db4617e] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/app/config/parameters.yml /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/app/config/parameters.yml )
+  INFO [6db4617e] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [4df90238] Running /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var as nofiplus@94.23.206.21
+ DEBUG [4df90238] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mkdir -p /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var )
+  INFO [4df90238] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [9deecbbf] Running [ -L /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs ] as nofiplus@94.23.206.21
+ DEBUG [9deecbbf] Command: [ -L /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs ]
+ DEBUG [9deecbbf] Finished in 0.056 seconds with exit status 1 (failed).
+ DEBUG [0b4d095a] Running [ -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs ] as nofiplus@94.23.206.21
+ DEBUG [0b4d095a] Command: [ -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs ]
+ DEBUG [0b4d095a] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [8556d083] Running /usr/bin/env rm -rf /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs as nofiplus@94.23.206.21
+ DEBUG [8556d083] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env rm -rf /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs )
+  INFO [8556d083] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [0e84b3b0] Running /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/var/logs /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs as nofiplus@94.23.206.21
+ DEBUG [0e84b3b0] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/shared/var/logs /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250/var/logs )
+  INFO [0e84b3b0] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [e31b2309] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [e31b2309] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250'" 1>&2; false; fi
+ DEBUG [e31b2309] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [78154771] Running /usr/bin/env composer install --no-dev --no-interaction --quiet --optimize-autoloader --ignore-platform-reqs --no-scripts as nofiplus@94.23.206.21
+ DEBUG [78154771] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 && ( export SYMFONY_ENV="prod" ; /usr/bin/env composer install --no-dev --no-interaction --quiet --optimize-autoloader --ignore-platform-reqs --no-scripts )
+  INFO [78154771] Finished in 4.523 seconds with exit status 0 (successful).
+  INFO [0280d786] Running /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/current as nofiplus@94.23.206.21
+ DEBUG [0280d786] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env ln -s /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/20180412173250 /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/current )
+  INFO [0280d786] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [13ed6abd] Running /usr/bin/env mv /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/current /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS as nofiplus@94.23.206.21
+ DEBUG [13ed6abd] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env mv /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases/current /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS )
+  INFO [13ed6abd] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [5fb68f09] Running /usr/bin/env ls -x /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases as nofiplus@94.23.206.21
+ DEBUG [5fb68f09] Command: ( export SYMFONY_ENV="prod" ; /usr/bin/env ls -x /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases )
+ DEBUG [5fb68f09] 	20180412172958	20180412173250
+ DEBUG [5fb68f09] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [35a5c8a0] Running if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases'" 1>&2; false; fi as nofiplus@94.23.206.21
+ DEBUG [35a5c8a0] Command: if test ! -d /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases; then echo "Directory does not exist '/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases'" 1>&2; false; fi
+ DEBUG [35a5c8a0] Finished in 0.057 seconds with exit status 0 (successful).
+  INFO [67027d4e] Running /usr/bin/env echo "Branch prod (at ec61dbfcb3eefd45124304935659a850fdf6d9ba) deployed as release 20180412173250 by dev" >> /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/revisions.log as nofiplus@94.23.206.21
+ DEBUG [67027d4e] Command: cd /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/releases && ( export SYMFONY_ENV="prod" ; /usr/bin/env echo "Branch prod (at ec61dbfcb3eefd45124304935659a850fdf6d9ba) deployed as release 20180412173250 by dev" >> /var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS/revisions.log )
+  INFO [67027d4e] Finished in 0.059 seconds with exit status 0 (successful).
