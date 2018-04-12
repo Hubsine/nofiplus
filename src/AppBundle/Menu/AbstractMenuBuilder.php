@@ -54,6 +54,8 @@ abstract class AbstractMenuBuilder
      * @var RouteUtil
      */
     protected $routeUtil;
+    
+    protected $_routeName;
 
     /**
      * Constructor 
@@ -70,6 +72,8 @@ abstract class AbstractMenuBuilder
         $this->authorizationChecker = $authorizationChecker;
         $this->translator           = $translator;
         $this->routeUtil            = $routeUtil;
+        
+        $this->_routeName           = $this->routeUtil->getCurrentRouteName();
     }
     
     /**
@@ -96,12 +100,47 @@ abstract class AbstractMenuBuilder
     }
     
     /**
-     * Get route name from request attributes
+     * Get current route name from request attributes
      * 
      * @return string
      */
     protected function getRouteName()
     {
-        return $this->request->attributes->get('_route');
+        return $this->_routeName;
+    }
+    
+    protected function onRoute($routeName)
+    {
+        return $this->routeUtil->onRoute($routeName);
+    }
+    
+    /**
+     * @see RouteUtil::getCompleteRoute
+     */
+    protected function getCompleteRoute($className, $prefix)
+    {
+        return $this->routeUtil->getCompleteRoute($className, $prefix);
+    }
+    
+    /**
+     * Get attribute from request 
+     * 
+     * @param string $attributeName
+     * @return mixed
+     */
+    protected function getAttribute($attributeName)
+    {
+        return $this->request->attributes->get($attributeName);
+    }
+    
+    /**
+     * Check if attribute existe
+     * 
+     * @param string $attributeName
+     * @return boolean
+     */
+    protected function hasAttribute($attributeName)
+    {
+        return $this->request->attributes->has($attributeName);
     }
 }

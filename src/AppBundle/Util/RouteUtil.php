@@ -73,4 +73,20 @@ class RouteUtil
     {
         return $this->request->attributes->get('_route');
     }
+    
+    /**
+     * Check if a route name is current route
+     * 
+     * @param string $routeName
+     * @return boolean
+     */
+    public function onRoute($routeName)
+    {
+        if( $routeName === $this->getCurrentRouteName())
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }

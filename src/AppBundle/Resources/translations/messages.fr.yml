@@ -292,8 +292,18 @@ menu:
     profile: Profil
     parameters: 'Paramètres'
     update: 'Modifier'
+    new: 'Nouveau'
+    new_offre: 'Nouvelle offre'
     login: 'Connexion'
-    register: 'Inscription'
+    register: 
+        register: 'Inscription'
+        check_email: 'Vérification e-mail'
+        confirm: 'Confirmation de compte'
+        confirmed: 'Compte confirmé'
+    forget_password: 'Mot de passe oublié'
+    page:
+        carte_index: 'Cartes'
+        carte_order: 'Commande'
     abonne:
         abonne: 'Compte'
         parameters: 'Paramètres'

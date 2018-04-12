@@ -4,11 +4,12 @@ namespace AppBundle\Menu;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use AppBundle\Menu\AbstractMenuBuilder;
-use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Abonne\Abonne;
+use AppBundle\Entity\User\Partner\Partner;
 use AppBundle\Entity\User\Partner\Company;
 use AppBundle\Entity\User\Partner\Offre;
 use AppBundle\Entity\Admin\Pages\Page;
+use AppBundle\Entity\Payment\OrderCarte;
 use AppBundle\Exception\BadInstanceException;
 
 /**
@@ -35,8 +36,23 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         $login      = $menu->addChild('menu.login', ['route'  => 'fos_user_security_login'])
                     ->setDisplay(false);
         
-        $register   = $menu->addChild('menu.register', ['route'  => 'fos_user_registration_register'])
-                    ->setDisplay(false);
+        $login
+            ->addChild('menu.forget_password', ['route'   => 'fos_user_resetting_request'])
+            ->setDisplay(false);
+        
+        $register   = $menu->addChild('menu.register.register', ['route'  => 'fos_user_registration_register'])
+                    ->setDisplay(false)
+                    ->setDisplayChildren(false);
+        
+        $register
+            ->addChild('menu.register.check_email', [
+                'route' => 'fos_user_registration_check_email'
+            ]);
+        
+        $register
+            ->addChild('menu.register.confirmed', [
+                'route' => 'fos_user_registration_confirmed'
+            ]);
         
         foreach ($menu as $item) 
         {
@@ -62,6 +78,161 @@ class FrontMenuBuilder extends AbstractMenuBuilder
                 ->setLinkAttribute('class', 'nav-link')
                 ;
         }
+        
+        $pageCarte = $menu
+            ->addChild('menu.page.carte_index', ['route' => 'page_carte_index'])
+            ->setDisplay(false);
+        
+        if( $this->onRoute( $this->getCompleteRoute(OrderCarte::class, 'show') ) )
+        {
+            $pageCarte
+                ->addChild('menu.page.carte_order', [
+                    'route' => $this->getCompleteRoute(OrderCarte::class, 'show'),
+                    'routeParameters'   => ['order' => $this->request->attributes->get('order')]
+                ])
+                ->setDisplay(false);
+        }
+        
+        ###
+        # User account - Abonne
+        ###
+        
+        if( $this->hasAttribute('abonne') ):
+            
+            $abonneSlug = $this->getAttribute('abonne')->getSlug();
+
+            // abonne
+            $abonne = $menu
+                        ->addChild('menu.abonne.abonne', [
+                            'route'    => $this->getCompleteRoute(Abonne::class, 'index'),
+                            'routeParameters'   => ['abonne'    => $abonneSlug]
+                        ])
+                        ->setDisplay(false)
+                        ->setDisplayChildren(false);
+
+            $abonne
+                ->addChild('menu.update', [
+                    'route'    => $this->getCompleteRoute(Abonne::class, 'update'),
+                    'routeParameters'   => ['abonne'    => $abonneSlug]
+                ]);
+
+            $abonne
+                ->addChild('menu.parameters', [
+                    'route'    => $this->getCompleteRoute(Abonne::class, 'edit_parameters'),
+                    'routeParameters'   => ['abonne'    => $abonneSlug]
+                ]);
+            
+        endif;
+        
+        ###
+        # User account - Partner
+        ###
+        
+        if( $this->hasAttribute('partner') ):
+            
+            $entityPartner        = $this->getAttribute('partner');
+            $partnerSlug    = $entityPartner->getSlug();
+
+            // partner
+            $partner = $menu
+                        ->addChild('menu.partner.partner', [
+                            'route'    => $this->getCompleteRoute(Partner::class, 'index'),
+                            'routeParameters'   => ['partner'    => $partnerSlug]
+                        ])
+                        ->setDisplay(false)
+                        ->setDisplayChildren(false);
+
+            $partner
+                ->addChild('menu.update', [
+                    'route'    => $this->getCompleteRoute(Partner::class, 'update'),
+                    'routeParameters'   => ['partner'    => $partnerSlug]
+                ]);
+
+            $partner
+                ->addChild('menu.parameters', [
+                    'route'    => $this->getCompleteRoute(Partner::class, 'edit_parameters'),
+                    'routeParameters'   => ['partner'    => $partnerSlug]
+                ]);
+            
+            // Entreprise
+            $companies = $partner
+                ->addChild('menu.partner.company_offres', [
+                    'route'    => $this->getCompleteRoute(Company::class, 'index'),
+                    'routeParameters'   => ['partner'    => $partnerSlug]
+                ]);
+            
+            $companies
+                ->addChild('menu.new', [
+                    'route' => $this->getCompleteRoute(Company::class, 'new'),
+                    'routeParameters'   => [
+                        'partner'   => $partnerSlug
+                    ]
+                ]);
+            
+            // Single Company 
+            if( $this->onRoute( $this->getCompleteRoute(Company::class, 'show') ) ||
+                $this->onRoute( $this->getCompleteRoute(Company::class, 'update') ) || 
+                $this->onRoute( $this->getCompleteRoute(Offre::class, 'new') ) ||     
+                $this->onRoute( $this->getCompleteRoute(Offre::class, 'update') ) )
+            {
+                switch ( $this->getRouteName() )
+                {
+                    case $this->getCompleteRoute(Company::class, 'show'):
+                        $entityCompany = $this->getAttribute('slug');
+                        break;
+                    
+                    default:
+                        $entityCompany = $this->getAttribute('company');
+                        break;
+                }
+                
+                // Single Company
+                $company = $companies
+                    ->addChild($entityCompany->getName(), [
+                        'route' => $this->getCompleteRoute(Company::class, 'show'),
+                        'routeParameters'   => [
+                            'partner'   => $partnerSlug,
+                            'slug'   => $entityCompany->getSlug()
+                        ]
+                    ]);
+                
+                $company
+                    ->addChild('menu.update', [
+                        'route' => $this->getCompleteRoute(Company::class, 'update'),
+                        'routeParameters'   => [
+                            'partner'   => $partnerSlug,
+                            'slug'   => $entityCompany->getSlug()
+                        ]
+                    ]);
+                
+                // Offre
+                
+                $company
+                    ->addChild('menu.new_offre', [
+                        'route' => $this->getCompleteRoute(Offre::class, 'new'),
+                        'routeParameters'   => [
+                            'partner'   => $partnerSlug,
+                            'company'   => $entityCompany->getSlug()
+                        ]
+                    ]);
+                
+                if( $this->onRoute( $this->getCompleteRoute(Offre::class, 'update') ) )
+                {
+                    $entityOffre = $this->getAttribute('slug');
+                    
+                    $company
+                        ->addChild($entityOffre->getName(), [
+                            'route' => $this->getCompleteRoute(Offre::class, 'update'),
+                            'routeParameters'   => [
+                                'partner'   => $partnerSlug,
+                                'company'    => $entityCompany->getSlug(),
+                                'slug'   => $entityOffre->getSlug()
+                            ]
+                        ]);
+                }
+            }
+            
+        endif;
         
         return $menu;
     }
@@ -144,7 +315,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
             ###
             # Register
             ###
-            $menu->addChild('menu.register', [
+            $menu->addChild('menu.register.register', [
                     'route'  => 'fos_user_registration_register',
                     'routeParameters'   => ['asuser'  => 'abonne']
                 ])
@@ -179,7 +350,7 @@ class FrontMenuBuilder extends AbstractMenuBuilder
         ###
         # Register
         ###
-        $register   = $menu->addChild('menu.register', [
+        $register   = $menu->addChild('menu.register.register', [
                 'route'  => 'fos_user_registration_register',
                 'routeParameters'   => ['asuser'  => 'abonne']
             ])
