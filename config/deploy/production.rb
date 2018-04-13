@@ -1,3 +1,7 @@
+set :deploy_to, "/var/www/vhosts/nofiplus.com/httpdocs/NOFIPLUS"
+
+set :application, "nofi_plus"
+set :repo_url, 'git@github.com:Hubsine/nofiplus.git'
 
 set :branch, 'prod'
 set :stage, :prod
