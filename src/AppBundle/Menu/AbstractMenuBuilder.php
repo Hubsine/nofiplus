@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\LoggingTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use AppBundle\Util\RouteUtil;
 use AppBundle\Menu\MenuTrait;
 
@@ -63,7 +65,7 @@ abstract class AbstractMenuBuilder
      * @param TokenInterface $factory
      */
     public function __construct(FactoryInterface $factory, RequestStack $requestStack, TokenStorageInterface $tokenStorage,
-            AuthorizationCheckerInterface $authorizationChecker, DataCollectorTranslator $translator, RouteUtil $routeUtil)
+            AuthorizationCheckerInterface $authorizationChecker, TranslatorInterface $translator, RouteUtil $routeUtil)
     {
         $this->factory              = $factory;
         $this->requestStack         = $requestStack;
