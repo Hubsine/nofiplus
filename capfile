@@ -4,5 +4,6 @@ require 'capistrano/deploy'
 require 'capistrano/symfony'
 require 'capistrano/symfony-doctrine'
 require "capistrano/scm/git"
+require 'capistrano/locally'
 install_plugin Capistrano::SCM::Git
 
