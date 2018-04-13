@@ -17,7 +17,6 @@
 /web/bundles/
 /node_modules/
 /yarn-error.log
-/web/build/
 /nbproject/
 /web/doc-fckhabou/visual/*.bak*
 /web/doc-fckhabou/visual/*.lck
