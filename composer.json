@@ -21,6 +21,7 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "doctrine/annotations": "1.4.*",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "easycorp/easyadmin-bundle": "^1.17",
@@ -45,7 +46,7 @@
         "symfony/templating": "^3.0",
         "twbs/bootstrap": "4.0.0",
         "twig/twig": "^1.0||^2.0",
-        "vich/uploader-bundle": "^1.8",
+        "vich/uploader-bundle": "1.7.*",
         "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
