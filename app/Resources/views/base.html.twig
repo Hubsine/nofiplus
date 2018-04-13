@@ -3,9 +3,24 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            
+
         <title>{{ 'layout.site.name' | trans }} | {% block title %} {{ 'layout.site.slogan' | trans }} {% endblock %}</title>
-        
+
+        <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="194x194" href="favicons/favicon-194x194.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+        <link rel="manifest" href="favicons/site.webmanifest">
+        <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#ffffff">
+        <link rel="shortcut icon" href="favicons/favicon.ico">
+        <meta name="apple-mobile-web-app-title" content="NOFI+">
+        <meta name="application-name" content="NOFI+">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
+        <meta name="msapplication-config" content="favicons/browserconfig.xml">
+        <meta name="theme-color" content="#ffffff">
+
         {### HEAD BLOCK STYLESHEET ###}
         {% block base_stylesheet %}
             <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
@@ -18,8 +33,8 @@
         {% block admin_stylesheet %}
 
         {% endblock admin_stylesheet %}
-            
-        
+
+
         {### HEAD BLOCK SCRIPT ###}
         {% block head_base_script %}
             <script src="{{ asset('build/manifest.js') }}"></script>
@@ -34,55 +49,54 @@
         {% block head_admin_script %}
 
         {% endblock head_admin_script %}
-        
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
     </head>
     <body class="{% block body_tag_class %}{% endblock body_tag_class %}">
-        
+
         {### BODY BLOCK###}
         {% block body %}
 
             {### HEADER ###}
             {% block main_header %}
-            <header class="mainHeader {% block header_tag_class %}{% endblock header_tag_class %}">
+                <header class="mainHeader {% block header_tag_class %}{% endblock header_tag_class %}">
                 {% block header_content %}{% endblock header_content %}
             </header>
-            {% endblock main_header %}
-            
-            {### CONTENT ###}
-            {% block main_content %}
+        {% endblock main_header %}
+
+        {### CONTENT ###}
+        {% block main_content %}
             <div id="mainContent" class="{% block content_tag_class %}{% endblock content_tag_class %}">
-                    {% block container_content %}{% endblock container_content %}
-            </div>
-            {% endblock main_content %}
-            
-            {### FOOTER ###}
-            {% block main_footer %}
-            <footer class="footer {% block footer_tag_class %}{% endblock footer_tag_class %}">
-                <div class="{% block footer_container_tag_class %}container{% endblock footer_container_tag_class %}">
-                {% block footer_content %}{% endblock footer_content %}
-                </div>
-            </footer>
-            {% endblock main_footer %}
-        {% endblock body %}
-        
-        
-        
-        {% block footer_base_script %}
-            <script src="{{ asset('build/functions.js') }}"></script>
-            <script src="{{ asset('build/global-js.js') }}"></script>
-        {% endblock footer_base_script %}
-        
-        {% block footer_front_script %}
-
-        {% endblock footer_front_script %}
-
-        {% block footer_admin_script %}
-
-        {% endblock footer_admin_script %}
-        
-        <div id="dialog-confirm" class="" style="display: none;" title="{{ 'layout.delete_confirmation.title' | trans }}">
-            <p>{{ 'layout.delete_confirmation.content' | trans }}</p>
+            {% block container_content %}{% endblock container_content %}
         </div>
-    </body>
+    {% endblock main_content %}
+
+    {### FOOTER ###}
+    {% block main_footer %}
+        <footer class="footer {% block footer_tag_class %}{% endblock footer_tag_class %}">
+            <div class="{% block footer_container_tag_class %}container{% endblock footer_container_tag_class %}">
+            {% block footer_content %}{% endblock footer_content %}
+        </div>
+    </footer>
+{% endblock main_footer %}
+{% endblock body %}
+
+
+
+{% block footer_base_script %}
+    <script src="{{ asset('build/functions.js') }}"></script>
+    <script src="{{ asset('build/global-js.js') }}"></script>
+{% endblock footer_base_script %}
+
+{% block footer_front_script %}
+
+{% endblock footer_front_script %}
+
+{% block footer_admin_script %}
+
+{% endblock footer_admin_script %}
+
+<div id="dialog-confirm" class="" style="display: none;" title="{{ 'layout.delete_confirmation.title' | trans }}">
+    <p>{{ 'layout.delete_confirmation.content' | trans }}</p>
+</div>
+</body>
 </html>
