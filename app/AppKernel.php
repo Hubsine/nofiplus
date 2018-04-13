@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             ###
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             ### 
             # FOS
             ###

@@ -13,6 +13,8 @@ set :log_level, :debug
 # Symfony 
 ###
 
+set :symfony_console, "php bin/console"
+
 ###
 # Composer
 ###
@@ -20,13 +22,31 @@ set :log_level, :debug
 set :composer_install_flags, '--no-dev --no-interaction --quiet --optimize-autoloader --ignore-platform-reqs --no-scripts'
 
 ###
-# Events
-###
-
-###
 # Databases
 ###
-before 'deploy:updated', 'symfony:doctrine:cache:clear_metadata'
-before 'deploy:updated', 'symfony:doctrine:cache:clear_query'
-before 'deploy:updated', 'symfony:doctrine:cache:clear_result'
-after  'deploy:updated', 'symfony:doctrine:migrations'
+
+namespace :deploy do
+  task :migrate do
+    on roles(:db) do
+        execute 'php bin/console doctrine:database:create --if-not-exists'
+        execute 'php bin/console doctrine:migrations:diff'
+        execute 'php bin/console doctrine:migrations:migrate --no-interaction'
+        execute 'php bin/console doctrine:migrations:status'
+    end 
+  end
+
+  desc 'Database validate'
+  task :database_validate do
+       on roles(:db) do
+            execute 'php bin/console doctrine:schema:validate'
+       end
+  end
+
+end
+
+
+###
+# Events
+###
+after 'deploy:updated', 'deploy:migrate'
+after 'deploy:migrate', 'deploy:database_validate'

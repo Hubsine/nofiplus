@@ -2,7 +2,7 @@
 set :repo_url, '/usr/local/var/www/nofiplus/.git'
 #set :repository, '.'
 #set :local_repository, "."
-set :branch, 'local_prod'
+set :branch, 'master'
 set :stage, :staging
 set :deploy_to, "/usr/local/var/www/NOFIPLUS_PROD"
 
