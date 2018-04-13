@@ -28,7 +28,9 @@ set :composer_install_flags, '--no-dev --no-interaction --quiet --optimize-autol
 namespace :deploy do
   task :migrate do
     on roles(:db) do
-        execute 'php bin/console doctrine:database:create --if-not-exists'
+        execute 'php bin/console cache:clear --env=prod'
+        execute 'php bin/console doctrine:database:create --if-not-exists --env=prod'
+        execute 'php bin/console doctrine:schema:update --force --env=prod'
         execute 'php bin/console doctrine:migrations:diff'
         execute 'php bin/console doctrine:migrations:migrate --no-interaction'
         execute 'php bin/console doctrine:migrations:status'
@@ -38,7 +40,7 @@ namespace :deploy do
   desc 'Database validate'
   task :database_validate do
        on roles(:db) do
-            execute 'php bin/console doctrine:schema:validate'
+            execute 'php bin/console doctrine:schema:validate --env=prod'
        end
   end
 
@@ -48,5 +50,5 @@ end
 ###
 # Events
 ###
-after 'deploy:updated', 'deploy:migrate'
+after 'deploy:updating', 'deploy:migrate'
 after 'deploy:migrate', 'deploy:database_validate'
