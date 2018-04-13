@@ -52,8 +52,7 @@ class Featured implements EntityInterface, MediaInterface
      *  fileNameProperty="name", 
      *  size="size", 
      *  mimeType="mimeType", 
-     *  originalName="originalName", 
-     *  dimensions="dimensions"
+     *  originalName="originalName"
      * )
      * 
      * @Assert\Image(

@@ -30,11 +30,6 @@ trait MediaTrait
     private $originalName;
     
     /**
-     * @ORM\Column(name="dimensions", type="simple_array", nullable=true)
-     */
-    private $dimensions;
-    
-    /**
      * Set name
      *
      * @param string $name
@@ -56,30 +51,6 @@ trait MediaTrait
     public function getName()
     {
         return $this->name;
-    }
-    
-    /**
-     * Set dimensions
-     *
-     * @param array $dimensions
-     *
-     * @return CompanyLogo
-     */
-    public function setDimensions($dimensions)
-    {
-        $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    /**
-     * Get dimensions
-     *
-     * @return array
-     */
-    public function getDimensions()
-    {
-        return $this->dimensions;
     }
     
     public function getOriginalName()
