@@ -159,14 +159,14 @@ vich_uploader:
         company_logo:
             uri_prefix: '%app.media.company.logo%'
             upload_destination: '%web_directory%%app.media.company.logo%'
-            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            namer: vich_uploader.namer_uniqid
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
         offre_featured:
             uri_prefix: '%app.media.offre.featured%'
             upload_destination: '%web_directory%%app.media.offre.featured%'
-            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            namer: vich_uploader.namer_uniqid
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true    
