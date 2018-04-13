@@ -44,11 +44,19 @@ namespace :deploy do
        end
   end
 
+  desc 'Webpack asset'
+  task :webpack_build do
+    on roles(:app) do
+        execute 'yarn run encore production'
+    end
+  end
+
 end
 
 
 ###
 # Events
 ###
-after 'deploy:updating', 'deploy:migrate'
+after 'deploy:updated', 'deploy:migrate'
 after 'deploy:migrate', 'deploy:database_validate'
+#after 'deploy:updated', 'deploy:webpack_build'
