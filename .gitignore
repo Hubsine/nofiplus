@@ -23,3 +23,4 @@
 /web/doc-fckhabou/visual/*.lck
 /web/uploads/
 /log/*
+/app/DoctrineMigrations/
