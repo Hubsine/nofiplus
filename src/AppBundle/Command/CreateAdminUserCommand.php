@@ -63,8 +63,8 @@ class CreateAdminUserCommand extends Command
             
             $output->writeln("Creation de l'utilisateur avec le role ROLE_SUPER_ADMIN...");
         
-            $username = 'Super admin 2';
-            $email = 'super_admin2@nofiplus.fr';
+            $username = 'Super admin';
+            $email = 'super_admin@nofiplus.fr';
             $password = substr($this->tokenGenerator->generateToken(), 0, 10);
 
             $user = new Admin();
