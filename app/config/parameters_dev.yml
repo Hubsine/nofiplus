@@ -5,6 +5,9 @@ parameters:
     database_user: root
     database_password: nofinofi
     mailer_transport: smtp
-    mailer_host: smtp.auth.1and1.com
+    mailer_host: auth.smtp.1and1.fr
     mailer_user: contact@nofiplus.com
+    mailer_from_name: 'NOFI+'
     mailer_password: #nofiplus2018
+    mailer_encryption: ssl
+    mailer_port: 465
