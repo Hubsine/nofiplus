@@ -5,6 +5,7 @@ namespace AppBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use AppBundle\Entity\User\Admin;
 use AppBundle\Doctrine\DoctrineUtil;
 use AppBundle\Util\TokenGeneratorUtil;
@@ -26,14 +27,21 @@ class CreateAdminUserCommand extends Command
      */
     private $tokenGenerator;
     
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+        
     private $abortedMessage = 'Un ou plusieurs utilisateurs possédant le role "ROLE_SUPER_ADMIN" existe déjà.';
 
-    public function __construct(DoctrineUtil $doctrineUtil, TokenGeneratorUtil $tokenGenerator, $name = null) 
+    public function __construct(DoctrineUtil $doctrineUtil, TokenGeneratorUtil $tokenGenerator, 
+            UserPasswordEncoderInterface $encoder, $name = null) 
     {
         parent::__construct($name);
         
         $this->doctrineUtil     = $doctrineUtil;
-        $this->tokenGenerator  = $tokenGenerator;
+        $this->tokenGenerator   = $tokenGenerator;
+        $this->encoder          = $encoder;
     }
 
     protected function configure()
@@ -71,7 +79,7 @@ class CreateAdminUserCommand extends Command
 
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPassword($password);
+            $user->setPassword($this->encoder->encodePassword($user, $password));
             $user->setEnabled(true);
             $user->setEnabledByAdmin(true);
 
@@ -79,7 +87,7 @@ class CreateAdminUserCommand extends Command
             
             $output->writeln("L'Utilisateur admin a été créer. Notez les identifiants...");
             $output->writeln([
-                'email : ' . $email, 
+                'email : ' . $user->getEmail(), 
                 'Mot de passe : ' . $password
             ]);
             
