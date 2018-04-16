@@ -34,7 +34,7 @@ namespace :deploy do
         execute 'php bin/console doctrine:migrations:diff'
         execute 'php bin/console doctrine:migrations:migrate --no-interaction'
         execute 'php bin/console doctrine:migrations:status'
-        execute 'php bin/console app:user:create-admin'
+        execute 'php bin/console app:user:create-admin --env=prod'
     end 
   end
 
