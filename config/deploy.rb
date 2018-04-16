@@ -34,6 +34,7 @@ namespace :deploy do
         execute 'php bin/console doctrine:migrations:diff'
         execute 'php bin/console doctrine:migrations:migrate --no-interaction'
         execute 'php bin/console doctrine:migrations:status'
+        execute 'php bin/console app:user:create-admin'
     end 
   end
 
@@ -44,13 +45,6 @@ namespace :deploy do
        end
   end
 
-  desc 'Webpack asset'
-  task :webpack_build do
-    on roles(:app) do
-        execute 'yarn run encore production'
-    end
-  end
-
 end
 
 
@@ -59,4 +53,3 @@ end
 ###
 after 'deploy:updated', 'deploy:migrate'
 after 'deploy:migrate', 'deploy:database_validate'
-#after 'deploy:updated', 'deploy:webpack_build'
