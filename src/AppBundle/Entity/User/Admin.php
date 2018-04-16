@@ -28,6 +28,8 @@ class Admin extends BaseUser implements AdminEntityInterface
     public function __construct()
     {
         parent::__construct();
+        
+        $this->addRole(User::ROLE_SUPER_ADMIN);
     }
     
     public function isAdmin()

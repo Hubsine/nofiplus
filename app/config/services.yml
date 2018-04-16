@@ -181,3 +181,10 @@ services:
     ###
     JMS\Payment\CoreBundle\PluginController\PluginControllerInterface: '@payment.plugin_controller.entity'
     
+    ###
+    # Commands
+    ###
+    AppBundle\Command\CreateAdminUserCommand:
+        tags:
+            - { name: 'console.command', command: 'app:user:create-admin' }
+    
