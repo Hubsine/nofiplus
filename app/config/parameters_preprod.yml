@@ -1,7 +1,7 @@
 parameters:
     database_host: localhost:3306
     database_port: null
-    database_name: np_v1_
+    database_name: np_preprod
     database_user: np_preprod
     database_password: 5Gaj2@o3/;H6
     mailer_transport: mail
