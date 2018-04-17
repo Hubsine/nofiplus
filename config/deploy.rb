@@ -43,12 +43,13 @@ namespace :deploy do
 
   desc 'Database validate'
   task :database_validate do
-    #on roles(:all) do
+    on roles(:all) do
       #execute "cd '#{release_path}'"
       #execute 'pwd'
       #execute 'php bin/console doctrine:schema:validate --env=prod'
-    invoke "symfony:console --env=fetch(:symfony_env)"
-    #end
+      symfony_console('doctrine:schema:validate')
+    #execute "symfony:console --env=fetch(:symfony_env)"
+    end
   end
 
 end
@@ -56,5 +57,6 @@ end
 ###
 # Events
 ###
+#before 'composer:install', 'deploy:database_validate'
 after 'deploy:updated', 'deploy:database_validate'
 #after 'deploy:updated', 'deploy:migrate'
