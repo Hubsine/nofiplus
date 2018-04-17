@@ -1,7 +1,11 @@
+#require 'sshkit'
+#require 'sshkit/dsl'
+#include SSHKit::DSL
 require 'capistrano/setup'
+require 'capistrano-bundler'
 require 'capistrano/deploy'
-
 require 'capistrano/symfony'
+require 'capistrano/symfony-doctrine'
 require 'capistrano/yarn'
 require "capistrano/scm/git"
 require 'capistrano/locally'
