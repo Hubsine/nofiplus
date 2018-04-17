@@ -3,7 +3,8 @@ set :repo_url, 'git@github.com:Hubsine/nofiplus.git'
 
 set :symfony_env,  "preprod"
 
-set :branch, 'master'
+set :branch, 'preprod'
+#set :stage, :preprod
 set :ssh_user, 'nofiplus'
 server '94.23.206.21', user: fetch(:ssh_user), roles: %w{web app db}
 
