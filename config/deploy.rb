@@ -1,3 +1,4 @@
+#M3IVk3MCHI
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.10.2"
 
@@ -15,7 +16,10 @@ set :log_level, :debug
 # Symfony 
 ###
 
+set :keep_releases, 5
 set :controllers_to_clear, ["app_*.php", "config.php"]
+set :env, ->{ "--env=#{fetch(:symfony_env)}" }
+#set :nginx_server_name, ->{ fetch(:app_domain) }
 
 ###
 # Composer
@@ -30,25 +34,20 @@ set :composer_install_flags, '--no-dev --no-interaction --quiet --optimize-autol
 namespace :deploy do
   task :migrate do
     on roles(:db) do
-        #execute "cd '#{release_path}'"
-        execute 'php bin/console cache:clear --env=prod'
-        execute 'php bin/console doctrine:database:create --if-not-exists --env=prod'
-        execute 'php bin/console doctrine:schema:update --force --env=prod'
-        execute 'php bin/console doctrine:migrations:diff'
-        execute 'php bin/console doctrine:migrations:migrate --no-interaction'
-        execute 'php bin/console doctrine:migrations:status'
-        execute 'php bin/console app:user:create-admin --env=prod'
+        symfony_console('cache:clear', fetch(:env))
+        symfony_console('doctrine:database:create', "--if-not-exists #{fetch(:env)}")
+        #symfony_console("doctrine:schema:update", "--force #{fetch(:env)}")
+        symfony_console("doctrine:migrations:diff")
+        symfony_console("doctrine:migrations:migrate", "--no-interaction --allow-no-migration #{fetch(:env)}")
+        symfony_console("doctrine:migrations:status")
+        symfony_console("app:user:create-admin", fetch(:env))
     end 
   end
 
   desc 'Database validate'
   task :database_validate do
     on roles(:all) do
-      #execute "cd '#{release_path}'"
-      #execute 'pwd'
-      #execute 'php bin/console doctrine:schema:validate --env=prod'
-      symfony_console('doctrine:schema:validate')
-    #execute "symfony:console --env=fetch(:symfony_env)"
+      symfony_console('doctrine:schema:validate', fetch(:env))
     end
   end
 
@@ -57,6 +56,6 @@ end
 ###
 # Events
 ###
-#before 'composer:install', 'deploy:database_validate'
-after 'deploy:updated', 'deploy:database_validate'
-#after 'deploy:updated', 'deploy:migrate'
+#after 'composer:install', 'deploy:database_validate'
+after 'deploy:updated', 'deploy:migrate'
+after 'deploy:migrate', 'deploy:database_validate'

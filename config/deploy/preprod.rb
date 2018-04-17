@@ -2,9 +2,10 @@ set :deploy_to, "/var/www/vhosts/nofiplus.com/httpdocs/PREPROD_NOFIPLUS"
 set :repo_url, 'git@github.com:Hubsine/nofiplus.git'
 
 set :symfony_env,  "preprod"
+set :keep_releases, 5
 
 set :branch, 'preprod'
-set :stage, :prod
+set :stage, :preprod
 set :ssh_user, 'nofiplus'
 server '94.23.206.21', user: fetch(:ssh_user), roles: %w{web app db}
 
