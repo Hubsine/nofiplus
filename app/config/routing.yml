@@ -1,7 +1,12 @@
 app:
     resource: "@AppBundle/Resources/config/routing/all.yml"
+
+easyadmin:
+    path: /dashboard
+    defaults: { _controller: EasyAdminBundle:Admin:index }
     
-easy_admin_bundle:
-    resource: "@EasyAdminBundle/Controller/AdminController.php"
-    type:     annotation
-    prefix:   /dashboard    
+admin:
+    path: /dashboard
+    defaults: { _controller: EasyAdminBundle:Admin:index }    
+
+    

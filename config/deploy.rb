@@ -56,6 +56,25 @@ end
 ###
 # Events
 ###
-#after 'composer:install', 'deploy:database_validate'
 after 'deploy:updated', 'deploy:migrate'
 after 'deploy:migrate', 'deploy:database_validate'
+
+namespace :assets do
+  desc 'Install Ckeditor'
+  task :install_ckeditor do
+    on roles(:app) do
+      symfony_console('ckeditor:install', fetch(:env))
+    end
+  end
+
+  desc 'Assets dump'
+  task :install do
+       on roles(:app) do
+            symfony_console("assets:install", fetch(:env) + ' ' + '--symlink')
+       end
+  end
+
+end
+
+after 'deploy:updated', 'assets:install_ckeditor'
+after 'assets:install_ckeditor, 'assets:install'
