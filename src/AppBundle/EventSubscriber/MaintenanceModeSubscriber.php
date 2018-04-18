@@ -87,10 +87,9 @@ class MaintenanceModeSubscriber implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         $routeName      = $event->getRequest()->attributes->get('_route');
-        $env            = $this->env;
         $isMaintenance  = $this->isMaintenanceMode();
         
-        if( $isMaintenance && $env === 'prod' && ! $this->isSuperAdmin() && $routeName !== 'fos_user_security_login' )
+        if( $isMaintenance && ! $this->isSuperAdmin() && $routeName !== 'fos_user_security_login' )
         {
         
             $response = $event->getResponse() === null ? new Response() : $event->getResponse();
