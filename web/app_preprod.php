@@ -1,13 +1,24 @@
 <?php
 
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
-require __DIR__.'/../vendor/autoload.php';
-if (PHP_VERSION_ID < 70000) {
-    include_once __DIR__.'/../var/bootstrap.php.cache';
+if (isset($_SERVER['HTTP_CLIENT_IP'])
+    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+    || !(in_array(@$_SERVER['REMOTE_ADDR'], ['86.246.133.166'], true) || PHP_SAPI === 'cli-server')
+) {
+    header('HTTP/1.0 403 Forbidden');
+    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-$kernel = new AppKernel('preprod', false);
+require __DIR__.'/../vendor/autoload.php';
+Debug::enable();
+
+//if (PHP_VERSION_ID < 70000) {
+//    include_once __DIR__.'/../var/bootstrap.php.cache';
+//}
+
+$kernel = new AppKernel('preprod', true);
 if (PHP_VERSION_ID < 70000) {
     $kernel->loadClassCache();
 }
