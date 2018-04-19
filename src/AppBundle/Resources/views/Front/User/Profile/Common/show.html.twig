@@ -71,11 +71,22 @@
                     {% if user.isPartner %}
                         <div class="row">
                             <div class="col">
-                                <label>{{ 'profile.show.phone.phone_number' | trans }}</label>
+                                <label>{{ 'profile.show.phone.phone_number_mobile' | trans }}</label>
                             </div>
                             <div class="col">
-                                {% if user.phoneMobile is not null or user.phoneFixed is not null %}
+                                {% if user.phoneMobile is not null %}
                                     {{ user.phoneMobile | phone_number_format('INTERNATIONAL') }} 
+                                {% else %}
+                                    {{ 'empty' | trans }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>{{ 'profile.show.phone.phone_number_fixed' | trans }}</label>
+                            </div>
+                            <div class="col">
+                                {% if user.phoneFixed is not null %}
                                     {{ user.phoneFixed | phone_number_format('INTERNATIONAL') }}
                                 {% else %}
                                     {{ 'empty' | trans }}

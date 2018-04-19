@@ -43,6 +43,8 @@ profile:
         last_name: 'Nom'
         phone: 
             phone_number: 'Numéro de téléphone'
+            phone_number_mobile: 'Numéro de téléphone mobile'
+            phone_number_fixed: 'Numéro de téléphone fixe'
             phone: 'Numéro de téléphone'
             mobile: 'Mobile'
             fixed: 'Fixe'
