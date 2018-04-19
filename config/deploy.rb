@@ -77,4 +77,4 @@ namespace :assets do
 end
 
 after 'deploy:updated', 'assets:install_ckeditor'
-after 'assets:install_ckeditor, 'assets:install'
+after 'assets:install_ckeditor', 'assets:install'
