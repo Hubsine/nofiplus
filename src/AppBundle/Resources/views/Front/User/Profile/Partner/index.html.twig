@@ -20,7 +20,7 @@
                                     {% endif %}
                                 </h4>
                                 <ul id="compagnies" class="nav nav-pills flex-column">
-                                    
+
                                     {% for company in compagnies %}
                                         {% if currentCompany is defined and company.id == currentCompany.id %}
                                             {% set class = 'active' %}
@@ -49,6 +49,11 @@
             <div class="col-md-7">
 
                 {% block compagnies_content %}
+                    {% if partner.enabledByAdmin == false %}
+                        <div class="alert alert-info">
+                            <p>{{ 'layout.company.can_add' | trans }}</p>
+                        </div>
+                    {% endif %}
                     {% for company in compagnies %}
                         {% include '@Front/User/Profile/Partner/Company/single.html.twig' with {'currentCompany': company} %}
                         {% if loop.last == false %}<div class="border border-bottom mb-3"></div>{% endif %}
