@@ -28,6 +28,7 @@ SSHKit.config.command_map[:php] = "/opt/plesk/php/7.0/bin/php"
 # Composer
 ###
 
+set :composer_install_flags, '--no-dev --no-interaction --quiet --optimize-autoloader --ignore-platform-reqs --no-scripts'
 set :composer_working_dir, -> { fetch(:release_path) }
 
 SSHKit.config.command_map[:bash] = "/bin/bash"

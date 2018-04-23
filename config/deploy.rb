@@ -3,20 +3,17 @@
 lock "~> 3.10.2"
 
 set :application, "nofi_plus"
+set :repo_url, 'git@github.com:Hubsine/nofiplus.git'
 
 set :file_permissions_users, ["nginx"]
 set :file_permissions_paths, ["var", "web/uploads"]
 
 set :log_level, :debug
 
-#set :linked_files, ["app/config/parameters.yml"]
-#set :linked_dirs, ["var/logs"]
-
 ### 
 # Symfony 
 ###
 
-set :keep_releases, 5
 set :controllers_to_clear, ["app_*.php", "config.php"]
 set :env, ->{ "--env=#{fetch(:symfony_env)}" }
 #set :nginx_server_name, ->{ fetch(:app_domain) }
@@ -25,7 +22,9 @@ set :env, ->{ "--env=#{fetch(:symfony_env)}" }
 # Composer
 ###
 
-set :composer_install_flags, '--no-dev --no-interaction --quiet --optimize-autoloader --ignore-platform-reqs --no-scripts'
+SSHKit.config.command_map[:php] = "/opt/plesk/php/7.0/bin/php"
+
+SSHKit.config.command_map[:bash] = "/bin/bash"
 
 ###
 # Databases
