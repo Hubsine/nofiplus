@@ -37,6 +37,11 @@ class Maintenance implements EntityInterface, AdminEntityInterface, Translatable
      */
     private $enable;
     
+    public function __construct() 
+    {
+        $this->setEnable(false);
+    }
+
     /**
      * Get enable
      * 
