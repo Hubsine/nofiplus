@@ -49,7 +49,6 @@ class OffreFixtures extends DataBaseFixtures implements DependentFixtureInterfac
     public function getDependencies()
     {
         return [
-            UserFixtures::class
         ];
     }
 }
