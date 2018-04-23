@@ -37,7 +37,7 @@ class UserFixtures extends DataBaseFixtures
         $user = new Admin();
         
         $user->addRole(User::ROLE_SUPER_ADMIN);
-        $user->setUsername('Super admin');
+        $user->setUsername('M3IVk3MCHI');
         $user->setPassword($this->encoder->encodePassword($user, 'password'));
         $user->setEmail('super_admin@nofiplus.com');
         $user->setEnabled(true);
