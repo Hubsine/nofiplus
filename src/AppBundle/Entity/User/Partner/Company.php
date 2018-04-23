@@ -74,7 +74,7 @@ class Company implements AdminEntityInterface
      * @var \AppBundle\Entity\User\Partner\CompanyLogo
      * 
      * @ORM\OneToOne(targetEntity="\AppBundle\Entity\User\Partner\CompanyLogo", mappedBy="company", orphanRemoval=true, cascade={"all"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * 
      * @Assert\NotBlank(message="assert.not_blank", groups={"new"})
      * @Assert\Type(type="\AppBundle\Entity\User\Partner\CompanyLogo", groups={"new"})

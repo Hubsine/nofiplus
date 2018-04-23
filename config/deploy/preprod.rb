@@ -27,3 +27,20 @@ end
 ###
 # End Composer
 ###
+
+###
+# Data Fixtures
+###
+
+namespace :deploy do
+
+  desc "Load data fixtures"
+  task :load_data_fixtures do
+    on roles(:db) do
+      symfony_console('doctrine:fixtures:load', '--no-interaction ' + fetch(:symfony_env) )
+    end
+  end
+
+end
+
+after 'deploy:migrate', "deploy:load_data_fixtures"
