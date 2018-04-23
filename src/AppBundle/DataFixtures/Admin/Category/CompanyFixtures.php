@@ -12,7 +12,7 @@ use AppBundle\Entity\Admin\Category\Company;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class CompanyFixtures extends DataBaseFixtures implements DependentFixtureInterface
+class CompanyFixtures extends DataBaseFixtures 
 {
     
     public function load(ObjectManager $manager)

@@ -13,7 +13,7 @@ use AppBundle\DataFixtures\User\UserFixtures;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class OffreFixtures extends DataBaseFixtures implements DependentFixtureInterface
+class OffreFixtures extends DataBaseFixtures
 {
     
     public function load(ObjectManager $manager)
