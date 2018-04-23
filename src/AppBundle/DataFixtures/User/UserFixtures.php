@@ -3,9 +3,11 @@
 namespace AppBundle\DataFixtures\User;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\DataFixtures\Admin\Category\OffreFixtures;
 use AppBundle\DataFixtures\Admin\Category\OffreDomainFixtures;
+use AppBundle\DataFixtures\Admin\Category\CompanyFixtures;
 use AppBundle\Entity\User\User;
 use AppBundle\Entity\User\Admin;
 use AppBundle\Entity\User\Abonne\Abonne;
@@ -21,11 +23,10 @@ use AppBundle\DataFixtures\DataBaseFixtures;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class UserFixtures extends DataBaseFixtures 
+class UserFixtures extends DataBaseFixtures implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        
         ###
         # Admin
         ###
@@ -217,6 +218,7 @@ class UserFixtures extends DataBaseFixtures
     {
         return [
             OffreFixtures::class,
+            CompanyFixtures::class,
             OffreDomainFixtures::class
         ];
     }

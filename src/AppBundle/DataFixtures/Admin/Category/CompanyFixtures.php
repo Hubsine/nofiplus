@@ -48,7 +48,6 @@ class CompanyFixtures extends DataBaseFixtures implements DependentFixtureInterf
     public function getDependencies()
     {
         return [
-            UserFixtures::class
         ];
     }
 }
