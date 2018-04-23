@@ -3,6 +3,7 @@
 namespace AppBundle\DataFixtures\Admin\Category;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use AppBundle\DataFixtures\DataBaseFixtures;
 use AppBundle\Entity\Admin\Category\Company;
 
@@ -11,7 +12,7 @@ use AppBundle\Entity\Admin\Category\Company;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class CompanyFixtures extends DataBaseFixtures
+class CompanyFixtures extends DataBaseFixtures implements DependentFixtureInterface
 {
     
     public function load(ObjectManager $manager)
@@ -42,5 +43,12 @@ class CompanyFixtures extends DataBaseFixtures
             $this->addReference('cat_company_' . $key, $value);
         }
             
+    }
+    
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }
