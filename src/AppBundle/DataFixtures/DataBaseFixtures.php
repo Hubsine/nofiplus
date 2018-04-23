@@ -26,11 +26,17 @@ abstract class DataBaseFixtures extends Fixture implements ContainerAwareInterfa
      * @var AclSecurityManager
      */
     protected $aclManager;
+    
+    /** 
+     * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $encoder 
+     */
+    private $encoder;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container    = $container;
         $this->aclManager   = $this->container->get('app.security.acl_manager');
+        $this->encoder      = $this->container->get('security.password_encoder');    
     }
     
     /**

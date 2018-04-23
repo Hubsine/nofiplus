@@ -23,16 +23,6 @@ use AppBundle\DataFixtures\DataBaseFixtures;
  */
 class UserFixtures extends DataBaseFixtures 
 {
-    /** 
-     * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $encoder 
-     */
-    private $encoder;
-
-    public function __construct() 
-    {
-        $this->encoder = $this->container->get('security.password_encoder');       
-    }
-    
     public function load(ObjectManager $manager)
     {
         
