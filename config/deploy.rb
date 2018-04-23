@@ -63,7 +63,7 @@ namespace :assets do
   desc 'Install Ckeditor'
   task :install_ckeditor do
     on roles(:app) do
-      symfony_console('ckeditor:install', fetch(:env))
+      symfony_console('ckeditor:install', fetch(:env) + ' --no-interaction')
     end
   end
 
