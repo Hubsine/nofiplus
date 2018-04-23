@@ -30,7 +30,7 @@ abstract class DataBaseFixtures extends Fixture implements ContainerAwareInterfa
     /** 
      * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $encoder 
      */
-    private $encoder;
+    protected $encoder;
 
     public function setContainer(ContainerInterface $container = null)
     {
