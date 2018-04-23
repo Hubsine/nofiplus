@@ -64,6 +64,7 @@ class AppKernel extends Kernel
         }
         
         if (in_array($this->getEnvironment(), ['preprod'], true)) {
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }

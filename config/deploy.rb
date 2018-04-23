@@ -40,7 +40,7 @@ namespace :deploy do
         symfony_console("doctrine:migrations:diff")
         symfony_console("doctrine:migrations:migrate", "--no-interaction --allow-no-migration #{fetch(:env)}")
         symfony_console("doctrine:migrations:status")
-        symfony_console("app:user:create-admin", fetch(:env))
+        #symfony_console("app:user:create-admin", fetch(:env))
     end 
   end
 
