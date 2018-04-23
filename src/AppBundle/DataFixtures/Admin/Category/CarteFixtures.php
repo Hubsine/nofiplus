@@ -3,15 +3,17 @@
 namespace AppBundle\DataFixtures\Admin\Category;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use AppBundle\DataFixtures\DataBaseFixtures;
 use AppBundle\Entity\Admin\Category\Carte;
+use AppBundle\DataFixtures\User\UserFixtures;
 
 /**
  * Description of CarteFixtures
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class CarteFixtures extends DataBaseFixtures
+class CarteFixtures extends DataBaseFixtures implements DependentFixtureInterface
 {
     
     public function load(ObjectManager $manager)
@@ -30,5 +32,12 @@ class CarteFixtures extends DataBaseFixtures
         $manager->flush();
             
         $this->addReference('carte_premium', $carte);
+    }
+    
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }
