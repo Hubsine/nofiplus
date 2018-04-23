@@ -23,7 +23,7 @@ use AppBundle\DataFixtures\DataBaseFixtures;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class UserFixtures extends DataBaseFixtures 
+class UserFixtures extends DataBaseFixtures implements DependentFixtureInterface
 {
     /** 
      * @var UserPasswordEncoderInterface $encoder 
