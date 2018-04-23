@@ -3,15 +3,17 @@
 namespace AppBundle\DataFixtures\Admin\Category;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use AppBundle\DataFixtures\DataBaseFixtures;
 use AppBundle\Entity\Admin\Category\Offre;
+use AppBundle\DataFixtures\User\UserFixtures;
 
 /**
  * Description of OffreFixtures
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class OffreFixtures extends DataBaseFixtures
+class OffreFixtures extends DataBaseFixtures implements DependentFixtureInterface
 {
     
     public function load(ObjectManager $manager)
@@ -42,5 +44,12 @@ class OffreFixtures extends DataBaseFixtures
         {
             $this->addReference('cat_offre_' . $key, $offre);
         }
+    }
+    
+    public function getDependencies()
+    {
+        return [
+            UserFixtures::class
+        ];
     }
 }

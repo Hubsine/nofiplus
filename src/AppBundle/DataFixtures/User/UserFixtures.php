@@ -3,8 +3,6 @@
 namespace AppBundle\DataFixtures\User;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\DataFixtures\Admin\Category\OffreFixtures;
 use AppBundle\DataFixtures\Admin\Category\OffreDomainFixtures;
@@ -23,16 +21,16 @@ use AppBundle\DataFixtures\DataBaseFixtures;
  *
  * @author Hubsine <contact@hubsine.com>
  */
-class UserFixtures extends DataBaseFixtures implements DependentFixtureInterface
+class UserFixtures extends DataBaseFixtures 
 {
     /** 
-     * @var UserPasswordEncoderInterface $encoder 
+     * @var \Symfony\Component\Security\Core\Encoder\UserPasswordEncoder $encoder 
      */
     private $encoder;
 
-    public function __construct(UserPasswordEncoderInterface $encoder) 
+    public function __construct() 
     {
-        $this->encoder = $encoder;       
+        $this->encoder = $this->container->get('security.password_encoder');       
     }
     
     public function load(ObjectManager $manager)
