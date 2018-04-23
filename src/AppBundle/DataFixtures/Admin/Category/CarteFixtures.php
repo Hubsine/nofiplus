@@ -23,7 +23,7 @@ class CarteFixtures extends DataBaseFixtures
         $carte = new Carte();
         
         $carte->setName('Premium');
-        $carte->setPrice(50);
+        $carte->setAmount(50);
         $carte->setAbout('About premium carte');
         
         $manager->persist($carte);
