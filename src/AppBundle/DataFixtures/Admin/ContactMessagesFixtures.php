@@ -15,7 +15,7 @@ class ContactMessagesFixtures extends DataBaseFixtures
 {
     public function load(ObjectManager $manager)
     {
-        for($c = 0; $o < 3; $o++)
+        for($c = 0; $c < 3; $c++)
         {
             $contact = new Contact();
             
