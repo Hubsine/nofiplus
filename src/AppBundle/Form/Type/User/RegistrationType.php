@@ -2,14 +2,12 @@
 
 namespace AppBundle\Form\Type\User;
 
-use FOS\UserBundle\Util\LegacyFormHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\User\Abonne\Abonne;
-use AppBundle\Entity\User\User;
 
 class RegistrationType extends AbstractType
 {
@@ -32,7 +30,7 @@ class RegistrationType extends AbstractType
                 )
             )
                 
-            ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
+            ->add('plainPassword', RepeatedType::class, array(
                 'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
                 'options' => array('translation_domain' => 'FOSUserBundle'),
                 'first_options' => array('label' => 'form.password'),
