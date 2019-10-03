@@ -107,23 +107,23 @@ services:
     ###
     # Twig Extensions
     ###
-    app.twig.extension.simple_form:
-        class: AppBundle\Twig\Extensions\SimpleFormExtension
-        tags: ['twig.extension']
-        
-    app.twig.extension.simple_snippet:
-        class: AppBundle\Twig\Extensions\SimpleSnippetExtension
-        tags: ['twig.extension']    
-    
-    app.twig.extension.asset:
-        class: AppBundle\Twig\Extensions\AssetExtension
-        tags: ['twig.extension']  
-        arguments:
-            - '@app.util.media'
-            
-    app.twig.extension.payment:
-        class: AppBundle\Twig\Extensions\PaymentExtension
-        tags: ['twig.extension']       
+#    app.twig.extension.simple_form:
+#        class: AppBundle\Twig\Extensions\SimpleFormExtension
+#        tags: ['twig.extension']
+#        
+#    app.twig.extension.simple_snippet:
+#        class: AppBundle\Twig\Extensions\SimpleSnippetExtension
+#        tags: ['twig.extension']    
+#    
+#    app.twig.extension.asset:
+#        class: AppBundle\Twig\Extensions\AssetExtension
+#        tags: ['twig.extension']  
+#        arguments:
+#            - '@app.util.media'
+#            
+#    app.twig.extension.payment:
+#        class: AppBundle\Twig\Extensions\PaymentExtension
+#        tags: ['twig.extension']       
 
     ###
     # Doctrine
