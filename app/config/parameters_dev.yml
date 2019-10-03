@@ -3,7 +3,7 @@ parameters:
     database_port: null
     database_name: nofiplus
     database_user: root
-    database_password: nofinofi
+    database_password: Bismillah
     mailer_transport: mail
     mailer_host: auth.smtp.1and1.fr
     mailer_user: contact@nofiplus.com
