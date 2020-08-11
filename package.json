@@ -10,7 +10,7 @@
     "jquery": "^3.2.1",
     "jquery-ui-bundle": "^1.12.1-migrate",
     "popper.js": "^1.12.9",
-    "tinymce": "^4.7.4"
+    "tinymce": "^4.9.11"
   },
   "author": "Hubsine <contact@hubsine.com>",
   "license": "ISC",
