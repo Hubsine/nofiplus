@@ -18,7 +18,7 @@
     "@symfony/webpack-encore": "^0.19.0",
     "file-loader": "^1.1.11",
     "image-webpack-loader": "^4.2.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^7.0.0",
     "sass-loader": "^6.0.7",
     "url-loader": "^1.0.1",
     "webpack-notifier": "^1.6.0"
